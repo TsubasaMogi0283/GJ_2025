@@ -128,7 +128,7 @@ private:
 	Camera camera_ = {};
 	//平行光源
 	DirectionalLight directionalLight_ = {};
-
+	//ポストエフェクト
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 
 };

@@ -19,6 +19,7 @@
 
 #include "VignettePostEffect.h"
 #include "Vignette.h"
+#include <BackTexture.h>
 
 
  /// <summary>
@@ -109,50 +110,7 @@ public:
 	/// </summary>
 	~GameScene() = default;
 
-public:
-	/// <summary>
-	/// 処理終了
-	/// </summary>
-	inline void SetIsEnd() {
-		this->isEnd_ = true;
-	}
-
-	/// <summary>
-	/// 勝利の設定
-	/// </summary>
-	inline void SetIsWin() {
-		this->isWin_ = true;
-	}
-
-	/// <summary>
-	/// 敗北の設定
-	/// </summary>
-	inline void SetIsLose() {
-		this->isLose_ = true;
-	}
-
-	/// <summary>
-	/// 環境音のハンドルを取得
-	/// </summary>
-	/// <returns></returns>
-	uint32_t GetEnviromentAudioHandle()const {
-		return enviromentAudioHandle_;
-	}
-
-	/// <summary>
-	/// 環境音の音量の設置
-	/// </summary>
-	/// <param name="volume">音量</param>
-	inline void SetEnviromentAudioVolume(const float_t& volume) {
-		this->enviromentAudioVolume_ = volume;
-	}
-
 private:
-	/// <summary>
-	/// ビネットの処理
-	/// </summary>
-	void VigntteProcess();
-
 	/// <summary>
 	/// ImGuiの表示
 	/// </summary>
@@ -175,46 +133,12 @@ private:
 	Elysia::Audio* audio_ = nullptr;
 
 private:
-
-	//説明テクスチャの最大数
-	const uint32_t MAX_EXPLANATION_NUMBER_ = 2u;
-	//時間変化
-	const float_t DELTA_TIME_ = 1.0f / 60.0f;
-	//フェードアウトの具合
-	const float_t FADE_OUT_INTERVAL_ = 0.01f;
-	//負けシーンに遷移するときの値
-	const float_t CHANGE_TO_LOSE_SCENE_VALUE_ = 2.0f;
-
-	//完全に透明になる値
-	const float_t PERFECT_TRANSPARENT_ = 0.0f;
-	//ビネットの最大値
-	const float_t MAX_VIGNETTE_POW_ = 1.6f;
-
-private:
 	//カメラ
 	Camera camera_ = {};
 	
 	//ポストエフェクト
-	//ビネット
-	Vignette vignette_ = {};
-	std::unique_ptr<Elysia::VignettePostEffect> vignettePostEffect_ = nullptr;
+	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 	
-	float_t vignetteChangeTime_ = 0.0f;
-	float_t warningTime_ = 0.0f;
-
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
-	//強い敵と接触したかどうか
-	bool isTouchStrongEnemy_ = false;
-
-	//処理が終了したかどうか
-	bool isEnd_ = false;
-	//結果
-	bool isWin_ = false;
-	bool isLose_ = false;
-
-	//環境音のハンドル
-	uint32_t enviromentAudioHandle_ = 0u;
-	//音量
-	float_t enviromentAudioVolume_ = 0.0f;
 };

@@ -34,48 +34,17 @@ void LoseScene::Initialize(){
 
 	//背景(ポストエフェクト)
 	backTexture_ = std::make_unique<Elysia::BackTexture>();
-	const Vector4 CLEAR_COLOR = { .x = 0.0f,.y = 0.0f,.z = 0.0f,.w = 1.0f };
+	const Vector4 CLEAR_COLOR = { .x = 0.0f,.y = 0.0f,.z = 1.0f,.w = 1.0f };
 	backTexture_->SetClearColour(CLEAR_COLOR);
 	backTexture_->Initialize();
 
-	//ディゾルブ
-	dissolveEffect_ = std::make_unique<Elysia::DissolvePostEffect>();
-	dissolveEffect_->Initialize(CLEAR_COLOR);
-	//マスクテクスチャ
-	uint32_t maskTexture = Elysia::TextureManager::GetInstance()->Load("Resources/External/Texture/Dissolve/noise0.png");
-
-
-	//調整項目として記録
-	globalVariables_->CreateGroup(DISSOLVE_NAME_);
-	globalVariables_->AddItem(DISSOLVE_NAME_, "Thinkness", dissolve_.edgeThinkness);
-
-	//初期化
-	dissolve_.Initialize();
-	dissolve_.maskTextureHandle = maskTexture;
-	dissolve_.edgeThinkness = globalVariables_->GetFloatValue(DISSOLVE_NAME_, "Thinkness");
-	dissolve_.threshold = 0.0f;
 	//カメラの初期化
 	camera_.Initialize();
 	camera_.translate = { .x = 0.0f,.y = 2.8f,.z = -23.0f };
 
-	//点光源
-	//調整項目として記録
-	globalVariables_->CreateGroup(POINT_LIGHT_NAME_);
-	globalVariables_->AddItem(POINT_LIGHT_NAME_, "Translate", pointLight_.position);
-	globalVariables_->AddItem(POINT_LIGHT_NAME_, "Decay", pointLight_.decay);
-
 	//初期化
 	pointLight_.Initialize();
-	pointLight_.position = globalVariables_->GetVector3Value(POINT_LIGHT_NAME_, "Translate");
-	pointLight_.decay = globalVariables_->GetFloatValue(POINT_LIGHT_NAME_,"Decay");
-	pointLight_.radius = 0.0f;
 
-	//読み込み
-	bgmHandle_ = audio_->Load("Resources/Audio/Lose/LoseBGM.wav");
-
-	
-	//再生
-	audio_->Play(bgmHandle_, true);
 }
 
 void LoseScene::Update(Elysia::GameManager* gameManager){
@@ -88,12 +57,6 @@ void LoseScene::Update(Elysia::GameManager* gameManager){
 	camera_.Update();
 	//点光源の更新
 	pointLight_.Update();
-	//ディゾルブの更新
-	dissolve_.Update();
-
-	//調整
-	Adjustment();
-	
 #ifdef _DEBUG
 	//ImGui
 	DisplayImGui();
@@ -108,17 +71,14 @@ void LoseScene::Update(Elysia::GameManager* gameManager){
 
 
 void LoseScene::DrawObject3D(){
-	//レベルデータ
-	levelDataManager_->Draw(levelDataHandle_, camera_, pointLight_);
-	
 }
 
 void LoseScene::PreDrawPostEffect(){
-	dissolveEffect_->PreDraw();
+	backTexture_->PreDraw();
 }
 
 void LoseScene::DrawPostEffect(){
-	dissolveEffect_->Draw(dissolve_);
+	backTexture_->Draw();
 }
 
 void LoseScene::DrawSprite(){
@@ -137,12 +97,6 @@ void LoseScene::DisplayImGui(){
 		ImGui::TreePop();
 		
 	}
-	if (ImGui::TreeNode("ディゾルブ")) {
-		ImGui::SliderFloat("しきい値", &dissolve_.threshold, 0.0f, 2.0f);
-		ImGui::SliderFloat("厚さ", &dissolve_.edgeThinkness, 0.0f, 2.0f);
-		ImGui::TreePop();
-		
-	}
 	if (ImGui::TreeNode("カメラ")) {
 		ImGui::SliderFloat3("座標", &camera_.translate.x, -40.0f, 40.0f);
 		ImGui::TreePop();
@@ -150,12 +104,6 @@ void LoseScene::DisplayImGui(){
 
 	ImGui::End();
 	
-
-}
-
-void LoseScene::Adjustment(){
-	globalVariables_->SaveFile(DISSOLVE_NAME_);
-	globalVariables_->SaveFile(POINT_LIGHT_NAME_);
 
 }
 

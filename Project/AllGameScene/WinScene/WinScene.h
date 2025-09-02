@@ -90,28 +90,6 @@ public:
 	/// </summary>
 	~WinScene()override=default;
 
-public:
-	/// <summary>
-	/// カメラの速度を設定
-	/// </summary>
-	/// <param name="cameraVelocity">速度分</param>
-	inline void SetCameraVelocity(const Vector3& cameraVelocity) {
-		this->cameraVelocity_ = cameraVelocity;
-	}
-
-
-	/// <summary>
-	/// BGMの音量を下げる
-	/// </summary>
-	/// <param name="downValue"></param>
-	inline void BgmVolumeDown(const float_t& downValue) {
-		this->bgmVolume_ -= downValue;
-		//0より小さくしないようにする
-		if (this->bgmVolume_ <= 0.0f) {
-			this->bgmVolume_ = 0.0f;
-		}
-	}
-
 private:
 	//レベルデータ管理クラス
 	Elysia::LevelDataManager* levelDataManager_ = nullptr;
@@ -122,33 +100,12 @@ private:
 
 private:
 
-	//テキスト
-	const std::string ESCAPE_SUCCEEDED_TEXT = "EscapeSucceededObject";
-	//浮遊用のθ
-	const float_t FLOATING_THETA_ = 0.05f;
-	//Y座標
-	const float_t BASED_POSITION_Y_ = 6.0f;
-
-private:
-	//カメラ
 	Camera camera_ = {};
-	//速度
-	Vector3 cameraVelocity_ = {};
-
 	//平行光源
 	DirectionalLight directionalLight_ = {};
 
 	//ポストエフェクト
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 
-	//オブジェクトの浮遊感を出す
-	float_t objectFloatingTheta_ = 0.0f;
-
-
-
-	//勝利のBGMハンドル
-	uint32_t bgmHandle_ = 0u;
-	//音量
-	float_t bgmVolume_ = 0.8f;
 };
 
