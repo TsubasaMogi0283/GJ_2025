@@ -16,10 +16,7 @@
 #include "DirectionalLight.h"
 #include "SpotLight.h"
 #include "RandomNoise.h"
-#include "RailCamera/TitleRailCamera.h"
 #include "RandomNoisePostEffect.h"
-#include "BaseBackTexture/BaseTitleBackTexture.h"
-#include "BaseTitleScene/BaseTitleScene.h"
 
 #pragma region 前方宣言
 
@@ -114,45 +111,6 @@ private:
 	void DisplayImGui();
 
 
-public:
-
-	/// <summary>
-	/// 背景テクスチャの遷移
-	/// </summary>
-	/// <param name="backTexture">背景テクスチャ(ポストエフェクト)</param>
-	void ChangeBackTexture(std::unique_ptr<BaseTitleBackTexture> backTexture);
-
-
-	/// <summary>
-	/// 細かいシーンの遷移
-	/// </summary>
-	/// <param name="detailTitleScene">細かいタイトルシーン</param>
-	void ChangeDetailScene(std::unique_ptr<BaseTitleScene>detailTitleScene);
-	
-	/// <summary>
-	/// ランダムノイズを見せるかどうか
-	/// </summary>
-	/// <param name="isDisplay">見せるかどうか</param>
-	inline void SetIsDisplayRandomEffect(const bool& isDisplay) {
-		this->isDisplayRandomEffect_= isDisplay;
-	}
-
-	/// <summary>
-	/// 処理を終えた
-	/// </summary>
-	inline void SetIsEnd() {
-		isEnd_ = true;
-	}
-
-	/// <summary>
-	/// 環境音のハンドルを取得
-	/// </summary>
-	/// <returns></returns>
-	uint32_t GetEnviromentAudioHandle()const {
-		return enviromentAudioHandle_;
-	}
-
-
 private:
 	//テクスチャ管理クラス
 	Elysia::TextureManager* textureManager_ = nullptr;
@@ -168,27 +126,9 @@ private:
 
 	//カメラ
 	Camera camera_ = {};
-	//レールカメラ
-	std::unique_ptr<TitleRailCamera> titleRailCamera_ = nullptr;
 	//平行光源
 	DirectionalLight directionalLight_ = {};
-
-	//細かいシーン
-	std::unique_ptr<BaseTitleScene>detailTitleScene_ = nullptr;
-	//処理を終えたかどうか
-	bool isEnd_ = false;
-
-	//背景(ポストエフェクト)
-	std::unique_ptr<BaseTitleBackTexture> baseTitleBackTexture_ = nullptr;
-	//ランダムノイズ
-	std::unique_ptr<Elysia::RandomNoisePostEffect> randomEffect_ = nullptr;
-	RandomNoise randomNoise_ = {};
-	//見せるかどうか
-	bool isDisplayRandomEffect_ = false;
-
-	//環境音のハンドル
-	uint32_t enviromentAudioHandle_ = 0u;
-
-
+	//ポストエフェクト
+	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 
 };

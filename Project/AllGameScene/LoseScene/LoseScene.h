@@ -12,10 +12,6 @@
 #include "Camera.h"
 #include "PointLight.h" 
 #include "BackTexture.h"
-#include "DissolveEffect.h"
-#include "Dissolve.h"
-#include "BaseLoseScene/BaseLoseScene.h"
-
 
 
 
@@ -99,42 +95,6 @@ public:
 	/// </summary>
 	~LoseScene()=default;
 
-public:
-	/// <summary>
-	/// 敗北の細かいシーンの遷移
-	/// </summary>
-	/// <param name=""></param>
-	void ChangeDetailScene(std::unique_ptr<BaseLoseScene> detailScene);
-
-	/// <summary>
-	/// 終わったことを設定する
-	/// </summary>
-	inline void SetIsEnd() {
-		this->isEnd_ = true;
-	}
-
-	/// <summary>
-	/// ゲームを続けるかどうかの設定
-	/// </summary>
-	/// <param name="isContinue">フラグ</param>
-	inline void SetIsContinue(const bool& isContinue) {
-		this->isContinue_ = isContinue;
-	}
-
-	/// <summary>
-	/// BGMのハンドルを取得
-	/// </summary>
-	/// <returns></returns>
-	inline uint32_t GetBgmHandle()const {
-		return bgmHandle_;
-	}
-
-	/// <summary>
-	/// BGMの音量を設定
-	/// </summary>
-	inline void SetBgmVolumeDown(const float_t& volume) {
-		this->bgmVolume_ = volume;
-	}
 
 
 private:
@@ -142,11 +102,6 @@ private:
 	/// /ImGUiの表示
 	/// </summary>
 	void DisplayImGui();
-
-	/// <summary>
-	/// 調整
-	/// </summary>
-	void Adjustment();
 
 private:
 	//入力クラス
@@ -159,13 +114,7 @@ private:
 	Elysia::GlobalVariables* globalVariables_ = nullptr;
 	//オーディオ
 	Elysia::Audio* audio_ = nullptr;
-private:
-	//調整項目
-	//点光源
-	const std::string POINT_LIGHT_NAME_ = "LoseScenePointLight";
-	//ディゾルブ
-	const std::string DISSOLVE_NAME_ = "LoseSceneDissolve";
-	
+
 
 private:
 	//カメラ
@@ -176,21 +125,6 @@ private:
 
 	//背景(ポストエフェクト)
 	std::unique_ptr<Elysia::BackTexture>backTexture_ = nullptr;
-	//ディゾルブ
-	std::unique_ptr<Elysia::DissolvePostEffect> dissolveEffect_ = nullptr;
-	Dissolve dissolve_ = {};
-
-	//細かいシーン
-	std::unique_ptr<BaseLoseScene> detailLoseScene_ = nullptr;
-	//処理が終わったかどうか
-	bool isEnd_ = false;
-	//ゲームを続けるかどうか
-	bool isContinue_ = false;
-
-	//敗北シーンのハンドル
-	uint32_t bgmHandle_ = 0u;
-	//音量
-	float_t bgmVolume_ = 0.9f;
 
 };
 
