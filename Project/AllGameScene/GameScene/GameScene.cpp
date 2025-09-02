@@ -246,6 +246,7 @@ void GameScene::PreDrawPostEffect() {
 
 void GameScene::DrawObject3D() {
 
+
 	//懐中電灯を取得
 	SpotLight spotLight = player_->GetFlashLight()->GetSpotLight();
 
