@@ -11,7 +11,6 @@
 #include "VectorCalculation.h"
 #include "GlobalVariables.h"
 #include "Easing.h"
-#include "BaseLoseScene/LightUp/LightUpLoseScene.h"
 
 
 LoseScene::LoseScene(){
@@ -74,12 +73,6 @@ void LoseScene::Initialize(){
 	//読み込み
 	bgmHandle_ = audio_->Load("Resources/Audio/Lose/LoseBGM.wav");
 
-	//細かいシーン
-	detailLoseScene_ = std::make_unique<LightUpLoseScene>();
-	//レベルデータハンドルの設定
-	detailLoseScene_->SetLevelDataHandle(levelDataHandle_);
-	//初期化
-	detailLoseScene_->Initialize();
 	
 	//再生
 	audio_->Play(bgmHandle_, true);
@@ -87,38 +80,15 @@ void LoseScene::Initialize(){
 
 void LoseScene::Update(Elysia::GameManager* gameManager){
 
-	//細かいシーンの更新
-	detailLoseScene_->Update(this);
-
-
-	//処理が終わった場合
-	if (isEnd_ == true) {
-		//ゲームへ
-		if (isContinue_ == true) {
-			gameManager->ChangeScene("Game");
-			return;
-		}
-		//タイトルへ
-		else {
-			gameManager->ChangeScene("Title");
-			return;
-		}
-	}
-
+	gameManager;
 	//レベルデータの更新
 	levelDataManager_->Update(levelDataHandle_);
 
 	//カメラの更新
-	camera_.translate = VectorCalculation::Add(camera_.translate, detailLoseScene_->GetCameraVelocity());
 	camera_.Update();
 	//点光源の更新
-	pointLight_.position = globalVariables_->GetVector3Value(POINT_LIGHT_NAME_, "Translate");
-	pointLight_.decay = globalVariables_->GetFloatValue(POINT_LIGHT_NAME_, "Decay");
-	pointLight_.radius = detailLoseScene_->GetPointLight().radius;
 	pointLight_.Update();
 	//ディゾルブの更新
-	dissolve_.threshold = detailLoseScene_->GetDissolve().threshold;
-	dissolve_.edgeThinkness = globalVariables_->GetFloatValue(DISSOLVE_NAME_, "Thinkness");
 	dissolve_.Update();
 
 	//調整
@@ -155,15 +125,6 @@ void LoseScene::DrawSprite(){
 
 }
 
-void LoseScene::ChangeDetailScene(std::unique_ptr<BaseLoseScene>detailScene){
-	//違った時だけ遷移する
-	if (detailLoseScene_ != detailScene) {
-		detailLoseScene_ = std::move(detailScene);
-		//次に遷移する
-		detailLoseScene_->SetLevelDataHandle(levelDataHandle_);
-		detailLoseScene_->Initialize();
-	}
-}
 
 
 void LoseScene::DisplayImGui(){

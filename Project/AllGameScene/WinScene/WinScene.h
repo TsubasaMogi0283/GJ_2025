@@ -14,8 +14,6 @@
 #include "DirectionalLight.h"
 #include "BackTexture.h"
 
-#include "BaseWinScene/BaseWinScene.h"
-
 
 /// <summary>
 /// ElysiaEngine(前方宣言)
@@ -94,12 +92,6 @@ public:
 
 public:
 	/// <summary>
-	/// 敗北の細かいシーンの遷移
-	/// </summary>
-	/// <param name="">細かいシーン</param>
-	void ChangeDetailScene(std::unique_ptr<BaseWinScene> detailScene);
-
-	/// <summary>
 	/// カメラの速度を設定
 	/// </summary>
 	/// <param name="cameraVelocity">速度分</param>
@@ -107,12 +99,6 @@ public:
 		this->cameraVelocity_ = cameraVelocity;
 	}
 
-	/// <summary>
-	/// 終わったことを設定する
-	/// </summary>
-	inline void SetIsEnd() {
-		this->isEnd_ = true;
-	}
 
 	/// <summary>
 	/// BGMの音量を下げる
@@ -159,10 +145,6 @@ private:
 	float_t objectFloatingTheta_ = 0.0f;
 
 
-	//細かいシーン
-	std::unique_ptr<BaseWinScene> detailWinScene_ = nullptr;
-	//処理が終わったかどうか
-	bool isEnd_ = false;
 
 	//勝利のBGMハンドル
 	uint32_t bgmHandle_ = 0u;

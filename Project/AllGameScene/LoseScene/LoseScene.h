@@ -14,9 +14,6 @@
 #include "BackTexture.h"
 #include "DissolveEffect.h"
 #include "Dissolve.h"
-#include "BaseLoseScene/BaseLoseScene.h"
-
-
 
 
 /// <summary>
@@ -100,26 +97,6 @@ public:
 	~LoseScene()=default;
 
 public:
-	/// <summary>
-	/// 敗北の細かいシーンの遷移
-	/// </summary>
-	/// <param name=""></param>
-	void ChangeDetailScene(std::unique_ptr<BaseLoseScene> detailScene);
-
-	/// <summary>
-	/// 終わったことを設定する
-	/// </summary>
-	inline void SetIsEnd() {
-		this->isEnd_ = true;
-	}
-
-	/// <summary>
-	/// ゲームを続けるかどうかの設定
-	/// </summary>
-	/// <param name="isContinue">フラグ</param>
-	inline void SetIsContinue(const bool& isContinue) {
-		this->isContinue_ = isContinue;
-	}
 
 	/// <summary>
 	/// BGMのハンドルを取得
@@ -180,12 +157,6 @@ private:
 	std::unique_ptr<Elysia::DissolvePostEffect> dissolveEffect_ = nullptr;
 	Dissolve dissolve_ = {};
 
-	//細かいシーン
-	std::unique_ptr<BaseLoseScene> detailLoseScene_ = nullptr;
-	//処理が終わったかどうか
-	bool isEnd_ = false;
-	//ゲームを続けるかどうか
-	bool isContinue_ = false;
 
 	//敗北シーンのハンドル
 	uint32_t bgmHandle_ = 0u;

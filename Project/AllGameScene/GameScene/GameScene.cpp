@@ -15,10 +15,6 @@
 #include "LevelDataManager.h"
 #include "GlobalVariables.h"
 #include "Audio.h"
-
-#include "BaseGameScene/Start/StartGameScene.h"
-#include "BaseGameScene/Play/PlayGameScene.h"
-
 GameScene::GameScene() {
 	//インスタンスの取得
 	//入力	
@@ -50,34 +46,6 @@ void GameScene::Initialize() {
 	//最初はコントロールは出来ない用にする
 	player_->SetIsAbleToControll(false);
 
-	//鍵のモデルの読み込み
-	uint32_t keyModelHandle = modelManager_->Load("Resources/External/Model/key", "Key.obj");
-	//生成
-	keyManager_ = std::make_unique<KeyManager>();
-	//レベルデータハンドルの設定
-	keyManager_->SetLevelDataHandle(levelHandle_);
-	//プレイヤーの設定
-	keyManager_->SetPlayer(player_.get());
-	//レベルデータから鍵の情報を取り出す
-	std::vector<Vector3> keyPositions = levelDataManager_->GetObjectPositions(levelHandle_,"Key");
-	keyManager_->Initialize(keyModelHandle, keyPositions);
-
-	//敵モデルの読み込み
-	//通常
-	uint32_t enemyModelHandle = modelManager_->Load("Resources/LevelData/GameStage/Ghost","Ghost.gltf",true);
-	//強敵
-	uint32_t strongEnemyModelHandle = modelManager_->Load("Resources/External/Model/01_HalloweenItems00/01_HalloweenItems00/EditedGLTF", "StrongGhost.gltf");
-	//敵管理システム
-	enemyManager_ = std::make_unique<EnemyManager>();
-	//プレイヤーの設定
-	enemyManager_->SetPlayer(player_.get());
-	//レベルデータ管理クラスの設定
-	enemyManager_->SetLevelDataManager(levelDataManager_, levelHandle_);
-	//初期化
-	//レベルデータから敵の情報を取り出す
-	std::vector<Vector3> normalEnemyPositions = levelDataManager_->GetObjectPositions(levelHandle_, "NormalEnemy");
-	std::vector<Vector3> strongEnemyPositions = levelDataManager_->GetObjectPositions(levelHandle_, "StrongEnemy");
-	enemyManager_->Initialize(enemyModelHandle, strongEnemyModelHandle, normalEnemyPositions, strongEnemyPositions);
 
 	//カメラの初期化
 	camera_.Initialize();
@@ -94,40 +62,11 @@ void GameScene::Initialize() {
 	//環境音の読み込み
 	enviromentAudioHandle_ = audio_->Load("Resources/Audio/Environment/Environment.wav");
 
-	//スタートから始まる
-	detailGameScene_ = std::make_unique<StartGameScene>();
-#ifdef _DEBUG
-	//デバッグ時はプレイシーンから始める
-	detailGameScene_ = std::make_unique<PlayGameScene>();
-#endif // _DEBUG
-	//レベルデータハンドルの設定
-	detailGameScene_->SetLevelDataHandle(levelHandle_);
-	//各ゲームオブジェクトのポインタを設定
-	detailGameScene_->SetPlayer(player_.get());
-	detailGameScene_->SetEnemyManager(enemyManager_.get());
-	detailGameScene_->SetKeyManager(keyManager_.get());
-	//初期化
-	detailGameScene_->Initialize();
 
 	//再生
 	audio_->Play(enviromentAudioHandle_, true);
 	//最初は音量を0にする
 	audio_->ChangeVolume(enviromentAudioHandle_, enviromentAudioVolume_);
-}
-
-void GameScene::ChangeDetailScene(std::unique_ptr<BaseGameScene> detailGameScene){
-	//違った時だけ遷移する
-	if (detailGameScene_ != detailGameScene) {
-		detailGameScene_ = std::move(detailGameScene);
-		//レベルデータハンドルの設定
-		detailGameScene_->SetLevelDataHandle(levelHandle_);
-		//各ゲームオブジェクトのポインタを設定
-		detailGameScene_->SetPlayer(player_.get());
-		detailGameScene_->SetEnemyManager(enemyManager_.get());
-		detailGameScene_->SetKeyManager(keyManager_.get());
-		//次に遷移する
-		detailGameScene_->Initialize();
-	}
 }
 
 void GameScene::VigntteProcess(){
@@ -182,13 +121,6 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 
 	//プレイヤーの更新
 	player_->Update();
-	//敵管理クラスの更新
-	enemyManager_->Update();
-	//敵を消す
-	enemyManager_->DeleteEnemy();
-	//鍵管理クラスの更新
-	keyManager_->Update();
-
 	//カメラの更新
 	//レールカメラから2つの行列を取得
 	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
@@ -208,9 +140,6 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 
 	//音量の設定
 	audio_->ChangeVolume(enviromentAudioHandle_, enviromentAudioVolume_);
-
-	//細かいシーンの更新
-	detailGameScene_->Update(this);
 
 	//処理が終わった時
 	if (isEnd_ == true) {
@@ -252,15 +181,8 @@ void GameScene::DrawObject3D() {
 
 	//レベルエディタ  
 	levelDataManager_->Draw(levelHandle_, camera_, spotLight);
-	//敵
-	enemyManager_->DrawObject3D(camera_, spotLight);
 	//プレイヤー
 	player_->DrawObject3D(camera_, spotLight);
-	//鍵
-	keyManager_->DrawObject3D(camera_, spotLight);
-
-	//細かいシーンの描画
-	detailGameScene_->DrawObject3D(camera_, spotLight);
 
 }
 
@@ -270,7 +192,4 @@ void GameScene::DrawPostEffect() {
 }
 
 void GameScene::DrawSprite() {
-	//細かいシーンのスプライト描画
-	detailGameScene_->DrawSprite();
-
 }

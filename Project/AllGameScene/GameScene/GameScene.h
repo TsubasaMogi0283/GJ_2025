@@ -15,14 +15,10 @@
 
 #include "Player/Player.h"
 #include "CollisionManager.h"
-#include "Key/KeyManager.h"
-#include "Enemy/EnemyManager.h"
-#include "Stage/Gate/Gate.h"
 #include "CollisionCalculation.h"
 
 #include "VignettePostEffect.h"
 #include "Vignette.h"
-#include "BaseGameScene/BaseGameScene.h"
 
 
  /// <summary>
@@ -114,12 +110,6 @@ public:
 	~GameScene() = default;
 
 public:
-	/// <summary>
-	/// 細かいシーンの遷移
-	/// </summary>
-	/// <param name="detailGameScene">細かいシーン</param>
-	void ChangeDetailScene(std::unique_ptr<BaseGameScene>detailGameScene);
-
 	/// <summary>
 	/// 処理終了
 	/// </summary>
@@ -214,16 +204,8 @@ private:
 
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
-	//敵管理
-	std::unique_ptr<EnemyManager> enemyManager_ = nullptr;
 	//強い敵と接触したかどうか
 	bool isTouchStrongEnemy_ = false;
-
-	//鍵管理クラス
-	std::unique_ptr<KeyManager> keyManager_ = nullptr;
-
-	//細かいシーン
-	std::unique_ptr<BaseGameScene>detailGameScene_ = nullptr;
 
 	//処理が終了したかどうか
 	bool isEnd_ = false;
