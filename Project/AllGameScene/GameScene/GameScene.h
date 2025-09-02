@@ -135,10 +135,9 @@ private:
 private:
 	//カメラ
 	Camera camera_ = {};
-	
+	SpotLight spotLight_ = {};
 	//ポストエフェクト
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
-	
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
 };

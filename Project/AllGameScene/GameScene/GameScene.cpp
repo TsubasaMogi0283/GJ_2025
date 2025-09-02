@@ -49,6 +49,11 @@ void GameScene::Initialize() {
 
 	//カメラの初期化
 	camera_.Initialize();
+	camera_.translate = { .x = 0.0f,.y = 2.0f,.z = -5.0f };
+
+	//スポットライト
+	spotLight_.Initialize();
+	spotLight_.direction = { 0.0f,0.0f,1.0f };
 
 	//ポストエフェクトの初期化
 	backTexture_ = std::make_unique<Elysia::BackTexture>();
@@ -63,10 +68,13 @@ void GameScene::DisplayImGui() {
 
 	ImGui::Begin("ゲームシーン");
 
-	if (ImGui::TreeNode("ビネット")==true) {
+	if (ImGui::TreeNode("カメラ") == true) {
+		ImGui::SliderFloat3("座標", &camera_.translate.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("回転", &camera_.rotate.x, -3.0f, 3.0f);
 		ImGui::TreePop();
-	}
 
+	}
+	
 	ImGui::End();
 
 }
@@ -77,9 +85,12 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//プレイヤーの更新
 	player_->Update();
 	//カメラの更新
-	//転送
 	camera_.Update();
 	
+	//ライトの更新
+	spotLight_.Update();
+
+
 #ifdef _DEBUG 
 
 	//再読み込み
@@ -98,7 +109,7 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
-
+	levelDataManager_->Draw(levelHandle_, camera_);
 
 }
 
