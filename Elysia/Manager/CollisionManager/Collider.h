@@ -148,6 +148,8 @@ protected:
 	//衝突半径
 	float_t radius_ = 1.0f;
 
+	Vector3 velocity_ = {};
+
 	//AABB
 	AABB aabb_ = {};
 
