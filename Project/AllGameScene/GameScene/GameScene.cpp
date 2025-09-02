@@ -92,6 +92,22 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	gameManager;
 
 	//プレイヤーの更新
+	if (input_->IsPushButton(DIK_UP) == true) {
+		playerDirection_.z = 1.0f;
+	}
+	if (input_->IsPushButton(DIK_DOWN) == true) {
+		playerDirection_.z = -1.0f;
+	}
+	if (input_->IsPushButton(DIK_RIGHT) == true) {
+		playerDirection_.x = 1.0f;
+	}
+	if (input_->IsPushButton(DIK_LEFT) == true) {
+		playerDirection_.x = -1.0f;
+	}
+
+	//方向取得
+	player_->SetMoveDirection(playerDirection_);
+	//更新
 	player_->Update();
 	//カメラの更新
 	camera_.Update();
@@ -120,7 +136,7 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
-	levelDataManager_->Draw(levelHandle_, camera_);
+	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
 
 	model_->Draw(worldTransform_, camera_, material_);
 

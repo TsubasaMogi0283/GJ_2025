@@ -141,7 +141,8 @@ private:
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
-
+	//移動方向
+	Vector3 playerDirection_ = {};
 
 	std::unique_ptr<Elysia::Model>model_ = nullptr;
 	Material material_ = {};
