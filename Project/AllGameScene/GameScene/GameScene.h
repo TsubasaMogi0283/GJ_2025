@@ -112,6 +112,17 @@ public:
 	~GameScene() = default;
 
 private:
+	
+	/// <summary>
+	/// プレイヤーの動き
+	/// </summary>
+	void PlayerMove();
+	
+	/// <summary>
+	/// プレイヤーの回転
+	/// </summary>
+	void PlayerRotate();
+
 	/// <summary>
 	/// ImGuiの表示
 	/// </summary>
@@ -133,6 +144,9 @@ private:
 	//オーディオ
 	Elysia::Audio* audio_ = nullptr;
 
+	//コントローラーがある場合
+	const float_t MOVE_LIMITATION_ = 0.02f;
+
 private:
 	//カメラ
 	Camera camera_ = {};
@@ -143,6 +157,10 @@ private:
 	std::unique_ptr<Player> player_ = nullptr;
 	//移動方向
 	Vector3 playerDirection_ = {};
+	float_t theta_ = 0.0f;
+	float_t phi_ = 0.0f;
+
+	bool isReleaseAttack_ = false;
 
 	std::unique_ptr<Elysia::Model>model_ = nullptr;
 	Material material_ = {};

@@ -73,6 +73,177 @@ void GameScene::Initialize() {
 }
 
 
+void GameScene::PlayerMove(){
+	//何も押していない時つまり動いていないので通常はfalseと0にしておく
+	//キーボードで動かしているかどうか
+	bool isPlayerMoveKey = false;
+	//動いているかどうか
+	bool isPlayerMove = false;
+	//向き
+	Vector3 playerMoveDirection = { .x = 0.0f,.y = 0.0f,.z = 0.0f };
+
+
+	//プレイヤーの更新
+	if (input_->IsPushKey(DIK_W) == true) {
+		//動く方向
+		playerMoveDirection = {
+			.x = std::cosf(theta_),
+			.y = 0.0f,
+			.z = std::sinf(theta_),
+		};
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+	if (input_->IsPushKey(DIK_S) == true) {
+		playerMoveDirection.x = std::cosf(theta_ + std::numbers::pi_v<float_t>);
+		playerMoveDirection.z = std::sinf(theta_ + std::numbers::pi_v<float_t>);
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+	if (input_->IsPushKey(DIK_D) == true) {
+		//動く方向
+		playerMoveDirection = {
+			.x = std::cosf(theta_ - std::numbers::pi_v<float_t> / 2.0f),
+			.y = 0.0f,
+			.z = std::sinf(theta_ - std::numbers::pi_v<float_t> / 2.0f),
+		};
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+	if (input_->IsPushKey(DIK_A) == true) {
+		//動く方向
+		playerMoveDirection = {
+			.x = std::cosf(theta_ + std::numbers::pi_v<float_t> / 2.0f),
+			.y = 0.0f,
+			.z = std::sinf(theta_ + std::numbers::pi_v<float_t> / 2.0f),
+		};
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+
+	//方向取得
+	player_->SetMoveDirection(playerMoveDirection);
+
+	//チャージ
+	bool isCharge = false;
+	//エンターキーまたはXボタンでチャージ開始
+	if (input_->IsPushKey(DIK_RETURN) == true || input_->IsPushButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
+		isCharge = true;
+	}
+	else {
+		isCharge = false;
+	}
+
+	//チャージ状態を設定
+	player_->GetFlashLight()->SetIsCharge(isCharge);
+
+	//エンターキーまたはYボタンを離した瞬間に攻撃する
+	if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
+		isReleaseAttack_ = true;
+		//クールタイムにする
+		player_->GetFlashLight()->SetIsCoolTime(true);
+		//カメラの振動
+		//攻撃できる時だけにする。その方が迫力が出るよね。
+		if (player_->GetFlashLight()->GetChargeCondition() >= ChargeCondition::NormalChargeAttack) {
+			player_->GetEyeCamera()->SetIsShake(true);
+		}
+	}
+	else {
+		isReleaseAttack_ = false;
+	}
+
+
+}
+
+void GameScene::PlayerRotate() {
+
+	//回転キーXY
+	bool isRotateYKey = false;
+	bool isRotateXKey = false;
+	//回転の大きさ
+	const float_t ROTATE_INTERVAL_ = 0.025f;
+
+	//+が左回り
+	//左を向く
+	if (input_->IsPushKey(DIK_LEFT) == true) {
+		theta_ += ROTATE_INTERVAL_;
+		isRotateYKey = true;
+	}
+	//右を向く
+	if (input_->IsPushKey(DIK_RIGHT) == true) {
+		theta_ -= ROTATE_INTERVAL_;
+		isRotateYKey = true;
+	}
+	//上を向く
+	if (input_->IsPushKey(DIK_UP) == true) {
+		phi_ -= ROTATE_INTERVAL_;
+		isRotateXKey = true;
+	}
+	//下を向く
+	if (input_->IsPushKey(DIK_DOWN) == true) {
+		phi_ += ROTATE_INTERVAL_;
+		isRotateXKey = true;
+	}
+
+	//2πより大きくなったら0にまた戻す
+	if (theta_ > 2.0f * std::numbers::pi_v<float_t>) {
+		theta_ = 0.0f;
+	}
+	//-2πより大きくなったら0にまた戻す
+	if (theta_ < -2.0f * std::numbers::pi_v<float_t>) {
+		theta_ = 0.0f;
+	}
+
+
+#pragma region コントローラーの回転
+
+
+
+
+	//キーボード入力していない時
+	if (isRotateYKey == false && isRotateXKey == false) {
+
+		//入力
+		float_t rotateMoveX = (static_cast<float_t>(input_->GetCurrentState().Gamepad.sThumbRY) / SHRT_MAX * ROTATE_INTERVAL_);
+		float_t rotateMoveY = (static_cast<float_t>(input_->GetCurrentState().Gamepad.sThumbRX) / SHRT_MAX * ROTATE_INTERVAL_);
+
+		//勝手に動くので制限を掛ける
+		if (rotateMoveY < MOVE_LIMITATION_ && rotateMoveY > -MOVE_LIMITATION_) {
+			rotateMoveY = 0.0f;
+		}
+		if (rotateMoveX < MOVE_LIMITATION_ && rotateMoveX > -MOVE_LIMITATION_) {
+			rotateMoveX = 0.0f;
+		}
+
+		//補正後の値を代入する
+		theta_ -= rotateMoveY;
+		phi_ -= rotateMoveX;
+	}
+
+#pragma endregion
+
+	//±π/6くらいに制限を掛けておきたい
+	//それ以下以上だと首が大変なことになっているように見えるからね
+	if (phi_ > std::numbers::pi_v<float_t> / 6.0f) {
+		phi_ = std::numbers::pi_v<float_t> / 6.0f;
+	}
+	if (phi_ < -std::numbers::pi_v<float_t> / 6.0f) {
+		phi_ = -std::numbers::pi_v<float_t> / 6.0f;
+	}
+}
+
 void GameScene::DisplayImGui() {
 
 	ImGui::Begin("ゲームシーン");
@@ -91,27 +262,19 @@ void GameScene::DisplayImGui() {
 void GameScene::Update(Elysia::GameManager* gameManager) {
 	gameManager;
 
-	//プレイヤーの更新
-	if (input_->IsPushButton(DIK_UP) == true) {
-		playerDirection_.z = 1.0f;
-	}
-	if (input_->IsPushButton(DIK_DOWN) == true) {
-		playerDirection_.z = -1.0f;
-	}
-	if (input_->IsPushButton(DIK_RIGHT) == true) {
-		playerDirection_.x = 1.0f;
-	}
-	if (input_->IsPushButton(DIK_LEFT) == true) {
-		playerDirection_.x = -1.0f;
-	}
-
-	//方向取得
-	player_->SetMoveDirection(playerDirection_);
+	
+	PlayerMove();
+	PlayerRotate();
+	//プレイヤーにそれぞれの角度を設定する
+	player_->SetTheta(theta_);
+	player_->SetPhi(phi_);
 	//更新
 	player_->Update();
 	//カメラの更新
-	camera_.Update();
-	
+	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
+	//転送
+	camera_.Transfer();
+	//camera_.Update();
 	//ライトの更新
 	spotLight_.Update();
 	worldTransform_.Update();
