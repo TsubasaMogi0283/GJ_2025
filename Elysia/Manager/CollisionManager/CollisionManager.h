@@ -72,8 +72,6 @@ namespace Elysia {
 		/// <param name="colliderB"></param>
 		void CheckPlaneAndPoint(Collider* colliderA, Collider* colliderB);
 
-
-
 	private:
 		//コライダーのリスト
 		std::list<Collider*>colliders_;
