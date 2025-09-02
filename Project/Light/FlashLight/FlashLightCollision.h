@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// 接触
 	/// </summary>
-	void OnCollision()override;
+	void OnCollision([[maybe_unused]] const Collider& collider)override;
 
 	/// <summary>
 	/// 非接触

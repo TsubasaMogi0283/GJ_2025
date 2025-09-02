@@ -41,7 +41,7 @@ void StageObjectForLevelEditorCollider::Update(){
 
 }
 
-void StageObjectForLevelEditorCollider::OnCollision(){
+void StageObjectForLevelEditorCollider::OnCollision([[maybe_unused]] const Collider& collider){
 	isTouch_ = true;
 }
 

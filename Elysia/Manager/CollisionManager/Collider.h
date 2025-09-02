@@ -35,7 +35,7 @@ public:
 	/// <summary>
 	/// 接触
 	/// </summary>
-	virtual void OnCollision()=0;
+	virtual void OnCollision([[maybe_unused]] const Collider& collider)=0;
 
 	/// <summary>
 	/// 非接触
@@ -127,6 +127,15 @@ public:
 		this->collisionMask_ = collisionMask;
 	}
 
+	//衝突時に自身を押し戻すかを取得
+	bool SetCollisionMask() const{
+		return shouldPushBack_;
+	}
+	//衝突時に自身を押し戻すかを設定
+	void SetCollisionMask(const bool& shouldPushBack) {
+		this->shouldPushBack_ = shouldPushBack;
+	}
+
 protected:
 	//名前
 	std::string name_ = "";
@@ -150,6 +159,9 @@ protected:
 
 	//平面
 	Plane plane_ = {};
+
+	//押し戻すか否か
+	bool shouldPushBack_;
 
 private:
 	

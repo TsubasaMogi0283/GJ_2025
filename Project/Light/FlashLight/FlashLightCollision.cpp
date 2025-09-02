@@ -27,7 +27,7 @@ Vector3 FlashLightCollision::GetWorldPosition(){
 	return playerWorldPosition_;
 }
 
-void FlashLightCollision::OnCollision(){
+void FlashLightCollision::OnCollision([[maybe_unused]] const Collider& collider){
 #ifdef _DEBUG
 	ImGui::Begin("扇側衝突している");
 	ImGui::End();
