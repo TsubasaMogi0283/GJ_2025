@@ -12,11 +12,12 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "SpotLight.h"
-
+#include <Material.h>
+#include <Model.h>
 #include "Player/Player.h"
 #include "CollisionManager.h"
 #include "CollisionCalculation.h"
-
+#include <WorldTransform.h>
 #include "VignettePostEffect.h"
 #include "Vignette.h"
 #include <BackTexture.h>
@@ -140,4 +141,10 @@ private:
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+	//移動方向
+	Vector3 playerDirection_ = {};
+
+	std::unique_ptr<Elysia::Model>model_ = nullptr;
+	Material material_ = {};
+	WorldTransform worldTransform_ = {};
 };
