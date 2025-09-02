@@ -108,7 +108,6 @@ void Elysia::CollisionManager::CheckFanAndPoint(Collider* colliderA, Collider* c
 
 void Elysia::CollisionManager::CheckPlaneAndPoint(Collider* colliderA, Collider* colliderB) {
 
-
 	if ((colliderA->GetCollisionAttribute() & colliderB->GetCollisionMask()) == 0 ||
 		(colliderB->GetCollisionAttribute() & colliderA->GetCollisionMask()) == 0) {
 		return;
