@@ -20,7 +20,55 @@
                     0.0,
                     0.0
                 ]
-            }
+            },
+            "file_name": "Grass",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.001",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.0,
+                    11.752154350280762,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.002",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.0,
+                    -15.1401948928833,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -41,7 +89,9 @@
                     0.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
         }
     ]
 }
