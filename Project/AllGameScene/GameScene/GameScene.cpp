@@ -61,6 +61,15 @@ void GameScene::Initialize() {
 	backTexture_->SetClearColour({ 1.0f,0.0f,0.0f,1.0f });
 	backTexture_->Initialize();
 	
+	uint32_t modelHandle = modelManager_->Load("Resources/LevelData/GameStage/Cube", "cube.obj");
+	model_.reset(Elysia::Model::Create(modelHandle));
+
+	worldTransform_.Initialize();
+	worldTransform_.translate.z = 3.0f;
+
+
+	material_.Initialize();
+	material_.lightingKinds = LightingType::NoneLighting;
 }
 
 
@@ -83,14 +92,32 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	gameManager;
 
 	//プレイヤーの更新
+	if (input_->IsPushButton(DIK_UP) == true) {
+		playerDirection_.z = 1.0f;
+	}
+	if (input_->IsPushButton(DIK_DOWN) == true) {
+		playerDirection_.z = -1.0f;
+	}
+	if (input_->IsPushButton(DIK_RIGHT) == true) {
+		playerDirection_.x = 1.0f;
+	}
+	if (input_->IsPushButton(DIK_LEFT) == true) {
+		playerDirection_.x = -1.0f;
+	}
+
+	//方向取得
+	player_->SetMoveDirection(playerDirection_);
+	//更新
 	player_->Update();
 	//カメラの更新
 	camera_.Update();
 	
 	//ライトの更新
 	spotLight_.Update();
+	worldTransform_.Update();
+	material_.Update();
 
-
+	levelDataManager_->Update(levelHandle_);
 #ifdef _DEBUG 
 
 	//再読み込み
@@ -109,7 +136,9 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
-	levelDataManager_->Draw(levelHandle_, camera_);
+	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
+
+	model_->Draw(worldTransform_, camera_, material_);
 
 }
 
