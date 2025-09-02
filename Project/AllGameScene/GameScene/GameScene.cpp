@@ -101,6 +101,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	worldTransform_.Update();
 	material_.Update();
 
+	levelDataManager_->Update(levelHandle_);
 #ifdef _DEBUG 
 
 	//再読み込み
