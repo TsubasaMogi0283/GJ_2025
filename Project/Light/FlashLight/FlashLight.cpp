@@ -350,6 +350,7 @@ void FlashLight::ImGuiDisplay() {
 	ImGui::Begin("懐中電灯");
 	if (ImGui::TreeNode("ライト") == true) {
 		ImGui::SliderFloat("角度", &lightSideTheta_, 0.0f, 3.0f);
+		ImGui::InputFloat3("座標オリジナル", &position_.x);
 		ImGui::InputFloat3("座標", &spotLight_.position.x);
 		ImGui::InputFloat3("方向", &spotLight_.direction.x);
 		ImGui::SliderFloat("距離", &spotLight_.distance, 0.0f, 100.0f);

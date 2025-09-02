@@ -52,7 +52,7 @@ void Player::Update(){
 	//移動処理
 	Move();
 	//ワールドトランスフォームの更新
-	worldTransform_.translate=VectorCalculation::Add(worldTransform_.translate, moveDirection_);
+	worldTransform_.translate=VectorCalculation::Add(worldTransform_.translate,VectorCalculation::Multiply(moveDirection_, SPEED_));
 	worldTransform_.Update();
 
 

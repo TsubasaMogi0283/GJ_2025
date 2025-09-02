@@ -278,6 +278,9 @@ private:
 	const float_t DASH_MOVE_SPEED_ = 0.2f;
 	//Yを固定させる
 	const float_t HEIGHT_ = 0.0f;
+	//スピード
+	const float_t SPEED_ = 0.1f;
+
 private:
 	//ワールドトランスフォーム
 	WorldTransform worldTransform_ = {};

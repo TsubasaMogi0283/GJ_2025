@@ -51,14 +51,10 @@ void GameScene::Initialize() {
 	camera_.Initialize();
 	camera_.translate = { .x = 0.0f,.y = 2.0f,.z = -5.0f };
 
-	//スポットライト
-	spotLight_.Initialize();
-	spotLight_.direction = { 0.0f,0.0f,1.0f };
-
 	//ポストエフェクトの初期化
 	backTexture_ = std::make_unique<Elysia::BackTexture>();
 	//初期化
-	backTexture_->SetClearColour({ 1.0f,0.0f,0.0f,1.0f });
+	backTexture_->SetClearColour({ 0.0f,0.0f,0.0f,1.0f });
 	backTexture_->Initialize();
 	
 	uint32_t modelHandle = modelManager_->Load("Resources/LevelData/GameStage/Cube", "cube.obj");
@@ -276,7 +272,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	camera_.Transfer();
 	//camera_.Update();
 	//ライトの更新
-	spotLight_.Update();
+	spotLight_=player_->GetFlashLight()->GetSpotLight();
 	worldTransform_.Update();
 	material_.Update();
 
