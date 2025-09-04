@@ -22,6 +22,8 @@
 #include "Vignette.h"
 #include <BackTexture.h>
 
+#include "Terrain/TerrainManager.h"
+
 
  /// <summary>
  /// ElysiaEngine(前方宣言)
@@ -147,4 +149,7 @@ private:
 	std::unique_ptr<Elysia::Model>model_ = nullptr;
 	Material material_ = {};
 	WorldTransform worldTransform_ = {};
+
+	// 地形管理クラス
+	std::shared_ptr<TerrainManager> terrainManager_;
 };

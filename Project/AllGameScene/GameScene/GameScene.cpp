@@ -31,6 +31,9 @@ GameScene::GameScene() {
 	globalVariables_ = Elysia::GlobalVariables::GetInstance();
 	//オーディオ
 	audio_ = Elysia::Audio::GetInstance();
+
+	// 地形管理クラス
+	terrainManager_ = std::make_shared<TerrainManager>();
 }
 
 void GameScene::Initialize() {
@@ -70,6 +73,11 @@ void GameScene::Initialize() {
 
 	material_.Initialize();
 	material_.lightingKinds = LightingType::NoneLighting;
+
+
+	// 地形初期化
+	terrainManager_->Init();
+	terrainManager_->Create_NewFloor(Vector3{0.0f, 10.0f, 5.0f});
 }
 
 
@@ -117,6 +125,12 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	worldTransform_.Update();
 	material_.Update();
 
+
+	// 地形
+	terrainManager_->Update();
+
+
+
 	levelDataManager_->Update(levelHandle_);
 #ifdef _DEBUG 
 
@@ -140,6 +154,8 @@ void GameScene::DrawObject3D() {
 
 	model_->Draw(worldTransform_, camera_, material_);
 
+	// 地形
+	terrainManager_->Draw(camera_, spotLight_);
 }
 
 void GameScene::DrawPostEffect() {

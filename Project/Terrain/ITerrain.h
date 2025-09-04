@@ -57,10 +57,34 @@ public:
 	/// </summary>
 	virtual void DrawObject3D(const Camera& camera, const SpotLight& spotLight) = 0;
 
+
+#pragma region accessor
+
+	// モデルハンドル
+	void Set_ModelHandle(uint32_t handle) { this->modelHandle_ = handle; }
+
+	// スケール
+	Vector3 Get_Scale() const { return transform_.scale; }
+	void Set_Scale(const Vector3& scale) { this->transform_.scale = scale; }
+	// 回転
+	Vector3 Get_Rotate() const { return transform_.rotate; }
+	void Set_Rotate(const Vector3& rotate) { this->transform_.rotate = rotate; }
+	// 座標
+	Vector3 Get_Translate() const { return transform_.translate; }
+	void Set_Translate(const Vector3& translate) { this->transform_.translate = translate; }
+
+	// 見え隠れのstate
+	TerrainHiddenState Get_HiddenState() const { return hiddenState_; }
+
+#pragma endregion
+
+
 protected:
 
+	// モデルのハンドル
+	uint32_t modelHandle_ = 1u;
 	// ワールドトランスフォーム
 	WorldTransform transform_{};
 	// 状態 隠れているのが初期状態
-	TerrainHiddenState hiddenState_ = TerrainHiddenState::Hidden;
+	TerrainHiddenState hiddenState_ = TerrainHiddenState::Visible;
 };
