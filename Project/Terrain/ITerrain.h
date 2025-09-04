@@ -21,7 +21,7 @@ class LevelDataManager; // レベルデータ管理
 };
 #pragma endregion 
 
-#pragma region 見え隠れの状態列挙型
+#pragma region 見え隠れの状態列挙型 顕幽
 enum class TerrainHiddenState {
 	Visible,   // 見えている
 	Hidden     // 隠れている
@@ -57,6 +57,9 @@ public:
 	/// </summary>
 	virtual void DrawObject3D(const Camera& camera, const SpotLight& spotLight) = 0;
 
+	void On() {
+		OnVisible();
+	}
 
 #pragma region accessor
 
@@ -73,18 +76,43 @@ public:
 	Vector3 Get_Translate() const { return transform_.translate; }
 	void Set_Translate(const Vector3& translate) { this->transform_.translate = translate; }
 
-	// 見え隠れのstate
+	// 顕幽state
 	TerrainHiddenState Get_HiddenState() const { return hiddenState_; }
+	void Set_HiddenState(TerrainHiddenState state) { this->hiddenState_ = state; }
 
 #pragma endregion
 
 
 protected:
 
+	/// <summary>
+	/// 顕幽状態の切り替え : 隠れる処理
+	/// </summary>
+	void OnHidden();
+
+	/// <summary>
+	/// 顕幽う状態の切り替え : 現れる処理
+	/// </summary>
+	void OnVisible();
+
+	/// <summary>
+	/// 顕幽タイマーの更新
+	/// </summary>
+	void Update_HiddenTimer();
+
+
+protected:
+
 	// モデルのハンドル
 	uint32_t modelHandle_ = 1u;
+	
 	// ワールドトランスフォーム
 	WorldTransform transform_{};
-	// 状態 隠れているのが初期状態
-	TerrainHiddenState hiddenState_ = TerrainHiddenState::Visible;
+	
+	// 顕幽状態
+	TerrainHiddenState hiddenState_ = TerrainHiddenState::Hidden;
+
+	// 顕幽タイマー
+	float hiddenTimer_ = 0.0f;
+	const float HIDDEN_DURATION_ = 1.0f * 60.0f;
 };

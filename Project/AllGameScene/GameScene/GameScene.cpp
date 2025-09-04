@@ -325,7 +325,6 @@ void GameScene::DrawObject3D() {
 
 	// 地形
 	terrainManager_->Draw(camera_, spotLight_);
-
 }
 
 void GameScene::DrawPostEffect() {

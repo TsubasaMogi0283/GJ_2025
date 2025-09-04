@@ -13,6 +13,9 @@ void Wall::Init()
 	// マテリアルの初期化
 	material_.Initialize();
 	material_.lightingKinds = LightingType::NoneLighting;
+
+	// 見え隠れの初期ステート
+	hiddenState_ = TerrainHiddenState::Hidden;
 }
 
 void Wall::Update()
@@ -21,6 +24,9 @@ void Wall::Update()
 	transform_.Update();
 	// マテリアルの更新
 	material_.Update();
+
+	// 顕幽タイマーの更新
+	Update_HiddenTimer();
 }
 
 void Wall::DrawObject3D(const Camera& camera, const SpotLight& spotLight)

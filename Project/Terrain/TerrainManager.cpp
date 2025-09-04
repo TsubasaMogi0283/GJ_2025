@@ -1,10 +1,13 @@
 #include "TerrainManager.h"
+#include "Input.h"
 #include "TextureManager.h"
 #include "ModelManager.h"
 #include "LevelDataManager.h"
 
 TerrainManager::TerrainManager()
 {
+	// 入力クラス
+	input_ = Elysia::Input::GetInstance();
 	//テクスチャ管理クラス
 	textureManager_ = Elysia::TextureManager::GetInstance();
 	//モデル管理クラス
@@ -26,15 +29,17 @@ void TerrainManager::Update()
 	for (auto& terr : terrains_) {
 		terr->Update();
 	}
+
+	if (input_->IsTriggerKey(DIK_I)) {
+		for (auto& terr : terrains_) {
+			terr->On();
+		}
+	}
 }
 
 void TerrainManager::Draw(const Camera& camera, const SpotLight& spotLight)
 {
 	for (auto& terr : terrains_) {
-		// 隠れた状態であればスキップ
-		if (terr->Get_HiddenState() == TerrainHiddenState::Hidden) {
-			continue;
-		}
 		terr->DrawObject3D(camera, spotLight);
 	}
 }

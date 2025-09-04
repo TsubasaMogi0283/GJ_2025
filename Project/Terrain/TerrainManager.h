@@ -14,6 +14,7 @@
 #include "Wall/Wall.h"
 
 namespace Elysia {
+class Input; // 入力管理
 class ModelManager; // モデル管理
 class TextureManager; // テクスチャ管理
 class LevelDataManager; // レベルデータ管理
@@ -66,6 +67,8 @@ private:
 
 private:
 
+	// 入力クラス
+	Elysia::Input* input_ = nullptr;
 	//テクスチャ管理クラス
 	Elysia::TextureManager* textureManager_ = nullptr;
 	//モデル管理クラス
