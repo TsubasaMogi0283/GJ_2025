@@ -22,9 +22,45 @@
                 ]
             },
             "file_name": "Grass",
-            "object_type": "Stage",
+            "object_type": "Audio",
             "collider": {
                 "type": "Plane",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    10.375163078308105,
+                    0.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage",
+            "collider": {
+                "type": "AABB",
                 "center": [
                     0.0,
                     0.0,
@@ -198,42 +234,6 @@
                 "translation": [
                     -10.0,
                     6.0,
-                    1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    10.375163078308105,
-                    0.0,
                     1.0
                 ]
             },

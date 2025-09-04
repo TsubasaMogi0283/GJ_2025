@@ -276,6 +276,11 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 
 	//ステージデータの更新
 	stageObjectData_->Update();
+	for (size_t i = 0u; i < stageObjectData_->GetColliderToFlashLight().size(); ++i) {
+		collisionManager_->RegisterList(stageObjectData_->GetColliderToFlashLight()[i]);
+	}
+	//ライトのコライダーを登録
+	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
 
 
 	//カメラの更新
@@ -285,9 +290,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//ライトの更新
 	spotLight_=player_->GetFlashLight()->GetSpotLight();
 	
-	//ライトのコライダーを登録
-	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
-
+	
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
 
