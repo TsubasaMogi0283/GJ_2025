@@ -114,6 +114,17 @@ public:
 	~GameScene() = default;
 
 private:
+	
+	/// <summary>
+	/// プレイヤーの動き
+	/// </summary>
+	void PlayerMove();
+	
+	/// <summary>
+	/// プレイヤーの回転
+	/// </summary>
+	void PlayerRotate();
+
 	/// <summary>
 	/// ImGuiの表示
 	/// </summary>
@@ -135,9 +146,13 @@ private:
 	//オーディオ
 	Elysia::Audio* audio_ = nullptr;
 
+	//コントローラーがある場合
+	const float_t MOVE_LIMITATION_ = 0.02f;
+
 private:
 	//カメラ
 	Camera camera_ = {};
+	//スポットライト
 	SpotLight spotLight_ = {};
 	//ポストエフェクト
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
@@ -145,6 +160,12 @@ private:
 	std::unique_ptr<Player> player_ = nullptr;
 	//移動方向
 	Vector3 playerDirection_ = {};
+	float_t theta_ = 0.0f;
+	float_t phi_ = 0.0f;
+
+	//衝突判定管理クラス
+	std::unique_ptr<Elysia::CollisionManager> collisionManager_ = nullptr;
+
 
 	std::unique_ptr<Elysia::Model>model_ = nullptr;
 	Material material_ = {};
@@ -152,4 +173,9 @@ private:
 
 	// 地形管理クラス
 	std::shared_ptr<TerrainManager> terrainManager_;
+
+	//離したかどうか
+	bool isReleaseAttack_ = false;
+	
+
 };

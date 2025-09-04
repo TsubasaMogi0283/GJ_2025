@@ -116,11 +116,6 @@ public:
 
 private:
 	/// <summary>
-	/// ダメージ
-	/// </summary>
-	void Damaged();
-
-	/// <summary>
 	/// 移動処理
 	/// </summary>
 	void Move();
@@ -192,47 +187,6 @@ public:
 	}
 
 	/// <summary>
-	/// 体力を取得
-	/// </summary>
-	/// <returns>体力</returns>
-	uint32_t GetHP()const {
-		return hp_;
-	}
-
-	/// <summary>
-	/// 生存中かどうかを取得
-	/// </summary>
-	/// <returns>生存中かどうか</returns>
-	bool GetIsAlive()const {
-		return isAlive_;
-	}
-
-	/// <summary>
-	/// ダメージを受けたかどうかを取得
-	/// </summary>
-	/// <returnsダメージを受けたかどうか></returns>
-	inline bool GetIsDamaged()const {
-		return isDameged_;
-	}
-
-	
-
-	/// <summary>
-	/// 持っている鍵の数を増やす
-	/// </summary>
-	inline void AddHaveKeyQuantity() {
-		++haveKeyQuantity_;
-	}
-
-	/// <summary>
-	/// 今鍵を何個持っているか
-	/// </summary>
-	/// <returns>鍵の数</returns>
-	inline uint32_t GetHavingKey() {
-		return haveKeyQuantity_;
-	}
-
-	/// <summary>
 	/// 動く方向の設定
 	/// </summary>
 	/// <param name="move">方向</param>
@@ -258,35 +212,11 @@ public:
 	}
 
 	/// <summary>
-	/// 通常の敵からの攻撃を受け入れるかどうか
-	/// </summary>
-	/// <param name="isAccept">受け入れるかどうか</param>
-	inline void SetIsAcceptDamegeFromNoemalEnemy(const bool& isAccept) {
-		this->isAcceptDamegeFromNoemalEnemy_ = isAccept;
-	}
-
-	/// <summary>
-	/// 通常の敵の攻撃の受け入れを取得
-	/// </summary>
-	/// <returns>受け入れ状態</returns>
-	bool GetIsAcceptDamegeFromNormalEnemy()const {
-		return isAcceptDamegeFromNoemalEnemy_;
-	}
-
-	/// <summary>
 	/// レベルデータハンドルの設定
 	/// </summary>
 	/// <param name="levelHandle"></param>
 	inline void SetLevelHandle(const uint32_t& levelHandle) {
 		this->levelHandle_ = levelHandle;
-	}
-
-	/// <summary>
-	/// 骨に当たったかどうか
-	/// </summary>
-	/// <param name="isBoneTouch"></param>
-	inline void SetIsBoneTouch(const bool& isBoneTouch) {
-		this->isBoneTouch_ = isBoneTouch;
 	}
 
 public:
@@ -305,18 +235,6 @@ public:
 	inline PlayerEyeCamera* GetEyeCamera()const {
 		return eyeCamera_.get();
 	}
-
-	/// <summary>
-	/// プレイヤー用のコライダーを取得
-	/// </summary>
-	/// <returns>コライダー</returns>
-	inline std::vector<BasePlayerCollision*> GetColliders()const {
-		std::vector<BasePlayerCollision*> colliders;
-		for (const auto& collider : colliders_) {
-			colliders.push_back(collider.get());
-		}
-		return colliders;
-	};
 
 
 	/// <summary>
@@ -360,6 +278,9 @@ private:
 	const float_t DASH_MOVE_SPEED_ = 0.2f;
 	//Yを固定させる
 	const float_t HEIGHT_ = 0.0f;
+	//スピード
+	const float_t SPEED_ = 0.1f;
+
 private:
 	//ワールドトランスフォーム
 	WorldTransform worldTransform_ = {};
@@ -374,42 +295,16 @@ private:
 	Material material_ = {};
 	//AABB
 	AABB aabb_ = {};
-	//持っている鍵の数
-	uint32_t haveKeyQuantity_ = 0u;
-
-	//体力
-	uint32_t hp_ = PLAYER_HP_MAX_QUANTITY_;
-	//生存かどうか
-	bool isAlive_ = true;
 
 	//操作可能かどうか
 	bool isControll_ = false;
 	//ダッシュ
 	bool isDash_ = false;
 
-	//敵の攻撃に当たったかどうか
-	bool isDamage_ = false;
-	//攻撃されたか
-	bool isDameged_ = false;
-	//通常の敵からダメージを受けたかどうか
-	bool isAcceptDamegeFromNoemalEnemy_ = false;
-	//骨に当たったかどうか
-	bool isBoneTouch_ = false;
-
 	//時間
 	float_t vibeTime_ = 0u;
 
-
 private:
-	//UI
-	//プレイヤーHPのスプライト
-	std::unique_ptr<Elysia::Sprite> playerHpSprite_[PLAYER_HP_MAX_QUANTITY_] = { nullptr };
-	//背景フレーム
-	std::unique_ptr<Elysia::Sprite> playerHPBackFrameSprite_ = nullptr;
-
-private:
-	//当たり判定のリスト
-	std::list<std::unique_ptr<BasePlayerCollision>> colliders_ = {};
 	//懐中電灯
 	std::unique_ptr<FlashLight>flashLight_ = nullptr;
 	//目としてのカメラクラス
