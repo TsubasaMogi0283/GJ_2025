@@ -17,6 +17,10 @@ void Wall::Init()
 
 void Wall::Update()
 {
+	// トランスフォームの更新
+	transform_.Update();
+	// マテリアルの更新
+	material_.Update();
 }
 
 void Wall::DrawObject3D(const Camera& camera, const SpotLight& spotLight)

@@ -17,6 +17,7 @@ void Floor::Init()
 
 void Floor::Update()
 {
+	// トランスフォームの更新
 	transform_.Update();
 	// マテリアルの更新
 	material_.Update();
