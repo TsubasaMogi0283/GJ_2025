@@ -57,15 +57,10 @@ void GameScene::Initialize() {
 	backTexture_->SetClearColour({ 0.0f,0.0f,0.0f,1.0f });
 	backTexture_->Initialize();
 	
-	uint32_t modelHandle = modelManager_->Load("Resources/LevelData/GameStage/Cube", "cube.obj");
-	model_.reset(Elysia::Model::Create(modelHandle));
+	//衝突管理クラス
+	collisionManager_ = std::make_unique<Elysia::CollisionManager>();
+	
 
-	worldTransform_.Initialize();
-	worldTransform_.translate.z = 3.0f;
-
-
-	material_.Initialize();
-	material_.lightingKinds = LightingType::NoneLighting;
 }
 
 
@@ -159,8 +154,6 @@ void GameScene::PlayerMove(){
 	else {
 		isReleaseAttack_ = false;
 	}
-
-
 }
 
 void GameScene::PlayerRotate() {
@@ -256,6 +249,9 @@ void GameScene::DisplayImGui() {
 }
 
 void GameScene::Update(Elysia::GameManager* gameManager) {
+	//中身を空にする
+	collisionManager_->ClearList();
+	
 	gameManager;
 
 	
@@ -270,13 +266,20 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
 	//転送
 	camera_.Transfer();
-	//camera_.Update();
 	//ライトの更新
 	spotLight_=player_->GetFlashLight()->GetSpotLight();
-	worldTransform_.Update();
-	material_.Update();
-
 	levelDataManager_->Update(levelHandle_);
+
+	//レベルエディタで設置したステージオブジェクトのコライダーを登録
+	for (const auto& collider : levelDataManager_->GetCollider(levelHandle_, "Stage")) {
+		collisionManager_->RegisterList(collider);
+	}
+	//ライトのコライダーを登録
+	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
+
+	//衝突判定の計算
+	collisionManager_->CheckAllCollision();
+
 #ifdef _DEBUG 
 
 	//再読み込み
@@ -295,10 +298,8 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
+	//レベルエディタのオブジェクトを描画
 	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
-
-	model_->Draw(worldTransform_, camera_, material_);
-
 }
 
 void GameScene::DrawPostEffect() {

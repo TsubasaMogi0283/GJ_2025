@@ -62,8 +62,77 @@
                     0.0
                 ],
                 "translation": [
-                    -9.603742599487305,
-                    2.3720884323120117,
+                    -10.0,
+                    2.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.003",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -10.0,
+                    4.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.004",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -10.0,
+                    8.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.005",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -10.0,
+                    6.0,
                     1.0
                 ]
             },
