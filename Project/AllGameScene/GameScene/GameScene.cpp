@@ -109,9 +109,6 @@ void GameScene::PlayerMove(){
 		};
 
 
-	material_.Initialize();
-	material_.lightingKinds = LightingType::NoneLighting;
-
 
 	// 地形初期化
 	terrainManager_->Init();
@@ -278,11 +275,6 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
 	//転送
 	camera_.Transfer();
-	//ライトの更新
-	spotLight_.Update();
-	worldTransform_.Update();
-	material_.Update();
-
 
 	// 地形
 	terrainManager_->Update();
@@ -333,8 +325,6 @@ void GameScene::DrawObject3D() {
 	//レベルエディタのオブジェクトを描画
 	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
 
-
-	model_->Draw(worldTransform_, camera_, material_);
 
 	// 地形
 	terrainManager_->Draw(camera_, spotLight_);

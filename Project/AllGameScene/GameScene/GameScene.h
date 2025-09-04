@@ -166,11 +166,6 @@ private:
 	//衝突判定管理クラス
 	std::unique_ptr<Elysia::CollisionManager> collisionManager_ = nullptr;
 
-
-	std::unique_ptr<Elysia::Model>model_ = nullptr;
-	Material material_ = {};
-	WorldTransform worldTransform_ = {};
-
 	// 地形管理クラス
 	std::shared_ptr<TerrainManager> terrainManager_;
 

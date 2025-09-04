@@ -557,6 +557,7 @@ namespace Elysia {
 		/// <param name="name"></param>
 		/// <returns></returns>
 		inline std::vector<bool> GetInitialInvisibles(const uint32_t& handle, const std::string& name) {
+			name;
 			std::vector<bool> result = {};
 			for (const auto& [key, levelData] : levelDatas_) {
 				if (levelData->handle == handle) {
