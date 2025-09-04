@@ -127,6 +127,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Elysia\Audio\Audio.cpp" />
     <ClCompile Include="Elysia\Camera\Camera.cpp" />
     <ClCompile Include="Elysia\Common\DirectX\DirectXSetup.cpp" />

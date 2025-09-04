@@ -17,4 +17,17 @@ struct AABB {
 	Vector3 min;
 	//最大点(奥の右上)
 	Vector3 max;
+
+	/// <summary>
+	/// AABBの中心点を計算するヘルパー関数
+	/// </summary>
+	/// <param name="aabb"></param>
+	/// <returns></returns>
+	Vector3 GetAABBCenter() {
+		return {
+			(min.x + max.x) / 2.0f,
+			(min.y + max.y) / 2.0f,
+			(min.z + max.z) / 2.0f
+		};
+	}
 };

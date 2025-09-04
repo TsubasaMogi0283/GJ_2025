@@ -139,7 +139,6 @@ void Elysia::CollisionManager::CheckPlaneAndPoint(Collider* colliderA, Collider*
 
 }
 
-
 void Elysia::CollisionManager::CheckAllCollision() {
 	//総当たりの判定
 	for (std::list<Collider*>::iterator itrA = colliders_.begin(); itrA != colliders_.end(); ++itrA) {

@@ -1,4 +1,7 @@
 #pragma once
+#include <cmath>
+#include <limits>
+#include <algorithm>
 #include "Collider.h"
 
 #pragma region 前方宣言

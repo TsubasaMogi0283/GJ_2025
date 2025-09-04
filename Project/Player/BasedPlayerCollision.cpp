@@ -4,7 +4,8 @@ void BasePlayerCollision::OnCollision([[maybe_unused]] const Collider& collider)
 	isTouch_ = true;
 
 	if (shouldPushBack_) {
-		
+		Vector3 vec = CalculateAABBPushbackVector(collider.GetAABB());
+
 	}
 }
 

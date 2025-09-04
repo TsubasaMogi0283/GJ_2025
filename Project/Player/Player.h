@@ -61,8 +61,6 @@ namespace Elysia {
 	class LevelDataManager;
 };
 
-
-
 #pragma endregion
 
 /// <summary>
@@ -74,7 +72,6 @@ enum PlayerMoveCondition {
 	//動く
 	OnPlayerMove,
 };
-
 
 /// <summary>
 /// プレイヤー

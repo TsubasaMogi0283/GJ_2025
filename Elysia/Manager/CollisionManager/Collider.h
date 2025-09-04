@@ -73,7 +73,6 @@ public:
 		return aabb_;
 	}
 
-
 	/// <summary>
 	/// 3Dの扇の取得
 	/// </summary>
@@ -98,7 +97,6 @@ public:
 		return plane_;
 	}
 
-
 	/// <summary>
 	/// 衝突判定で使う形の種類の値を取得
 	/// </summary>
@@ -106,7 +104,6 @@ public:
 	inline uint32_t GetCollisionType()const {
 		return collisionType_;
 	}
-
 
 public:
 	//衝突属性(自分)を取得
@@ -137,9 +134,12 @@ public:
 	}
 
 protected:
+
+	Vector3 CalculateAABBPushbackVector(const AABB& staticAABB);
+
+protected:
 	//名前
 	std::string name_ = "";
-
 
 	//当たり判定の種類
 	//デフォルトで球にしておく
@@ -149,6 +149,8 @@ protected:
 	float_t radius_ = 1.0f;
 
 	Vector3 velocity_ = {};
+
+	Vector3* position_;
 
 	//AABB
 	AABB aabb_ = {};

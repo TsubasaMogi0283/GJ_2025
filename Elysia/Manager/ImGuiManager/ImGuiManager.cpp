@@ -50,9 +50,6 @@ void Elysia::ImGuiManager::BeginFrame() {
 
 }
 
-
-
-
 void Elysia::ImGuiManager::Draw() {
 	//描画
 	ImGui::Render();

@@ -660,6 +660,9 @@
     <ClCompile Include="Project\EscapeAssistArrow\EscapeAssistArrow.cpp">
       <Filter>Project\Item\EscapeAssistArrow</Filter>
     </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Elysia\Source File\Manager\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
