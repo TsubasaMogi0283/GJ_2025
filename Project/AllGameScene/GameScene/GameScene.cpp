@@ -51,27 +51,187 @@ void GameScene::Initialize() {
 	camera_.Initialize();
 	camera_.translate = { .x = 0.0f,.y = 2.0f,.z = -5.0f };
 
-	//スポットライト
-	spotLight_.Initialize();
-	spotLight_.direction = { 0.0f,0.0f,1.0f };
-
 	//ポストエフェクトの初期化
 	backTexture_ = std::make_unique<Elysia::BackTexture>();
 	//初期化
-	backTexture_->SetClearColour({ 1.0f,0.0f,0.0f,1.0f });
+	backTexture_->SetClearColour({ 0.0f,0.0f,0.0f,1.0f });
 	backTexture_->Initialize();
 	
-	uint32_t modelHandle = modelManager_->Load("Resources/LevelData/GameStage/Cube", "cube.obj");
-	model_.reset(Elysia::Model::Create(modelHandle));
+	//衝突管理クラス
+	collisionManager_ = std::make_unique<Elysia::CollisionManager>();
+	
 
-	worldTransform_.Initialize();
-	worldTransform_.translate.z = 3.0f;
-
-
-	material_.Initialize();
-	material_.lightingKinds = LightingType::NoneLighting;
 }
 
+
+void GameScene::PlayerMove(){
+	//何も押していない時つまり動いていないので通常はfalseと0にしておく
+	//キーボードで動かしているかどうか
+	bool isPlayerMoveKey = false;
+	//動いているかどうか
+	bool isPlayerMove = false;
+	//向き
+	Vector3 playerMoveDirection = { .x = 0.0f,.y = 0.0f,.z = 0.0f };
+
+
+	//プレイヤーの更新
+	if (input_->IsPushKey(DIK_W) == true) {
+		//動く方向
+		playerMoveDirection = {
+			.x = std::cosf(theta_),
+			.y = 0.0f,
+			.z = std::sinf(theta_),
+		};
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+	if (input_->IsPushKey(DIK_S) == true) {
+		playerMoveDirection.x = std::cosf(theta_ + std::numbers::pi_v<float_t>);
+		playerMoveDirection.z = std::sinf(theta_ + std::numbers::pi_v<float_t>);
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+	if (input_->IsPushKey(DIK_D) == true) {
+		//動く方向
+		playerMoveDirection = {
+			.x = std::cosf(theta_ - std::numbers::pi_v<float_t> / 2.0f),
+			.y = 0.0f,
+			.z = std::sinf(theta_ - std::numbers::pi_v<float_t> / 2.0f),
+		};
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+	if (input_->IsPushKey(DIK_A) == true) {
+		//動く方向
+		playerMoveDirection = {
+			.x = std::cosf(theta_ + std::numbers::pi_v<float_t> / 2.0f),
+			.y = 0.0f,
+			.z = std::sinf(theta_ + std::numbers::pi_v<float_t> / 2.0f),
+		};
+
+		//キーボード入力をしている
+		isPlayerMoveKey = true;
+		//動いている
+		isPlayerMove = true;
+	}
+
+	//方向取得
+	player_->SetMoveDirection(playerMoveDirection);
+
+	//チャージ
+	bool isCharge = false;
+	//エンターキーまたはXボタンでチャージ開始
+	if (input_->IsPushKey(DIK_RETURN) == true || input_->IsPushButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
+		isCharge = true;
+	}
+	else {
+		isCharge = false;
+	}
+
+	//チャージ状態を設定
+	player_->GetFlashLight()->SetIsCharge(isCharge);
+
+	//エンターキーまたはYボタンを離した瞬間に攻撃する
+	if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
+		isReleaseAttack_ = true;
+		//クールタイムにする
+		player_->GetFlashLight()->SetIsCoolTime(true);
+		//カメラの振動
+		//攻撃できる時だけにする。その方が迫力が出るよね。
+		if (player_->GetFlashLight()->GetChargeCondition() >= ChargeCondition::NormalChargeAttack) {
+			player_->GetEyeCamera()->SetIsShake(true);
+		}
+	}
+	else {
+		isReleaseAttack_ = false;
+	}
+}
+
+void GameScene::PlayerRotate() {
+
+	//回転キーXY
+	bool isRotateYKey = false;
+	bool isRotateXKey = false;
+	//回転の大きさ
+	const float_t ROTATE_INTERVAL_ = 0.025f;
+
+	//+が左回り
+	//左を向く
+	if (input_->IsPushKey(DIK_LEFT) == true) {
+		theta_ += ROTATE_INTERVAL_;
+		isRotateYKey = true;
+	}
+	//右を向く
+	if (input_->IsPushKey(DIK_RIGHT) == true) {
+		theta_ -= ROTATE_INTERVAL_;
+		isRotateYKey = true;
+	}
+	//上を向く
+	if (input_->IsPushKey(DIK_UP) == true) {
+		phi_ -= ROTATE_INTERVAL_;
+		isRotateXKey = true;
+	}
+	//下を向く
+	if (input_->IsPushKey(DIK_DOWN) == true) {
+		phi_ += ROTATE_INTERVAL_;
+		isRotateXKey = true;
+	}
+
+	//2πより大きくなったら0にまた戻す
+	if (theta_ > 2.0f * std::numbers::pi_v<float_t>) {
+		theta_ = 0.0f;
+	}
+	//-2πより大きくなったら0にまた戻す
+	if (theta_ < -2.0f * std::numbers::pi_v<float_t>) {
+		theta_ = 0.0f;
+	}
+
+
+#pragma region コントローラーの回転
+
+
+
+
+	//キーボード入力していない時
+	if (isRotateYKey == false && isRotateXKey == false) {
+
+		//入力
+		float_t rotateMoveX = (static_cast<float_t>(input_->GetCurrentState().Gamepad.sThumbRY) / SHRT_MAX * ROTATE_INTERVAL_);
+		float_t rotateMoveY = (static_cast<float_t>(input_->GetCurrentState().Gamepad.sThumbRX) / SHRT_MAX * ROTATE_INTERVAL_);
+
+		//勝手に動くので制限を掛ける
+		if (rotateMoveY < MOVE_LIMITATION_ && rotateMoveY > -MOVE_LIMITATION_) {
+			rotateMoveY = 0.0f;
+		}
+		if (rotateMoveX < MOVE_LIMITATION_ && rotateMoveX > -MOVE_LIMITATION_) {
+			rotateMoveX = 0.0f;
+		}
+
+		//補正後の値を代入する
+		theta_ -= rotateMoveY;
+		phi_ -= rotateMoveX;
+	}
+
+#pragma endregion
+
+	//±π/6くらいに制限を掛けておきたい
+	//それ以下以上だと首が大変なことになっているように見えるからね
+	if (phi_ > std::numbers::pi_v<float_t> / 6.0f) {
+		phi_ = std::numbers::pi_v<float_t> / 6.0f;
+	}
+	if (phi_ < -std::numbers::pi_v<float_t> / 6.0f) {
+		phi_ = -std::numbers::pi_v<float_t> / 6.0f;
+	}
+}
 
 void GameScene::DisplayImGui() {
 
@@ -89,35 +249,45 @@ void GameScene::DisplayImGui() {
 }
 
 void GameScene::Update(Elysia::GameManager* gameManager) {
+	//中身を空にする
+	collisionManager_->ClearList();
+	
 	gameManager;
 
-	//プレイヤーの更新
-	if (input_->IsPushButton(DIK_UP) == true) {
-		playerDirection_.z = 1.0f;
-	}
-	if (input_->IsPushButton(DIK_DOWN) == true) {
-		playerDirection_.z = -1.0f;
-	}
-	if (input_->IsPushButton(DIK_RIGHT) == true) {
-		playerDirection_.x = 1.0f;
-	}
-	if (input_->IsPushButton(DIK_LEFT) == true) {
-		playerDirection_.x = -1.0f;
-	}
-
-	//方向取得
-	player_->SetMoveDirection(playerDirection_);
+	
+	PlayerMove();
+	PlayerRotate();
+	//プレイヤーにそれぞれの角度を設定する
+	player_->SetTheta(theta_);
+	player_->SetPhi(phi_);
 	//更新
 	player_->Update();
 	//カメラの更新
-	camera_.Update();
-	
+	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
+	//転送
+	camera_.Transfer();
 	//ライトの更新
-	spotLight_.Update();
-	worldTransform_.Update();
-	material_.Update();
-
+	spotLight_=player_->GetFlashLight()->GetSpotLight();
 	levelDataManager_->Update(levelHandle_);
+
+
+	
+	for (const auto& collider : levelDataManager_->GetCollider(levelHandle_, "Stage")) {
+		//レベルエディタで設置したステージオブジェクトのコライダーを登録
+		collisionManager_->RegisterList(collider);
+
+		//表示させる
+		if (collider->GetIsTouch() == true) {
+
+		}
+
+	}
+	//ライトのコライダーを登録
+	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
+
+	//衝突判定の計算
+	collisionManager_->CheckAllCollision();
+
 #ifdef _DEBUG 
 
 	//再読み込み
@@ -136,10 +306,8 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
+	//レベルエディタのオブジェクトを描画
 	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
-
-	model_->Draw(worldTransform_, camera_, material_);
-
 }
 
 void GameScene::DrawPostEffect() {
