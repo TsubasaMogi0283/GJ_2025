@@ -31,6 +31,9 @@ GameScene::GameScene() {
 	globalVariables_ = Elysia::GlobalVariables::GetInstance();
 	//オーディオ
 	audio_ = Elysia::Audio::GetInstance();
+
+	// 地形管理クラス
+	terrainManager_ = std::make_shared<TerrainManager>();
 }
 
 void GameScene::Initialize() {
@@ -104,6 +107,15 @@ void GameScene::PlayerMove(){
 			.y = 0.0f,
 			.z = std::sinf(theta_ - std::numbers::pi_v<float_t> / 2.0f),
 		};
+
+
+	material_.Initialize();
+	material_.lightingKinds = LightingType::NoneLighting;
+
+
+	// 地形初期化
+	terrainManager_->Init();
+	terrainManager_->Create_NewFloor(Vector3{0.0f, 10.0f, 5.0f});
 
 		//キーボード入力をしている
 		isPlayerMoveKey = true;
@@ -267,7 +279,19 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//転送
 	camera_.Transfer();
 	//ライトの更新
+	spotLight_.Update();
+	worldTransform_.Update();
+	material_.Update();
+
+
+	// 地形
+	terrainManager_->Update();
+
+
+
+
 	spotLight_=player_->GetFlashLight()->GetSpotLight();
+
 	levelDataManager_->Update(levelHandle_);
 
 
@@ -308,6 +332,13 @@ void GameScene::PreDrawPostEffect() {
 void GameScene::DrawObject3D() {
 	//レベルエディタのオブジェクトを描画
 	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
+
+
+	model_->Draw(worldTransform_, camera_, material_);
+
+	// 地形
+	terrainManager_->Draw(camera_, spotLight_);
+
 }
 
 void GameScene::DrawPostEffect() {

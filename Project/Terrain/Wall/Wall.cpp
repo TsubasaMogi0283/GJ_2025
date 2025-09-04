@@ -1,10 +1,6 @@
 #include "Wall.h"
 
-Wall::Wall()
-{
-	// モデルの生成
-	model_ = std::make_unique<Elysia::Model>();
-}
+Wall::Wall() {}
 
 void Wall::Init()
 {
@@ -12,11 +8,11 @@ void Wall::Init()
 	transform_.Initialize();
 
 	// モデルの設定
-	uint32_t modelHandle = 0;
-	model_.reset(Elysia::Model::Create(modelHandle));
+	model_.reset(Elysia::Model::Create(modelHandle_));
 
 	// マテリアルの初期化
 	material_.Initialize();
+	material_.lightingKinds = LightingType::NoneLighting;
 }
 
 void Wall::Update()
@@ -26,5 +22,5 @@ void Wall::Update()
 void Wall::DrawObject3D(const Camera& camera, const SpotLight& spotLight)
 {
 	camera, spotLight;
-	model_->Draw(transform_, camera, material_);
+	model_->Draw(transform_, camera, material_, spotLight);
 }

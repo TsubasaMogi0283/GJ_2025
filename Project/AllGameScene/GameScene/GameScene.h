@@ -22,6 +22,8 @@
 #include "Vignette.h"
 #include <BackTexture.h>
 
+#include "Terrain/TerrainManager.h"
+
 
  /// <summary>
  /// ElysiaEngine(前方宣言)
@@ -164,7 +166,16 @@ private:
 	//衝突判定管理クラス
 	std::unique_ptr<Elysia::CollisionManager> collisionManager_ = nullptr;
 
+
+	std::unique_ptr<Elysia::Model>model_ = nullptr;
+	Material material_ = {};
+	WorldTransform worldTransform_ = {};
+
+	// 地形管理クラス
+	std::shared_ptr<TerrainManager> terrainManager_;
+
 	//離したかどうか
 	bool isReleaseAttack_ = false;
 	
+
 };
