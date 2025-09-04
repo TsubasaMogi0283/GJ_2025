@@ -62,8 +62,11 @@ void GameScene::Initialize() {
 	
 	//衝突管理クラス
 	collisionManager_ = std::make_unique<Elysia::CollisionManager>();
-	
 
+	// 地形初期化
+	terrainManager_->Init();
+	terrainManager_->Create_NewFloor(Vector3{ -1.0f, 1.0f, 5.0f });
+	terrainManager_->Create_NewWall(Vector3{ 1.0f, 1.0f, 5.0f });
 }
 
 
@@ -107,12 +110,6 @@ void GameScene::PlayerMove(){
 			.y = 0.0f,
 			.z = std::sinf(theta_ - std::numbers::pi_v<float_t> / 2.0f),
 		};
-
-
-
-	// 地形初期化
-	terrainManager_->Init();
-	terrainManager_->Create_NewFloor(Vector3{0.0f, 10.0f, 5.0f});
 
 		//キーボード入力をしている
 		isPlayerMoveKey = true;

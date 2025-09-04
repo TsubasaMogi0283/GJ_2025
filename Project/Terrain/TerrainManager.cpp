@@ -17,7 +17,7 @@ void TerrainManager::Init()
 {
 	// 使用するモデルデータの読み込み
 	floorModelHandle_ = modelManager_->Load("Resources/Model/Terrain/Floor", "Floor.obj");
-	//wallModelHandle_ = modelManager_->Load("Resources/Model/Terrain/Wall", "Wall.obj");
+	wallModelHandle_ = modelManager_->Load("Resources/Model/Terrain/Wall", "Wall.obj");
 
 }
 
