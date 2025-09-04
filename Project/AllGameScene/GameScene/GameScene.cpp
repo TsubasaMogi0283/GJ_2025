@@ -270,9 +270,18 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	spotLight_=player_->GetFlashLight()->GetSpotLight();
 	levelDataManager_->Update(levelHandle_);
 
-	//レベルエディタで設置したステージオブジェクトのコライダーを登録
+
+	for(const auto& object : levelDataManager_->GetOb(levelHandle_, "Stage"))
+
+	
 	for (const auto& collider : levelDataManager_->GetCollider(levelHandle_, "Stage")) {
+		//レベルエディタで設置したステージオブジェクトのコライダーを登録
 		collisionManager_->RegisterList(collider);
+
+		if (collider->GetIsTouch() == true) {
+
+		}
+
 	}
 	//ライトのコライダーを登録
 	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
