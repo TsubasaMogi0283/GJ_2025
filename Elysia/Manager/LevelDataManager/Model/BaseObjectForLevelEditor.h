@@ -12,8 +12,10 @@
 #include "Material.h"
 #include "AABB.h"
 #include "Transform.h"
+#include <Model/BaseObjectForLevelEditorCollider.h>
 
-/// <summary>
+ 
+ /// <summary>
 /// オブジェクトの種類
 /// </summary>
 enum LevelEditorObjectType {
@@ -34,8 +36,10 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="modelhandle"></param>
-	/// <param name="position"></param>
-	virtual void Initialize(const uint32_t& modelhandle,const Transform& position)=0;
+	/// <param name="transform"></param>
+	/// <param name="isHavingCollider"></param>
+	/// <param name="objectSize"></param>
+	virtual void Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const Vector3& objectSize)=0;
 
 	/// <summary>
 	/// 更新
@@ -79,6 +83,14 @@ public:
 
 
 public:
+	/// <summary>
+	/// コライダーの取得
+	/// </summary>
+	/// <returns></returns>
+	virtual BaseObjectForLevelEditorCollider* GetCollider()const {
+		return collider_.get();
+	}
+
 	/// <summary>
 	/// ワールド座標の取得
 	/// </summary>
@@ -178,4 +190,9 @@ protected:
 
 	//リスナーが動いているかどうか
 	bool isListenerMove_=false;
+
+	//コライダー
+	std::unique_ptr<BaseObjectForLevelEditorCollider> collider_ = nullptr;
+	bool isGenerateCollider_ = false;
+
 };

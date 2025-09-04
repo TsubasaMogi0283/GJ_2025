@@ -4,7 +4,7 @@
 
 #include "VectorCalculation.h"
 
-void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform) {
+void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const Vector3& objectSize) {
 	
 	//レベルエディタ用のオブジェクトのタイプ
 	objectType_ = LevelEditorObjectType::StageObject;
@@ -21,6 +21,14 @@ void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 	//マテリアルの初期化
 	material_.Initialize();
 
+	//コライダーを持っていれば生成
+	if (isHavingCollider == true) {
+		isGenerateCollider_ = true;
+		collider_ = std::make_unique<StageObjectForLevelEditorCollider>();
+		collider_->Initialize();
+		collider_->SetSize(objectSize);
+	}
+
 }
 
 void StageObjectForLevelEditor::Update(){
@@ -35,6 +43,12 @@ void StageObjectForLevelEditor::Update(){
 		.max = VectorCalculation::Add(worldTransform_.GetWorldPosition(),size_)
 	};
 
+	//中心座標を設定
+	if (isGenerateCollider_ == true) {
+		collider_->SetCenterPosition(worldTransform_.GetWorldPosition());
+
+	}
+	
 #ifdef _DEBUG
 	ImGui::Begin("ステージオブジェクト"); 
 	Vector3 position = worldTransform_.GetWorldPosition();

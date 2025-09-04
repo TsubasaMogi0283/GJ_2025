@@ -127,6 +127,13 @@ void GameScene::PlayerMove(){
 	//方向取得
 	player_->SetMoveDirection(playerMoveDirection);
 
+	if (input_->IsPushKey(DIK_LSHIFT) == true) {
+		player_->SetIsDash(true);
+	}
+	else {
+		player_->SetIsDash(false);
+	}
+
 	//チャージ
 	bool isCharge = false;
 	//エンターキーまたはXボタンでチャージ開始
@@ -276,10 +283,6 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 		//レベルエディタで設置したステージオブジェクトのコライダーを登録
 		collisionManager_->RegisterList(collider);
 
-		//表示させる
-		if (collider->GetIsTouch() == true) {
-
-		}
 
 	}
 	//ライトのコライダーを登録

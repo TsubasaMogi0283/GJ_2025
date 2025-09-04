@@ -7,7 +7,7 @@
  */
 
 
-#include "IObjectForLevelEditorCollider.h"
+#include "BaseObjectForLevelEditorCollider.h"
 
 /// <summary>
 /// オーディオオブジェクト用の当たり判定

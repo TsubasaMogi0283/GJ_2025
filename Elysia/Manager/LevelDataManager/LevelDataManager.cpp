@@ -236,20 +236,12 @@ void Elysia::LevelDataManager::Ganarate(LevelData& levelData) {
 
 			//オブジェクトの生成
 			stageObject->SetSize(objectData.size);
-			stageObject->Initialize(modelHandle, objectData.transform);
+
+			//初期化
+			stageObject->Initialize(modelHandle, objectData.transform, objectData.isHavingCollider, objectData.size);
 			objectData.objectForLeveEditor = stageObject;
 			objectData.isModelGenerate = true;
 
-			//コライダーがある場合
-			if (objectData.isHavingCollider == true) {
-				//生成
-				StageObjectForLevelEditorCollider* collider = new StageObjectForLevelEditorCollider();
-				collider->SetSize(objectData.size);
-				collider->Initialize();
-
-				//代入
-				objectData.levelDataObjectCollider = collider;
-			}
 		}
 		//オーディオ
 		else if (objectData.type == "Audio") {
@@ -282,23 +274,11 @@ void Elysia::LevelDataManager::Ganarate(LevelData& levelData) {
 			uint32_t modelHandle = ModelManager::GetInstance()->LoadModelFileForLevelData(levelEditorDirectoryPath, objectData.modelFileName);
 
 			//初期化
-			audioObject->Initialize(modelHandle, objectData.transform);
+			audioObject->Initialize(modelHandle, objectData.transform, objectData.isHavingCollider, objectData.size);
 			//オブジェクトの生成
 			objectData.objectForLeveEditor = audioObject;
 			objectData.isModelGenerate = true;
 
-			//コライダーがある場合
-			if (objectData.isHavingCollider == true) {
-
-				//生成
-				AudioObjectForLevelEditorCollider* collider = new AudioObjectForLevelEditorCollider();
-				collider->SetSize(objectData.size);
-				collider->Initialize();
-
-				//代入
-				objectData.levelDataObjectCollider = collider;
-
-			}
 		}
 		//モデルは生成しない
 		else {
@@ -409,9 +389,6 @@ void Elysia::LevelDataManager::Reload(const uint32_t& levelDataHandle) {
 				if (object.objectForLeveEditor != nullptr) {
 					delete object.objectForLeveEditor;
 				}
-				if (object.levelDataObjectCollider != nullptr) {
-					delete object.levelDataObjectCollider;
-				}
 
 			}
 
@@ -486,14 +463,14 @@ void Elysia::LevelDataManager::Update(const uint32_t& levelDataHandle) {
 					object.objectForLeveEditor->Update();
 					Vector3 objectWorldPosition = object.objectForLeveEditor->GetWorldPosition();
 
-					//衝突判定の設定
-					if (object.isHavingCollider == true) {
-						bool isTouch = object.levelDataObjectCollider->GetIsTouch();
-						object.objectForLeveEditor->SetIsTouch(isTouch);
-						object.levelDataObjectCollider->SetObjectPosition(objectWorldPosition);
-						object.levelDataObjectCollider->SetCenterPosition(object.center);
-						object.levelDataObjectCollider->Update();
-					}
+					////衝突判定の設定
+					//if (object.isHavingCollider == true) {
+					//	bool isTouch = object.levelDataObjectCollider->GetIsTouch();
+					//	object.objectForLeveEditor->SetIsTouch(isTouch);
+					//	object.levelDataObjectCollider->SetObjectPosition(objectWorldPosition);
+					//	object.levelDataObjectCollider->SetCenterPosition(object.center);
+					//	object.levelDataObjectCollider->Update();
+					//}
 				}
 			}
 			break;
@@ -513,9 +490,6 @@ void Elysia::LevelDataManager::Delete(const uint32_t& levelDataHandle) {
 				// Modelの解放
 				if (object.objectForLeveEditor != nullptr) {
 					delete object.objectForLeveEditor;
-				}
-				if (object.levelDataObjectCollider != nullptr) {
-					delete object.levelDataObjectCollider;
 				}
 
 			}
@@ -624,10 +598,6 @@ void Elysia::LevelDataManager::Finalize() {
 			//オブジェクトの解放
 			if (object.objectForLeveEditor != nullptr) {
 				delete object.objectForLeveEditor;
-			}
-			//コライダーの解放
-			if (object.levelDataObjectCollider != nullptr) {
-				delete object.levelDataObjectCollider;
 			}
 		}
 	}

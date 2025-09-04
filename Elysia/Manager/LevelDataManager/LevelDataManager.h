@@ -173,8 +173,8 @@ namespace Elysia {
 					for (auto& objectData : levelData->objectDatas) {
 
 						//コライダーを持っている場合、リストに追加
-						if (objectData.levelDataObjectCollider != nullptr&& objectData.type == objectType) {
-							colliders.push_back(objectData.levelDataObjectCollider);
+						if (objectData.isHavingCollider == true&& objectData.type == objectType) {
+							colliders.push_back(objectData.objectForLeveEditor->GetCollider());
 						}
 					}
 
@@ -335,9 +335,6 @@ namespace Elysia {
 
 			//モデルを生成するかどうか
 			bool isModelGenerate = false;
-
-			//コライダー
-			BaseObjectForLevelEditorCollider* levelDataObjectCollider;
 
 
 		};
@@ -554,9 +551,8 @@ namespace Elysia {
 		/// 初期表示かどうか
 		/// </summary>
 		/// <param name="handle"></param>
-		/// <param name="name"></param>
 		/// <returns></returns>
-		inline std::vector<bool> GetInitialInvisibles(const uint32_t& handle, const std::string& name) {
+		inline std::vector<bool> GetInitialInvisibles(const uint32_t& handle) {
 			std::vector<bool> result = {};
 			for (const auto& [key, levelData] : levelDatas_) {
 				if (levelData->handle == handle) {

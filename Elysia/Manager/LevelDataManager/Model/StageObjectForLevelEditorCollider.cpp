@@ -17,8 +17,6 @@ void StageObjectForLevelEditorCollider::Initialize() {
 
 void StageObjectForLevelEditorCollider::Update(){
 	
-
-
 	aabb_.max = {
 		.x = objectPosition_.x + size_.x/2.0f,
 		.y = objectPosition_.y + size_.y/2.0f,

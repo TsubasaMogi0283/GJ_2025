@@ -412,7 +412,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\AudioObjectForLevelEditor.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\AudioObjectForLevelEditorCollider.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\BaseObjectForLevelEditor.h" />
-    <ClInclude Include="Elysia\Manager\LevelDataManager\Model\IObjectForLevelEditorCollider.h" />
+    <ClInclude Include="Elysia\Manager\LevelDataManager\Model\BaseObjectForLevelEditorCollider.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\StageObjectForLevelEditor.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\StageObjectForLevelEditorCollider.h" />
     <ClInclude Include="Elysia\Manager\ModelManager\Animation.h" />
