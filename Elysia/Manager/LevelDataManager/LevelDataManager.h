@@ -154,6 +154,9 @@ namespace Elysia {
 
 	public:
 
+		
+
+
 		/// <summary>
 		/// 指定したオブジェクトタイプのコライダーを取得する
 		/// </summary>
@@ -320,6 +323,9 @@ namespace Elysia {
 
 			//非表示設定
 			bool isInvisible = false;
+			//初期非表示かどうか
+			bool isInitialInvisible = false;
+
 
 			//レベルデータのオーディオ
 			AudioDataForLevelEditor levelAudioData;
@@ -363,6 +369,32 @@ namespace Elysia {
 
 
 	public:
+		/// <summary>
+		/// オブジェクトデータの取得
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="objectType"></param>
+		/// <returns></returns>
+		inline std::list<ObjectData> GetObjectDatas(const uint32_t& handle, const std::string& objectType) {
+			std::list<ObjectData> objectDatas = {};
+
+			for (const auto& [key, levelData] : levelDatas_) {
+				if (levelData->handle == handle) {
+					
+					for (const auto& object : objectDatas) {
+						if (object.type == objectType) {
+							objectDatas.push_back(object);
+						}
+					}
+					
+					//無駄なループを防ぐ
+					break;
+				}
+			}
+
+			return objectDatas;
+		}
+
 		/// <summary>
 		/// リスナーの設定
 		/// </summary>
@@ -519,12 +551,40 @@ namespace Elysia {
 		}
 
 		/// <summary>
+		/// 初期表示かどうか
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		inline std::vector<bool> GetInitialInvisibles(const uint32_t& handle, const std::string& name) {
+			name;
+			std::vector<bool> result = {};
+			for (const auto& [key, levelData] : levelDatas_) {
+				if (levelData->handle == handle) {
+
+					//該当するLevelDataのobjectDatasを検索
+					for (auto& objectData : levelData->objectDatas) {
+						//一致したら
+						if (objectData.isInitialInvisible == false) {
+							result.push_back(true);
+							//無駄なループを防ぐ
+							break;
+						}
+					}
+					//無駄なループを防ぐ
+					break;
+				}
+			}
+			return result;
+		}
+
+		/// <summary>
 		/// 初期スケールを取得
 		/// </summary>
 		/// <param name="handle">ハンドル</param>
 		/// <param name="name">名前</param>
 		/// <returns>スケール</returns>
-		inline Vector3 GetInitiaScale(const uint32_t& handle, const std::string& name) {
+		inline Vector3 GetInitialScale(const uint32_t& handle, const std::string& name) {
 			Vector3 result = {};
 			for (const auto& [key, levelData] : levelDatas_) {
 				if (levelData->handle == handle) {

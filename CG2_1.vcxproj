@@ -209,6 +209,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Player\PlayerCollisionToNormalEnemyAttack.cpp" />
     <ClCompile Include="Project\Player\PlayerCollisionToStageObject.cpp" />
     <ClCompile Include="Project\Player\PlayerCollisionToStrongEnemy.cpp" />
+    <ClCompile Include="Project\Terrain\Floor\Floor.cpp" />
+    <ClCompile Include="Project\Terrain\TerrainManager.cpp" />
+    <ClCompile Include="Project\Terrain\Wall\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\AnimationObject3D\AnimationObject3D.PS.hlsl">
@@ -502,6 +505,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Player\PlayerCollisionToNormalEnemyAttack.h" />
     <ClInclude Include="Project\Player\PlayerCollisionToStageObject.h" />
     <ClInclude Include="Project\Player\PlayerCollisionToStrongEnemy.h" />
+    <ClInclude Include="Project\Terrain\Floor\Floor.h" />
+    <ClInclude Include="Project\Terrain\ITerrain.h" />
+    <ClInclude Include="Project\Terrain\TerrainManager.h" />
+    <ClInclude Include="Project\Terrain\Wall\Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
