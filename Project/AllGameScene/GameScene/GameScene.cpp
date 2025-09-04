@@ -35,8 +35,9 @@ GameScene::GameScene() {
 
 void GameScene::Initialize() {
 
-	//ハンドルの取得
-	levelHandle_ = levelDataManager_->Load("GameStage/GameStage.json");
+	//ステージデータ
+	stageObjectData_ = std::make_unique<StageObjectData>();
+	stageObjectData_->Initialize();
 
 	//生成
 	player_ = std::make_unique<Player>();
@@ -59,6 +60,8 @@ void GameScene::Initialize() {
 	
 	//衝突管理クラス
 	collisionManager_ = std::make_unique<Elysia::CollisionManager>();
+	
+
 	
 
 }
@@ -269,22 +272,19 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	player_->SetPhi(phi_);
 	//更新
 	player_->Update();
+
+
+	//ステージデータの更新
+	stageObjectData_->Update();
+
+
 	//カメラの更新
 	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
 	//転送
 	camera_.Transfer();
 	//ライトの更新
 	spotLight_=player_->GetFlashLight()->GetSpotLight();
-	levelDataManager_->Update(levelHandle_);
-
-
 	
-	for (const auto& collider : levelDataManager_->GetCollider(levelHandle_, "Stage")) {
-		//レベルエディタで設置したステージオブジェクトのコライダーを登録
-		collisionManager_->RegisterList(collider);
-
-
-	}
 	//ライトのコライダーを登録
 	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
 
@@ -293,10 +293,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 
 #ifdef _DEBUG 
 
-	//再読み込み
-	if (input_->IsTriggerKey(DIK_R) == true) {
-		levelDataManager_->Reload(levelHandle_);
-	}
+	
 	//ImGuiの表示
 	DisplayImGui();
 
@@ -309,8 +306,8 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
-	//レベルエディタのオブジェクトを描画
-	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
+	//ステージデータの描画
+	stageObjectData_->Draw(camera_,spotLight_);
 }
 
 void GameScene::DrawPostEffect() {

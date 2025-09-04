@@ -28,7 +28,7 @@ namespace
 #endif
 
 //-------------------------------------------------------------------------------------
-// Determines number of image array entries and pixel size
+// Determines colliderNumber_ of image array entries and pixel size
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_
 HRESULT DirectX::Internal::DetermineImageArray(

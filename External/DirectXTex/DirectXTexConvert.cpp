@@ -29,14 +29,14 @@ namespace
         }
         else if (IValue > 0x41FF73FFU)
         {
-            // The number is too large to be represented as a 7e3. Saturate.
+            // The colliderNumber_ is too large to be represented as a 7e3. Saturate.
             return 0x3FFU;
         }
         else
         {
             if (IValue < 0x3E800000U)
             {
-                // The number is too small to be represented as a normalized 7e3.
+                // The colliderNumber_ is too small to be represented as a normalized 7e3.
                 // Convert it to a denormalized value.
                 const uint32_t Shift = std::min<uint32_t>(125U - (IValue >> 23U), 24U);
                 IValue = (0x800000U | (IValue & 0x7FFFFFU)) >> Shift;
@@ -96,14 +96,14 @@ namespace
         }
         else if (IValue > 0x43FEFFFFU)
         {
-            // The number is too large to be represented as a 6e4. Saturate.
+            // The colliderNumber_ is too large to be represented as a 6e4. Saturate.
             return 0x3FFU;
         }
         else
         {
             if (IValue < 0x3C800000U)
             {
-                // The number is too small to be represented as a normalized 6e4.
+                // The colliderNumber_ is too small to be represented as a normalized 6e4.
                 // Convert it to a denormalized value.
                 const uint32_t Shift = std::min<uint32_t>(121U - (IValue >> 23U), 24U);
                 IValue = (0x800000U | (IValue & 0x7FFFFFU)) >> Shift;

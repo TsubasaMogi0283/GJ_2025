@@ -1143,7 +1143,7 @@ static void             UpdateViewportsNewFrame();
 //         #define GImGui MyImGuiTLS
 //     And then define MyImGuiTLS in one of your cpp files. Note that thread_local is a C++11 keyword, earlier C++ uses compiler-specific keyword.
 //   - Future development aims to make this context pointer explicit to all calls. Also read https://github.com/ocornut/imgui/issues/586
-//   - If you need a finite number of contexts, you may compile and use multiple instances of the ImGui code from a different namespace.
+//   - If you need a finite colliderNumber_ of contexts, you may compile and use multiple instances of the ImGui code from a different namespace.
 // - DLL users: read comments above.
 #ifndef GImGui
 ImGuiContext*   GImGui = NULL;
@@ -1212,7 +1212,7 @@ ImGuiStyle::ImGuiStyle()
     AntiAliasedLines        = true;             // Enable anti-aliased lines/borders. Disable if you are really tight on CPU/GPU.
     AntiAliasedLinesUseTex  = true;             // Enable anti-aliased lines/borders using textures where possible. Require backend to render with bilinear filtering (NOT point/nearest filtering).
     AntiAliasedFill         = true;             // Enable anti-aliased filled shapes (rounded rectangles, circles, etc.).
-    CurveTessellationTol    = 1.25f;            // Tessellation tolerance when using PathBezierCurveTo() without a specific number of segments. Decrease for highly tessellated curves (higher quality, more polygons), increase to reduce quality.
+    CurveTessellationTol    = 1.25f;            // Tessellation tolerance when using PathBezierCurveTo() without a specific colliderNumber_ of segments. Decrease for highly tessellated curves (higher quality, more polygons), increase to reduce quality.
     CircleTessellationMaxError = 0.30f;         // Maximum error (in pixels) allowed when using AddCircle()/AddCircleFilled() or drawing rounded corner rectangles with no explicit segment count specified. Decrease for higher quality but more geometry.
 
     // Behaviors
@@ -3735,7 +3735,7 @@ void ImGui::RemoveContextHook(ImGuiContext* ctx, ImGuiID hook_id)
 }
 
 // Call context hooks (used by e.g. test engine)
-// We assume a small number of hooks so all stored in same array
+// We assume a small colliderNumber_ of hooks so all stored in same array
 void ImGui::CallContextHooks(ImGuiContext* ctx, ImGuiContextHookType hook_type)
 {
     ImGuiContext& g = *ctx;
@@ -4256,7 +4256,7 @@ void ImGui::MemFree(void* ptr)
     return (*GImAllocatorFreeFunc)(ptr, GImAllocatorUserData);
 }
 
-// We record the number of allocation in recent frames, as a way to audit/sanitize our guiding principles of "no allocations on idle/repeating frames"
+// We record the colliderNumber_ of allocation in recent frames, as a way to audit/sanitize our guiding principles of "no allocations on idle/repeating frames"
 void ImGui::DebugAllocHook(ImGuiDebugAllocInfo* info, int frame_count, void* ptr, size_t size)
 {
     ImGuiDebugAllocEntry* entry = &info->LastEntriesBuf[info->LastEntriesIdx];
@@ -7048,7 +7048,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         bool hidden_regular = (window->HiddenFramesCanSkipItems > 0) || (window->HiddenFramesCannotSkipItems > 0);
         window->Hidden = hidden_regular || (window->HiddenFramesForRenderOnly > 0);
 
-        // Disable inputs for requested number of frames
+        // Disable inputs for requested colliderNumber_ of frames
         if (window->DisableInputsFrames > 0)
         {
             window->DisableInputsFrames--;
@@ -8205,7 +8205,7 @@ void ImGui::GetTypematicRepeatRate(ImGuiInputFlags flags, float* repeat_delay, f
     }
 }
 
-// Return value representing the number of presses in the last time period, for the given repeat rate
+// Return value representing the colliderNumber_ of presses in the last time period, for the given repeat rate
 // (most often returns 0 or 1. The result is generally only >1 when RepeatRate is smaller than DeltaTime, aka large DeltaTime or fast RepeatRate)
 int ImGui::GetKeyPressedAmount(ImGuiKey key, float repeat_delay, float repeat_rate)
 {
@@ -8273,7 +8273,7 @@ static inline ImGuiID GetRoutingIdFromOwnerId(ImGuiID owner_id)
 
 ImGuiKeyRoutingData* ImGui::GetShortcutRoutingData(ImGuiKeyChord key_chord)
 {
-    // Majority of shortcuts will be Key + any number of Mods
+    // Majority of shortcuts will be Key + any colliderNumber_ of Mods
     // We accept _Single_ mod with ImGuiKey_None.
     //  - Shortcut(ImGuiKey_S | ImGuiMod_Ctrl);                    // Legal
     //  - Shortcut(ImGuiKey_S | ImGuiMod_Ctrl | ImGuiMod_Shift);   // Legal
@@ -9478,7 +9478,7 @@ static void ImGui::ErrorCheckEndFrameSanityChecks()
 // FIXME: Can't recover from interleaved BeginTabBar/Begin
 void    ImGui::ErrorCheckEndFrameRecover(ImGuiErrorLogCallback log_callback, void* user_data)
 {
-    // PVS-Studio V1044 is "Loop break conditions do not depend on the number of iterations"
+    // PVS-Studio V1044 is "Loop break conditions do not depend on the colliderNumber_ of iterations"
     ImGuiContext& g = *GImGui;
     while (g.CurrentWindowStack.Size > 0) //-V1044
     {
@@ -11471,7 +11471,7 @@ void ImGui::NavMoveRequestTryWrapping(ImGuiWindow* window, ImGuiNavMoveFlags wra
         g.NavMoveFlags = (g.NavMoveFlags & ~ImGuiNavMoveFlags_WrapMask_) | wrap_flags;
 }
 
-// FIXME: This could be replaced by updating a frame number in each window when (window == NavWindow) and (NavLayer == 0).
+// FIXME: This could be replaced by updating a frame colliderNumber_ in each window when (window == NavWindow) and (NavLayer == 0).
 // This way we could find the last focused window among our children. It would be much less confusing this way?
 static void ImGui::NavSaveLastChildNavWindowIntoParent(ImGuiWindow* nav_window)
 {
@@ -14641,7 +14641,7 @@ void ImGui::DebugNodeFont(ImFont* font)
         for (unsigned int base = 0; base <= IM_UNICODE_CODEPOINT_MAX; base += 256)
         {
             // Skip ahead if a large bunch of glyphs are not present in the font (test in chunks of 4k)
-            // This is only a small optimization to reduce the number of iterations when IM_UNICODE_MAX_CODEPOINT
+            // This is only a small optimization to reduce the colliderNumber_ of iterations when IM_UNICODE_MAX_CODEPOINT
             // is large // (if ImWchar==ImWchar32 we will do at least about 272 queries here)
             if (!(base & 4095) && font->IsGlyphRangeUnused(base, base + 4095))
             {

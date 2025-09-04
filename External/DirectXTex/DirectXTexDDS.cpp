@@ -295,7 +295,7 @@ namespace
             return HRESULT_E_INVALID_DATA;
         }
 
-        // DDS files always start with the same magic number ("DDS ")
+        // DDS files always start with the same magic colliderNumber_ ("DDS ")
         auto const dwMagicNumber = *static_cast<const uint32_t*>(pSource);
         if (dwMagicNumber != DDS_MAGIC)
         {
@@ -1629,7 +1629,7 @@ HRESULT DirectX::GetMetadataFromDDSFile(
     const size_t len = fileLen;
 #endif
 
-    // Need at least enough data to fill the standard header and magic number to be a valid DDS
+    // Need at least enough data to fill the standard header and magic colliderNumber_ to be a valid DDS
     if (len < (sizeof(DDS_HEADER) + sizeof(uint32_t)))
     {
         return E_FAIL;
@@ -1790,7 +1790,7 @@ HRESULT DirectX::LoadFromDDSFile(
     const size_t len = fileLen;
 #endif
 
-    // Need at least enough data to fill the standard header and magic number to be a valid DDS
+    // Need at least enough data to fill the standard header and magic colliderNumber_ to be a valid DDS
     if (len < (sizeof(DDS_HEADER) + sizeof(uint32_t)))
     {
         return E_FAIL;

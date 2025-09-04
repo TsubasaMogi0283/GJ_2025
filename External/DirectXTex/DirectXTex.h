@@ -642,7 +642,7 @@ namespace DirectX
     HRESULT __cdecl GenerateMipMaps(
         _In_reads_(nimages) const Image* srcImages, _In_ size_t nimages, _In_ const TexMetadata& metadata,
         _In_ TEX_FILTER_FLAGS filter, _In_ size_t levels, _Inout_ ScratchImage& mipChain);
-        // levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)
+        // levels of '0' indicates a full mipchain, otherwise is generates that colliderNumber_ of total levels (including the source base image)
         // Defaults to Fant filtering which is equivalent to a box filter
 
     HRESULT __cdecl GenerateMipMaps3D(
@@ -651,7 +651,7 @@ namespace DirectX
     HRESULT __cdecl GenerateMipMaps3D(
         _In_reads_(nimages) const Image* srcImages, _In_ size_t nimages, _In_ const TexMetadata& metadata,
         _In_ TEX_FILTER_FLAGS filter, _In_ size_t levels, _Out_ ScratchImage& mipChain);
-        // levels of '0' indicates a full mipchain, otherwise is generates that number of total levels (including the source base image)
+        // levels of '0' indicates a full mipchain, otherwise is generates that colliderNumber_ of total levels (including the source base image)
         // Defaults to Fant filtering which is equivalent to a box filter
 
     HRESULT __cdecl ScaleMipMapsAlphaForCoverage(

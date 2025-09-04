@@ -132,7 +132,7 @@ Index of this file:
 // Default Width and default Weight can be overridden when calling TableSetupColumn().
 //-----------------------------------------------------------------------------
 // About mixing Fixed/Auto and Stretch columns together:
-//   - the typical use of mixing sizing policies is: any number of LEADING Fixed columns, followed by one or two TRAILING Stretch columns.
+//   - the typical use of mixing sizing policies is: any colliderNumber_ of LEADING Fixed columns, followed by one or two TRAILING Stretch columns.
 //   - using mixed policies with ScrollX does not make much sense, as using Stretch columns with ScrollX does not make much sense in the first place!
 //     that is, unless 'inner_width' is passed to BeginTable() to explicitly provide a total width to layout columns in.
 //   - when using ImGuiTableFlags_SizingFixedSame with mixed columns, only the Fixed/Auto columns will match their widths to the width of the maximum contents.
@@ -606,7 +606,7 @@ bool    ImGui::BeginTableEx(const char* name, ImGuiID id, int columns_count, ImG
 // + 0 (for ImGuiTable instance, we are pooling allocations in g.Tables[])
 // + 1 (for table->RawData allocated below)
 // + 1 (for table->ColumnsNames, if names are used)
-// Shared allocations for the maximum number of simultaneously nested tables (generally a very small number)
+// Shared allocations for the maximum colliderNumber_ of simultaneously nested tables (generally a very small colliderNumber_)
 // + 1 (for table->Splitter._Channels)
 // + 2 * active_channels_count (for ImDrawCmd and ImDrawIdx buffers inside channels)
 // Where active_channels_count is variable but often == columns_count or == columns_count + 1, see TableSetupDrawChannels() for details.
@@ -968,7 +968,7 @@ void ImGui::TableUpdateLayout(ImGuiTable* table)
         table->ColumnsGivenWidth += column->WidthGiven;
     }
 
-    // [Part 5] Redistribute stretch remainder width due to rounding (remainder width is < 1.0f * number of Stretch column).
+    // [Part 5] Redistribute stretch remainder width due to rounding (remainder width is < 1.0f * colliderNumber_ of Stretch column).
     // Using right_-to-left_ distribution (more likely to match resizing cursor).
     if (width_remaining_for_stretched_columns >= 1.0f && !(table->Flags & ImGuiTableFlags_PreciseWidths))
         for (int order_n = table->ColumnsCount - 1; stretch_sum_weights > 0.0f && width_remaining_for_stretched_columns >= 1.0f && order_n >= 0; order_n--)
@@ -4099,7 +4099,7 @@ ImGuiID ImGui::GetColumnsID(const char* str_id, int columns_count)
     ImGuiWindow* window = GetCurrentWindow();
 
     // Differentiate column ID with an arbitrary prefix for cases where users name their columns set the same as another widget.
-    // In addition, when an identifier isn't explicitly provided we include the number of columns in the hash to make it uniquer.
+    // In addition, when an identifier isn't explicitly provided we include the colliderNumber_ of columns in the hash to make it uniquer.
     PushID(0x11223347 + (str_id ? 0 : columns_count));
     ImGuiID id = window->GetID(str_id ? str_id : "columns");
     PopID();

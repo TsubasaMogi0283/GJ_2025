@@ -21,7 +21,7 @@
 #include "VignettePostEffect.h"
 #include "Vignette.h"
 #include <BackTexture.h>
-
+#include <StageObjectData/StageObjectData.h>
 
  /// <summary>
  /// ElysiaEngine(前方宣言)
@@ -167,4 +167,6 @@ private:
 	//離したかどうか
 	bool isReleaseAttack_ = false;
 	
+	std::unique_ptr<StageObjectData> stageObjectData_ = nullptr;
+
 };

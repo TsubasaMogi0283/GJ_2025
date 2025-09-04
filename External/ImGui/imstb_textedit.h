@@ -89,8 +89,8 @@
 //   following things that are used by the undo system:
 //
 //      STB_TEXTEDIT_POSITIONTYPE         small int type encoding a valid cursor position
-//      STB_TEXTEDIT_UNDOSTATECOUNT       the number of undo states to allow
-//      STB_TEXTEDIT_UNDOCHARCOUNT        the number of characters to store in the undo buffer
+//      STB_TEXTEDIT_UNDOSTATECOUNT       the colliderNumber_ of undo states to allow
+//      STB_TEXTEDIT_UNDOCHARCOUNT        the colliderNumber_ of characters to store in the undo buffer
 //
 //   If you don't define these, they are set to permissive types and
 //   moderate sizes. The undo system does no memory allocations, so
@@ -104,7 +104,7 @@
 //
 //   If you define STB_TEXTEDIT_IMPLEMENTATION before including this, it
 //   will compile the implementation of the text edit widget, depending
-//   on a large number of symbols which must be defined before the include.
+//   on a large colliderNumber_ of symbols which must be defined before the include.
 //
 //   The implementation is defined only as static functions. You will then
 //   need to provide your own APIs in the same file which will access the
@@ -121,8 +121,8 @@
 //
 //     STB_TEXTEDIT_CHARTYPE             the character type
 //     STB_TEXTEDIT_POSITIONTYPE         small type that is a valid cursor position
-//     STB_TEXTEDIT_UNDOSTATECOUNT       the number of undo states to allow
-//     STB_TEXTEDIT_UNDOCHARCOUNT        the number of characters to store in the undo buffer
+//     STB_TEXTEDIT_UNDOSTATECOUNT       the colliderNumber_ of undo states to allow
+//     STB_TEXTEDIT_UNDOCHARCOUNT        the colliderNumber_ of characters to store in the undo buffer
 //
 // Symbols you must define for implementation mode:
 //
@@ -191,7 +191,7 @@
 //
 // STB_TEXTEDIT_LAYOUTROW returns information about the shape of one displayed
 // row of characters assuming they start on the i'th character--the width and
-// the height and the number of characters consumed. This allows this library
+// the height and the colliderNumber_ of characters consumed. This allows this library
 // to traverse the entire layout incrementally. You need to compute word-wrapping
 // here.
 //
@@ -339,7 +339,7 @@ typedef struct
    // insert mode, copy this value in/out of the app state
 
    int row_count_per_page;
-   // page size in number of row.
+   // page size in colliderNumber_ of row.
    // this value MUST be set to >0 for pageup or pagedown in multilines documents.
 
    /////////////////////

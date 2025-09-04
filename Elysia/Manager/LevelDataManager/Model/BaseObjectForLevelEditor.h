@@ -127,7 +127,6 @@ public:
 		isListenerMove_ = isMove;
 	}
 
-
 	/// <summary>
 	/// 拡縮
 	/// </summary>

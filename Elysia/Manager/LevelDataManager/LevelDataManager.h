@@ -222,6 +222,35 @@ namespace Elysia {
 			return positions;
 		}
 
+		/// <summary>
+		/// サイズを取得
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="objectType"></param>
+		/// <returns></returns>
+		inline std::vector<Vector3> GetSizes(const uint32_t& handle, const std::string& objectType) {
+			std::vector<Vector3> sizes = {};
+			for (const auto& [key, levelData] : levelDatas_) {
+				if (levelData->handle == handle) {
+
+					//該当するLevelDataのobjectDatasを検索
+					for (auto& objectData : levelData->objectDatas) {
+
+						//指定されたオブジェクトだったら追加
+						if (objectData.type == objectType) {
+							sizes.push_back(objectData.size);
+
+						}
+
+					}
+
+					//無駄なループを防ぐ
+					break;
+				}
+			}
+
+			return sizes;
+		}
 
 
 		/// <summary>

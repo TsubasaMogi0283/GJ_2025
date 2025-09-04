@@ -22,7 +22,20 @@
                 ]
             },
             "file_name": "Grass",
-            "object_type": "Stage"
+            "object_type": "Stage",
+            "collider": {
+                "type": "Plane",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -45,7 +58,20 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Stage"
+            "object_type": "Stage",
+            "collider": {
+                "type": "AABB",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -68,7 +94,20 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Stage"
+            "object_type": "Stage",
+            "collider": {
+                "type": "AABB",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -91,7 +130,20 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Stage"
+            "object_type": "Stage",
+            "collider": {
+                "type": "AABB",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -114,7 +166,20 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Stage"
+            "object_type": "Stage",
+            "collider": {
+                "type": "AABB",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -137,7 +202,20 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Stage"
+            "object_type": "Stage",
+            "collider": {
+                "type": "AABB",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         },
         {
             "type": "MESH",
@@ -160,7 +238,20 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Stage"
+            "object_type": "Stage",
+            "collider": {
+                "type": "AABB",
+                "center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "size": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
         }
     ]
 }
