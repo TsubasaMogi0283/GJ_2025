@@ -16,6 +16,7 @@
 #include "PlayerCollisionToStrongEnemy.h"
 #include "PlayerCollisionToNormalEnemyAttack.h"
 #include "PlayerCollisionToAudioObject.h"
+#include "PlayerCollisionToStageObject.h"
 #include "Light/FlashLight/FlashLight.h"
 #include "Camera/PlayerCamera.h"
 
@@ -300,6 +301,9 @@ private:
 
 	//時間
 	float_t vibeTime_ = 0u;
+
+	//壁との衝突判定をとるため
+	std::unique_ptr<PlayerCollisionToStageObject> collider_;
 
 private:
 	//懐中電灯

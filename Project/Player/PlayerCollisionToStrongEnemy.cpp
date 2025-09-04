@@ -23,6 +23,8 @@ void PlayerCollisionToStrongEnemy::Initialize(){
 	//相手
 	SetCollisionMask(COLLISION_ATTRIBUTE_STRONG_ENEMY);
 
+	position_ = nullptr;
+
 }
 
 void PlayerCollisionToStrongEnemy::Update(){

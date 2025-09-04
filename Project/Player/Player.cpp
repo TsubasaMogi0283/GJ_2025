@@ -45,6 +45,10 @@ void Player::Initialize(){
 	material_.lightingKinds = LightingType::SpotLighting;
 	material_.color = { .x = 1.0f,.y = 1.0f,.z = 1.0f,.w = 1.0f };
 
+	collider_ = std::make_unique<PlayerCollisionToStageObject>();
+	collider_->Initialize();
+	collider_->SetPlayerPosition(&worldTransform_.translate);
+
 }
 
 void Player::Update(){

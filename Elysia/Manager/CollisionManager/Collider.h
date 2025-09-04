@@ -150,7 +150,7 @@ protected:
 
 	Vector3 velocity_ = {};
 
-	Vector3* position_;
+	std::optional<Vector3*> position_;
 
 	//AABB
 	AABB aabb_ = {};

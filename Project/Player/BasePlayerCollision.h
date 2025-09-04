@@ -81,11 +81,11 @@ public:
 
 public:
 	/// <summary>
-	/// プレイヤーの座標の設定
+	/// プレイヤーの座標を完全に同期させる
 	/// </summary>
 	/// <param name="position">座標</param>
-	virtual inline void SetPlayerPosition(const Vector3& position) {
-		this->playerPosition_ = position;
+	virtual inline void SetPlayerPosition(Vector3* position) {
+		position_ = position;
 	}
 
 	/// <summary>
