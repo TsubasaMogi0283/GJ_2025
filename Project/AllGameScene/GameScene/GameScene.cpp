@@ -271,13 +271,12 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	levelDataManager_->Update(levelHandle_);
 
 
-	for(const auto& object : levelDataManager_->GetOb(levelHandle_, "Stage"))
-
 	
 	for (const auto& collider : levelDataManager_->GetCollider(levelHandle_, "Stage")) {
 		//レベルエディタで設置したステージオブジェクトのコライダーを登録
 		collisionManager_->RegisterList(collider);
 
+		//表示させる
 		if (collider->GetIsTouch() == true) {
 
 		}
