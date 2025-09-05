@@ -68,8 +68,12 @@ public:
 	/// </summary>
 	~StageObjectData() = default;
 
-
 public:
+
+	/// <summary>
+	/// 懐中電灯用
+	/// </summary>
+	/// <returns></returns>
 	std::vector<BaseObjectForLevelEditorCollider*> GetColliderToFlashLight() {
 		std::vector<BaseObjectForLevelEditorCollider*>colliders;
 		for (size_t i = 0; i < colliderToFlashLight_.size(); ++i) {

@@ -33,6 +33,21 @@ public:
 	/// </summary>
 	void Update()override;
 
+	/// <summary>
+	/// 描画
+	/// </summary>
+	/// <param name="camera"></param>
+	void Draw(const Camera& camera)override;
+
+	/// <summary>
+	/// 描画(スポットライト)
+	/// </summary>
+	/// <param name="camera"></param>
+	/// <param name="material"></param>
+	/// <param name="spotLight"></param>
+	void Draw(const Camera& camera, const SpotLight& spotLight)override;
+
+
 public:
 
 	/// <summary>

@@ -38,15 +38,26 @@ void StageObjectData::Update() {
 	levelDataManager_->Update(levelHandle_);
 
 
-	//const auto& colliders = levelDataManager_->GetCollider(levelHandle_, "Stage");
 	//座標の取得
 	const auto& positions = levelDataManager_->GetObjectPositions(levelHandle_, "Stage");
-
+	
 	for (size_t i = 0u; i < colliderToFlashLight_.size();++i) {
 		//中心座標の登録
 		colliderToFlashLight_[i]->SetObjectPosition(positions[i]);
-
 	}
+
+	const auto& objectDatas = levelDataManager_->GetObjectDatas(levelHandle_, "Stage");
+	int a = 0;
+	for (const auto& objectData : objectDatas) {
+		//見つかった時だけ通す
+		if (objectData.name.find("Cube")!=std::string::npos) {
+			++a;
+			objectData.objectForLeveEditor->SetTransparency(1.0f);
+		}
+	}
+
+	a;
+
 
 #ifdef _DEBUG
 	ImGui::Begin("ステージデータ");

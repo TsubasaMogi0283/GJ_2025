@@ -35,7 +35,6 @@ void StageObjectForLevelEditor::Update(){
 
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
-	//マテリアルはDrawでやっているのでここには無いよ
 
 	//AABBの設定
 	aabb_ = {
@@ -60,4 +59,22 @@ void StageObjectForLevelEditor::Update(){
 
 
 
+}
+
+void StageObjectForLevelEditor::Draw(const Camera& camera){
+	//スポットライトに設定
+	material_.lightingKinds = LightingType::NoneLighting;
+	//変更したのでここで更新させる
+	material_.Update();
+	//モデルの描画
+	model_->Draw(worldTransform_, camera, material_);
+}
+
+void StageObjectForLevelEditor::Draw(const Camera& camera, const SpotLight& spotLight){
+	//スポットライトに設定
+	material_.lightingKinds = LightingType::SpotLighting;
+	//変更したのでここで更新させる
+	material_.Update();
+	//モデルの描画
+	model_->Draw(worldTransform_, camera, material_, spotLight);
 }
