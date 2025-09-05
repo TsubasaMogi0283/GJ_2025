@@ -47,11 +47,9 @@ void StageObjectData::Update() {
 	}
 
 	const auto& objectDatas = levelDataManager_->GetObjectDatas(levelHandle_, "Stage");
-	int a = 0;
 	for (const auto& objectData : objectDatas) {
 		//見つかった時だけ通す
 		if (objectData.name.find("Cube")!=std::string::npos) {
-			++a;
 			objectData.objectForLeveEditor->SetTransparency(1.0f);
 		}
 	}
