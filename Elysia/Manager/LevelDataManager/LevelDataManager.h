@@ -407,7 +407,8 @@ namespace Elysia {
 			for (const auto& [key, levelData] : levelDatas_) {
 				if (levelData->handle == handle) {
 					
-					for (const auto& object : objectDatas) {
+					for (const auto& object : levelData->objectDatas) {
+
 						if (object.type == objectType) {
 							objectDatas.push_back(object);
 						}

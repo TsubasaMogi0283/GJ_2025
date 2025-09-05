@@ -56,7 +56,6 @@ void StageObjectData::Update() {
 		}
 	}
 
-	a;
 
 
 #ifdef _DEBUG
