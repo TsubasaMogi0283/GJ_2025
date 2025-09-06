@@ -45,23 +45,30 @@ void StageObjectForLevelEditor::Update(){
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
 
+	
+
+	
+	Vector3 worldPosition = worldTransform_.GetWorldPosition();
+
 	//AABBの設定
 	aabb_ = {
-		.min = VectorCalculation::Subtract(worldTransform_.GetWorldPosition(),size_),
-		.max = VectorCalculation::Add(worldTransform_.GetWorldPosition(),size_)
+		.min = VectorCalculation::Subtract(worldPosition,size_),
+		.max = VectorCalculation::Add(worldPosition,size_)
 	};
-
-	//中心座標を設定
-	//プレイヤー用
-	if (colliderToPlayer_!=nullptr) {
-		colliderToPlayer_->SetCenterPosition(worldTransform_.GetWorldPosition());
+	if (colliderToPlayer_ != nullptr) {
+		colliderToPlayer_->SetObjectPosition(worldPosition);
+		colliderToPlayer_->SetCenterPosition(worldPosition);
 		colliderToPlayer_->Update();
 	}
-	//ライト用
-	if (colliderToLight_ !=nullptr) {
-		colliderToLight_->SetCenterPosition(worldTransform_.GetWorldPosition());
+
+	if (colliderToLight_ != nullptr) {
+		colliderToLight_->SetObjectPosition(worldPosition);
+		colliderToLight_->SetCenterPosition(worldPosition);
 		colliderToLight_->Update();
 	}
+
+	
+	
 
 #ifdef _DEBUG
 	ImGui::Begin("ステージオブジェクト"); 

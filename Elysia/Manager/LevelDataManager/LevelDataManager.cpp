@@ -465,16 +465,7 @@ void Elysia::LevelDataManager::Update(const uint32_t& levelDataHandle) {
 					//更新
 					object.objectForLeveEditor->SetIsListenerMove(isListenerMove);
 					object.objectForLeveEditor->Update();
-					Vector3 objectWorldPosition = object.objectForLeveEditor->GetWorldPosition();
 
-					////衝突判定の設定
-					//if (object.isHavingCollider == true) {
-					//	bool isTouch = object.levelDataObjectCollider->GetIsTouch();
-					//	object.objectForLeveEditor->SetIsTouch(isTouch);
-					//	object.levelDataObjectCollider->SetObjectPosition(objectWorldPosition);
-					//	object.levelDataObjectCollider->SetCenterPosition(object.center);
-					//	object.levelDataObjectCollider->Update();
-					//}
 				}
 			}
 			break;

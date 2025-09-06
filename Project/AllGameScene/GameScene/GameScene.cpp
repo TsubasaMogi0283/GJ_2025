@@ -277,14 +277,24 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//ステージデータの更新
 	stageObjectData_->Update();
 	
-	
+	Vector3 position = {};
 	const auto& i = levelDataManager_->GetColliderToLight(stageObjectData_->GetLevelDataHandle(), "Stage");
 	for (const auto& lightCollider : i) {
+
+		position = lightCollider->GetWorldPosition();
+
 		if (lightCollider != nullptr) {
 			collisionManager_->RegisterList(lightCollider);
 		}
 		
 	}
+
+
+#ifdef _DEBUG
+	ImGui::Begin("確認");
+	ImGui::InputFloat3("座標", &position.x);
+	ImGui::End();
+#endif // _DEBUG
 	//ライトのコライダーを登録
 	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
 
