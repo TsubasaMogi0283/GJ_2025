@@ -158,12 +158,12 @@ namespace Elysia {
 
 
 		/// <summary>
-		/// 指定したオブジェクトタイプのコライダーを取得する
+		/// 指定したオブジェクトタイプのプレイヤー用のコライダーを取得する
 		/// </summary>
 		/// <param name="handle">ハンドル</param>
 		/// <param name="objectType">オブジェクトの型</param>
 		/// <returns>コライダー</returns>
-		inline std::vector<BaseObjectForLevelEditorCollider*> GetCollider(const uint32_t& handle,const std::string& objectType) {
+		inline std::vector<BaseObjectForLevelEditorCollider*> GetColliderToPlayer(const uint32_t& handle,const std::string& objectType) {
 			std::vector<BaseObjectForLevelEditorCollider*> colliders = {};
 
 			for (const auto& [key, levelData] : levelDatas_) {
@@ -174,7 +174,7 @@ namespace Elysia {
 
 						//コライダーを持っている場合、リストに追加
 						if (objectData.isHavingCollider == true&& objectData.type == objectType) {
-							colliders.push_back(objectData.objectForLeveEditor->GetCollider());
+							colliders.push_back(objectData.objectForLeveEditor->GetColliderToPlayer());
 						}
 					}
 
@@ -185,6 +185,36 @@ namespace Elysia {
 
 			return colliders;
 		}
+
+		/// <summary>
+		/// ライト用のコライダーを取得
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="objectType"></param>
+		/// <returns></returns>
+		inline std::vector<BaseObjectForLevelEditorCollider*> GetColliderToLight(const uint32_t& handle, const std::string& objectType) {
+			std::vector<BaseObjectForLevelEditorCollider*> colliders = {};
+
+			for (const auto& [key, levelData] : levelDatas_) {
+				if (levelData->handle == handle) {
+
+					//該当するLevelDataのobjectDatasを検索
+					for (auto& objectData : levelData->objectDatas) {
+
+						//コライダーを持っている場合、リストに追加
+						if (objectData.isHavingCollider == true && objectData.type == objectType) {
+							colliders.push_back(objectData.objectForLeveEditor->GetColliderToLight());
+						}
+					}
+
+					//無駄なループを防ぐ
+					break;
+				}
+			}
+
+			return colliders;
+		}
+
 
 		/// <summary>
 		/// オブジェクトの座標を取得

@@ -18,7 +18,7 @@ void StageObjectData::Initialize(){
 	levelHandle_ = levelDataManager_->Load("GameStage/GameStage.json");
 
 	//コライダーの数
-	colliderNumber_ = levelDataManager_->GetCollider(levelHandle_, "Stage").size();
+	colliderNumber_ = levelDataManager_->GetColliderToPlayer(levelHandle_, "Stage").size();
 }
 
 void StageObjectData::Update() {
@@ -26,9 +26,6 @@ void StageObjectData::Update() {
 	levelDataManager_->Update(levelHandle_);
 
 
-	//座標の取得
-	const auto& positions = levelDataManager_->GetObjectPositions(levelHandle_, "Stage");
-	
 
 	const auto& objectDatas = levelDataManager_->GetObjectDatas(levelHandle_, "Stage");
 	for (const auto& objectData : objectDatas) {
@@ -36,6 +33,8 @@ void StageObjectData::Update() {
 		if (objectData.name.find("Cube")!=std::string::npos&& objectData.isHavingCollider==true) {
 			objectData.objectForLeveEditor->SetTransparency(1.0f);
 		}
+
+		
 	}
 
 

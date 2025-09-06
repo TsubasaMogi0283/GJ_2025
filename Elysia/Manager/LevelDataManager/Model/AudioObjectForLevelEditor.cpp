@@ -35,7 +35,6 @@ void AudioObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 
 	//コライダーを持っていたら生成
 	if (isHavingCollider == true) {
-		isGenerateCollider_ = true;
 		colliderToPlayer_ = std::make_unique< AudioObjectForLevelEditorCollider>();
 		colliderToPlayer_->Initialize();
 		colliderToPlayer_->SetSize(objectSize);
@@ -52,7 +51,7 @@ void AudioObjectForLevelEditor::Update(){
 	//マテリアルはDrawでやっているのでここには無いよ
 
 	//中心座標の設定
-	if (isGenerateCollider_ == true) {
+	if (colliderToPlayer_ != nullptr) {
 		colliderToPlayer_->SetCenterPosition(worldTransform_.GetWorldPosition());
 
 	}

@@ -85,11 +85,26 @@ public:
 
 public:
 	/// <summary>
-	/// コライダーの取得
+	/// プレイヤー用のコライダーの取得
 	/// </summary>
 	/// <returns></returns>
-	virtual BaseObjectForLevelEditorCollider* GetCollider()const {
-		return colliderToPlayer_.get();
+	virtual BaseObjectForLevelEditorCollider* GetColliderToPlayer()const {
+		if (colliderToPlayer_ != nullptr) {
+			return colliderToPlayer_.get();
+		}
+		
+		return nullptr;
+	}
+
+	/// <summary>
+	/// ライト用のコライダーを取得
+	/// </summary>
+	/// <returns></returns>
+	virtual BaseObjectForLevelEditorCollider* GetColliderToLight()const {
+		if (colliderToLight_ != nullptr) {
+			return colliderToLight_.get();
+		}
+		return nullptr;
 	}
 
 	/// <summary>
@@ -193,10 +208,7 @@ protected:
 
 	//コライダー
 	std::unique_ptr<BaseObjectForLevelEditorCollider> colliderToPlayer_ = nullptr;
-	bool isGenerateCollider_ = false;
 	//ライト用のコライダー
 	std::unique_ptr<BaseObjectForLevelEditorCollider> colliderToLight_ = nullptr;
-	bool isGenerateColliderToLight_ = false;
-
 
 };

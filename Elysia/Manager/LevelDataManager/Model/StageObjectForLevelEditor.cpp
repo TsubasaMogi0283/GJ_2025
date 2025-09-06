@@ -24,13 +24,11 @@ void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 
 	//コライダーを持っていれば生成
 	if (isHavingCollider == true) {
-		isGenerateCollider_ = true;
 		colliderToPlayer_ = std::make_unique<StageObjectForLevelEditorCollider>();
 		colliderToPlayer_->Initialize();
 		colliderToPlayer_->SetSize(objectSize);
 	}
 	if (isGenerateColliderToLight == true) {
-		isGenerateColliderToLight_ = true;
 		colliderToLight_ = std::make_unique<StageObjectForLevelEditorCollider>();
 		colliderToLight_->Initialize();
 		colliderToLight_->SetCollisionType(ColliderType::PointType);
@@ -54,12 +52,12 @@ void StageObjectForLevelEditor::Update(){
 
 	//中心座標を設定
 	//プレイヤー用
-	if (isGenerateCollider_ == true) {
+	if (colliderToPlayer_!=nullptr) {
 		colliderToPlayer_->SetCenterPosition(worldTransform_.GetWorldPosition());
 		colliderToPlayer_->Update();
 	}
 	//ライト用
-	if (isGenerateColliderToLight_ == true) {
+	if (colliderToLight_ !=nullptr) {
 		colliderToLight_->SetCenterPosition(worldTransform_.GetWorldPosition());
 		colliderToLight_->Update();
 	}

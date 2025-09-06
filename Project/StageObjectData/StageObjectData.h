@@ -69,6 +69,14 @@ public:
 	~StageObjectData() = default;
 
 public:
+	/// <summary>
+	/// データハンドルを取得
+	/// </summary>
+	/// <returns></returns>
+	uint32_t GetLevelDataHandle()const {
+		return levelHandle_;
+	};
+
 
 private:
 	//インプット
