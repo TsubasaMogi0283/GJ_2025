@@ -19,18 +19,6 @@ void StageObjectData::Initialize(){
 
 	//コライダーの数
 	colliderNumber_ = levelDataManager_->GetCollider(levelHandle_, "Stage").size();
-	const auto& sizes = levelDataManager_->GetSizes(levelHandle_, "Stage");
-	for (size_t i = 0u; i < colliderNumber_; ++i) {
-		//ライト用のコライダーを取得
-		std::unique_ptr<BaseObjectForLevelEditorCollider> collider = std::make_unique<StageObjectForLevelEditorCollider>();
-		collider->Initialize();
-		collider->SetCollisionType(ColliderType::PointType);
-		collider->SetCollisionAttribute(COLLISION_ATTRIBUTE_STAGE_OBJECT);
-		collider->SetCollisionMask(COLLISION_ATTRIBUTE_FLASH_LIGHT);
-		collider->SetSize(sizes[i]);
-		//挿入
-		colliderToFlashLight_.push_back(std::move(collider));
-	}
 }
 
 void StageObjectData::Update() {
@@ -41,15 +29,11 @@ void StageObjectData::Update() {
 	//座標の取得
 	const auto& positions = levelDataManager_->GetObjectPositions(levelHandle_, "Stage");
 	
-	for (size_t i = 0u; i < colliderToFlashLight_.size();++i) {
-		//中心座標の登録
-		colliderToFlashLight_[i]->SetObjectPosition(positions[i]);
-	}
 
 	const auto& objectDatas = levelDataManager_->GetObjectDatas(levelHandle_, "Stage");
 	for (const auto& objectData : objectDatas) {
 		//見つかった時だけ通す
-		if (objectData.name.find("Cube")!=std::string::npos) {
+		if (objectData.name.find("Cube")!=std::string::npos&& objectData.isHavingCollider==true) {
 			objectData.objectForLeveEditor->SetTransparency(1.0f);
 		}
 	}
@@ -58,13 +42,6 @@ void StageObjectData::Update() {
 
 #ifdef _DEBUG
 	ImGui::Begin("ステージデータ");
-	for (size_t i = 0u; i < colliderToFlashLight_.size(); ++i) {
-		int32_t newI = static_cast<int32_t>(i);
-		ImGui::InputInt("数", &newI);
-		bool isCollision = colliderToFlashLight_[i]->GetIsTouch();
-		ImGui::Checkbox("衝突したかどうか", &isCollision);
-
-	}
 	
 	ImGui::End();
 

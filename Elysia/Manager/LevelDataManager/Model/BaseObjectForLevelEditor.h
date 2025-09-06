@@ -38,8 +38,9 @@ public:
 	/// <param name="modelhandle"></param>
 	/// <param name="transform"></param>
 	/// <param name="isHavingCollider"></param>
+	/// <param name="isGenerateColliderToLight"></param>
 	/// <param name="objectSize"></param>
-	virtual void Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const Vector3& objectSize)=0;
+	virtual void Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize)=0;
 
 	/// <summary>
 	/// 更新
@@ -88,7 +89,7 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	virtual BaseObjectForLevelEditorCollider* GetCollider()const {
-		return collider_.get();
+		return colliderToPlayer_.get();
 	}
 
 	/// <summary>
@@ -191,7 +192,11 @@ protected:
 	bool isListenerMove_=false;
 
 	//コライダー
-	std::unique_ptr<BaseObjectForLevelEditorCollider> collider_ = nullptr;
+	std::unique_ptr<BaseObjectForLevelEditorCollider> colliderToPlayer_ = nullptr;
 	bool isGenerateCollider_ = false;
+	//ライト用のコライダー
+	std::unique_ptr<BaseObjectForLevelEditorCollider> colliderToLight_ = nullptr;
+	bool isGenerateColliderToLight_ = false;
+
 
 };

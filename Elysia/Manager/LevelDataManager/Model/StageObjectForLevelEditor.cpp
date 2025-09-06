@@ -3,8 +3,9 @@
 #include <imgui.h>
 
 #include "VectorCalculation.h"
+#include <CollisionConfig.h>
 
-void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const Vector3& objectSize) {
+void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize) {
 	
 	//レベルエディタ用のオブジェクトのタイプ
 	objectType_ = LevelEditorObjectType::StageObject;
@@ -24,10 +25,19 @@ void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 	//コライダーを持っていれば生成
 	if (isHavingCollider == true) {
 		isGenerateCollider_ = true;
-		collider_ = std::make_unique<StageObjectForLevelEditorCollider>();
-		collider_->Initialize();
-		collider_->SetSize(objectSize);
+		colliderToPlayer_ = std::make_unique<StageObjectForLevelEditorCollider>();
+		colliderToPlayer_->Initialize();
+		colliderToPlayer_->SetSize(objectSize);
 	}
+	if (isGenerateColliderToLight == true) {
+		isGenerateColliderToLight_ = true;
+		colliderToLight_ = std::make_unique<StageObjectForLevelEditorCollider>();
+		colliderToLight_->Initialize();
+		colliderToLight_->SetCollisionType(ColliderType::PointType);
+		colliderToLight_->SetCollisionAttribute(COLLISION_ATTRIBUTE_STAGE_OBJECT);
+		colliderToLight_->SetCollisionMask(COLLISION_ATTRIBUTE_FLASH_LIGHT);
+	}
+
 
 }
 
@@ -43,11 +53,17 @@ void StageObjectForLevelEditor::Update(){
 	};
 
 	//中心座標を設定
+	//プレイヤー用
 	if (isGenerateCollider_ == true) {
-		collider_->SetCenterPosition(worldTransform_.GetWorldPosition());
-
+		colliderToPlayer_->SetCenterPosition(worldTransform_.GetWorldPosition());
+		colliderToPlayer_->Update();
 	}
-	
+	//ライト用
+	if (isGenerateColliderToLight_ == true) {
+		colliderToLight_->SetCenterPosition(worldTransform_.GetWorldPosition());
+		colliderToLight_->Update();
+	}
+
 #ifdef _DEBUG
 	ImGui::Begin("ステージオブジェクト"); 
 	Vector3 position = worldTransform_.GetWorldPosition();

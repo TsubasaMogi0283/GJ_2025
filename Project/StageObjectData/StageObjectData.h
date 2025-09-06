@@ -70,20 +70,6 @@ public:
 
 public:
 
-	/// <summary>
-	/// 懐中電灯用
-	/// </summary>
-	/// <returns></returns>
-	std::vector<BaseObjectForLevelEditorCollider*> GetColliderToFlashLight() {
-		std::vector<BaseObjectForLevelEditorCollider*>colliders;
-		for (size_t i = 0; i < colliderToFlashLight_.size(); ++i) {
-			if (colliderToFlashLight_[i] != nullptr) {
-				colliders.push_back(colliderToFlashLight_[i].get());
-			}
-		}
-		return colliders;
-	}
-
 private:
 	//インプット
 	Elysia::Input* input_ = nullptr;
@@ -96,8 +82,6 @@ private:
 private:
 	//コライダーの数
 	size_t colliderNumber_ = 0u;
-	//ライトに対するコライダー
-	std::vector<std::unique_ptr<BaseObjectForLevelEditorCollider>>colliderToFlashLight_ = {};
 
 };
 

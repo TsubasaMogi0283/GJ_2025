@@ -238,7 +238,11 @@ void Elysia::LevelDataManager::Ganarate(LevelData& levelData) {
 			stageObject->SetSize(objectData.size);
 
 			//初期化
-			stageObject->Initialize(modelHandle, objectData.transform, objectData.isHavingCollider, objectData.size);
+			bool isCube = false;
+			if (objectData.name.find("Cube") != std::string::npos && objectData.isHavingCollider == true) {
+				isCube = true;
+			}
+			stageObject->Initialize(modelHandle, objectData.transform, objectData.isHavingCollider,isCube,objectData.size);
 			objectData.objectForLeveEditor = stageObject;
 			objectData.isModelGenerate = true;
 
@@ -274,7 +278,7 @@ void Elysia::LevelDataManager::Ganarate(LevelData& levelData) {
 			uint32_t modelHandle = ModelManager::GetInstance()->LoadModelFileForLevelData(levelEditorDirectoryPath, objectData.modelFileName);
 
 			//初期化
-			audioObject->Initialize(modelHandle, objectData.transform, objectData.isHavingCollider, objectData.size);
+			audioObject->Initialize(modelHandle, objectData.transform, objectData.isHavingCollider,false, objectData.size);
 			//オブジェクトの生成
 			objectData.objectForLeveEditor = audioObject;
 			objectData.isModelGenerate = true;
