@@ -318,6 +318,8 @@ void GameScene::PreDrawPostEffect() {
 void GameScene::DrawObject3D() {
 	//ステージデータの描画
 	stageObjectData_->Draw(camera_,spotLight_);
+
+	player_->DrawObject3D(camera_,spotLight_);
 }
 
 void GameScene::DrawPostEffect() {

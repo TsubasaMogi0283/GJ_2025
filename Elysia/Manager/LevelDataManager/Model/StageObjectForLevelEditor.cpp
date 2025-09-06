@@ -31,6 +31,7 @@ void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 	if (isGenerateColliderToLight == true) {
 		colliderToLight_ = std::make_unique<StageObjectForLevelEditorCollider>();
 		colliderToLight_->Initialize();
+		colliderToLight_->SetName("ForLight");
 		colliderToLight_->SetCollisionType(ColliderType::PointType);
 		colliderToLight_->SetCollisionAttribute(COLLISION_ATTRIBUTE_STAGE_OBJECT);
 		colliderToLight_->SetCollisionMask(COLLISION_ATTRIBUTE_FLASH_LIGHT);
