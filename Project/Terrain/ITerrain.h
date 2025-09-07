@@ -13,7 +13,7 @@
 #pragma region 前方宣言
 struct Camera; // カメラ
 struct Material; // マテリアル
-namespace Elysia { 
+namespace Elysia {
 class Input; // 入力
 class ModelManager; // モデル管理
 class TextureManager; // テクスチャ管理
@@ -22,9 +22,11 @@ class LevelDataManager; // レベルデータ管理
 #pragma endregion 
 
 #pragma region 見え隠れの状態列挙型 顕幽
-enum class TerrainHiddenState {
-	Visible,   // 見えている
-	Hidden     // 隠れている
+enum class TerrainVisibilityState {
+	Hidden,       // 完全に隠れている
+	Appearing,    // 出現演出中
+	Visible,      // 完全に見えている
+	Disappearing  // 消失演出中
 };
 #pragma endregion
 
@@ -58,27 +60,32 @@ public:
 	virtual void DrawObject3D(const Camera& camera, const SpotLight& spotLight) = 0;
 
 	void On() {
-		OnVisible();
+		OnReveal();
 	}
 
 #pragma region accessor
 
 	// モデルハンドル
-	void Set_ModelHandle(uint32_t handle) { this->modelHandle_ = handle; }
+	void SetModelHandle(uint32_t handle) { this->modelHandle_ = handle; }
 
 	// スケール
-	Vector3 Get_Scale() const { return transform_.scale; }
-	void Set_Scale(const Vector3& scale) { this->transform_.scale = scale; }
+	Vector3 GetScale() const { return transform_.scale; }
+	void SetScale(const Vector3& scale) { this->transform_.scale = scale; }
 	// 回転
-	Vector3 Get_Rotate() const { return transform_.rotate; }
-	void Set_Rotate(const Vector3& rotate) { this->transform_.rotate = rotate; }
+	Vector3 GetRotate() const { return transform_.rotate; }
+	void SetRotate(const Vector3& rotate) { this->transform_.rotate = rotate; }
 	// 座標
-	Vector3 Get_Translate() const { return transform_.translate; }
-	void Set_Translate(const Vector3& translate) { this->transform_.translate = translate; }
+	Vector3 GetTranslate() const { return transform_.translate; }
+	void SetTranslate(const Vector3& translate) { this->transform_.translate = translate; }
+
+	// AABBの取得
+	AABB GetAABB() const {
+		return aabb_;
+	}
 
 	// 顕幽state
-	TerrainHiddenState Get_HiddenState() const { return hiddenState_; }
-	void Set_HiddenState(TerrainHiddenState state) { this->hiddenState_ = state; }
+	TerrainVisibilityState GetHiddenState() const { return visibilityState_; }
+	void SetHiddenState(TerrainVisibilityState state) { this->visibilityState_ = state; }
 
 #pragma endregion
 
@@ -86,33 +93,50 @@ public:
 protected:
 
 	/// <summary>
-	/// 顕幽状態の切り替え : 隠れる処理
+	/// 顕幽状態の切り替え : 現す処理
 	/// </summary>
-	void OnHidden();
+	void OnReveal();
 
 	/// <summary>
-	/// 顕幽う状態の切り替え : 現れる処理
+	/// 
 	/// </summary>
-	void OnVisible();
+	void UpdateVisibilityState();
 
 	/// <summary>
-	/// 顕幽タイマーの更新
+	/// 個別演出
 	/// </summary>
-	void Update_HiddenTimer();
-
+	void UpdateAppearing();
+	void UpdateVisible();
+	void UpdateDisappearing();
 
 protected:
 
 	// モデルのハンドル
 	uint32_t modelHandle_ = 1u;
-	
+	// モデル
+	std::unique_ptr<Elysia::Model> model_;
+
+	// マテリアル
+	Material material_{};
+
 	// ワールドトランスフォーム
 	WorldTransform transform_{};
-	
-	// 顕幽状態
-	TerrainHiddenState hiddenState_ = TerrainHiddenState::Hidden;
 
-	// 顕幽タイマー
-	float hiddenTimer_ = 0.0f;
-	const float HIDDEN_DURATION_ = 1.0f * 60.0f;
+	// コライダー
+	AABB aabb_{};
+
+	// 顕幽状態
+	TerrainVisibilityState visibilityState_ = TerrainVisibilityState::Hidden;
+
+	// 出現演出の経過時間
+	float appearTimer_ = 0.0f;
+	const float kAppearDuration_ = 1.0f;
+
+	// 表示中の経過時間
+	float visibleTimer_ = 0.0f;
+	const float kVisibleDuration_ = 30.0f;
+
+	// 消失演出の経過時間
+	float disappearTimer_ = 0.0f;
+	const float kDisappearDuration_ = 10.0f;
 };

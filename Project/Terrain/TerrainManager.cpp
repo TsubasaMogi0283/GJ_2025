@@ -48,9 +48,9 @@ void TerrainManager::Create_NewFloor(const Vector3& pos)
 {
 	std::unique_ptr<Floor> floor =  std::make_unique<Floor>();
 
-	floor->Set_ModelHandle(floorModelHandle_); // モデルハンドルの設定
+	floor->SetModelHandle(floorModelHandle_); // モデルハンドルの設定
 	floor->Init(); // 初期化
-	floor->Set_Translate(pos); // 座標の設定
+	floor->SetTranslate(pos); // 座標の設定
 	
 	terrains_.push_back(std::move(floor));
 }
@@ -59,9 +59,9 @@ void TerrainManager::Create_NewWall(const Vector3& pos)
 {
 	std::unique_ptr<Wall> wall = std::make_unique<Wall>();
 
-	wall->Set_ModelHandle(wallModelHandle_); // モデルハンドルの設定
+	wall->SetModelHandle(wallModelHandle_); // モデルハンドルの設定
 	wall->Init(); // 初期化
-	wall->Set_Translate(pos); // 座標の設定
+	wall->SetTranslate(pos); // 座標の設定
 
 	terrains_.push_back(std::move(wall));
 }

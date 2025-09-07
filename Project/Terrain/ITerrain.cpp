@@ -1,39 +1,82 @@
 #include "ITerrain.h"
 
-void ITerrain::OnHidden()
+void ITerrain::OnReveal()
 {
-	// 既にStateがHiddenなら早期return
-	if(hiddenState_ == TerrainHiddenState::Hidden) 
-		return;
+    // 既に見えている or 出現中なら何もしない
+    if (visibilityState_ == TerrainVisibilityState::Visible ||
+        visibilityState_ == TerrainVisibilityState::Appearing) {
+        return;
+    }
 
-	// ステートをHiddenへ
-	hiddenState_ = TerrainHiddenState::Hidden;
+    // 出現演出の開始
+    visibilityState_ = TerrainVisibilityState::Appearing;
+    appearTimer_ = 0.0f;
 }
 
-void ITerrain::OnVisible()
+void ITerrain::UpdateVisibilityState()
 {
-	// 既にStateがHiddenなら早期return
-	if (hiddenState_ == TerrainHiddenState::Visible)
-		return;
+    switch (visibilityState_) {
+    case TerrainVisibilityState::Appearing:
+    UpdateAppearing();
+    break;
 
-	// ステートをHiddenへ
-	hiddenState_ = TerrainHiddenState::Visible;
-	// タイマー設定
-	hiddenTimer_ = HIDDEN_DURATION_;
+    case TerrainVisibilityState::Visible:
+    UpdateVisible();
+    break;
+
+    case TerrainVisibilityState::Disappearing:
+    UpdateDisappearing();
+    break;
+
+    case TerrainVisibilityState::Hidden:
+    default:
+    break;
+    }
 }
 
-void ITerrain::Update_HiddenTimer()
+void ITerrain::UpdateAppearing()
 {
-	// ステートがHiddenならタイマーの更新に入る
-	if (hiddenState_ == TerrainHiddenState::Visible) {
-
-		hiddenTimer_--;
-
-		// 0以下でステートをもとに戻す
-		if (hiddenTimer_ <= 0.0f) {
-
-			hiddenState_ = TerrainHiddenState::Hidden;
-			hiddenTimer_ = 0.0f;
-		}
-	}
+    appearTimer_++;
+    if (appearTimer_ >= kAppearDuration_) {
+        appearTimer_ = 0.0f;
+        visibilityState_ = TerrainVisibilityState::Visible;
+        material_.color.w = 1.0f;
+    }
 }
+
+void ITerrain::UpdateVisible()
+{
+    visibleTimer_++;
+    if (visibleTimer_ >= kVisibleDuration_) {
+        visibleTimer_ = 0.0f;
+        visibilityState_ = TerrainVisibilityState::Disappearing;
+    }
+}
+
+void ITerrain::UpdateDisappearing()
+{
+    disappearTimer_++;
+
+    // 進行度 0.0f ~ 1.0f
+    float t = disappearTimer_ / kDisappearDuration_;
+
+    // 点滅のパターン：短い周期でランダムにON/OFF
+    // 例：だんだんOFFの時間が増える
+    float flicker = (std::rand() % 100) / 100.0f; // 0.0〜1.0 ランダム
+
+    if (flicker > t) {
+        // まだ点灯している
+        material_.color.w = 1.0f;
+    }
+    else {
+        // 消えている
+        material_.color.w = 0.0f;
+    }
+
+    if (disappearTimer_ >= kDisappearDuration_) {
+        disappearTimer_ = 0.0f;
+        visibilityState_ = TerrainVisibilityState::Hidden;
+        material_.color.w = 0.0f;
+    }
+}
+
