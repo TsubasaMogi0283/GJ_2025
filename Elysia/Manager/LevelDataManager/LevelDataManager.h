@@ -158,12 +158,12 @@ namespace Elysia {
 
 
 		/// <summary>
-		/// 指定したオブジェクトタイプのコライダーを取得する
+		/// 指定したオブジェクトタイプのプレイヤー用のコライダーを取得する
 		/// </summary>
 		/// <param name="handle">ハンドル</param>
 		/// <param name="objectType">オブジェクトの型</param>
 		/// <returns>コライダー</returns>
-		inline std::vector<BaseObjectForLevelEditorCollider*> GetCollider(const uint32_t& handle,const std::string& objectType) {
+		inline std::vector<BaseObjectForLevelEditorCollider*> GetColliderToPlayer(const uint32_t& handle,const std::string& objectType) {
 			std::vector<BaseObjectForLevelEditorCollider*> colliders = {};
 
 			for (const auto& [key, levelData] : levelDatas_) {
@@ -173,8 +173,8 @@ namespace Elysia {
 					for (auto& objectData : levelData->objectDatas) {
 
 						//コライダーを持っている場合、リストに追加
-						if (objectData.levelDataObjectCollider != nullptr&& objectData.type == objectType) {
-							colliders.push_back(objectData.levelDataObjectCollider);
+						if (objectData.isHavingCollider == true&& objectData.type == objectType) {
+							colliders.push_back(objectData.objectForLeveEditor->GetColliderToPlayer());
 						}
 					}
 
@@ -185,6 +185,36 @@ namespace Elysia {
 
 			return colliders;
 		}
+
+		/// <summary>
+		/// ライト用のコライダーを取得
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="objectType"></param>
+		/// <returns></returns>
+		inline std::vector<BaseObjectForLevelEditorCollider*> GetColliderToLight(const uint32_t& handle, const std::string& objectType) {
+			std::vector<BaseObjectForLevelEditorCollider*> colliders = {};
+
+			for (const auto& [key, levelData] : levelDatas_) {
+				if (levelData->handle == handle) {
+
+					//該当するLevelDataのobjectDatasを検索
+					for (auto& objectData : levelData->objectDatas) {
+
+						//コライダーを持っている場合、リストに追加
+						if (objectData.isHavingCollider == true && objectData.type == objectType) {
+							colliders.push_back(objectData.objectForLeveEditor->GetColliderToLight());
+						}
+					}
+
+					//無駄なループを防ぐ
+					break;
+				}
+			}
+
+			return colliders;
+		}
+
 
 		/// <summary>
 		/// オブジェクトの座標を取得
@@ -222,6 +252,35 @@ namespace Elysia {
 			return positions;
 		}
 
+		/// <summary>
+		/// サイズを取得
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="objectType"></param>
+		/// <returns></returns>
+		inline std::vector<Vector3> GetSizes(const uint32_t& handle, const std::string& objectType) {
+			std::vector<Vector3> sizes = {};
+			for (const auto& [key, levelData] : levelDatas_) {
+				if (levelData->handle == handle) {
+
+					//該当するLevelDataのobjectDatasを検索
+					for (auto& objectData : levelData->objectDatas) {
+
+						//指定されたオブジェクトだったら追加
+						if (objectData.type == objectType) {
+							sizes.push_back(objectData.size);
+
+						}
+
+					}
+
+					//無駄なループを防ぐ
+					break;
+				}
+			}
+
+			return sizes;
+		}
 
 
 		/// <summary>
@@ -336,9 +395,6 @@ namespace Elysia {
 			//モデルを生成するかどうか
 			bool isModelGenerate = false;
 
-			//コライダー
-			BaseObjectForLevelEditorCollider* levelDataObjectCollider;
-
 
 		};
 
@@ -381,7 +437,8 @@ namespace Elysia {
 			for (const auto& [key, levelData] : levelDatas_) {
 				if (levelData->handle == handle) {
 					
-					for (const auto& object : objectDatas) {
+					for (const auto& object : levelData->objectDatas) {
+
 						if (object.type == objectType) {
 							objectDatas.push_back(object);
 						}
@@ -554,10 +611,8 @@ namespace Elysia {
 		/// 初期表示かどうか
 		/// </summary>
 		/// <param name="handle"></param>
-		/// <param name="name"></param>
 		/// <returns></returns>
-		inline std::vector<bool> GetInitialInvisibles(const uint32_t& handle, const std::string& name) {
-			name;
+		inline std::vector<bool> GetInitialInvisibles(const uint32_t& handle) {
 			std::vector<bool> result = {};
 			for (const auto& [key, levelData] : levelDatas_) {
 				if (levelData->handle == handle) {

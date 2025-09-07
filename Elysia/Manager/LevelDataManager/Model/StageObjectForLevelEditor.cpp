@@ -3,8 +3,9 @@
 #include <imgui.h>
 
 #include "VectorCalculation.h"
+#include <CollisionConfig.h>
 
-void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform) {
+void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize) {
 	
 	//レベルエディタ用のオブジェクトのタイプ
 	objectType_ = LevelEditorObjectType::StageObject;
@@ -21,19 +22,88 @@ void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 	//マテリアルの初期化
 	material_.Initialize();
 
+	//コライダーを持っていれば生成
+	if (isHavingCollider == true) {
+		colliderToPlayer_ = std::make_unique<StageObjectForLevelEditorCollider>();
+		colliderToPlayer_->Initialize();
+		colliderToPlayer_->SetSize(objectSize);
+	}
+	if (isGenerateColliderToLight == true) {
+
+		material_.color.w = 0.0f;
+
+#ifdef _DEBUG
+		material_.color.w = 0.1f;
+#endif // _DEBUG
+		
+
+		colliderToLight_ = std::make_unique<StageObjectForLevelEditorCollider>();
+		colliderToLight_->Initialize();
+		colliderToLight_->SetName("ForLight");
+		colliderToLight_->SetCollisionType(ColliderType::PointType);
+		colliderToLight_->SetCollisionAttribute(COLLISION_ATTRIBUTE_STAGE_OBJECT);
+		colliderToLight_->SetCollisionMask(COLLISION_ATTRIBUTE_FLASH_LIGHT);
+	}
+
+
 }
 
 void StageObjectForLevelEditor::Update(){
 
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
-	//マテリアルはDrawでやっているのでここには無いよ
+
+	Vector3 worldPosition = worldTransform_.GetWorldPosition();
 
 	//AABBの設定
 	aabb_ = {
-		.min = VectorCalculation::Subtract(worldTransform_.GetWorldPosition(),size_),
-		.max = VectorCalculation::Add(worldTransform_.GetWorldPosition(),size_)
+		.min = VectorCalculation::Subtract(worldPosition,size_),
+		.max = VectorCalculation::Add(worldPosition,size_)
 	};
+	if (colliderToPlayer_ != nullptr) {
+		colliderToPlayer_->SetObjectPosition(worldPosition);
+		colliderToPlayer_->SetCenterPosition(worldPosition);
+		colliderToPlayer_->Update();
+	}
+
+	if (colliderToLight_ != nullptr) {
+		colliderToLight_->SetObjectPosition(worldPosition);
+		colliderToLight_->SetCenterPosition(worldPosition);
+		colliderToLight_->Update();
+
+		if (colliderToLight_->GetIsTouch() == true&& isDisplay_==false) {
+			isDisplay_ = true;
+		}
+
+
+		if (isDisplay_ == true) {
+			
+			displayTime_ += 1.0f / 60.0f;
+
+
+			if (displayTime_ > 3.0f) {
+				material_.color.w -= 0.01f;
+
+			}
+			else {
+				material_.color.w = 1.0f;
+			}
+
+			if (material_.color.w <= 0.0f) {
+				material_.color.w = 0.0f;
+				isDisplay_ = false;
+			}
+		}
+
+	}
+
+	
+	
+
+
+
+
+	
 
 #ifdef _DEBUG
 	ImGui::Begin("ステージオブジェクト"); 
@@ -46,4 +116,22 @@ void StageObjectForLevelEditor::Update(){
 
 
 
+}
+
+void StageObjectForLevelEditor::Draw(const Camera& camera){
+	//スポットライトに設定
+	material_.lightingKinds = LightingType::NoneLighting;
+	//変更したのでここで更新させる
+	material_.Update();
+	//モデルの描画
+	model_->Draw(worldTransform_, camera, material_);
+}
+
+void StageObjectForLevelEditor::Draw(const Camera& camera, const SpotLight& spotLight){
+	//スポットライトに設定
+	material_.lightingKinds = LightingType::SpotLighting;
+	//変更したのでここで更新させる
+	material_.Update();
+	//モデルの描画
+	model_->Draw(worldTransform_, camera, material_, spotLight);
 }

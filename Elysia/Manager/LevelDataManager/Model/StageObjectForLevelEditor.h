@@ -24,12 +24,30 @@ public:
 	/// </summary>
 	/// <param name="modelhandle"></param>
 	/// <param name="transform"></param>
-	void Initialize(const uint32_t& modelhandle, const Transform& transform) override;
+	/// <param name="isHavingCollider"></param>
+	/// <param name="isGenerateColliderToLight"></param>
+	/// <param name="objectSize"></param>
+	void Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize) override;
 
 	/// <summary>
 	/// 更新
 	/// </summary>
 	void Update()override;
+
+	/// <summary>
+	/// 描画
+	/// </summary>
+	/// <param name="camera"></param>
+	void Draw(const Camera& camera)override;
+
+	/// <summary>
+	/// 描画(スポットライト)
+	/// </summary>
+	/// <param name="camera"></param>
+	/// <param name="material"></param>
+	/// <param name="spotLight"></param>
+	void Draw(const Camera& camera, const SpotLight& spotLight)override;
+
 
 public:
 
@@ -44,7 +62,8 @@ public:
 private:
 	//AABB用のサイズ
 	Vector3 size_ = {};
-
-
+	bool isDisplay_ = false;
+	float_t transparency_ = 0.0f;
+	float_t displayTime_ = 0.0f;
 };
 

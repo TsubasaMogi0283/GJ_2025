@@ -38,8 +38,9 @@ GameScene::GameScene() {
 
 void GameScene::Initialize() {
 
-	//ハンドルの取得
-	levelHandle_ = levelDataManager_->Load("GameStage/GameStage.json");
+	//ステージデータ
+	stageObjectData_ = std::make_unique<StageObjectData>();
+	stageObjectData_->Initialize();
 
 	//生成
 	player_ = std::make_unique<Player>();
@@ -133,6 +134,13 @@ void GameScene::PlayerMove(){
 	//方向取得
 	player_->SetMoveDirection(playerMoveDirection);
 
+	if (input_->IsPushKey(DIK_LSHIFT) == true) {
+		player_->SetIsDash(true);
+	}
+	else {
+		player_->SetIsDash(false);
+	}
+
 	//チャージ
 	bool isCharge = false;
 	//エンターキーまたはXボタンでチャージ開始
@@ -145,12 +153,16 @@ void GameScene::PlayerMove(){
 
 	//チャージ状態を設定
 	player_->GetFlashLight()->SetIsCharge(isCharge);
-
+	
 	//エンターキーまたはYボタンを離した瞬間に攻撃する
 	if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
 		isReleaseAttack_ = true;
 		//クールタイムにする
 		player_->GetFlashLight()->SetIsCoolTime(true);
+		//ライトのコライダーを登録
+		collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
+
+
 		//カメラの振動
 		//攻撃できる時だけにする。その方が迫力が出るよね。
 		if (player_->GetFlashLight()->GetChargeCondition() >= ChargeCondition::NormalChargeAttack) {
@@ -259,7 +271,17 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	collisionManager_->ClearList();
 	
 	gameManager;
+	//ステージデータの更新
+	stageObjectData_->Update();
 
+	const auto& i = levelDataManager_->GetColliderToLight(stageObjectData_->GetLevelDataHandle(), "Stage");
+	for (const auto& lightCollider : i) {
+
+		if (lightCollider != nullptr) {
+			collisionManager_->RegisterList(lightCollider);
+		}
+
+	}
 	
 	PlayerMove();
 	PlayerRotate();
@@ -282,31 +304,31 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	spotLight_=player_->GetFlashLight()->GetSpotLight();
 
 	levelDataManager_->Update(levelHandle_);
-
-
 	
-	for (const auto& collider : levelDataManager_->GetCollider(levelHandle_, "Stage")) {
-		//レベルエディタで設置したステージオブジェクトのコライダーを登録
-		collisionManager_->RegisterList(collider);
 
-		//表示させる
-		if (collider->GetIsTouch() == true) {
 
-		}
+#ifdef _DEBUG
+	ImGui::Begin("確認");
+	ImGui::Checkbox("リリース", &isReleaseAttack_);
+	ImGui::End();
+#endif // _DEBUG
+	
 
-	}
-	//ライトのコライダーを登録
-	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
 
+	//カメラの更新
+	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
+	//転送
+	camera_.Transfer();
+	//ライトの更新
+	spotLight_=player_->GetFlashLight()->GetSpotLight();
+	
+	
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
 
 #ifdef _DEBUG 
 
-	//再読み込み
-	if (input_->IsTriggerKey(DIK_R) == true) {
-		levelDataManager_->Reload(levelHandle_);
-	}
+	
 	//ImGuiの表示
 	DisplayImGui();
 
@@ -319,6 +341,10 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
+	//ステージデータの描画
+	stageObjectData_->Draw(camera_,spotLight_);
+
+	player_->DrawObject3D(camera_,spotLight_);
 	//レベルエディタのオブジェクトを描画
 	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
 

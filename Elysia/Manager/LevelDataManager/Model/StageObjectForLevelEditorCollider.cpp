@@ -17,23 +17,27 @@ void StageObjectForLevelEditorCollider::Initialize() {
 
 void StageObjectForLevelEditorCollider::Update(){
 	
-
-
-	aabb_.max = {
-		.x = objectPosition_.x + size_.x/2.0f,
-		.y = objectPosition_.y + size_.y/2.0f,
-		.z = objectPosition_.z + size_.z/2.0f,
-	};
-	aabb_.min = {
-		.x = objectPosition_.x - size_.x/2.0f,
-		.y = objectPosition_.y - size_.y/2.0f,
-		.z = objectPosition_.z - size_.z/2.0f,
-	};
+	if (collisionType_ == ColliderType::AABBType) {
+		aabb_.max = {
+		.x = objectPosition_.x + size_.x / 2.0f,
+		.y = objectPosition_.y + size_.y / 2.0f,
+		.z = objectPosition_.z + size_.z / 2.0f,
+		};
+		aabb_.min = {
+			.x = objectPosition_.x - size_.x / 2.0f,
+			.y = objectPosition_.y - size_.y / 2.0f,
+			.z = objectPosition_.z - size_.z / 2.0f,
+		};
+	}
+	
 
 #ifdef _DEBUG
 	ImGui::Begin("ステージオブジェクト(コライダー)");
-	ImGui::InputFloat3("MAX", &aabb_.max.x);
-	ImGui::InputFloat3("MIN", &aabb_.min.x);
+	if (collisionType_ == ColliderType::AABBType) {
+		ImGui::InputFloat3("MAX", &aabb_.max.x);
+		ImGui::InputFloat3("MIN", &aabb_.min.x);
+
+	}
 	ImGui::InputFloat3("位置", &objectPosition_.x);
 	ImGui::Checkbox("衝突", &isTouch_);
 	ImGui::End();

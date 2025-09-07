@@ -5,7 +5,7 @@
  * @author 茂木翼
  */
 
-#include "IObjectForLevelEditorCollider.h"
+#include "BaseObjectForLevelEditorCollider.h"
 
 /// <summary>
 /// ステージオブジェクト用のクラス

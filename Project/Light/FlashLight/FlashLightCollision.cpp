@@ -6,14 +6,15 @@
 
 void FlashLightCollision::Initialize(){
 
+	name_ = "FlashLight";
+
 	//種類
 	collisionType_ = ColliderType::FanType;
 
 	//自分
 	SetCollisionAttribute(COLLISION_ATTRIBUTE_FLASH_LIGHT);
 	//相手
-	SetCollisionMask(COLLISION_ATTRIBUTE_ENEMY2);
-
+	SetCollisionMask(COLLISION_ATTRIBUTE_STAGE_OBJECT);
 
 }
 

@@ -25,6 +25,20 @@ public:
 	virtual void Update() = 0;
 
 	/// <summary>
+	/// デストラクタ
+	/// </summary>
+	virtual ~BaseObjectForLevelEditorCollider() = default;
+
+public:
+	/// <summary>
+	/// タイプの設定
+	/// </summary>
+	/// <param name="type"></param>
+	virtual void SetCollisionType(const uint32_t& type) {
+		collisionType_ = type;
+	};
+
+	/// <summary>
 	/// オブジェクトの座標を取得
 	/// </summary>
 	/// <param name="position"></param>
@@ -36,7 +50,7 @@ public:
 	/// 衝突したかどうかのフラグを取得
 	/// </summary>
 	/// <returns></returns>
-	virtual bool GetIsTouch() const{
+	virtual bool GetIsTouch() const {
 		return isTouch_;
 	}
 
@@ -55,13 +69,6 @@ public:
 	virtual void SetSize(const Vector3& size) {
 		this->size_ = size;
 	}
-
-
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	virtual ~BaseObjectForLevelEditorCollider() = default;
 
 
 protected:

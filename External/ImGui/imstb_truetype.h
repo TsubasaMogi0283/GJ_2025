@@ -120,7 +120,7 @@
 //   "Load" a font file from a memory buffer (you have to keep the buffer loaded)
 //           stbtt_InitFont()
 //           stbtt_GetFontOffsetForIndex()        -- indexing for TTC font collections
-//           stbtt_GetNumberOfFonts()             -- number of fonts for TTC font collections
+//           stbtt_GetNumberOfFonts()             -- colliderNumber_ of fonts for TTC font collections
 //
 //   Render a unicode codepoint to a bitmap
 //           stbtt_GetCodepointBitmap()           -- allocates and returns a bitmap
@@ -186,7 +186,7 @@
 //         measurement for describing font size, defined as 72 points per inch.
 //         stb_truetype provides a point API for compatibility. However, true
 //         "per inch" conventions don't make much sense on computer displays
-//         since different monitors have different number of pixels per
+//         since different monitors have different colliderNumber_ of pixels per
 //         inch. For example, Windows traditionally uses a convention that
 //         there are 96 pixels per inch, thus making 'inch' measurements have
 //         nothing to do with inches, and thus effectively defining a point to
@@ -541,7 +541,7 @@ STBTT_DEF int stbtt_BakeFontBitmap(const unsigned char *data, int offset,  // fo
                                 int first_char, int num_chars,          // characters to bake
                                 stbtt_bakedchar *chardata);             // you allocate this, it's num_chars long
 // if return is positive, the first unused row of the bitmap
-// if return is negative, returns the negative of the number of characters that fit
+// if return is negative, returns the negative of the colliderNumber_ of characters that fit
 // if return is 0, no characters fit and no rows were used
 // This uses a very crappy packing.
 
@@ -644,7 +644,7 @@ STBTT_DEF void stbtt_PackSetOversampling(stbtt_pack_context *spc, unsigned int h
 // This function sets the amount of oversampling for all following calls to
 // stbtt_PackFontRange(s) or stbtt_PackFontRangesGatherRects for a given
 // pack context. The default (no oversampling) is achieved by h_oversample=1
-// and v_oversample=1. The total number of pixels required is
+// and v_oversample=1. The total colliderNumber_ of pixels required is
 // h_oversample*v_oversample larger than the default; for example, 2x2
 // oversampling requires 4x the storage of 1x1. For best results, render
 // oversampled textures with bilinear filtering. Look at the readme in
@@ -700,15 +700,15 @@ struct stbtt_pack_context {
 //
 
 STBTT_DEF int stbtt_GetNumberOfFonts(const unsigned char *data);
-// This function will determine the number of fonts in a font file.  TrueType
+// This function will determine the colliderNumber_ of fonts in a font file.  TrueType
 // collection (.ttc) files may contain multiple fonts, while TrueType font
-// (.ttf) files only contain one font. The number of fonts can be used for
+// (.ttf) files only contain one font. The colliderNumber_ of fonts can be used for
 // indexing with the previous function where the index is between zero and one
 // less than the total fonts. If an error occurs, -1 is returned.
 
 STBTT_DEF int stbtt_GetFontOffsetForIndex(const unsigned char *data, int index);
 // Each .ttf/.ttc file may have more than one font. Each font has a sequential
-// index number starting from 0. Call this function to get the font offset for
+// index colliderNumber_ starting from 0. Call this function to get the font offset for
 // a given index; it returns -1 if the index is out of range. A regular .ttf
 // file will only define one font and it always be at offset 0, so it will
 // return '0' for index 0, and -1 for all other indices.
@@ -721,7 +721,7 @@ struct stbtt_fontinfo
    unsigned char  * data;              // pointer to .ttf file
    int              fontstart;         // offset of start of font
 
-   int numGlyphs;                     // number of glyphs, needed for range checking
+   int numGlyphs;                     // colliderNumber_ of glyphs, needed for range checking
 
    int loca,head,glyf,hhea,hmtx,kern,gpos,svg; // table locations as offset from start of .ttf
    int index_map;                     // a cmap mapping for our chosen character encoding
@@ -936,7 +936,7 @@ typedef struct
 STBTT_DEF void stbtt_Rasterize(stbtt__bitmap *result,        // 1-channel bitmap to draw into
                                float flatness_in_pixels,     // allowable error of curve in pixels
                                stbtt_vertex *vertices,       // array of vertices defining shape
-                               int num_verts,                // number of vertices in above array
+                               int num_verts,                // colliderNumber_ of vertices in above array
                                float scale_x, float scale_y, // scale applied to input vertices
                                float shift_x, float shift_y, // translation applied to input vertices
                                int x_off, int y_off,         // another translation applied to input
@@ -1298,7 +1298,7 @@ static stbtt_int32 ttLONG(stbtt_uint8 *p)    { return (p[0]<<24) + (p[1]<<16) + 
 
 static int stbtt__isfont(stbtt_uint8 *font)
 {
-   // check the version number
+   // check the version colliderNumber_
    if (stbtt_tag4(font, '1',0,0,0))  return 1; // TrueType 1
    if (stbtt_tag(font, "typ1"))   return 1; // TrueType with type 1 font -- we don't support this!
    if (stbtt_tag(font, "OTTO"))   return 1; // OpenType with CFF
@@ -2326,7 +2326,7 @@ STBTT_DEF int  stbtt_GetKerningTableLength(const stbtt_fontinfo *info)
    // we only look at the first table. it must be 'horizontal' and format 0.
    if (!info->kern)
       return 0;
-   if (ttUSHORT(data+2) < 1) // number of tables, need at least 1
+   if (ttUSHORT(data+2) < 1) // colliderNumber_ of tables, need at least 1
       return 0;
    if (ttUSHORT(data+8) != 1) // horizontal flag must be set in format
       return 0;
@@ -2342,7 +2342,7 @@ STBTT_DEF int stbtt_GetKerningTable(const stbtt_fontinfo *info, stbtt_kerningent
    // we only look at the first table. it must be 'horizontal' and format 0.
    if (!info->kern)
       return 0;
-   if (ttUSHORT(data+2) < 1) // number of tables, need at least 1
+   if (ttUSHORT(data+2) < 1) // colliderNumber_ of tables, need at least 1
       return 0;
    if (ttUSHORT(data+8) != 1) // horizontal flag must be set in format
       return 0;
@@ -2370,7 +2370,7 @@ static int stbtt__GetGlyphKernInfoAdvance(const stbtt_fontinfo *info, int glyph1
    // we only look at the first table. it must be 'horizontal' and format 0.
    if (!info->kern)
       return 0;
-   if (ttUSHORT(data+2) < 1) // number of tables, need at least 1
+   if (ttUSHORT(data+2) < 1) // colliderNumber_ of tables, need at least 1
       return 0;
    if (ttUSHORT(data+8) != 1) // horizontal flag must be set in format
       return 0;
@@ -3622,7 +3622,7 @@ static void stbtt__tesselate_cubic(stbtt__point *points, int *num_points, float 
    }
 }
 
-// returns number of contours
+// returns colliderNumber_ of contours
 static stbtt__point *stbtt_FlattenCurves(stbtt_vertex *vertices, int num_verts, float objspace_flatness, int **contour_lengths, int *num_contours, void *userdata)
 {
    stbtt__point *points=0;

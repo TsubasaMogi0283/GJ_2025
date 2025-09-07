@@ -8,7 +8,7 @@ AudioObjectForLevelEditor::AudioObjectForLevelEditor(){
 	audio_ = Elysia::Audio::GetInstance();
 }
 
-void AudioObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform){
+void AudioObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize){
 	
 	//レベルエディタ用のオブジェクトのタイプ
 	objectType_ = LevelEditorObjectType::AudioObject;
@@ -32,6 +32,14 @@ void AudioObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 	else if (audioDataForLevelEditor_.type == "Action") {
 		audioType_ = AudioObjectType::ActionType;
 	}
+
+	//コライダーを持っていたら生成
+	if (isHavingCollider == true) {
+		colliderToPlayer_ = std::make_unique< AudioObjectForLevelEditorCollider>();
+		colliderToPlayer_->Initialize();
+		colliderToPlayer_->SetSize(objectSize);
+	}
+	isGenerateColliderToLight;
 }
 
 
@@ -41,6 +49,13 @@ void AudioObjectForLevelEditor::Update(){
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
 	//マテリアルはDrawでやっているのでここには無いよ
+
+	//中心座標の設定
+	if (colliderToPlayer_ != nullptr) {
+		colliderToPlayer_->SetCenterPosition(worldTransform_.GetWorldPosition());
+
+	}
+	
 
 	switch (audioType_) {
 	case AudioObjectType::BGMType:

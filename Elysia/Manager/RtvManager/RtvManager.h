@@ -87,7 +87,7 @@ namespace Elysia {
 		// <summary>
 		// ハンドルの取得
 		// </summary>
-		// <param name="number">数</param>
+		// <param name="colliderNumber_">数</param>
 		// <returns>ハンドル</returns>
 		inline D3D12_CPU_DESCRIPTOR_HANDLE& GetRtvHandle(const uint32_t& number) const {
 			return rtvHandles_[number];
