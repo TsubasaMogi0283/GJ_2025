@@ -1,4 +1,5 @@
 #include "Floor.h"
+#include <VectorCalculation.h>
 
 Floor::Floor() {}
 
@@ -13,6 +14,11 @@ void Floor::Init()
 	// マテリアルの初期化
 	material_.Initialize();
 	material_.lightingKinds = LightingType::NoneLighting;
+
+	// 見え隠れの初期ステート
+	visibilityState_ = TerrainVisibilityState::Hidden;
+	// マテリアルはcolor.wを0.0fで透明に
+	material_.color.w = 0.0f;
 }
 
 void Floor::Update()
@@ -21,6 +27,9 @@ void Floor::Update()
 	transform_.Update();
 	// マテリアルの更新
 	material_.Update();
+
+	// 顕幽タイマーの更新
+	UpdateVisibilityState();
 }
 
 void Floor::DrawObject3D(const Camera& camera, const SpotLight& spotLight)
