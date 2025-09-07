@@ -45,9 +45,6 @@ void StageObjectForLevelEditor::Update(){
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
 
-	
-
-	
 	Vector3 worldPosition = worldTransform_.GetWorldPosition();
 
 	//AABBの設定
