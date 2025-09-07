@@ -29,10 +29,13 @@ void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 		colliderToPlayer_->SetSize(objectSize);
 	}
 	if (isGenerateColliderToLight == true) {
+
+		material_.color.w = 0.0f;
+
 #ifdef _DEBUG
 		material_.color.w = 0.1f;
 #endif // _DEBUG
-
+		
 
 		colliderToLight_ = std::make_unique<StageObjectForLevelEditorCollider>();
 		colliderToLight_->Initialize();
@@ -84,7 +87,11 @@ void StageObjectForLevelEditor::Update(){
 			}
 			else {
 				material_.color.w = 1.0f;
+			}
 
+			if (material_.color.w <= 0.0f) {
+				material_.color.w = 0.0f;
+				isDisplay_ = false;
 			}
 		}
 
