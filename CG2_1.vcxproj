@@ -210,6 +210,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Player\PlayerCollisionToStrongEnemy.cpp" />
     <ClCompile Include="Project\StageObjectData\StageObjectData.cpp" />
     <ClCompile Include="Project\Terrain\Floor\Floor.cpp" />
+    <ClCompile Include="Project\Terrain\ITerrain.cpp" />
     <ClCompile Include="Project\Terrain\TerrainManager.cpp" />
     <ClCompile Include="Project\Terrain\Wall\Wall.cpp" />
   </ItemGroup>

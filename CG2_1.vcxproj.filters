@@ -122,6 +122,7 @@
     <ClCompile Include="Project\Terrain\TerrainManager.cpp" />
     <ClCompile Include="Project\Terrain\Wall\Wall.cpp" />
     <ClCompile Include="Project\StageObjectData\StageObjectData.cpp" />
+    <ClCompile Include="Project\Terrain\ITerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Elysia\Audio\Audio.h" />
