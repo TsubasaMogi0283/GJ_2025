@@ -108,9 +108,17 @@ void StageObjectForLevelEditor::Update(){
 #ifdef _DEBUG
 	ImGui::Begin("ステージオブジェクト"); 
 	Vector3 position = worldTransform_.GetWorldPosition();
-	ImGui::InputFloat3("座標", &position.x);
-	ImGui::InputFloat3("AABB_Max", &aabb_.max.x);
-	ImGui::InputFloat3("AABB_Min", &aabb_.min.x);
+	if (colliderToLight_ != nullptr) {
+		ImGui::InputFloat3("座標", &position.x);
+
+	}
+	if (colliderToPlayer_ != nullptr) {
+		ImGui::InputFloat3("AABB_Max", &aabb_.max.x);
+		ImGui::InputFloat3("AABB_Min", &aabb_.min.x);
+
+	}
+
+	ImGui::InputFloat("透明度", &material_.color.w);
 	ImGui::End();
 #endif // _DEBUG
 
