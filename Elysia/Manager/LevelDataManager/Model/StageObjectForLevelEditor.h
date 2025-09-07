@@ -62,7 +62,8 @@ public:
 private:
 	//AABB用のサイズ
 	Vector3 size_ = {};
-
-
+	bool isDisplay_ = false;
+	float_t transparency_ = 0.0f;
+	float_t displayTime_ = 0.0f;
 };
 

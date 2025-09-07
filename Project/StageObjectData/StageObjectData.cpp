@@ -27,17 +27,6 @@ void StageObjectData::Update() {
 
 
 
-	const auto& objectDatas = levelDataManager_->GetObjectDatas(levelHandle_, "Stage");
-	for (const auto& objectData : objectDatas) {
-		//見つかった時だけ通す
-		if (objectData.name.find("Cube")!=std::string::npos&& objectData.isHavingCollider==true) {
-			objectData.objectForLeveEditor->SetTransparency(1.0f);
-		}
-
-		
-	}
-
-
 
 #ifdef _DEBUG
 	ImGui::Begin("ステージデータ");

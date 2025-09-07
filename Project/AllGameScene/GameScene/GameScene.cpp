@@ -149,12 +149,16 @@ void GameScene::PlayerMove(){
 
 	//チャージ状態を設定
 	player_->GetFlashLight()->SetIsCharge(isCharge);
-
+	
 	//エンターキーまたはYボタンを離した瞬間に攻撃する
 	if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
 		isReleaseAttack_ = true;
 		//クールタイムにする
 		player_->GetFlashLight()->SetIsCoolTime(true);
+		//ライトのコライダーを登録
+		collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
+
+
 		//カメラの振動
 		//攻撃できる時だけにする。その方が迫力が出るよね。
 		if (player_->GetFlashLight()->GetChargeCondition() >= ChargeCondition::NormalChargeAttack) {
@@ -263,7 +267,17 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	collisionManager_->ClearList();
 	
 	gameManager;
+	//ステージデータの更新
+	stageObjectData_->Update();
 
+	const auto& i = levelDataManager_->GetColliderToLight(stageObjectData_->GetLevelDataHandle(), "Stage");
+	for (const auto& lightCollider : i) {
+
+		if (lightCollider != nullptr) {
+			collisionManager_->RegisterList(lightCollider);
+		}
+
+	}
 	
 	PlayerMove();
 	PlayerRotate();
@@ -274,26 +288,15 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	player_->Update();
 
 
-	//ステージデータの更新
-	stageObjectData_->Update();
 	
-	const auto& i = levelDataManager_->GetColliderToLight(stageObjectData_->GetLevelDataHandle(), "Stage");
-	for (const auto& lightCollider : i) {
-
-		if (lightCollider != nullptr) {
-			collisionManager_->RegisterList(lightCollider);
-		}
-		
-	}
 
 
 #ifdef _DEBUG
 	ImGui::Begin("確認");
+	ImGui::Checkbox("リリース", &isReleaseAttack_);
 	ImGui::End();
 #endif // _DEBUG
-	//ライトのコライダーを登録
-	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
-
+	
 
 
 	//カメラの更新

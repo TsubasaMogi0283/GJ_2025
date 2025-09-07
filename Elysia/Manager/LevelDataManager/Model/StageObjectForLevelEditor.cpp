@@ -29,6 +29,11 @@ void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 		colliderToPlayer_->SetSize(objectSize);
 	}
 	if (isGenerateColliderToLight == true) {
+#ifdef _DEBUG
+		material_.color.w = 0.1f;
+#endif // _DEBUG
+
+
 		colliderToLight_ = std::make_unique<StageObjectForLevelEditorCollider>();
 		colliderToLight_->Initialize();
 		colliderToLight_->SetName("ForLight");
@@ -62,9 +67,35 @@ void StageObjectForLevelEditor::Update(){
 		colliderToLight_->SetObjectPosition(worldPosition);
 		colliderToLight_->SetCenterPosition(worldPosition);
 		colliderToLight_->Update();
+
+		if (colliderToLight_->GetIsTouch() == true&& isDisplay_==false) {
+			isDisplay_ = true;
+		}
+
+
+		if (isDisplay_ == true) {
+			
+			displayTime_ += 1.0f / 60.0f;
+
+
+			if (displayTime_ > 3.0f) {
+				material_.color.w -= 0.01f;
+
+			}
+			else {
+				material_.color.w = 1.0f;
+
+			}
+		}
+
 	}
 
 	
+	
+
+
+
+
 	
 
 #ifdef _DEBUG
