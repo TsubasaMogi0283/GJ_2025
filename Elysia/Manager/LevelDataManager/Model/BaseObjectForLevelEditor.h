@@ -12,8 +12,10 @@
 #include "Material.h"
 #include "AABB.h"
 #include "Transform.h"
+#include <Model/BaseObjectForLevelEditorCollider.h>
 
-/// <summary>
+ 
+ /// <summary>
 /// オブジェクトの種類
 /// </summary>
 enum LevelEditorObjectType {
@@ -34,8 +36,11 @@ public:
 	/// 初期化
 	/// </summary>
 	/// <param name="modelhandle"></param>
-	/// <param name="position"></param>
-	virtual void Initialize(const uint32_t& modelhandle,const Transform& position)=0;
+	/// <param name="transform"></param>
+	/// <param name="isHavingCollider"></param>
+	/// <param name="isGenerateColliderToLight"></param>
+	/// <param name="objectSize"></param>
+	virtual void Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize)=0;
 
 	/// <summary>
 	/// 更新
@@ -80,6 +85,29 @@ public:
 
 public:
 	/// <summary>
+	/// プレイヤー用のコライダーの取得
+	/// </summary>
+	/// <returns></returns>
+	virtual BaseObjectForLevelEditorCollider* GetColliderToPlayer()const {
+		if (colliderToPlayer_ != nullptr) {
+			return colliderToPlayer_.get();
+		}
+		
+		return nullptr;
+	}
+
+	/// <summary>
+	/// ライト用のコライダーを取得
+	/// </summary>
+	/// <returns></returns>
+	virtual BaseObjectForLevelEditorCollider* GetColliderToLight()const {
+		if (colliderToLight_ != nullptr) {
+			return colliderToLight_.get();
+		}
+		return nullptr;
+	}
+
+	/// <summary>
 	/// ワールド座標の取得
 	/// </summary>
 	/// <returns></returns>
@@ -114,7 +142,6 @@ public:
 	inline void SetIsListenerMove(const bool& isMove) {
 		isListenerMove_ = isMove;
 	}
-
 
 	/// <summary>
 	/// 拡縮
@@ -178,4 +205,10 @@ protected:
 
 	//リスナーが動いているかどうか
 	bool isListenerMove_=false;
+
+	//コライダー
+	std::unique_ptr<BaseObjectForLevelEditorCollider> colliderToPlayer_ = nullptr;
+	//ライト用のコライダー
+	std::unique_ptr<BaseObjectForLevelEditorCollider> colliderToLight_ = nullptr;
+
 };

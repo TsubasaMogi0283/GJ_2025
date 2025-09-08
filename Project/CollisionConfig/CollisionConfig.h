@@ -17,7 +17,7 @@ const uint32_t COLLISION_ATTRIBUTE_ENEMY_ATTACK = 0b1 << 2;
 //一発アウトの敵の攻撃の当たり判定
 const uint32_t COLLISION_ATTRIBUTE_STRONG_ENEMY = 0b1 << 3;
 
-//プレイヤー(一発アウトの敵用)
+//プレイヤーのライト
 const uint32_t COLLISION_ATTRIBUTE_PLAYER2 = 0b1 << 4;
 
 //懐中電灯

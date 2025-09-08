@@ -21,6 +21,7 @@
 #include "VignettePostEffect.h"
 #include "Vignette.h"
 #include <BackTexture.h>
+#include <StageObjectData/StageObjectData.h>
 
 #include "Terrain/TerrainManager.h"
 
@@ -172,5 +173,6 @@ private:
 	//離したかどうか
 	bool isReleaseAttack_ = false;
 	
+	std::unique_ptr<StageObjectData> stageObjectData_ = nullptr;
 
 };

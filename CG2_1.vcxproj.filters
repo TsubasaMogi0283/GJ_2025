@@ -471,6 +471,8 @@
     <ClCompile Include="Project\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Project\Terrain\TerrainManager.cpp" />
     <ClCompile Include="Project\Terrain\Wall\Wall.cpp" />
+    <ClCompile Include="Project\StageObjectData\StageObjectData.cpp" />
+    <ClCompile Include="Project\Terrain\ITerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Elysia\Audio\Audio.h" />
@@ -500,7 +502,7 @@
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\AudioObjectForLevelEditor.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\AudioObjectForLevelEditorCollider.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\BaseObjectForLevelEditor.h" />
-    <ClInclude Include="Elysia\Manager\LevelDataManager\Model\IObjectForLevelEditorCollider.h" />
+    <ClInclude Include="Elysia\Manager\LevelDataManager\Model\BaseObjectForLevelEditorCollider.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\StageObjectForLevelEditor.h" />
     <ClInclude Include="Elysia\Manager\LevelDataManager\Model\StageObjectForLevelEditorCollider.h" />
     <ClInclude Include="Elysia\Manager\ModelManager\Animation.h" />
@@ -596,6 +598,7 @@
     <ClInclude Include="Project\Terrain\ITerrain.h" />
     <ClInclude Include="Project\Terrain\TerrainManager.h" />
     <ClInclude Include="Project\Terrain\Wall\Wall.h" />
+    <ClInclude Include="Project\StageObjectData\StageObjectData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

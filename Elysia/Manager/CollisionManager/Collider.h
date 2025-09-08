@@ -105,6 +105,14 @@ public:
 		return collisionType_;
 	}
 
+	/// <summary>
+	/// 名前の設定
+	/// </summary>
+	/// <param name="name"></param>
+	inline void SetName(const std::string& name) {
+		this->name_ = name;
+	}
+
 public:
 	//衝突属性(自分)を取得
 	uint32_t GetCollisionAttribute() {

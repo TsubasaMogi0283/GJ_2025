@@ -88,7 +88,10 @@ public:
 	/// </summary>
 	/// <param name="modelhandle"></param>
 	/// <param name="transform"></param>
-	void Initialize(const uint32_t& modelhandle, const Transform& transform) override;
+	/// <param name="isHavingCollider"></param>
+	/// <param name="isGenerateColliderToLight"></param>
+	/// <param name="objectSize"></param>
+	void Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize) override;
 
 	/// <summary>
 	/// 更新

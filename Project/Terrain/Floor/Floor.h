@@ -39,8 +39,4 @@ public:
 
 private:
 
-	// モデル
-	std::unique_ptr<Elysia::Model> model_;
-	// マテリアル
-	Material material_{};
 };
