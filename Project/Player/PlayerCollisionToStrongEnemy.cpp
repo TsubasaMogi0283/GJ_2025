@@ -23,11 +23,13 @@ void PlayerCollisionToStrongEnemy::Initialize(){
 	//相手
 	SetCollisionMask(COLLISION_ATTRIBUTE_STRONG_ENEMY);
 
+	position_ = nullptr;
+
 }
 
 void PlayerCollisionToStrongEnemy::Update(){
 	//プレイヤーの座標を持ってくる
-	worldTransform_.translate = playerPosition_;
+	worldTransform_.translate = *position_;
 	//更新
 	worldTransform_.Update();
 }

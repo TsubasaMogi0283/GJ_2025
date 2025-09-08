@@ -41,7 +41,7 @@ public:
 	/// <summary>
 	/// 接触
 	/// </summary>
-	virtual void OnCollision()=0;
+	virtual void OnCollision([[maybe_unused]] const Collider& collider)=0;
 
 	/// <summary>
 	/// 非接触
@@ -79,7 +79,6 @@ public:
 		return aabb_;
 	}
 
-
 	/// <summary>
 	/// 3Dの扇の取得
 	/// </summary>
@@ -103,7 +102,6 @@ public:
 	inline Plane GetPlane()const {
 		return plane_;
 	}
-
 
 	/// <summary>
 	/// 衝突判定で使う形の種類の値を取得
@@ -140,10 +138,26 @@ public:
 		this->collisionMask_ = collisionMask;
 	}
 
+	//衝突時に自身を押し戻すかを取得
+	bool SetCollisionMask() const{
+		return shouldPushBack_;
+	}
+	//衝突時に自身を押し戻すかを設定
+	void SetCollisionMask(const bool& shouldPushBack) {
+		this->shouldPushBack_ = shouldPushBack;
+	}
+
+	inline void ParentPosition(Vector3* position) {
+		position_ = position;
+	}
+
+protected:
+
+	Vector3 CalculateAABBPushbackVector(const AABB& staticAABB);
+
 protected:
 	//名前
 	std::string name_ = "";
-
 
 	//当たり判定の種類
 	//デフォルトで球にしておく
@@ -151,6 +165,10 @@ protected:
 
 	//衝突半径
 	float_t radius_ = 1.0f;
+
+	Vector3 velocity_ = {};
+
+	Vector3* position_;
 
 	//AABB
 	AABB aabb_ = {};
@@ -163,6 +181,9 @@ protected:
 
 	//平面
 	Plane plane_ = {};
+
+	//押し戻すか否か
+	bool shouldPushBack_;
 
 private:
 	

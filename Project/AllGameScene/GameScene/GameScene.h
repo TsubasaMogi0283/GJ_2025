@@ -21,10 +21,8 @@
 #include "VignettePostEffect.h"
 #include "Vignette.h"
 #include <BackTexture.h>
-#include <StageObjectData/StageObjectData.h>
 
 #include "Terrain/TerrainManager.h"
-
 
  /// <summary>
  /// ElysiaEngine(前方宣言)
@@ -167,12 +165,9 @@ private:
 	//衝突判定管理クラス
 	std::unique_ptr<Elysia::CollisionManager> collisionManager_ = nullptr;
 
-	// 地形管理クラス
-	std::shared_ptr<TerrainManager> terrainManager_;
-
 	//離したかどうか
 	bool isReleaseAttack_ = false;
-	
-	std::unique_ptr<StageObjectData> stageObjectData_ = nullptr;
 
+	// 地形管理クラス
+	std::shared_ptr<TerrainManager> terrainManager_;
 };

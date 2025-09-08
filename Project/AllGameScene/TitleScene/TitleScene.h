@@ -13,10 +13,10 @@
 #include "Model.h"
 #include "Camera.h"
 #include "BackTexture.h"
-#include "DirectionalLight.h"
-#include "SpotLight.h"
-#include "RandomNoise.h"
-#include "RandomNoisePostEffect.h"
+#include <PointLight.h>
+#include <Dissolve.h>
+#include <DissolveEffect.h>
+#include <TitleScene/BaseTitleScene/BaseTitleScene.h>
 
 #pragma region 前方宣言
 
@@ -103,6 +103,19 @@ public:
 	/// </summary>
 	~TitleScene() = default;
 
+public:
+	/// <summary>
+	/// 詳細のシーンの遷移
+	/// </summary>
+	/// <param name="detailScene"></param>
+	void ChangeDetailScene(std::unique_ptr<BaseTitleScene>detailScene);
+
+	/// <summary>
+	/// 処理の終了
+	/// </summary>
+	void SetIsEnd() {
+		this->isEnd_ = true;
+	}
 
 private:
 	/// <summary>
@@ -127,8 +140,16 @@ private:
 	//カメラ
 	Camera camera_ = {};
 	//平行光源
-	DirectionalLight directionalLight_ = {};
+	PointLight pointLight_ = {};
+
+	//ディゾルブ
+	Dissolve dissolve_ = {};
 	//ポストエフェクト
-	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
+	std::unique_ptr<Elysia::DissolvePostEffect> dissolvePostEffect_ = nullptr;
+
+	//詳細シーン
+	std::unique_ptr<BaseTitleScene> detailScene_ = nullptr;
+	//処理終わり
+	bool isEnd_ = false;
 
 };

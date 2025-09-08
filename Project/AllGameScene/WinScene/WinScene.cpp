@@ -48,7 +48,7 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 	camera_.Update();
 
 	//レベルデータの更新
-	levelDataManager_->Update(levelDataHandle_);
+	//levelDataManager_->Update(levelDataHandle_);
 
 	
 }

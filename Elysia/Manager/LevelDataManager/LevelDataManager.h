@@ -102,11 +102,13 @@ namespace Elysia {
 		/// <param name="levelDataHandle">ハンドル</param>
 		void Reload(const uint32_t& levelDataHandle);
 
+
 		/// <summary>
 		/// 更新
 		/// </summary>
-		/// <param name="levelDataHandle">ハンドル</param>
+		/// <param name="levelDataHandle"></param>
 		void Update(const uint32_t& levelDataHandle);
+
 
 		/// <summary>
 		/// 消去
@@ -407,13 +409,11 @@ namespace Elysia {
 			//ハンドル
 			uint32_t handle = 0u;
 
+			//リスナー
+			Listener* listener_ = nullptr;
+
 			//オブジェクトのリスト
 			std::list<ObjectData> objectDatas;
-
-			//リスナー
-			//プレイヤーなどを設定してね
-			Listener listener = {};
-
 			//フォルダ名
 			std::string folderName;
 			//ファイル名
@@ -425,6 +425,26 @@ namespace Elysia {
 
 
 	public:
+		/// <summary>
+		/// リスナーの設定(初期化処理の所でやってね)
+		/// </summary>
+		/// <param name="handle"></param>
+		/// <param name="listener"></param>
+		inline void SetListener(const uint32_t& handle,Listener* listener) {
+
+			for (const auto& [key, levelData] : levelDatas_) {
+				if (levelData->handle == handle) {
+
+					levelData->listener_ = listener;
+
+					//無駄なループを防ぐ
+					break;
+				}
+			}
+
+		}
+
+
 		/// <summary>
 		/// オブジェクトデータの取得
 		/// </summary>
@@ -450,23 +470,6 @@ namespace Elysia {
 			}
 
 			return objectDatas;
-		}
-
-		/// <summary>
-		/// リスナーの設定
-		/// </summary>
-		/// <param name="handle">ハンドル</param>
-		/// <param name="listener">リスナー</param>
-		inline void SetListener(const uint32_t& handle, const Listener& listener) {
-			for (const auto& [key, levelData] : levelDatas_) {
-
-				//一致したら設定
-				if (levelData->handle == handle) {
-					levelData->listener = listener;
-					//無駄なループを防ぐ
-					break;
-				}
-			}
 		}
 
 		/// <summary>

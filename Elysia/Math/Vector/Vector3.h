@@ -15,5 +15,4 @@ struct Vector3 {
 	float_t x;
 	float_t y;
 	float_t z;
-
 };
