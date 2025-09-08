@@ -23,15 +23,15 @@ void PlayerCollisionToStageObject::Update(){
 
 	//AABBに値を入れていく
 	aabb_.max = {
-		.x = playerPosition_.x + SIZE,
-		.y = playerPosition_.y + SIZE,
-		.z = playerPosition_.z + SIZE,
+		.x = position_->x + SIZE,
+		.y = position_->y + SIZE,
+		.z = position_->z + SIZE,
 	};
 
 	aabb_.min = {
-		.x = playerPosition_.x - SIZE,
-		.y = playerPosition_.y - SIZE,
-		.z = playerPosition_.z - SIZE,
+		.x = position_->x - SIZE,
+		.y = position_->y - SIZE,
+		.z = position_->z - SIZE,
 	};
 
 	
@@ -40,7 +40,6 @@ void PlayerCollisionToStageObject::Update(){
 #ifdef _DEBUG
 	ImGui::Begin("プレイヤーのコリジョン(ステージオブジェクト用)");
 	ImGui::Checkbox("接触", &isTouch_);
-	ImGui::InputFloat3("位置", &playerPosition_.x);
 	ImGui::InputFloat3("MAX", &aabb_.max.x);
 	ImGui::InputFloat3("MIN", &aabb_.min.x);
 	ImGui::End();

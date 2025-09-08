@@ -47,7 +47,7 @@ void Player::Initialize(){
 
 	collider_ = std::make_unique<PlayerCollisionToStageObject>();
 	collider_->Initialize();
-	collider_->SetPlayerPosition(&worldTransform_.translate);
+	collider_->ParentPosition(&worldTransform_.translate);
 
 }
 

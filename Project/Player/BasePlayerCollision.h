@@ -76,7 +76,7 @@ public:
 	/// </summary>
 	/// <returns>ワールド座標</returns>
 	inline Vector3 GetWorldPosition()override {
-		return playerPosition_;
+		return *position_;
 	};
 
 public:

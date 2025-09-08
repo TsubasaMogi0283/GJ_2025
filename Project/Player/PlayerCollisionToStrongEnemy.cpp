@@ -29,7 +29,7 @@ void PlayerCollisionToStrongEnemy::Initialize(){
 
 void PlayerCollisionToStrongEnemy::Update(){
 	//プレイヤーの座標を持ってくる
-	worldTransform_.translate = playerPosition_;
+	worldTransform_.translate = *position_;
 	//更新
 	worldTransform_.Update();
 }
