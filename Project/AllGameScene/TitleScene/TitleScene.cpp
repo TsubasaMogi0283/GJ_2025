@@ -51,6 +51,7 @@ void TitleScene::Initialize() {
 	dissolvePostEffect_->Initialize({ .x = 0.0f,.y = 0.0f,.z = 0.0f,.w = 1.0f });
 
 	detailScene_ = std::make_unique<StartTitleScene>();
+	detailScene_->SetLevelDataHandle(levelHandle_);
 	detailScene_->Initialize();
 
 }
