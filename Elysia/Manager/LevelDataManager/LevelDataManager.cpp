@@ -438,7 +438,8 @@ void Elysia::LevelDataManager::Reload(const uint32_t& levelDataHandle) {
 
 }
 
-void Elysia::LevelDataManager::Update(const uint32_t& levelDataHandle) {
+
+void Elysia::LevelDataManager::Update(const uint32_t& levelDataHandle){
 
 	//この書き方はC++17からの構造化束縛というものらしい
 	//イテレータではなくこっちでやった方が良いかな
@@ -448,22 +449,28 @@ void Elysia::LevelDataManager::Update(const uint32_t& levelDataHandle) {
 
 			//リスナーが動いているかどうか
 			bool isListenerMove = false;
-
-			//動いていなかった場合
-			if (levelData->listener.move.x == 0.0f &&
-				levelData->listener.move.y == 0.0f &&
-				levelData->listener.move.z == 0.0f) {
-				isListenerMove = false;
+			if (levelData->listener_ != nullptr) {
+				//動いていなかった場合
+				if (levelData->listener_->GetMove().x == 0.0f &&
+					levelData->listener_->GetMove().y == 0.0f &&
+					levelData->listener_->GetMove().z == 0.0f) {
+					isListenerMove = false;
+				}
+				else {
+					isListenerMove = true;
+				}
 			}
-			else {
-				isListenerMove = true;
-			}
+			
 
 			for (const auto& object : levelData->objectDatas) {
 				//モデルを生成した時
 				if (object.isModelGenerate) {
 					//更新
-					object.objectForLeveEditor->SetIsListenerMove(isListenerMove);
+					if (levelData->listener_ != nullptr) {
+						object.objectForLeveEditor->SetIsListenerMove(isListenerMove);
+						object.objectForLeveEditor->SetListener(levelData->listener_);
+
+					}
 					object.objectForLeveEditor->Update();
 
 				}

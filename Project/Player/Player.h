@@ -19,6 +19,7 @@
 #include "PlayerCollisionToStageObject.h"
 #include "Light/FlashLight/FlashLight.h"
 #include "Camera/PlayerCamera.h"
+#include <Listener.h>
 
 #pragma region 前方宣言
 
@@ -77,7 +78,7 @@ enum PlayerMoveCondition {
 /// <summary>
 /// プレイヤー
 /// </summary>
-class Player {
+class Player : public Listener {
 public:
 	/// <summary>
 	/// コンストラクタ

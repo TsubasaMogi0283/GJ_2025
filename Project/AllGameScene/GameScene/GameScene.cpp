@@ -38,9 +38,8 @@ GameScene::GameScene() {
 
 void GameScene::Initialize() {
 
-	//ステージデータ
-	stageObjectData_ = std::make_unique<StageObjectData>();
-	stageObjectData_->Initialize();
+	//ハンドルの取得
+	levelHandle_ = levelDataManager_->Load("GameStage/GameStage.json");
 
 	//生成
 	player_ = std::make_unique<Player>();
@@ -50,6 +49,10 @@ void GameScene::Initialize() {
 	player_->SetLevelHandle(levelHandle_);
 	//最初はコントロールは出来ない用にする
 	player_->SetIsAbleToControll(false);
+	//向き
+	theta_ = -std::numbers::pi_v<float_t> / 2.0f;
+
+	levelDataManager_->SetListener(levelHandle_, player_.get());
 
 	//カメラの初期化
 	camera_.Initialize();
@@ -159,12 +162,8 @@ void GameScene::PlayerMove(){
 		isReleaseAttack_ = true;
 		//クールタイムにする
 		player_->GetFlashLight()->SetIsCoolTime(true);
-		//ライトのコライダーを登録
-		collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
-
-
 		//カメラの振動
-		//攻撃できる時だけにする。その方が迫力が出るよね。
+		//攻撃できる時だけにする。
 		if (player_->GetFlashLight()->GetChargeCondition() >= ChargeCondition::NormalChargeAttack) {
 			player_->GetEyeCamera()->SetIsShake(true);
 		}
@@ -172,6 +171,13 @@ void GameScene::PlayerMove(){
 	else {
 		isReleaseAttack_ = false;
 	}
+
+
+	//ライトのコライダーを登録
+	collisionManager_->RegisterList(player_->GetFlashLight()->GetFanCollision());
+
+	//リリース状態を取得
+	player_->SetIsReleaseKey(isReleaseAttack_);
 }
 
 void GameScene::PlayerRotate() {
@@ -213,11 +219,7 @@ void GameScene::PlayerRotate() {
 		theta_ = 0.0f;
 	}
 
-
 #pragma region コントローラーの回転
-
-
-
 
 	//キーボード入力していない時
 	if (isRotateYKey == false && isRotateXKey == false) {
@@ -254,16 +256,13 @@ void GameScene::PlayerRotate() {
 void GameScene::DisplayImGui() {
 
 	ImGui::Begin("ゲームシーン");
-
 	if (ImGui::TreeNode("カメラ") == true) {
 		ImGui::SliderFloat3("座標", &camera_.translate.x, -10.0f, 10.0f);
 		ImGui::SliderFloat3("回転", &camera_.rotate.x, -3.0f, 3.0f);
 		ImGui::TreePop();
-
 	}
 	
 	ImGui::End();
-
 }
 
 void GameScene::Update(Elysia::GameManager* gameManager) {
@@ -271,18 +270,18 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	collisionManager_->ClearList();
 	
 	gameManager;
-	//ステージデータの更新
-	stageObjectData_->Update();
 
-	const auto& i = levelDataManager_->GetColliderToLight(stageObjectData_->GetLevelDataHandle(), "Stage");
+	//レベルエディタの更新
+	levelDataManager_->Update(levelHandle_);
+	//レベルエディタのオブジェクトのコライダーを取得し登録
+	const auto& i = levelDataManager_->GetColliderToLight(levelHandle_, "Stage");
 	for (const auto& lightCollider : i) {
-
 		if (lightCollider != nullptr) {
 			collisionManager_->RegisterList(lightCollider);
 		}
-
 	}
 	
+	//プレイヤーの移動と回転
 	PlayerMove();
 	PlayerRotate();
 	//プレイヤーにそれぞれの角度を設定する
@@ -299,10 +298,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	// 地形
 	terrainManager_->Update();
 
-	spotLight_=player_->GetFlashLight()->GetSpotLight();
 
-	levelDataManager_->Update(levelHandle_);
-	
 
 
 #ifdef _DEBUG
@@ -317,15 +313,16 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
 	//転送
 	camera_.Transfer();
-	//ライトの更新
-	spotLight_=player_->GetFlashLight()->GetSpotLight();
 	
 	
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
 
 #ifdef _DEBUG 
-
+	//再読み込み
+	if (input_->IsTriggerKey(DIK_R) == true) {
+		levelDataManager_->Reload(levelHandle_);
+	}
 	
 	//ImGuiの表示
 	DisplayImGui();
@@ -339,16 +336,16 @@ void GameScene::PreDrawPostEffect() {
 }
 
 void GameScene::DrawObject3D() {
-	//ステージデータの描画
-	stageObjectData_->Draw(camera_,spotLight_);
 
-	player_->DrawObject3D(camera_,spotLight_);
+	//ライトの更新
+	SpotLight spotLight = player_->GetFlashLight()->GetSpotLight();
+
 	//レベルエディタのオブジェクトを描画
-	levelDataManager_->Draw(levelHandle_, camera_, spotLight_);
-
-
+	levelDataManager_->Draw(levelHandle_, camera_, spotLight);
+	//プレイヤーの描画
+	player_->DrawObject3D(camera_,spotLight);
 	// 地形
-	terrainManager_->Draw(camera_, spotLight_);
+	terrainManager_->Draw(camera_, spotLight);
 }
 
 void GameScene::DrawPostEffect() {
@@ -357,4 +354,5 @@ void GameScene::DrawPostEffect() {
 }
 
 void GameScene::DrawSprite() {
+
 }

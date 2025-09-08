@@ -67,15 +67,19 @@ void Player::Update(){
 	worldTransform_.translate=VectorCalculation::Add(worldTransform_.translate,VectorCalculation::Multiply(moveDirection_, speed));
 	worldTransform_.Update();
 
+	//ワールド座標の取得
+	Vector3 worldPosition = worldTransform_.GetWorldPosition();
+	position_ = worldPosition;
+	move_ = moveDirection_;
 
 	//AABBの計算
-	aabb_.min = VectorCalculation::Subtract(worldTransform_.GetWorldPosition(), { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
-	aabb_.max = VectorCalculation::Add(worldTransform_.GetWorldPosition(), { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
+	aabb_.min = VectorCalculation::Subtract(worldPosition, { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
+	aabb_.max = VectorCalculation::Add(worldPosition, { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
 
 
 	//懐中電灯
 	//角度はゲームシーンで取得する
-	flashLight_->SetPlayerPosition(worldTransform_.GetWorldPosition());
+	flashLight_->SetPlayerPosition(worldPosition);
 	//目線の角度の設定
 	flashLight_->SetTheta(theta_);
 	flashLight_->SetPhi(-phi_);
@@ -85,7 +89,7 @@ void Player::Update(){
 
 	//カメラ(目)
 	//座標の設定
-	eyeCamera_->SetPlayerPosition(GetWorldPosition());
+	eyeCamera_->SetPlayerPosition(worldPosition);
 	//角度の設定
 	eyeCamera_->SetTheta(theta_);
 	eyeCamera_->SetPhi(phi_);
