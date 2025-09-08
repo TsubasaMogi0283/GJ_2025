@@ -24,7 +24,6 @@
 
 #include "Terrain/TerrainManager.h"
 
-
  /// <summary>
  /// ElysiaEngine(前方宣言)
  /// </summary>
@@ -152,6 +151,8 @@ private:
 private:
 	//カメラ
 	Camera camera_ = {};
+	//スポットライト
+	SpotLight spotLight_ = {};
 	//ポストエフェクト
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 	//プレイヤー
@@ -164,10 +165,9 @@ private:
 	//衝突判定管理クラス
 	std::unique_ptr<Elysia::CollisionManager> collisionManager_ = nullptr;
 
-	// 地形管理クラス
-	std::shared_ptr<TerrainManager> terrainManager_;
-
 	//離したかどうか
 	bool isReleaseAttack_ = false;
-	
+
+	// 地形管理クラス
+	std::shared_ptr<TerrainManager> terrainManager_;
 };

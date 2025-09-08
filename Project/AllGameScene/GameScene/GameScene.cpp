@@ -274,12 +274,25 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//レベルエディタの更新
 	levelDataManager_->Update(levelHandle_);
 	//レベルエディタのオブジェクトのコライダーを取得し登録
-	const auto& i = levelDataManager_->GetColliderToLight(levelHandle_, "Stage");
-	for (const auto& lightCollider : i) {
-		if (lightCollider != nullptr) {
-			collisionManager_->RegisterList(lightCollider);
+	//レベルエディタの更新
+	levelDataManager_->Update(levelHandle_);
+	//レベルエディタのオブジェクトのコライダーを取得し登録
+	const auto& lightColliders = levelDataManager_->GetColliderToLight(levelHandle_, "Stage");
+	const auto& playerColliders = levelDataManager_->GetColliderToPlayer(levelHandle_, "Stage");
+
+	for (const auto& collider : lightColliders) {
+		if (collider != nullptr) {
+			collisionManager_->RegisterList(collider);
 		}
 	}
+
+
+	for (const auto& collider : playerColliders) {
+		if (collider != nullptr) {
+			collisionManager_->RegisterList(collider);
+		}
+	}
+
 	
 	//プレイヤーの移動と回転
 	PlayerMove();
