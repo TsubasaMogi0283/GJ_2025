@@ -20,7 +20,7 @@ void PlayerCollisionToAudioObject::Update(){
 #ifdef _DEBUG
 	ImGui::Begin("当たり判定(オーディオオブジェクト用)");
 	ImGui::Checkbox("衝突",&isTouch_);
-	ImGui::InputFloat3("座標", &playerPosition_.x);
+	ImGui::InputFloat3("座標", &position_->x);
 	ImGui::End();
 #endif // _DEBUG
 }

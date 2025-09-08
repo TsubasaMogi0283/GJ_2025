@@ -53,7 +53,7 @@ void AudioTestPlayer::Update(){
 
 	//コリジョンの更新
 	//オーディオ
-	collosionToAudioObject_->SetPlayerPosition(worldTransform_.GetWorldPosition());
+	collosionToAudioObject_->ParentPosition(&worldTransform_.translate);
 	collosionToAudioObject_->Update();
 	//ステージ
 	//collosionToStageObject_->SetPlayerPosition(worldTransform_.GetWorldPosition());

@@ -16,6 +16,7 @@
 #include "PlayerCollisionToStrongEnemy.h"
 #include "PlayerCollisionToNormalEnemyAttack.h"
 #include "PlayerCollisionToAudioObject.h"
+#include "PlayerCollisionToStageObject.h"
 #include "Light/FlashLight/FlashLight.h"
 #include "Camera/PlayerCamera.h"
 #include <Listener.h>
@@ -62,8 +63,6 @@ namespace Elysia {
 	class LevelDataManager;
 };
 
-
-
 #pragma endregion
 
 /// <summary>
@@ -75,7 +74,6 @@ enum PlayerMoveCondition {
 	//動く
 	OnPlayerMove,
 };
-
 
 /// <summary>
 /// プレイヤー
@@ -246,6 +244,14 @@ public:
 		return flashLight_->GetFanCollision();
 	}
 
+	/// <summary>
+	/// プレイヤーのコライダーを取得
+	/// </summary>
+	/// <returns></returns>
+	inline PlayerCollisionToStageObject* GetPlayerCollision(){
+		return collider_.get();
+	}
+
 private:
 	//入力クラス
 	Elysia::Input* input_ = nullptr;
@@ -306,6 +312,9 @@ private:
 
 	//時間
 	float_t vibeTime_ = 0u;
+
+	//壁との衝突判定をとるため
+	std::unique_ptr<PlayerCollisionToStageObject> collider_;
 
 private:
 	//懐中電灯

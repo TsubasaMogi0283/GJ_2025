@@ -1,4 +1,7 @@
 #pragma once
+#include <cmath>
+#include <limits>
+#include <algorithm>
 #include "Collider.h"
 
 #pragma region 前方宣言
@@ -60,7 +63,7 @@ public:
 	/// <summary>
 	/// 接触
 	/// </summary>
-	void OnCollision()override;
+	void OnCollision([[maybe_unused]] const Collider& collider)override;
 
 	/// <summary>
 	/// 非接触
@@ -73,17 +76,10 @@ public:
 	/// </summary>
 	/// <returns>ワールド座標</returns>
 	inline Vector3 GetWorldPosition()override {
-		return playerPosition_;
+		return *position_;
 	};
 
 public:
-	/// <summary>
-	/// プレイヤーの座標の設定
-	/// </summary>
-	/// <param name="position">座標</param>
-	virtual inline void SetPlayerPosition(const Vector3& position) {
-		this->playerPosition_ = position;
-	}
 
 	/// <summary>
 	/// 衝突下かどうかのフラグ
@@ -94,8 +90,6 @@ public:
 	}
 
 protected:
-	//位置
-	Vector3 playerPosition_ = {};
 	//衝突
 	bool isTouch_ = false;
 

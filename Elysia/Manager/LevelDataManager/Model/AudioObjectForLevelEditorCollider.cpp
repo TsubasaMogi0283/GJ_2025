@@ -42,7 +42,7 @@ void AudioObjectForLevelEditorCollider::Update(){
 
 }
 
-void AudioObjectForLevelEditorCollider::OnCollision(){
+void AudioObjectForLevelEditorCollider::OnCollision([[maybe_unused]] const Collider& collider){
 	isTouch_ = true;
 }
 

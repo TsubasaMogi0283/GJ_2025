@@ -45,6 +45,10 @@ void Player::Initialize(){
 	material_.lightingKinds = LightingType::SpotLighting;
 	material_.color = { .x = 1.0f,.y = 1.0f,.z = 1.0f,.w = 1.0f };
 
+	collider_ = std::make_unique<PlayerCollisionToStageObject>();
+	collider_->Initialize();
+	collider_->ParentPosition(&worldTransform_.translate);
+
 }
 
 void Player::Update(){
@@ -81,6 +85,7 @@ void Player::Update(){
 	flashLight_->SetPhi(-phi_);
 	//更新
 	flashLight_->Update();
+	collider_->Update();
 
 	//カメラ(目)
 	//座標の設定
