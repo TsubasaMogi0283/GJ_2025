@@ -7,8 +7,9 @@
  * @author 茂木翼
  */
 
+#include <vector>
+#include <numbers>
 #include "Sprite.h"
-
 #include "TitleScene/BaseTitleScene/BaseTitleScene.h"
 
 /// <summary>
@@ -68,6 +69,7 @@ private:
 private:
 	//ウィンドウクラス
 	Elysia::WindowsSetup* windowsSetup_ = nullptr;
+
 private:
 	//サイズの減少値
 	const float_t SIZE_DOWN_VALUE_ = 0.05f;
@@ -77,7 +79,40 @@ private:
 	const float_t MAX_VOLUME_ = 0.6f;
 	//音量の増える値
 	const float_t VOLUME_INCREASE_VALUE_ = 0.0005f;
+
+	//テキストの数
+	static const uint8_t TEXT_QUANTITY_ = 4u;
+	//待ち回転
+	const float_t WAITING_ROTATE_ = std::numbers::pi_v<float_t>*10.0f;
+
+
+
+private:
+	/// <summary>
+	/// テキスト情報
+	/// </summary>
+	struct TextInformation {
+		//初期座標
+		Vector3 initialPosition = {};
+		//テキストが後ろから飛んでくるまでの座標
+		Vector3 waitingPosition_ = {};
+		
+		//線形補間用変数
+		//回転
+		float_t rotateT_=0.0f;
+		//座標
+		float_t positionT_ = 0.0f;
+	};
+
 private:
 
 	float_t radiusT_ = 0.0f;
+
+	//ライトアップ終わったかどうか
+	bool isEndLightUp_ = false;
+	std::array<TextInformation,TEXT_QUANTITY_>textInformations_ = {};
+
+	//移動開始タイマー
+	float_t moveStartTimer_ = 0.0f;
+
 };

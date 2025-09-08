@@ -30,14 +30,25 @@ void StartTitleScene::Initialize(){
 }
 
 void StartTitleScene::Update(TitleScene* titleScene){
-	//線形補間で増やす
-	radiusT_ += INCREASE_T_VALUE_;
-	radiusT_=std::clamp(radiusT_,0.0f, 1.0f);
-	pointLight_.radius = SingleCalculation::Lerp(MIN_, MAX_RADIUS_, radiusT_);
+	
+	//ライトアップ中
+	if (isEndLightUp_ == false) {
+		//線形補間で増やす
+		radiusT_ += INCREASE_T_VALUE_;
+		radiusT_ = std::clamp(radiusT_, 0.0f, 1.0f);
+		pointLight_.radius = SingleCalculation::Lerp(MIN_, MAX_RADIUS_, radiusT_);
 
-	if (pointLight_.radius >= MAX_RADIUS_) {
-		pointLight_.radius = MAX_RADIUS_;
+		//ライトアップ完了
+		if (radiusT_>=1.0f) {
+			isEndLightUp_=true;
+		}
 	}
+	//ライトアップ完了後
+	else {
+
+	}
+
+	
 
 	titleScene;
 
