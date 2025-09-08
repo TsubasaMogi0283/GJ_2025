@@ -35,7 +35,7 @@ void TerrainCollider::Update()
 	};
 }
 
-void TerrainCollider::OnCollision()
+void TerrainCollider::OnCollision([[maybe_unused]] const Collider& collider)
 {
 	// 出現処理
 	owner_->OnReveal();
