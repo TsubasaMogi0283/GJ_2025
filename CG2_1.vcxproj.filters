@@ -122,6 +122,9 @@
     <ClCompile Include="Project\Terrain\TerrainManager.cpp" />
     <ClCompile Include="Project\Terrain\Wall\Wall.cpp" />
     <ClCompile Include="Project\Terrain\ITerrain.cpp" />
+    <ClCompile Include="Project\AllGameScene\TitleScene\BaseTitleScene\Start\StartTitleScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\TitleScene\BaseTitleScene\Select\SelectTitleScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\TitleScene\BaseTitleScene\Finish\FinishTitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Elysia\Audio\Audio.h" />
@@ -247,6 +250,10 @@
     <ClInclude Include="Project\Terrain\ITerrain.h" />
     <ClInclude Include="Project\Terrain\TerrainManager.h" />
     <ClInclude Include="Project\Terrain\Wall\Wall.h" />
+    <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\BaseTitleScene.h" />
+    <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\Start\StartTitleScene.h" />
+    <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\Select\SelectTitleScene.h" />
+    <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\Finish\FinishTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
