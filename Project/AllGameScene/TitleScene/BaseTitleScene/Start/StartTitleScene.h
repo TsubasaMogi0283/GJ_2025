@@ -79,4 +79,5 @@ private:
 	const float_t VOLUME_INCREASE_VALUE_ = 0.0005f;
 private:
 
+	float_t radiusT_ = 0.0f;
 };

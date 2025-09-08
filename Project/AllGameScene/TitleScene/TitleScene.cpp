@@ -45,10 +45,10 @@ void TitleScene::Initialize() {
 	//ディゾルブ
 	dissolve_.Initialize();
 	dissolve_.maskTextureHandle = maskTexture;
-
+	dissolve_.threshold = 0.0f;
 	//ポストエフェクト
 	dissolvePostEffect_ = std::make_unique<Elysia::DissolvePostEffect>();
-	dissolvePostEffect_->Initialize({ .x = 1.0f,.y = 0.0f,.z = 0.0f,.w = 1.0f });
+	dissolvePostEffect_->Initialize({ .x = 0.0f,.y = 0.0f,.z = 0.0f,.w = 1.0f });
 
 	detailScene_ = std::make_unique<StartTitleScene>();
 	detailScene_->Initialize();
