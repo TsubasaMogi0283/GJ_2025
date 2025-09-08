@@ -7,7 +7,7 @@
  * @author 茂木翼
  */
 
-#include <vector>
+#include <array>
 #include <numbers>
 #include "Sprite.h"
 #include "TitleScene/BaseTitleScene/BaseTitleScene.h"
