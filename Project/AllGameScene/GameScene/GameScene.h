@@ -170,4 +170,6 @@ private:
 	//離したかどうか
 	bool isReleaseAttack_ = false;
 	
+	// 地形管理クラス
+	std::shared_ptr<TerrainManager> terrainManager_;
 };
