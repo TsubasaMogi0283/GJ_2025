@@ -26,13 +26,13 @@ void PlayerCollisionToStageObject::Update(){
 	//AABBに値を入れていく
 	aabb_.max = {
 		.x = position_->x + SIZE,
-		.y = position_->y + SIZE,
+		.y = position_->y + SIZE + 2,
 		.z = position_->z + SIZE,
 	};
 
 	aabb_.min = {
 		.x = position_->x - SIZE,
-		.y = position_->y - SIZE,
+		.y = position_->y - SIZE - 2,
 		.z = position_->z - SIZE,
 	};
 
