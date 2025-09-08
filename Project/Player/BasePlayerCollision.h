@@ -80,13 +80,6 @@ public:
 	};
 
 public:
-	/// <summary>
-	/// プレイヤーの座標を完全に同期させる
-	/// </summary>
-	/// <param name="position">座標</param>
-	virtual inline void SetPlayerPosition(Vector3* position) {
-		position_ = position;
-	}
 
 	/// <summary>
 	/// 衝突下かどうかのフラグ
@@ -97,8 +90,6 @@ public:
 	}
 
 protected:
-	//位置
-	Vector3 playerPosition_ = {};
 	//衝突
 	bool isTouch_ = false;
 

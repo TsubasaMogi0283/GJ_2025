@@ -6,6 +6,9 @@ void BasePlayerCollision::OnCollision([[maybe_unused]] const Collider& collider)
 	if (shouldPushBack_) {
 		Vector3 vec = CalculateAABBPushbackVector(collider.GetAABB());
 
+		position_->x += vec.x;
+		position_->y += vec.y;
+		position_->z += vec.z;
 	}
 }
 

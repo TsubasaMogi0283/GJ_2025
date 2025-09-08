@@ -133,6 +133,10 @@ public:
 		this->shouldPushBack_ = shouldPushBack;
 	}
 
+	inline void ParentPosition(Vector3* position) {
+		position_ = position;
+	}
+
 protected:
 
 	Vector3 CalculateAABBPushbackVector(const AABB& staticAABB);
@@ -150,7 +154,7 @@ protected:
 
 	Vector3 velocity_ = {};
 
-	std::optional<Vector3*> position_;
+	Vector3* position_;
 
 	//AABB
 	AABB aabb_ = {};
