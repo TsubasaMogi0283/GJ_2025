@@ -10,6 +10,9 @@
 #include "Material.h"
 #include "AABB.h"
 
+#include "Collider/TerrainCollider.h"
+
+
 #pragma region 前方宣言
 struct Camera; // カメラ
 struct Material; // マテリアル
@@ -59,9 +62,10 @@ public:
 	/// </summary>
 	virtual void DrawObject3D(const Camera& camera, const SpotLight& spotLight) = 0;
 
-	void On() {
-		OnReveal();
-	}
+	/// <summary>
+	/// 顕幽状態の切り替え : 現す処理
+	/// </summary>
+	void OnReveal();
 
 #pragma region accessor
 
@@ -78,9 +82,12 @@ public:
 	Vector3 GetTranslate() const { return transform_.translate; }
 	void SetTranslate(const Vector3& translate) { this->transform_.translate = translate; }
 
-	// AABBの取得
-	AABB GetAABB() const {
-		return aabb_;
+	// ワールド座標
+	Vector3 GetWorldPos() const { return transform_.GetWorldPosition(); }
+
+	// コライダーの取得
+	TerrainCollider* GetCollision() const {
+		return collider_.get();
 	}
 
 	// 顕幽state
@@ -91,11 +98,6 @@ public:
 
 
 protected:
-
-	/// <summary>
-	/// 顕幽状態の切り替え : 現す処理
-	/// </summary>
-	void OnReveal();
 
 	/// <summary>
 	/// 
@@ -123,7 +125,7 @@ protected:
 	WorldTransform transform_{};
 
 	// コライダー
-	AABB aabb_{};
+	std::unique_ptr<TerrainCollider> collider_;
 
 	// 顕幽状態
 	TerrainVisibilityState visibilityState_ = TerrainVisibilityState::Hidden;

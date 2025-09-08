@@ -1,7 +1,12 @@
 #include "Floor.h"
 #include <VectorCalculation.h>
 
-Floor::Floor() {}
+Floor::Floor() 
+{
+	// コライダー生成
+	collider_ = std::make_unique<TerrainCollider>(this);
+
+}
 
 void Floor::Init()
 {
@@ -19,6 +24,7 @@ void Floor::Init()
 	visibilityState_ = TerrainVisibilityState::Hidden;
 	// マテリアルはcolor.wを0.0fで透明に
 	material_.color.w = 0.0f;
+
 }
 
 void Floor::Update()

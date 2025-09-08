@@ -287,6 +287,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	}
 
 
+
 	for (const auto& collider : playerColliders) {
 		if (collider != nullptr) {
 			collisionManager_->RegisterList(collider);
