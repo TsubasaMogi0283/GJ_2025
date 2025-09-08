@@ -4,6 +4,7 @@
 
 #include "VectorCalculation.h"
 #include <CollisionConfig.h>
+#include <Listener.h>
 
 void StageObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Transform& transform, const bool& isHavingCollider, const bool& isGenerateColliderToLight, const Vector3& objectSize) {
 	
@@ -71,7 +72,7 @@ void StageObjectForLevelEditor::Update(){
 		colliderToLight_->SetCenterPosition(worldPosition);
 		colliderToLight_->Update();
 
-		if (colliderToLight_->GetIsTouch() == true&& isDisplay_==false) {
+		if (colliderToLight_->GetIsTouch() == true&& listener_->GetIsReleaseKey()==true) {
 			isDisplay_ = true;
 		}
 
@@ -92,7 +93,14 @@ void StageObjectForLevelEditor::Update(){
 			if (material_.color.w <= 0.0f) {
 				material_.color.w = 0.0f;
 				isDisplay_ = false;
+				displayTime_ = 0.0f;
 			}
+		}
+		else {
+#ifdef _DEBUG
+			material_.color.w = 0.1f;
+#endif // _DEBUG
+
 		}
 
 	}

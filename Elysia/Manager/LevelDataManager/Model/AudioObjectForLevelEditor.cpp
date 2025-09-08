@@ -1,7 +1,7 @@
 #include "AudioObjectForLevelEditor.h"
 
 #include <imgui.h>
-
+#include <Listener.h>
 
 AudioObjectForLevelEditor::AudioObjectForLevelEditor(){
 	//インスタンスの取得
@@ -45,7 +45,6 @@ void AudioObjectForLevelEditor::Initialize(const uint32_t& modelhandle, const Tr
 
 
 void AudioObjectForLevelEditor::Update(){
-
 	//ワールドトランスフォームの更新
 	worldTransform_.Update();
 	//マテリアルはDrawでやっているのでここには無いよ

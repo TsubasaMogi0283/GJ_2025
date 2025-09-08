@@ -25,6 +25,11 @@ enum LevelEditorObjectType {
 	AudioObject,
 };
 
+/// <summary>
+/// リスナー
+/// </summary>
+class Listener;
+
 
 /// <summary>
 /// レベルエディタ用のモデル(基底クラス)
@@ -134,6 +139,15 @@ public:
 		this->isTouch_ = isTouch;
 	}
 
+
+	/// <summary>
+	/// リスナーの設定
+	/// </summary>
+	/// <param name="listener"></param>
+	inline void SetListener(Listener* listener) {
+		this->listener_ = listener;
+	}
+
 	/// <summary>
 	/// リスナーが動いているかどうかの設定
 	/// </summary>
@@ -142,6 +156,7 @@ public:
 	inline void SetIsListenerMove(const bool& isMove) {
 		isListenerMove_ = isMove;
 	}
+
 
 	/// <summary>
 	/// 拡縮
@@ -203,6 +218,8 @@ protected:
 	//衝突
 	bool isTouch_ = false;
 
+	//リスナー
+	Listener* listener_ = nullptr;
 	//リスナーが動いているかどうか
 	bool isListenerMove_=false;
 

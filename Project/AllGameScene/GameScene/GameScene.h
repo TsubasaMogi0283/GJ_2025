@@ -21,7 +21,6 @@
 #include "VignettePostEffect.h"
 #include "Vignette.h"
 #include <BackTexture.h>
-#include <StageObjectData/StageObjectData.h>
 
 #include "Terrain/TerrainManager.h"
 
@@ -153,8 +152,6 @@ private:
 private:
 	//カメラ
 	Camera camera_ = {};
-	//スポットライト
-	SpotLight spotLight_ = {};
 	//ポストエフェクト
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 	//プレイヤー
@@ -173,6 +170,4 @@ private:
 	//離したかどうか
 	bool isReleaseAttack_ = false;
 	
-	std::unique_ptr<StageObjectData> stageObjectData_ = nullptr;
-
 };

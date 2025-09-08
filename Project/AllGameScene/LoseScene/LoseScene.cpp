@@ -51,7 +51,7 @@ void LoseScene::Update(Elysia::GameManager* gameManager){
 
 	gameManager;
 	//レベルデータの更新
-	levelDataManager_->Update(levelDataHandle_);
+	//levelDataManager_->Update(levelDataHandle_);
 
 	//カメラの更新
 	camera_.Update();
