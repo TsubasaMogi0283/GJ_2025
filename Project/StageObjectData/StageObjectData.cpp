@@ -25,9 +25,6 @@ void StageObjectData::Update() {
 	//レベルデータの更新
 	levelDataManager_->Update(levelHandle_);
 
-
-
-
 #ifdef _DEBUG
 	ImGui::Begin("ステージデータ");
 	

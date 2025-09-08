@@ -290,6 +290,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	player_->SetPhi(phi_);
 	//更新
 	player_->Update();
+	collisionManager_->RegisterList(player_->GetPlayerCollision());
 	//カメラの更新
 	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
 	//転送
@@ -297,9 +298,6 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 
 	// 地形
 	terrainManager_->Update();
-
-
-
 
 	spotLight_=player_->GetFlashLight()->GetSpotLight();
 

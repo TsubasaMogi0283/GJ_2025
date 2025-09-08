@@ -81,6 +81,7 @@ void Player::Update(){
 	flashLight_->SetPhi(-phi_);
 	//更新
 	flashLight_->Update();
+	collider_->Update();
 
 	//カメラ(目)
 	//座標の設定

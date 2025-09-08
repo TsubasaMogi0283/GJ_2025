@@ -243,6 +243,14 @@ public:
 		return flashLight_->GetFanCollision();
 	}
 
+	/// <summary>
+	/// プレイヤーのコライダーを取得
+	/// </summary>
+	/// <returns></returns>
+	inline PlayerCollisionToStageObject* GetPlayerCollision(){
+		return collider_.get();
+	}
+
 private:
 	//入力クラス
 	Elysia::Input* input_ = nullptr;

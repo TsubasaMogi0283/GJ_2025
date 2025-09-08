@@ -7,6 +7,8 @@ void PlayerCollisionToStageObject::Initialize(){
 	//名前の設定
 	name_ = "ToStageObject";
 
+	shouldPushBack_ = true;
+
 	//種類
 	collisionType_ = ColliderType::AABBType;
 
@@ -33,9 +35,6 @@ void PlayerCollisionToStageObject::Update(){
 		.y = position_->y - SIZE,
 		.z = position_->z - SIZE,
 	};
-
-	
-
 
 #ifdef _DEBUG
 	ImGui::Begin("プレイヤーのコリジョン(ステージオブジェクト用)");

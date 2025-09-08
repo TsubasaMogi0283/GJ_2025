@@ -461,7 +461,7 @@ void Elysia::LevelDataManager::Update(const uint32_t& levelDataHandle) {
 
 			for (const auto& object : levelData->objectDatas) {
 				//モデルを生成した時
-				if (object.isModelGenerate == true) {
+				if (object.isModelGenerate) {
 					//更新
 					object.objectForLeveEditor->SetIsListenerMove(isListenerMove);
 					object.objectForLeveEditor->Update();
