@@ -7,8 +7,9 @@
  * @author 茂木翼
  */
 
-#include <vector>
+#include <array>
 #include <numbers>
+#include <string>
 #include "Sprite.h"
 #include "TitleScene/BaseTitleScene/BaseTitleScene.h"
 
@@ -84,24 +85,44 @@ private:
 	static const uint8_t TEXT_QUANTITY_ = 4u;
 	//待ち回転
 	const float_t WAITING_ROTATE_ = std::numbers::pi_v<float_t>*10.0f;
+	//テキストが後ろから飛んでくるまでの座標
+	const float_t waitingPositionZ_ = -20.0f;
 
-
+	const std::string textSyo_ = "Syo";
+	const std::string textKai_ = "Kai";
+	const std::string textMei_ = "Mei";
+	const std::string textRo_ = "Ro";
 
 private:
+	enum TextCharacter {
+		Syo,
+		Kai,
+		Mei,
+		Ro
+	};
+
 	/// <summary>
 	/// テキスト情報
 	/// </summary>
 	struct TextInformation {
 		//初期座標
 		Vector3 initialPosition = {};
-		//テキストが後ろから飛んでくるまでの座標
-		Vector3 waitingPosition_ = {};
-		
+		//待機座標
+		Vector3 waitingPosition = {};
+		//移動開始
+		bool isStartMove_ = false;
+		//移動終了
+		bool isEndMove_ = false;
+
 		//線形補間用変数
 		//回転
 		float_t rotateT_=0.0f;
 		//座標
 		float_t positionT_ = 0.0f;
+		
+
+		//番号
+		std::string name_ = "";
 	};
 
 private:
@@ -111,8 +132,17 @@ private:
 	//ライトアップ終わったかどうか
 	bool isEndLightUp_ = false;
 	std::array<TextInformation,TEXT_QUANTITY_>textInformations_ = {};
-
+	uint8_t releaseTextNumber_ = 0u;
 	//移動開始タイマー
 	float_t moveStartTimer_ = 0.0f;
+
+	//テキストの移動が終わったかどうか
+	bool isEndTextMove_ = false;
+	//選択肢表示したか
+	bool isDisplaySelection_ = false;
+
+
+	Vector3 start = {};
+	Vector3 po = {};
 
 };
