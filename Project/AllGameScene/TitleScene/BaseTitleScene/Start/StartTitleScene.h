@@ -84,7 +84,10 @@ private:
 	//テキストの数
 	static const uint8_t TEXT_QUANTITY_ = 4u;
 	//待ち回転
-	const float_t WAITING_ROTATE_ = std::numbers::pi_v<float_t>*10.0f;
+	const Vector3 WAITING_ROTATE_ = {.x =0.0f,.y = std::numbers::pi_v<float_t>*10.0f,.z=0.0f };
+	//初期回転
+	const Vector3 INITIAL_ROTATE_ = {};
+
 	//テキストが後ろから飛んでくるまでの座標
 	const float_t waitingPositionZ_ = -20.0f;
 
@@ -139,10 +142,9 @@ private:
 	//テキストの移動が終わったかどうか
 	bool isEndTextMove_ = false;
 	//選択肢表示したか
+	float_t selectTransparency_ = 0.0f;
 	bool isDisplaySelection_ = false;
 
 
-	Vector3 start = {};
-	Vector3 po = {};
 
 };

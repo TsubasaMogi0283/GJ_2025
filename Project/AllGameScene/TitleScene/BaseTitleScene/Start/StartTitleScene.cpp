@@ -49,8 +49,6 @@ void StartTitleScene::Initialize(){
 	textInformations_[TextCharacter::Ro].waitingPosition = levelDataManager_->GetInitialTranslate(levelDataHandle_, textRo_);
 	textInformations_[TextCharacter::Ro].waitingPosition.z= waitingPositionZ_;
 
-	Vector3 e = textInformations_[TextCharacter::Syo].initialPosition;
-	start = textInformations_[TextCharacter::Syo].waitingPosition;
 
 	//新しく座標の設定
 	//待機の方を入れる
@@ -59,7 +57,11 @@ void StartTitleScene::Initialize(){
 	levelDataManager_->SetTranslate(levelDataHandle_, textInformations_[TextCharacter::Mei ].name_, textInformations_[TextCharacter::Mei].waitingPosition);
 	levelDataManager_->SetTranslate(levelDataHandle_, textInformations_[TextCharacter::Ro].name_, textInformations_[TextCharacter::Ro].waitingPosition);
 
-
+	//透明度の設定
+	selectTransparency_ = 0.0f;
+	levelDataManager_->SetTransparency(levelDataHandle_, "Start", selectTransparency_);
+	levelDataManager_->SetTransparency(levelDataHandle_, "End", selectTransparency_);
+	levelDataManager_->SetTransparency(levelDataHandle_, "Arrow", selectTransparency_);
 }
 
 void StartTitleScene::Update(TitleScene* titleScene){
@@ -98,10 +100,18 @@ void StartTitleScene::Update(TitleScene* titleScene){
 				textInformations_[i].positionT_ += 0.01f;
 				textInformations_[i].positionT_ = std::clamp(textInformations_[i].positionT_, 0.0f, 1.0f);
 
+				//座標の設定
 				//待機から初期へ進んで行く
 				Vector3 position = VectorCalculation::Lerp(textInformations_[i].waitingPosition, textInformations_[i].initialPosition, textInformations_[i].positionT_);
-				//座標の設定
 				levelDataManager_->SetTranslate(levelDataHandle_, textInformations_[i].name_, position);
+
+				//線形補間
+				textInformations_[i].rotateT_ += 0.01f;
+				textInformations_[i].rotateT_ = std::clamp(textInformations_[i].rotateT_, 0.0f, 1.0f);
+
+				//回転の設定
+				Vector3 rotate = VectorCalculation::Lerp(WAITING_ROTATE_, INITIAL_ROTATE_, textInformations_[i].rotateT_);
+				levelDataManager_->SetRotate(levelDataHandle_, textInformations_[i].name_, rotate);
 
 				//移動終了
 				if (textInformations_[i].positionT_ >= 1.0f) {
@@ -111,12 +121,26 @@ void StartTitleScene::Update(TitleScene* titleScene){
 				}
 			}
 		}
+		isEndTextMove_ = std::all_of(textInformations_.begin(), textInformations_.end(),
+			[](const auto& info) {
+				return info.isEndMove_;
+			});
 
 	}
+	if (isEndTextMove_ == true) {
 
+		selectTransparency_ += 0.01f;
+		levelDataManager_->SetTransparency(levelDataHandle_, "Start", selectTransparency_);
+		levelDataManager_->SetTransparency(levelDataHandle_, "End", selectTransparency_);
+		levelDataManager_->SetTransparency(levelDataHandle_, "Arrow", selectTransparency_);
+
+		//表示されたら次の選択シーンへ
+		if (selectTransparency_ >= 1.0f) {
+			titleScene->ChangeDetailScene(std::make_unique<SelectTitleScene>());
+			return;
+		}
+	}
 	
-
-	titleScene;
 
 #ifdef _DEBUG
 	//ImGui表示用
@@ -133,8 +157,14 @@ void StartTitleScene::DrawSprite(){
 
 void StartTitleScene::DisplayImGui(){
 	ImGui::Begin("開始(タイトル)");
-	ImGui::InputFloat("半径", &pointLight_.radius);
-	ImGui::Checkbox("ライトアップ", &isEndLightUp_);
+	if (ImGui::TreeNode("ライト") == true) {
+		ImGui::InputFloat("半径", &pointLight_.radius);
+		ImGui::Checkbox("ライトアップ", &isEndLightUp_);
+		ImGui::TreePop();
+	}
+
+	ImGui::Checkbox("移動終了", &isEndTextMove_);
+
 	ImGui::InputFloat("移動開始時間", &moveStartTimer_);
 	ImGui::InputFloat("TP", &textInformations_[0].positionT_);
 	int32_t num=static_cast<int32_t>(releaseTextNumber_);
