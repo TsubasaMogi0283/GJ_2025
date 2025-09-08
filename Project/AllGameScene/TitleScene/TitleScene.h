@@ -13,8 +13,7 @@
 #include "Model.h"
 #include "Camera.h"
 #include "BackTexture.h"
-#include "DirectionalLight.h"
-#include "SpotLight.h"
+#include <PointLight.h>
 #include "RandomNoise.h"
 #include "RandomNoisePostEffect.h"
 
@@ -127,7 +126,7 @@ private:
 	//カメラ
 	Camera camera_ = {};
 	//平行光源
-	DirectionalLight directionalLight_ = {};
+	PointLight pointLight_ = {};
 	//ポストエフェクト
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 

@@ -28,9 +28,9 @@ TitleScene::TitleScene() {
 void TitleScene::Initialize() {
 
 	//平行光源
-	directionalLight_.Initialize();
-	directionalLight_.color = { .x = 1.0f,.y = 0.22f,.z = 0.0f,.w = 1.0f };
-	directionalLight_.direction = { .x = 0.91f,.y = -1.0f,.z = 0.0f };
+	pointLight_.Initialize();
+	pointLight_.color = { .x = 1.0f,.y = 0.22f,.z = 0.0f,.w = 1.0f };
+	//pointLight_.direction = { .x = 0.91f,.y = -1.0f,.z = 0.0f };
 
 
 	//カメラの初期化
@@ -44,7 +44,7 @@ void TitleScene::Initialize() {
 
 void TitleScene::Update(Elysia::GameManager* gameManager) {
 	//平行光源の更新
-	directionalLight_.Update();
+	pointLight_.Update();
 
 	//カメラの更新
 	camera_.Update();
@@ -62,12 +62,11 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 
 void TitleScene::DrawObject3D() {
 	//ステージオブジェクト
-	levelDataManager_->Draw(levelHandle_, camera_, directionalLight_);
+	levelDataManager_->Draw(levelHandle_, camera_, pointLight_);
 
 }
 
 void TitleScene::PreDrawPostEffect() {
-
 	backTexture_->PreDraw();
 }
 
@@ -76,7 +75,6 @@ void TitleScene::DrawPostEffect() {
 }
 
 void TitleScene::DrawSprite() {
-
 
 }
 
