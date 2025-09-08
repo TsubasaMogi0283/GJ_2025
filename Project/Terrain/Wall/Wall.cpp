@@ -1,6 +1,10 @@
 #include "Wall.h"
 
-Wall::Wall() {}
+Wall::Wall() 
+{
+	// コライダー生成
+	collider_ = std::make_unique<TerrainCollider>(this);
+}
 
 void Wall::Init()
 {

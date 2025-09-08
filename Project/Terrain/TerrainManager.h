@@ -55,6 +55,11 @@ public:
 	void Create_NewFloor(const Vector3& pos);
 	void Create_NewWall(const Vector3& pos);
 
+	/// <summary>
+	/// 全てのTerrainのColliderを取得
+	/// </summary>
+	std::vector<TerrainCollider*> GetAllColliders() const;
+
 
 private:
 

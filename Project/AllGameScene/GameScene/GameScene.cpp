@@ -280,7 +280,14 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 		if (lightCollider != nullptr) {
 			collisionManager_->RegisterList(lightCollider);
 		}
+	}
 
+	// 地形のコライダーを登録
+	auto terrCol = terrainManager_->GetAllColliders();
+	for (auto* col : terrCol) {
+		if (col) {
+			 collisionManager_->RegisterList(col);
+		}
 	}
 	
 	PlayerMove();
