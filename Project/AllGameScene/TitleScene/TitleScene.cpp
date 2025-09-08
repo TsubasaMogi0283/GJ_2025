@@ -78,6 +78,11 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 	}
 	
 #ifdef _DEBUG
+	//再読み込み
+	if (input_->IsTriggerKey(DIK_R) == true) {
+		levelDataManager_->Reload(levelHandle_);
+	}
+
 	//ImGui用
 	DisplayImGui();
 #endif
