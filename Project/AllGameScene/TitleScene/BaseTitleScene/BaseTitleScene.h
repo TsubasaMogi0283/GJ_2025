@@ -135,8 +135,13 @@ protected:
 	//完全不透明値
 	const float_t PERFECT_NO_TRANSPARENT_ = 1.0f;
 
+	//線形他の増える値
+	const float_t INCREASE_T_VALUE_ = 0.01f;
+
 	//最大半径
-	const float_t MAX_RADIUS_ = 10.0f;
+	const float_t MAX_RADIUS_ = 4.0f;
+	//最小値
+	const float_t MIN_ = 0.0f;
 
 protected:
 	//平行光源

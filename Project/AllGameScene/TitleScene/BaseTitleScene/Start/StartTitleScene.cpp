@@ -8,6 +8,7 @@
 
 #include "TitleScene/TitleScene.h"
 #include <TitleScene/BaseTitleScene/Select/SelectTitleScene.h>
+#include <SingleCalculation.h>
 
 StartTitleScene::StartTitleScene(){
 	//インスタンスの取得
@@ -29,8 +30,10 @@ void StartTitleScene::Initialize(){
 }
 
 void StartTitleScene::Update(TitleScene* titleScene){
-
-	pointLight_.radius += 0.01f;
+	//線形補間で増やす
+	radiusT_ += INCREASE_T_VALUE_;
+	radiusT_=std::clamp(radiusT_,0.0f, 1.0f);
+	pointLight_.radius = SingleCalculation::Lerp(MIN_, MAX_RADIUS_, radiusT_);
 
 	if (pointLight_.radius >= MAX_RADIUS_) {
 		pointLight_.radius = MAX_RADIUS_;
@@ -53,7 +56,7 @@ void StartTitleScene::DrawSprite(){
 
 void StartTitleScene::DisplayImGui(){
 	ImGui::Begin("開始(タイトル)");
-
+	ImGui::InputFloat("半径", &pointLight_.radius);
 	ImGui::End();
 
 

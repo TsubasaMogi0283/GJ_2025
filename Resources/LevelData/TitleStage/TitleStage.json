@@ -45,30 +45,6 @@
         },
         {
             "type": "MESH",
-            "name": "ToGame",
-            "transform": {
-                "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    0.06768989562988281,
-                    -2.818809747695923,
-                    0.5107827186584473
-                ]
-            },
-            "file_name": "ToGame",
-            "object_type": "Stage",
-            "is_invisible": false
-        },
-        {
-            "type": "MESH",
             "name": "Ground",
             "transform": {
                 "scaling": [
@@ -88,6 +64,259 @@
                 ]
             },
             "file_name": "Grass",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Arrow",
+            "transform": {
+                "scaling": [
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    0.6000000238418579
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -1.4445511102676392,
+                    0.0,
+                    0.9280939698219299
+                ]
+            },
+            "file_name": "SelectArrow",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Start",
+            "transform": {
+                "scaling": [
+                    0.30000001192092896,
+                    0.30000001192092896,
+                    0.30000001192092896
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.8828943371772766
+                ]
+            },
+            "file_name": "Start",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "End",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.1212940514087677
+                ]
+            },
+            "file_name": "End",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Kai",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -0.699999988079071,
+                    0.0,
+                    1.98123037815094
+                ]
+            },
+            "file_name": "Kai",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Mei",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.699999988079071,
+                    0.0,
+                    1.98123037815094
+                ]
+            },
+            "file_name": "Mei",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Ro",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    2.0,
+                    0.0,
+                    1.98123037815094
+                ]
+            },
+            "file_name": "Ro",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Syo",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -2.0,
+                    0.0,
+                    1.98123037815094
+                ]
+            },
+            "file_name": "Syo",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    4.0,
+                    0.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.001",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    4.0,
+                    -2.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.002",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    4.0,
+                    2.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.004",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -4.0,
+                    2.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
             "object_type": "Stage"
         }
     ]
