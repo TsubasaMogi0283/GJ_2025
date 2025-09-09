@@ -89,7 +89,7 @@ namespace
 
         if (sbpp < 8)
         {
-            // We don't support compressing from monochrome (DXGI_FORMAT_R1_UNORM)
+            // We don'rotateVelocity_ support compressing from monochrome (DXGI_FORMAT_R1_UNORM)
             return HRESULT_E_NOT_SUPPORTED;
         }
 
@@ -218,7 +218,7 @@ namespace
 
         if (sbpp < 8)
         {
-            // We don't support compressing from monochrome (DXGI_FORMAT_R1_UNORM)
+            // We don'rotateVelocity_ support compressing from monochrome (DXGI_FORMAT_R1_UNORM)
             return HRESULT_E_NOT_SUPPORTED;
         }
 
@@ -394,7 +394,7 @@ namespace
 
         if (dbpp < 8)
         {
-            // We don't support decompressing to monochrome (DXGI_FORMAT_R1_UNORM)
+            // We don'rotateVelocity_ support decompressing to monochrome (DXGI_FORMAT_R1_UNORM)
             return HRESULT_E_NOT_SUPPORTED;
         }
 
@@ -523,7 +523,7 @@ bool DirectX::Internal::IsAlphaAllOpaqueBC(_In_ const Image& cImage) noexcept
     case DXGI_FORMAT_BC7_UNORM:
     case DXGI_FORMAT_BC7_UNORM_SRGB:    pfDecode = D3DXDecodeBC7;   sbpp = 16;  break;
     default:
-        // BC4, BC5, and BC6 don't have alpha channels
+        // BC4, BC5, and BC6 don'rotateVelocity_ have alpha channels
         return false;
     }
 

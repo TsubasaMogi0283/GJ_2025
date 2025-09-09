@@ -1,26 +1,43 @@
 #pragma once
 
+
 /**
- * @file FinishTitleScene.h
- * @brief 終わりのタイトルシーン
+ * @file ToGameTitleScene.h
+ * @brief ゲームを始めるクラス
  * @author 茂木翼
  */
 
+#include <array>
+#include <numbers>
+#include <string>
 #include "Sprite.h"
-
 #include "TitleScene/BaseTitleScene/BaseTitleScene.h"
 
+/// <summary>
+/// ElysiaEngine
+/// </summary>
+namespace Elysia {
+
+	/// <summary>
+	/// ウィンドウクラス
+	/// </summary>
+	class WindowsSetup;
+
+	/// <summary>
+	/// オーディオ
+	/// </summary>
+	class Audio;
+}
 
 /// <summary>
-/// 終わりのタイトルシーン
+/// ゲームを始める
 /// </summary>
-class FinishTitleScene : public BaseTitleScene {
+class ToGameTitleScene : public BaseTitleScene {
 public:
-
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	FinishTitleScene();
+	ToGameTitleScene();
 
 	/// <summary>
 	/// 初期化
@@ -33,7 +50,6 @@ public:
 	/// <param name="titleScene">タイトルシーン(メイン)</param>
 	void Update(TitleScene* titleScene)override;
 
-
 	/// <summary>
 	/// スプライト
 	/// </summary>
@@ -42,30 +58,17 @@ public:
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~FinishTitleScene()override=default;
+	~ToGameTitleScene()override=default;
 
 
 private:
 	/// <summary>
-	/// ImGui表示用
+	/// ImGUi表示用
 	/// </summary>
 	void DisplayImGui()override;
 
 private:
-	//点滅の制限
-	const uint32_t FLASH_TIME_LIMIT_ = 30u;
-	//高速点滅の制限
-	const uint32_t FAST_FLASH_TIME_LIMIT_ = 60u;
-	//高速点滅の間隔
-	const uint32_t FAST_FLASH_TIME_INTERVAL_ = 3u;
-	//カウントが増える時間
-	const uint32_t INCREASE_COUNT_TIME = 0u;
-	//表示
-	const uint32_t DISPLAY_TIME_ = 0u;
-	//点滅の間隔
-	const uint32_t FLASH_INTERVAL_ = 2u;
-private:
 
-	float_t threshold_ = 0.0f;
-
+	float_t velocity_ = {};
+	float_t accel_ = 0.005f;
 };

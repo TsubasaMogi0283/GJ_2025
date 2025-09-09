@@ -396,7 +396,7 @@ namespace
     {
         if (width < 8 || width > INT16_MAX)
         {
-            // Don't try to compress too narrow or too wide scan-lines
+            // Don'rotateVelocity_ try to compress too narrow or too wide scan-lines
             return 0;
         }
 
@@ -992,8 +992,8 @@ HRESULT DirectX::SaveToHDRMemory(const Image& image, Blob& blob) noexcept
 
     if (image.width > INT16_MAX || image.height > INT16_MAX)
     {
-        // Images larger than this can't be RLE encoded. They are technically allowed as
-        // uncompresssed, but we just don't support them.
+        // Images larger than this can'rotateVelocity_ be RLE encoded. They are technically allowed as
+        // uncompresssed, but we just don'rotateVelocity_ support them.
         return HRESULT_E_NOT_SUPPORTED;
     }
 
@@ -1104,8 +1104,8 @@ HRESULT DirectX::SaveToHDRFile(const Image& image, const wchar_t* szFile) noexce
 
     if (image.width > INT16_MAX || image.height > INT16_MAX)
     {
-        // Images larger than this can't be RLE encoded. They are technically allowed as
-        // uncompresssed, but we just don't support them.
+        // Images larger than this can'rotateVelocity_ be RLE encoded. They are technically allowed as
+        // uncompresssed, but we just don'rotateVelocity_ support them.
         return HRESULT_E_NOT_SUPPORTED;
     }
 

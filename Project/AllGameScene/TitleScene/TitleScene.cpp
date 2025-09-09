@@ -46,6 +46,7 @@ void TitleScene::Initialize() {
 	dissolve_.Initialize();
 	dissolve_.maskTextureHandle = maskTexture;
 	dissolve_.threshold = 0.0f;
+	dissolve_.edgeThinkness = 0.0f;
 	//ポストエフェクト
 	dissolvePostEffect_ = std::make_unique<Elysia::DissolvePostEffect>();
 	dissolvePostEffect_->Initialize({ .x = 0.0f,.y = 0.0f,.z = 0.0f,.w = 1.0f });
@@ -59,7 +60,9 @@ void TitleScene::Initialize() {
 void TitleScene::Update(Elysia::GameManager* gameManager) {
 	//詳細シーンの更新
 	detailScene_->Update(this);
-
+	
+	
+	
 	//レベルエディターの更新
 	levelDataManager_->Update(levelHandle_);
 
@@ -67,23 +70,30 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 	pointLight_.radius = detailScene_->GetPointLight().radius;
 	pointLight_.Update();
 	//ディゾルブの更新
+	dissolve_.threshold = detailScene_->GetDissolve().threshold;
 	dissolve_.Update();
 
 	//カメラの更新
+	camera_.translate = detailScene_->GetCamera().translate;
 	camera_.Update();
 	
-	//処理を終えたらゲームシーンへ
-	if(false) {
-		gameManager->ChangeScene("Select");
-		return;
+	//ゲーム終了
+	if (isEnd_ == true) {
+		if (isGameEnd_ == true) {
+			gameManager->SetIsGameEnd(true);
+			return;
+		}
+		else {
+			gameManager->ChangeScene("Select");
+			return;
+		}
 	}
-	
+
 #ifdef _DEBUG
 	//再読み込み
 	if (input_->IsTriggerKey(DIK_R) == true) {
 		levelDataManager_->Reload(levelHandle_);
 	}
-
 	//ImGui用
 	DisplayImGui();
 #endif
@@ -92,9 +102,6 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 void TitleScene::DrawObject3D() {
 	//ステージオブジェクト
 	levelDataManager_->Draw(levelHandle_, camera_, pointLight_);
-
-	
-
 }
 
 void TitleScene::PreDrawPostEffect() {

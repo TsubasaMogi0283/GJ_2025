@@ -29,9 +29,9 @@
 // PLEASE reach out at omar AT dearimgui DOT com. See https://github.com/ocornut/imgui/wiki/Sponsors
 // Businesses: you can also purchase licenses for the Dear ImGui Automation/Test Engine.
 
-// It is recommended that you don't modify imgui.cpp! It will become difficult for you to update the library.
+// It is recommended that you don'rotateVelocity_ modify imgui.cpp! It will become difficult for you to update the library.
 // Note that 'ImGui::' being a namespace, you can add functions into the namespace from your own source files, without
-// modifying imgui.h or imgui.cpp. You may include imgui_internal.h to access internal data structures, but it doesn't
+// modifying imgui.h or imgui.cpp. You may include imgui_internal.h to access internal data structures, but it doesn'rotateVelocity_
 // come with any guarantee of forward compatibility. Discussing your changes on the GitHub Issue Tracker may lead you
 // to a better solution or official support for them.
 
@@ -113,7 +113,7 @@ CODE
  Designed primarily for developers and content-creators, not the typical end-user!
  Some of the current weaknesses (which we aim to address in the future) includes:
 
- - Doesn't look fancy.
+ - Doesn'rotateVelocity_ look fancy.
  - Limited layout features, intricate layouts are typically crafted in code.
 
 
@@ -157,7 +157,7 @@ CODE
      - CTRL+Tab then Ctrl+Arrows    Move window. Hold SHIFT to resize instead of moving.
    - Output when ImGuiConfigFlags_NavEnableKeyboard set,
      - io.WantCaptureKeyboard flag is set when keyboard is claimed.
-     - io.NavActive: true when a window is focused and it doesn't have the ImGuiWindowFlags_NoNavInputs flag set.
+     - io.NavActive: true when a window is focused and it doesn'rotateVelocity_ have the ImGuiWindowFlags_NoNavInputs flag set.
      - io.NavVisible: true when the navigation cursor is visible (usually goes to back false when mouse is used).
 
  - GAMEPAD CONTROLS
@@ -181,8 +181,8 @@ CODE
      Enabling ImGuiConfigFlags_NavEnableSetMousePos + ImGuiBackendFlags_HasSetMousePos instructs Dear ImGui to move your mouse cursor along with navigation movements.
      When enabled, the NewFrame() function may alter 'io.MousePos' and set 'io.WantSetMousePos' to notify you that it wants the mouse cursor to be moved.
      When that happens your backend NEEDS to move the OS or underlying mouse cursor on the next frame. Some of the backends in examples/ do that.
-     (If you set the NavEnableSetMousePos flag but don't honor 'io.WantSetMousePos' properly, Dear ImGui will misbehave as it will see your mouse moving back & forth!)
-     (In a setup when you may not have easy control over the mouse cursor, e.g. uSynergy.c doesn't expose moving remote mouse cursor, you may want
+     (If you set the NavEnableSetMousePos flag but don'rotateVelocity_ honor 'io.WantSetMousePos' properly, Dear ImGui will misbehave as it will see your mouse moving back & forth!)
+     (In a setup when you may not have easy control over the mouse cursor, e.g. uSynergy.c doesn'rotateVelocity_ expose moving remote mouse cursor, you may want
      to set a boolean to ignore your other external mouse positions until the external source is moved again.)
 
 
@@ -192,7 +192,7 @@ CODE
  READ FIRST
  ----------
  - Remember to check the wonderful Wiki (https://github.com/ocornut/imgui/wiki)
- - Your code creates the UI every frame of your application loop, if your code doesn't run the UI is gone!
+ - Your code creates the UI every frame of your application loop, if your code doesn'rotateVelocity_ run the UI is gone!
    The UI can be highly dynamic, there are no construction or destruction steps, less superfluous
    data retention on your side, less state duplication, less state synchronization, fewer bugs.
  - Call and read ImGui::ShowDemoWindow() for demo code demonstrating most features.
@@ -210,18 +210,18 @@ CODE
    - A typical idle frame should never call malloc/free.
    - We rely on a maximum of constant-time or O(N) algorithms. Limiting searches/scans as much as possible.
    - We put particular energy in making sure performances are decent with typical "Debug" build settings as well.
-     Which mean we tend to avoid over-relying on "zero-cost abstraction" as they aren't zero-cost at all.
+     Which mean we tend to avoid over-relying on "zero-cost abstraction" as they aren'rotateVelocity_ zero-cost at all.
  - This codebase aims to be both highly opinionated and highly flexible:
    - This code works because of the things it choose to solve or not solve.
-   - C++: this is a pragmatic C-ish codebase: we don't use fancy C++ features, we don't include C++ headers,
+   - C++: this is a pragmatic C-ish codebase: we don'rotateVelocity_ use fancy C++ features, we don'rotateVelocity_ include C++ headers,
      and ImGui:: is a namespace. We rarely use member functions (and when we did, I am mostly regretting it now).
      This is to increase compatibility, increase maintainability and facilitate use from other languages.
    - C++: ImVec2/ImVec4 do not expose math operators by default, because it is expected that you use your own math types.
      See FAQ "How can I use my own math types instead of ImVec2/ImVec4?" for details about setting up imconfig.h for that.
      We can can optionally export math operators for ImVec2/ImVec4 using IMGUI_DEFINE_MATH_OPERATORS, which we use internally.
    - C++: pay attention that ImVector<> manipulates plain-old-data and does not honor construction/destruction
-     (so don't use ImVector in your code or at our own risk!).
-   - Building: We don't use nor mandate a build system for the main library.
+     (so don'rotateVelocity_ use ImVector in your code or at our own risk!).
+   - Building: We don'rotateVelocity_ use nor mandate a build system for the main library.
      This is in an effort to ensure that it works in the real world aka with any esoteric build setup.
      This is also because providing a build system for the main library would be of little-value.
      The build problems are almost never coming from the main library but from specific backends.
@@ -231,7 +231,7 @@ CODE
  ----------------------------------------------
  - Update submodule or copy/overwrite every file.
  - About imconfig.h:
-   - You may modify your copy of imconfig.h, in this case don't overwrite it.
+   - You may modify your copy of imconfig.h, in this case don'rotateVelocity_ overwrite it.
    - or you may locally branch to modify imconfig.h and merge/rebase latest.
    - or you may '#define IMGUI_USER_CONFIG "my_config_file.h"' globally from your build system to
      specify a custom path for your imconfig.h file and instead not have to modify the default one.
@@ -273,7 +273,7 @@ CODE
      ImGuiIO& io = ImGui::GetIO();
      // TODO: Set optional io.ConfigFlags values, e.g. 'io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard' to enable keyboard controls.
      // TODO: Fill optional fields of the io structure later.
-     // TODO: Load TTF/OTF fonts if you don't want to use the default font.
+     // TODO: Load TTF/OTF fonts if you don'rotateVelocity_ want to use the default font.
 
      // Initialize helper Platform and Renderer backends (here we are using imgui_impl_win32.cpp and imgui_impl_dx11.cpp)
      ImGui_ImplWin32_Init(hwnd);
@@ -308,7 +308,7 @@ CODE
      ImGuiIO& io = ImGui::GetIO();
      // TODO: Set optional io.ConfigFlags values, e.g. 'io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard' to enable keyboard controls.
      // TODO: Fill optional fields of the io structure later.
-     // TODO: Load TTF/OTF fonts if you don't want to use the default font.
+     // TODO: Load TTF/OTF fonts if you don'rotateVelocity_ want to use the default font.
 
      // Build and load the texture atlas into a texture
      // (In the examples/ app this is usually done within the ImGui_ImplXXX_Init() function from one of the demo Renderer)
@@ -393,7 +393,7 @@ CODE
                      continue;
 
                  // We are using scissoring to clip some objects. All low-level graphics API should support it.
-                 // - If your engine doesn't support scissoring yet, you may ignore this at first. You will get some small glitches
+                 // - If your engine doesn'rotateVelocity_ support scissoring yet, you may ignore this at first. You will get some small glitches
                  //   (some elements visible outside their bounds) but you can fix that once everything else works!
                  // - Clipping coordinates are provided in imgui coordinates space:
                  //   - For a given viewport, draw_data->DisplayPos == viewport->Pos and draw_data->DisplaySize == viewport->Size
@@ -408,7 +408,7 @@ CODE
                  MyEngineBindTexture((MyTexture*)pcmd->GetTexID());
 
                  // Render 'pcmd->ElemCount/3' indexed triangles.
-                 // By default the indices ImDrawIdx are 16-bit, you can change them to 32-bit in imconfig.h if your engine doesn't support 16-bit indices.
+                 // By default the indices ImDrawIdx are 16-bit, you can change them to 32-bit in imconfig.h if your engine doesn'rotateVelocity_ support 16-bit indices.
                  MyEngineDrawIndexedTriangles(pcmd->ElemCount, sizeof(ImDrawIdx) == 2 ? GL_UNSIGNED_SHORT : GL_UNSIGNED_INT, idx_buffer + pcmd->IdxOffset, vtx_buffer, pcmd->VtxOffset);
              }
           }
@@ -426,7 +426,7 @@ CODE
 
  - 2023/11/09 (1.90.0) - removed IM_OFFSETOF() macro in favor of using offsetof() available in C++11. Kept redirection define (will obsolete).
  - 2023/11/07 (1.90.0) - removed BeginChildFrame()/EndChildFrame() in favor of using BeginChild() with the ImGuiChildFlags_FrameStyle flag. kept inline redirection function (will obsolete).
-                         those functions were merely PushStyle/PopStyle helpers, the removal isn't so much motivated by needing to add the feature in BeginChild(), but by the necessity to avoid BeginChildFrame() signature mismatching BeginChild() signature and features.
+                         those functions were merely PushStyle/PopStyle helpers, the removal isn'rotateVelocity_ so much motivated by needing to add the feature in BeginChild(), but by the necessity to avoid BeginChildFrame() signature mismatching BeginChild() signature and features.
  - 2023/11/02 (1.90.0) - BeginChild: upgraded 'bool border = true' parameter to 'ImGuiChildFlags flags' type, added ImGuiChildFlags_Border equivalent. As with our prior "bool-to-flags" API updates, the ImGuiChildFlags_Border value is guaranteed to be == true forever to ensure a smoother transition, meaning all existing calls will still work.
                            - old: BeginChild("Name", size, true)
                            - new: BeginChild("Name", size, ImGuiChildFlags_Border)
@@ -447,11 +447,11 @@ CODE
                            - ImDrawCornerFlags_XXX          -> use ImDrawFlags_RoundCornersXXX flags. Read 1.82 Changelog for details + grep commented names in sources.
                        - commented out runtime support for hardcoded ~0 or 0x01..0x0F rounding flags values for AddRect()/AddRectFilled()/PathRect()/AddImageRounded() -> use ImDrawFlags_RoundCornersXXX flags. Read 1.82 Changelog for details
  - 2023/08/25 (1.89.9) - clipper: Renamed IncludeRangeByIndices() (also called ForceDisplayRangeByIndices() before 1.89.6) to IncludeItemsByIndex(). Kept inline redirection function. Sorry!
- - 2023/07/12 (1.89.8) - ImDrawData: CmdLists now owned, changed from ImDrawList** to ImVector<ImDrawList*>. Majority of users shouldn't be affected, but you cannot compare to NULL nor reassign manually anymore. Instead use AddDrawList(). (#6406, #4879, #1878)
- - 2023/06/28 (1.89.7) - overlapping items: obsoleted 'SetItemAllowOverlap()' (called after item) in favor of calling 'SetNextItemAllowOverlap()' (called before item). 'SetItemAllowOverlap()' didn't and couldn't work reliably since 1.89 (2022-11-15).
+ - 2023/07/12 (1.89.8) - ImDrawData: CmdLists now owned, changed from ImDrawList** to ImVector<ImDrawList*>. Majority of users shouldn'rotateVelocity_ be affected, but you cannot compare to NULL nor reassign manually anymore. Instead use AddDrawList(). (#6406, #4879, #1878)
+ - 2023/06/28 (1.89.7) - overlapping items: obsoleted 'SetItemAllowOverlap()' (called after item) in favor of calling 'SetNextItemAllowOverlap()' (called before item). 'SetItemAllowOverlap()' didn'rotateVelocity_ and couldn'rotateVelocity_ work reliably since 1.89 (2022-11-15).
  - 2023/06/28 (1.89.7) - overlapping items: renamed 'ImGuiTreeNodeFlags_AllowItemOverlap' to 'ImGuiTreeNodeFlags_AllowOverlap', 'ImGuiSelectableFlags_AllowItemOverlap' to 'ImGuiSelectableFlags_AllowOverlap'. Kept redirecting enums (will obsolete).
  - 2023/06/28 (1.89.7) - overlapping items: IsItemHovered() now by default return false when querying an item using AllowOverlap mode which is being overlapped. Use ImGuiHoveredFlags_AllowWhenOverlappedByItem to revert to old behavior.
- - 2023/06/28 (1.89.7) - overlapping items: Selectable and TreeNode don't allow overlap when active so overlapping widgets won't appear as hovered. While this fixes a common small visual issue, it also means that calling IsItemHovered() after a non-reactive elements - e.g. Text() - overlapping an active one may fail if you don't use IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem). (#6610)
+ - 2023/06/28 (1.89.7) - overlapping items: Selectable and TreeNode don'rotateVelocity_ allow overlap when active so overlapping widgets won'rotateVelocity_ appear as hovered. While this fixes a common small visual issue, it also means that calling IsItemHovered() after a non-reactive elements - e.g. Text() - overlapping an active one may fail if you don'rotateVelocity_ use IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem). (#6610)
  - 2023/06/20 (1.89.7) - moved io.HoverDelayShort/io.HoverDelayNormal to style.HoverDelayShort/style.HoverDelayNormal. As the fields were added in 1.89 and expected to be left_ unchanged by most users, or only tweaked once during app initialization, we are exceptionally accepting the breakage.
  - 2023/05/30 (1.89.6) - backends: renamed "imgui_impl_sdlrenderer.cpp" to "imgui_impl_sdlrenderer2.cpp" and "imgui_impl_sdlrenderer.h" to "imgui_impl_sdlrenderer2.h". This is in prevision for the future release of SDL3.
  - 2023/05/22 (1.89.6) - listbox: commented out obsolete/redirecting functions that were marked obsolete more than two years ago:
@@ -523,7 +523,7 @@ CODE
  - 2022/04/05 (1.88) - inputs: renamed ImGuiKeyModFlags to ImGuiModFlags. Kept inline redirection enums (will obsolete). This was never used in public API functions but technically present in imgui.h and ImGuiIO.
  - 2022/01/20 (1.87) - inputs: reworded gamepad IO.
                         - Backend writing to io.NavInputs[]            -> backend should call io.AddKeyEvent()/io.AddKeyAnalogEvent() with ImGuiKey_GamepadXXX values.
- - 2022/01/19 (1.87) - sliders, drags: removed support for legacy arithmetic operators (+,+-,*,/) when inputing text. This doesn't break any api/code but a feature that used to be accessible by end-users (which seemingly no one used).
+ - 2022/01/19 (1.87) - sliders, drags: removed support for legacy arithmetic operators (+,+-,*,/) when inputing text. This doesn'rotateVelocity_ break any api/code but a feature that used to be accessible by end-users (which seemingly no one used).
  - 2022/01/17 (1.87) - inputs: reworked mouse IO.
                         - Backend writing to io.MousePos               -> backend should call io.AddMousePosEvent()
                         - Backend writing to io.MouseDown[]            -> backend should call io.AddMouseButtonEvent()
@@ -536,7 +536,7 @@ CODE
                         - IsKeyPressed(GetKeyIndex(ImGuiKey_XXX))      -> use IsKeyPressed(ImGuiKey_XXX)
                         - Backend writing to io.KeyMap[],io.KeysDown[] -> backend should call io.AddKeyEvent() (+ call io.SetKeyEventNativeData() if you want legacy user code to stil function with legacy key codes).
                         - Backend writing to io.KeyCtrl, io.KeyShift.. -> backend should call io.AddKeyEvent() with ImGuiMod_XXX values. *IF YOU PULLED CODE BETWEEN 2021/01/10 and 2021/01/27: We used to have a io.AddKeyModsEvent() function which was now replaced by io.AddKeyEvent() with ImGuiMod_XXX values.*
-                     - one case won't work with backward compatibility: if your custom backend used ImGuiKey as mock native indices (e.g. "io.KeyMap[ImGuiKey_A] = ImGuiKey_A") because those values are now larger than the legacy KeyDown[] array. Will assert.
+                     - one case won'rotateVelocity_ work with backward compatibility: if your custom backend used ImGuiKey as mock native indices (e.g. "io.KeyMap[ImGuiKey_A] = ImGuiKey_A") because those values are now larger than the legacy KeyDown[] array. Will assert.
                      - inputs: added ImGuiKey_ModCtrl/ImGuiKey_ModShift/ImGuiKey_ModAlt/ImGuiKey_ModSuper values to submit keyboard modifiers using io.AddKeyEvent(), instead of writing directly to io.KeyCtrl, io.KeyShift, io.KeyAlt, io.KeySuper.
  - 2022/01/05 (1.87) - inputs: renamed ImGuiKey_KeyPadEnter to ImGuiKey_KeypadEnter to align with new symbols. Kept redirection enum.
  - 2022/01/05 (1.87) - removed io.ImeSetInputScreenPosFn() in favor of more flexible io.SetPlatformImeDataFn(). Removed 'void* io.ImeWindowHandle' in favor of writing to 'void* ImGuiViewport::PlatformHandleRaw'.
@@ -570,7 +570,7 @@ CODE
                        legacy path still support use of hard coded ~0 or any value from 0x1 or 0xF. They will behave the same with legacy paths enabled (will assert otherwise).
  - 2021/03/11 (1.82) - removed redirecting functions/enums names that were marked obsolete in 1.66 (September 2018):
                         - ImGui::SetScrollHere()              -> use ImGui::SetScrollHereY()
- - 2021/03/11 (1.82) - clarified that ImDrawList::PathArcTo(), ImDrawList::PathArcToFast() won't render with radius < 0.0f. Previously it sorts of accidentally worked but would generally lead to counter-clockwise paths and have an effect on anti-aliasing.
+ - 2021/03/11 (1.82) - clarified that ImDrawList::PathArcTo(), ImDrawList::PathArcToFast() won'rotateVelocity_ render with radius < 0.0f. Previously it sorts of accidentally worked but would generally lead to counter-clockwise paths and have an effect on anti-aliasing.
  - 2021/03/10 (1.82) - upgraded ImDrawList::AddPolyline() and PathStroke() "bool closed" parameter to "ImDrawFlags flags". The matching ImDrawFlags_Closed value is guaranteed to always stay == 1 in the future.
  - 2021/02/22 (1.82) - (*undone in 1.84*) win32+mingw: Re-enabled IME functions by default even under MinGW. In July 2016, issue #738 had me incorrectly disable those default functions for MinGW. MinGW users should: either link with -limm32, either set their imconfig file  with '#define IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS'.
  - 2021/02/17 (1.82) - renamed rarely used style.CircleSegmentMaxError (old default = 1.60f) to style.CircleTessellationMaxError (new default = 0.30f) as the meaning of the value changed.
@@ -619,7 +619,7 @@ CODE
  - 2020/06/15 (1.77) - renamed OpenPopupOnItemClick() to OpenPopupContextItem(). Kept inline redirection function (will obsolete). [NOTE: THIS WAS REVERTED IN 1.79]
  - 2020/06/15 (1.77) - removed CalcItemRectClosestPoint() entry point which was made obsolete and asserting in December 2017.
  - 2020/04/23 (1.77) - removed unnecessary ID (first arg) of ImFontAtlas::AddCustomRectRegular().
- - 2020/01/22 (1.75) - ImDrawList::AddCircle()/AddCircleFilled() functions don't accept negative radius any more.
+ - 2020/01/22 (1.75) - ImDrawList::AddCircle()/AddCircleFilled() functions don'rotateVelocity_ accept negative radius any more.
  - 2019/12/17 (1.75) - [undid this change in 1.76] made Columns() limited to 64 columns by asserting above that limit. While the current code technically supports it, future code may not so we're putting the restriction ahead.
  - 2019/12/13 (1.75) - [imgui_internal.h] changed ImRect() default constructor initializes all fields to 0.0f instead of (FLT_MAX,FLT_MAX,-FLT_MAX,-FLT_MAX). If you used ImRect::Add() to create bounding boxes by adding multiple points into it, you may need to fix your initial value.
  - 2019/12/08 (1.75) - removed redirecting functions/enums that were marked obsolete in 1.53 (December 2017):
@@ -646,7 +646,7 @@ CODE
  - 2019/10/14 (1.74) - inputs: Fixed a miscalculation in the keyboard/mouse "typematic" repeat delay/rate calculation, used by keys and e.g. repeating mouse buttons as well as the GetKeyPressedAmount() function.
                        if you were using a non-default value for io.KeyRepeatRate (previous default was 0.250), you can add +io.KeyRepeatDelay to it to compensate for the fix.
                        The function was triggering on: 0.0 and (delay+rate*N) where (N>=1). Fixed formula responds to (N>=0). Effectively it made io.KeyRepeatRate behave like it was set to (io.KeyRepeatRate + io.KeyRepeatDelay).
-                       If you never altered io.KeyRepeatRate nor used GetKeyPressedAmount() this won't affect you.
+                       If you never altered io.KeyRepeatRate nor used GetKeyPressedAmount() this won'rotateVelocity_ affect you.
  - 2019/07/15 (1.72) - removed TreeAdvanceToLabelPos() which is rarely used and only does SetCursorPosX(GetCursorPosX() + GetTreeNodeToLabelSpacing()). Kept redirection function (will obsolete).
  - 2019/07/12 (1.72) - renamed ImFontAtlas::CustomRect to ImFontAtlasCustomRect. Kept redirection typedef (will obsolete).
  - 2019/06/14 (1.72) - removed redirecting functions/enums names that were marked obsolete in 1.51 (June 2017): ImGuiCol_Column*, ImGuiSetCond_*, IsItemHoveredRect(), IsPosHoveringAnyWindow(), IsMouseHoveringAnyWindow(), IsMouseHoveringWindow(), IMGUI_ONCE_UPON_A_FRAME. Grep this log for details and new names, or see how they were implemented until 1.71.
@@ -662,7 +662,7 @@ CODE
  - 2019/02/26 (1.69) - renamed ImGuiColorEditFlags_RGB/ImGuiColorEditFlags_HSV/ImGuiColorEditFlags_HEX to ImGuiColorEditFlags_DisplayRGB/ImGuiColorEditFlags_DisplayHSV/ImGuiColorEditFlags_DisplayHex. Kept redirection enums (will obsolete).
  - 2019/02/14 (1.68) - made it illegal/assert when io.DisplayTime == 0.0f (with an exception for the first frame). If for some reason your time step calculation gives you a zero value, replace it with an arbitrarily small value!
  - 2019/02/01 (1.68) - removed io.DisplayVisibleMin/DisplayVisibleMax (which were marked obsolete and removed from viewport/docking branch already).
- - 2019/01/06 (1.67) - renamed io.InputCharacters[], marked internal as was always intended. Please don't access directly, and use AddInputCharacter() instead!
+ - 2019/01/06 (1.67) - renamed io.InputCharacters[], marked internal as was always intended. Please don'rotateVelocity_ access directly, and use AddInputCharacter() instead!
  - 2019/01/06 (1.67) - renamed ImFontAtlas::GlyphRangesBuilder to ImFontGlyphRangesBuilder. Kept redirection typedef (will obsolete).
  - 2018/12/20 (1.67) - made it illegal to call Begin("") with an empty string. This somehow half-worked before but had various undesirable side-effects.
  - 2018/12/10 (1.67) - renamed io.ConfigResizeWindowsFromEdges to io.ConfigWindowsResizeFromEdges as we are doing a large pass on configuration flags.
@@ -693,7 +693,7 @@ CODE
                        If you have IMGUI_DISABLE_OBSOLETE_FUNCTIONS enabled, the code will instead assert! You may run a reg-exp search on your codebase for e.g. "DragInt.*%f" to help you find them.
  - 2018/04/28 (1.61) - obsoleted InputFloat() functions taking an optional "int decimal_precision" in favor of an equivalent and more flexible "const char* format",
                        consistent with other functions. Kept redirection functions (will obsolete).
- - 2018/04/09 (1.61) - IM_DELETE() helper function added in 1.60 doesn't clear the input _pointer_ reference, more consistent with expectation and allows passing r-value.
+ - 2018/04/09 (1.61) - IM_DELETE() helper function added in 1.60 doesn'rotateVelocity_ clear the input _pointer_ reference, more consistent with expectation and allows passing r-value.
  - 2018/03/20 (1.60) - renamed io.WantMoveMouse to io.WantSetMousePos for consistency and ease of understanding (was added in 1.52, _not_ used by core and only honored by some backend ahead of merging the Nav branch).
  - 2018/03/12 (1.60) - removed ImGuiCol_CloseButton, ImGuiCol_CloseButtonActive, ImGuiCol_CloseButtonHovered as the closing cross uses regular button colors now.
  - 2018/03/08 (1.60) - changed ImFont::DisplayOffset.y to default to 0 instead of +1. Fixed rounding of Ascent/Descent to match TrueType renderer. If you were adding or subtracting to ImFont::DisplayOffset check if your fonts are correctly aligned vertically.
@@ -755,12 +755,12 @@ CODE
  - 2017/07/20 (1.51) - removed IsPosHoveringAnyWindow(ImVec2), which was partly broken and misleading. ASSERT + redirect user to io.WantCaptureMouse
  - 2017/05/26 (1.50) - removed ImFontConfig::MergeGlyphCenterV in favor of a more multipurpose ImFontConfig::GlyphOffset.
  - 2017/05/01 (1.50) - renamed ImDrawList::PathFill() (rarely used directly) to ImDrawList::PathFillConvex() for clarity.
- - 2016/11/06 (1.50) - BeginChild(const char*) now applies the stack id to the provided label, consistently with other functions as it should always have been. It shouldn't affect you unless (extremely unlikely) you were appending multiple times to a same child from different locations of the stack id. If that's the case, generate an id with GetID() and use it instead of passing string to BeginChild().
+ - 2016/11/06 (1.50) - BeginChild(const char*) now applies the stack id to the provided label, consistently with other functions as it should always have been. It shouldn'rotateVelocity_ affect you unless (extremely unlikely) you were appending multiple times to a same child from different locations of the stack id. If that's the case, generate an id with GetID() and use it instead of passing string to BeginChild().
  - 2016/10/15 (1.50) - avoid 'void* user_data' parameter to io.SetClipboardTextFn/io.GetClipboardTextFn pointers. We pass io.ClipboardUserData to it.
  - 2016/09/25 (1.50) - style.WindowTitleAlign is now a ImVec2 (ImGuiAlign enum was removed). set to (0.5f,0.5f) for horizontal+vertical centering, (0.0f,0.0f) for upper-left_, etc.
  - 2016/07/30 (1.50) - SameLine(x) with x>0.0f is now relative to left_ of column/group if any, and not always to left_ of window. This was sort of always the intent and hopefully, breakage should be minimal.
- - 2016/05/12 (1.49) - title bar (using ImGuiCol_TitleBg/ImGuiCol_TitleBgActive colors) isn't rendered over a window background (ImGuiCol_WindowBg color) anymore.
-                       If your TitleBg/TitleBgActive alpha was 1.0f or you are using the default theme it will not affect you, otherwise if <1.0f you need to tweak your custom theme to readjust for the fact that we don't draw a WindowBg background behind the title bar.
+ - 2016/05/12 (1.49) - title bar (using ImGuiCol_TitleBg/ImGuiCol_TitleBgActive colors) isn'rotateVelocity_ rendered over a window background (ImGuiCol_WindowBg color) anymore.
+                       If your TitleBg/TitleBgActive alpha was 1.0f or you are using the default theme it will not affect you, otherwise if <1.0f you need to tweak your custom theme to readjust for the fact that we don'rotateVelocity_ draw a WindowBg background behind the title bar.
                        This helper function will convert an old TitleBg/TitleBgActive color into a new one with the same visual output, given the OLD color and the OLD WindowBg color:
                        ImVec4 ConvertTitleBgCol(const ImVec4& win_bg_col, const ImVec4& title_bg_col) { float new_a = 1.0f - ((1.0f - win_bg_col.w) * (1.0f - title_bg_col.w)), k = title_bg_col.w / new_a; return ImVec4((win_bg_col.x * win_bg_col.w + title_bg_col.x) * k, (win_bg_col.y * win_bg_col.w + title_bg_col.y) * k, (win_bg_col.z * win_bg_col.w + title_bg_col.z) * k, new_a); }
                        If this is confusing, pick the RGB value from title bar from an old screenshot and apply this as TitleBg/TitleBgActive. Or you may just create TitleBgActive from a tweaked TitleBg color.
@@ -776,7 +776,7 @@ CODE
  - 2015/12/27 (1.48) - fixed ImDrawList::AddRect() which used to render a rectangle 1 px too large on each axis.
  - 2015/12/04 (1.47) - renamed Color() helpers to ValueColor() - dangerously named, rarely used and probably to be made obsolete.
  - 2015/08/29 (1.45) - with the addition of horizontal scrollbar we made various fixes to inconsistencies with dealing with cursor position.
-                       GetCursorPos()/SetCursorPos() functions now include the scrolled amount. It shouldn't affect the majority of users, but take note that SetCursorPosX(100.0f) puts you at +100 from the starting x position which may include scrolling, not at +100 from the window left_ side.
+                       GetCursorPos()/SetCursorPos() functions now include the scrolled amount. It shouldn'rotateVelocity_ affect the majority of users, but take note that SetCursorPosX(100.0f) puts you at +100 from the starting x position which may include scrolling, not at +100 from the window left_ side.
                        GetContentRegionMax()/GetWindowContentRegionMin()/GetWindowContentRegionMax() functions allow include the scrolled amount. Typically those were used in cases where no scrolling would happen so it may not be a problem, but watch out!
  - 2015/08/29 (1.45) - renamed style.ScrollbarWidth to style.ScrollbarSize
  - 2015/08/05 (1.44) - split imgui.cpp into extra files: imgui_demo.cpp imgui_draw.cpp imgui_internal.h that you need to add to your project.
@@ -869,7 +869,7 @@ CODE
 
  Q: What is this library called?
  Q: Which version should I get?
- >> This library is called "Dear ImGui", please don't call it "ImGui" :)
+ >> This library is called "Dear ImGui", please don'rotateVelocity_ call it "ImGui" :)
  >> See https://www.dearimgui.com/faq for details.
 
  Q&A: Integration
@@ -935,7 +935,7 @@ CODE
     - Disclose your usage of Dear ImGui via a dev blog post, a tweet, a screenshot, a mention somewhere etc.
       You may post screenshot or links in the gallery threads. Visuals are ideal as they inspire other programmers.
       But even without visuals, disclosing your use of dear imgui helps the library grow credibility, and help other teams and programmers with taking decisions.
-    - If you have issues or if you need to hack into the library, even if you don't expect any support it is useful that you share your issues (on GitHub or privately).
+    - If you have issues or if you need to hack into the library, even if you don'rotateVelocity_ expect any support it is useful that you share your issues (on GitHub or privately).
 
 */
 
@@ -980,7 +980,7 @@ CODE
 #else
 #include <windows.h>
 #endif
-#if defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP) // UWP doesn't have all Win32 functions
+#if defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP) // UWP doesn'rotateVelocity_ have all Win32 functions
 #define IMGUI_DISABLE_WIN32_DEFAULT_CLIPBOARD_FUNCTIONS
 #define IMGUI_DISABLE_WIN32_DEFAULT_IME_FUNCTIONS
 #endif
@@ -1021,7 +1021,7 @@ CODE
 #pragma clang diagnostic ignored "-Wdouble-promotion"               // warning: implicit conversion from 'float' to 'double' when passing argument to function  // using printf() is a misery with this as C++ va_arg ellipsis changes float to double.
 #pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"  // warning: implicit conversion from 'xxx' to 'float' may lose precision
 #elif defined(__GNUC__)
-// We disable -Wpragmas because GCC doesn't provide a has_warning equivalent and some forks/patches may not follow the warning/version association.
+// We disable -Wpragmas because GCC doesn'rotateVelocity_ provide a has_warning equivalent and some forks/patches may not follow the warning/version association.
 #pragma GCC diagnostic ignored "-Wpragmas"                  // warning: unknown option after '#pragma GCC diagnostic' kind
 #pragma GCC diagnostic ignored "-Wunused-function"          // warning: 'xxxx' defined but not used
 #pragma GCC diagnostic ignored "-Wint-to-pointer-cast"      // warning: cast to pointer from integer of different size
@@ -1044,7 +1044,7 @@ static const float NAV_WINDOWING_LIST_APPEAR_DELAY          = 0.15f;    // Time 
 // Window resizing from edges (when io.ConfigWindowsResizeFromEdges = true and ImGuiBackendFlags_HasMouseCursors is set in io.BackendFlags by backend)
 static const float WINDOWS_HOVER_PADDING                    = 4.0f;     // Extend outside window for hovering/resizing (maxxed with TouchPadding) and inside windows for borders. Affect FindHoveredWindow().
 static const float WINDOWS_RESIZE_FROM_EDGES_FEEDBACK_TIMER = 0.04f;    // Reduce visual noise by only highlighting the border after a certain time.
-static const float WINDOWS_MOUSE_WHEEL_SCROLL_LOCK_TIMER    = 0.70f;    // Lock scrolled window (so it doesn't pick child windows that are scrolling through) for a certain time, unless mouse moved.
+static const float WINDOWS_MOUSE_WHEEL_SCROLL_LOCK_TIMER    = 0.70f;    // Lock scrolled window (so it doesn'rotateVelocity_ pick child windows that are scrolling through) for a certain time, unless mouse moved.
 
 // Tooltip offset
 static const ImVec2 TOOLTIP_DEFAULT_OFFSET = ImVec2(16, 10);            // Multiplied by g.Style.MouseCursorScale
@@ -1129,7 +1129,7 @@ static void             UpdateViewportsNewFrame();
 // - Heaps and globals are not shared across DLL boundaries!
 // - You will need to call SetCurrentContext() + SetAllocatorFunctions() for each static/DLL boundary you are calling from.
 // - Same applies for hot-reloading mechanisms that are reliant on reloading DLL (note that many hot-reloading mechanisms work without DLL).
-// - Using Dear ImGui via a shared library is not recommended, because of function call overhead and because we don't guarantee backward nor forward ABI compatibility.
+// - Using Dear ImGui via a shared library is not recommended, because of function call overhead and because we don'rotateVelocity_ guarantee backward nor forward ABI compatibility.
 // - Confused? In a debugger: add GImGui to your watch window and notice how its value changes depending on your current location (which DLL boundary you are in).
 
 // Current context pointer. Implicitly used by all Dear ImGui functions. Always assumed to be != NULL.
@@ -1150,7 +1150,7 @@ ImGuiContext*   GImGui = NULL;
 #endif
 
 // Memory Allocator functions. Use SetAllocatorFunctions() to change them.
-// - You probably don't want to modify that mid-program, and if you use global/static e.g. ImVector<> instances you may need to keep them accessible during program destruction.
+// - You probably don'rotateVelocity_ want to modify that mid-program, and if you use global/static e.g. ImVector<> instances you may need to keep them accessible during program destruction.
 // - DLL users: read comments above.
 #ifndef IMGUI_DISABLE_DEFAULT_ALLOCATORS
 static void*   MallocWrapper(size_t size, void* user_data)    { IM_UNUSED(user_data); return malloc(size); }
@@ -1187,7 +1187,7 @@ ImGuiStyle::ImGuiStyle()
     ItemSpacing             = ImVec2(8,4);      // Horizontal and vertical spacing between widgets/lines
     ItemInnerSpacing        = ImVec2(4,4);      // Horizontal and vertical spacing between within elements of a composed widget (e.g. a slider and its label)
     CellPadding             = ImVec2(4,2);      // Padding within a table cell. CellPadding.y may be altered between different rows.
-    TouchExtraPadding       = ImVec2(0,0);      // Expand reactive bounding box for touch-based system where touch position is not accurate enough. Unfortunately we don't sort widgets so priority on overlap will always be given to the first widget. So don't grow this too much!
+    TouchExtraPadding       = ImVec2(0,0);      // Expand reactive bounding box for touch-based system where touch position is not accurate enough. Unfortunately we don'rotateVelocity_ sort widgets so priority on overlap will always be given to the first widget. So don'rotateVelocity_ grow this too much!
     IndentSpacing           = 21.0f;            // Horizontal spacing when e.g. entering a tree node. Generally == (FontSize + FramePadding.x*2).
     ColumnsMinSpacing       = 6.0f;             // Minimum horizontal spacing between two columns. Preferably > (FramePadding.x + 1).
     ScrollbarSize           = 14.0f;            // Width of the vertical scrollbar, Height of the horizontal scrollbar
@@ -1464,7 +1464,7 @@ void ImGuiIO::AddKeyAnalogEvent(ImGuiKey key, bool down, float analog_value)
     IM_ASSERT(ImGui::IsAliasKey(key) == false); // Backend cannot submit ImGuiKey_MouseXXX values they are automatically inferred from AddMouseXXX() events.
     IM_ASSERT(key != ImGuiMod_Shortcut); // We could easily support the translation here but it seems saner to not accept it (TestEngine perform a translation itself)
 
-    // Verify that backend isn't mixing up using new io.AddKeyEvent() api and old io.KeysDown[] + io.KeyMap[] data.
+    // Verify that backend isn'rotateVelocity_ mixing up using new io.AddKeyEvent() api and old io.KeysDown[] + io.KeyMap[] data.
 #ifndef IMGUI_DISABLE_OBSOLETE_KEYIO
     IM_ASSERT((BackendUsingLegacyKeyArrays == -1 || BackendUsingLegacyKeyArrays == 0) && "Backend needs to either only use io.AddKeyEvent(), either only fill legacy io.KeysDown[] + io.KeyMap[]. Not both!");
     if (BackendUsingLegacyKeyArrays == -1)
@@ -1503,7 +1503,7 @@ void ImGuiIO::AddKeyEvent(ImGuiKey key, bool down)
 
 // [Optional] Call after AddKeyEvent().
 // Specify native keycode, scancode + Specify index for legacy <1.87 IsKeyXXX() functions with native indices.
-// If you are writing a backend in 2022 or don't use IsKeyXXX() with native values that are not ImGuiKey values, you can avoid calling this.
+// If you are writing a backend in 2022 or don'rotateVelocity_ use IsKeyXXX() with native values that are not ImGuiKey values, you can avoid calling this.
 void ImGuiIO::SetKeyEventNativeData(ImGuiKey key, int native_keycode, int native_scancode, int native_legacy_index)
 {
     if (key == ImGuiKey_None)
@@ -1754,7 +1754,7 @@ ImVec2 ImTriangleClosestPoint(const ImVec2& a, const ImVec2& b, const ImVec2& c,
 // [SECTION] MISC HELPERS/UTILITIES (String, Format, Hash functions)
 //-----------------------------------------------------------------------------
 
-// Consider using _stricmp/_strnicmp under Windows or strcasecmp/strncasecmp. We don't actually use either ImStricmp/ImStrnicmp in the codebase any more.
+// Consider using _stricmp/_strnicmp under Windows or strcasecmp/strncasecmp. We don'rotateVelocity_ actually use either ImStricmp/ImStrnicmp in the codebase any more.
 int ImStricmp(const char* str1, const char* str2)
 {
     int d;
@@ -1986,7 +1986,7 @@ static const ImU32 GCrc32LookupTable[256] =
 };
 
 // Known size hash
-// It is ok to call ImHashData on a string with known length but the ### operator won't be supported.
+// It is ok to call ImHashData on a string with known length but the ### operator won'rotateVelocity_ be supported.
 // FIXME-OPT: Replace with e.g. FNV1a hash? CRC32 pretty much randomly access 1KB. Need to do proper measurements.
 ImGuiID ImHashData(const void* data_p, size_t data_size, ImGuiID seed)
 {
@@ -2002,7 +2002,7 @@ ImGuiID ImHashData(const void* data_p, size_t data_size, ImGuiID seed)
 // We support a syntax of "label###id" where only "###id" is included in the hash, and only "label" gets displayed.
 // Because this syntax is rarely used we are optimizing for the common case.
 // - If we reach ### in the string we discard the hash so far and reset to the seed.
-// - We don't do 'current += 2; continue;' after handling ### to keep the code smaller/faster (measured ~10% diff in Debug build)
+// - We don'rotateVelocity_ do 'current += 2; continue;' after handling ### to keep the code smaller/faster (measured ~10% diff in Debug build)
 // FIXME-OPT: Replace with e.g. FNV1a hash? CRC32 pretty much randomly access 1KB. Need to do proper measurements.
 ImGuiID ImHashStr(const char* data_p, size_t data_size, ImGuiID seed)
 {
@@ -2042,7 +2042,7 @@ ImGuiID ImHashStr(const char* data_p, size_t data_size, ImGuiID seed)
 ImFileHandle ImFileOpen(const char* filename, const char* mode)
 {
 #if defined(_WIN32) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS) && !defined(__CYGWIN__) && !defined(__GNUC__)
-    // We need a fopen() wrapper because MSVC/Windows fopen doesn't handle UTF-8 filenames.
+    // We need a fopen() wrapper because MSVC/Windows fopen doesn'rotateVelocity_ handle UTF-8 filenames.
     // Previously we used ImTextCountCharsFromUtf8/ImTextStrFromUtf8 here but we now need to support ImWchar16 and ImWchar32!
     const int filename_wsize = ::MultiByteToWideChar(CP_UTF8, 0, filename, -1, NULL, 0);
     const int mode_wsize = ::MultiByteToWideChar(CP_UTF8, 0, mode, -1, NULL, 0);
@@ -2066,7 +2066,7 @@ ImU64   ImFileWrite(const void* data, ImU64 sz, ImU64 count, ImFileHandle f)    
 
 // Helper: Load file content into memory
 // Memory allocated with IM_ALLOC(), must be freed by user using IM_FREE() == ImGui::MemFree()
-// This can't really be used with "rt" because fseek size won't match read size.
+// This can'rotateVelocity_ really be used with "rt" because fseek size won'rotateVelocity_ match read size.
 void*   ImFileLoadToMemory(const char* filename, const char* mode, size_t* out_file_size, int padding_bytes)
 {
     IM_ASSERT(filename && mode);
@@ -2417,7 +2417,7 @@ void ImGuiStorage::BuildSortByKey()
     {
         static int IMGUI_CDECL PairComparerByID(const void* lhs, const void* rhs)
         {
-            // We can't just do a subtraction because qsort uses signed integers and subtracting our ID doesn't play well with that.
+            // We can'rotateVelocity_ just do a subtraction because qsort uses signed integers and subtracting our ID doesn'rotateVelocity_ play well with that.
             if (((const ImGuiStoragePair*)lhs)->key > ((const ImGuiStoragePair*)rhs)->key) return +1;
             if (((const ImGuiStoragePair*)lhs)->key < ((const ImGuiStoragePair*)rhs)->key) return -1;
             return 0;
@@ -2626,7 +2626,7 @@ bool ImGuiTextFilter::PassFilter(const char* text, const char* text_end) const
 //-----------------------------------------------------------------------------
 
 // On some platform vsnprintf() takes va_list by reference and modifies it.
-// va_copy is the 'correct' way to copy a va_list but Visual Studio prior to 2013 doesn't have it.
+// va_copy is the 'correct' way to copy a va_list but Visual Studio prior to 2013 doesn'rotateVelocity_ have it.
 #ifndef va_copy
 #if defined(__GNUC__) || defined(__clang__)
 #define va_copy(dest, src) __builtin_va_copy(dest, src)
@@ -2699,7 +2699,7 @@ void ImGuiTextIndex::append(const char* base, int old_size, int new_size)
         LineOffsets.push_back(EndOffset);
     const char* base_end = base + new_size;
     for (const char* p = base + old_size; (p = (const char*)memchr(p, '\n', base_end - p)) != 0; )
-        if (++p < base_end) // Don't push a trailing offset on last \n
+        if (++p < base_end) // Don'rotateVelocity_ push a trailing offset on last \n
             LineOffsets.push_back((int)(intptr_t)(p - base));
     EndOffset = ImMax(EndOffset, new_size);
 }
@@ -2738,7 +2738,7 @@ void ImGui::CalcListClipping(int items_count, float items_height, int* out_items
     }
 
     // We create the union of the ClipRect and the scoring rect which at worst should be 1 page away from ClipRect
-    // We don't include g.NavId's rectangle in there (unless g.NavJustMovedToId is set) because the rectangle enlargement can get costly.
+    // We don'rotateVelocity_ include g.NavId's rectangle in there (unless g.NavJustMovedToId is set) because the rectangle enlargement can get costly.
     ImRect rect = window->ClipRect;
     if (g.NavMoveScoringItems)
         rect.Add(g.NavScoringNoClipRect);
@@ -2808,7 +2808,7 @@ static void ImGuiListClipper_SeekCursorAndSetupPrevLine(float pos_y, float line_
             ImGui::TableEndRow(table);
         table->RowPosY2 = window->DC.CursorPos.y;
         const int row_increase = (int)((off_y / line_height) + 0.5f);
-        //table->CurrentRow += row_increase; // Can't do without fixing TableEndRow()
+        //table->CurrentRow += row_increase; // Can'rotateVelocity_ do without fixing TableEndRow()
         table->RowBgColorCounter += row_increase;
     }
 }
@@ -2945,7 +2945,7 @@ static bool ImGuiListClipper_StepInternal(ImGuiListClipper* clipper)
         clipper->ItemsHeight = (window->DC.CursorPos.y - clipper->StartPosY) / (float)(clipper->DisplayEnd - clipper->DisplayStart);
         bool affected_by_floating_point_precision = ImIsFloatAboveGuaranteedIntegerPrecision(clipper->StartPosY) || ImIsFloatAboveGuaranteedIntegerPrecision(window->DC.CursorPos.y);
         if (affected_by_floating_point_precision)
-            clipper->ItemsHeight = window->DC.PrevLineSize.y + g.Style.ItemSpacing.y; // FIXME: Technically wouldn't allow multi-line entries.
+            clipper->ItemsHeight = window->DC.PrevLineSize.y + g.Style.ItemSpacing.y; // FIXME: Technically wouldn'rotateVelocity_ allow multi-line entries.
 
         IM_ASSERT(clipper->ItemsHeight > 0.0f && "Unable to calculate item height! First item hasn't moved the cursor vertically!");
         calc_clipping = true;   // If item height had to be calculated, calculate clipping afterwards.
@@ -3078,7 +3078,7 @@ ImU32 ImGui::GetColorU32(ImU32 col)
     if (style.Alpha >= 1.0f)
         return col;
     ImU32 a = (col & IM_COL32_A_MASK) >> IM_COL32_A_SHIFT;
-    a = (ImU32)(a * style.Alpha); // We don't need to clamp 0..255 because Style.Alpha is in 0..1 range.
+    a = (ImU32)(a * style.Alpha); // We don'rotateVelocity_ need to clamp 0..255 because Style.Alpha is in 0..1 range.
     return (col & ~IM_COL32_A_MASK) | (a << IM_COL32_A_SHIFT);
 }
 
@@ -3385,7 +3385,7 @@ void ImGui::RenderTextClipped(const ImVec2& pos_min, const ImVec2& pos_max, cons
 
 // Another overly complex function until we reorganize everything into a nice all-in-one helper.
 // This is made more complex because we have dissociated the layout rectangle (pos_min..pos_max) which define _where_ the ellipsis is, from actual clipping of text and limit of the ellipsis display.
-// This is because in the context of tabs we selectively hide part of the text when the Close Button appears, but we don't want the ellipsis to move.
+// This is because in the context of tabs we selectively hide part of the text when the Close Button appears, but we don'rotateVelocity_ want the ellipsis to move.
 void ImGui::RenderTextEllipsis(ImDrawList* draw_list, const ImVec2& pos_min, const ImVec2& pos_max, float clip_max_x, float ellipsis_max_x, const char* text, const char* text_end_full, const ImVec2* text_size_if_known)
 {
     ImGuiContext& g = *GImGui;
@@ -3652,7 +3652,7 @@ void ImGui::Shutdown()
     if (!g.Initialized)
         return;
 
-    // Save settings (unless we haven't attempted to load them: CreateContext/DestroyContext without a call to NewFrame shouldn't save an empty file)
+    // Save settings (unless we haven'rotateVelocity_ attempted to load them: CreateContext/DestroyContext without a call to NewFrame shouldn'rotateVelocity_ save an empty file)
     if (g.SettingsLoaded && g.IO.IniFilename != NULL)
         SaveIniSettingsToDisk(g.IO.IniFilename);
 
@@ -4143,7 +4143,7 @@ bool ImGui::ItemHoverable(const ImRect& bb, ImGuiID id, ImGuiItemFlags item_flag
     // hover test in widgets code. We could also decide to split this function is two.
     if (id != 0)
     {
-        // Drag source doesn't report as hovered
+        // Drag source doesn'rotateVelocity_ report as hovered
         if (g.DragDropActive && g.DragDropPayload.SourceId == id && !(g.DragDropSourceFlags & ImGuiDragDropFlags_SourceNoDisableHover))
             return false;
 
@@ -4397,7 +4397,7 @@ void ImGui::StartMouseMovingWindow(ImGuiWindow* window)
 
 // Handle mouse moving window
 // Note: moving window with the navigation keys (Square + d-pad / CTRL+TAB + Arrows) are processed in NavUpdateWindowing()
-// FIXME: We don't have strong guarantee that g.MovingWindow stay synched with g.ActiveId == g.MovingWindow->MoveId.
+// FIXME: We don'rotateVelocity_ have strong guarantee that g.MovingWindow stay synched with g.ActiveId == g.MovingWindow->MoveId.
 // This is currently enforced by the fact that BeginDragDropSource() is setting all g.ActiveIdUsingXXXX flags to inhibit navigation inputs,
 // but if we should more thoroughly test cases where g.ActiveId or g.MovingWindow gets changed and not the other.
 void ImGui::UpdateMouseMovingWindowNewFrame()
@@ -4493,7 +4493,7 @@ static bool IsWindowActiveAndVisible(ImGuiWindow* window)
     return (window->Active) && (!window->Hidden);
 }
 
-// The reason this is exposed in imgui_internal.h is: on touch-based system that don't have hovering, we want to dispatch inputs to the right_ target (imgui vs imgui+app)
+// The reason this is exposed in imgui_internal.h is: on touch-based system that don'rotateVelocity_ have hovering, we want to dispatch inputs to the right_ target (imgui vs imgui+app)
 void ImGui::UpdateHoveredWindowAndCaptureFlags()
 {
     ImGuiContext& g = *GImGui;
@@ -4517,7 +4517,7 @@ void ImGui::UpdateHoveredWindowAndCaptureFlags()
         clear_hovered_windows = true;
 
     // We track click ownership. When clicked outside of a window the click is owned by the application and
-    // won't report hovering nor request capture even while dragging over our windows afterward.
+    // won'rotateVelocity_ report hovering nor request capture even while dragging over our windows afterward.
     const bool has_open_popup = (g.OpenPopupStack.Size > 0);
     const bool has_open_modal = (modal_window != NULL);
     int mouse_earliest_down = -1;
@@ -4661,7 +4661,7 @@ void ImGui::NewFrame()
         ClearActiveID();
     }
 
-    // Update ActiveId data (clear reference to active widget if the widget isn't alive anymore)
+    // Update ActiveId data (clear reference to active widget if the widget isn'rotateVelocity_ alive anymore)
     if (g.ActiveId)
         g.ActiveIdTimer += g.IO.DeltaTime;
     g.LastActiveIdTimer += g.IO.DeltaTime;
@@ -4826,7 +4826,7 @@ void ImGui::NewFrame()
     }
 
     // Create implicit/fallback window - which we will only render it if the user has added something to it.
-    // We don't use "Debug" to avoid colliding with user trying to create a "Debug" window with custom flags.
+    // We don'rotateVelocity_ use "Debug" to avoid colliding with user trying to create a "Debug" window with custom flags.
     // This fallback is particularly important as it prevents ImGui:: calls from crashing.
     g.WithinFrameScopeWithImplicitWindow = true;
     SetNextWindowSize(ImVec2(400, 400), ImGuiCond_FirstUseEver);
@@ -4974,7 +4974,7 @@ static void ImGui::RenderDimmedBackgroundBehindWindow(ImGuiWindow* window, ImU32
         IM_ASSERT(cmd.ElemCount == 6);
         draw_list->CmdBuffer.pop_back();
         draw_list->CmdBuffer.push_front(cmd);
-        draw_list->AddDrawCmd(); // We need to create a command as CmdBuffer.back().IdxOffset won't be correct if we append to same command.
+        draw_list->AddDrawCmd(); // We need to create a command as CmdBuffer.back().IdxOffset won'rotateVelocity_ be correct if we append to same command.
         draw_list->PopClipRect();
     }
 }
@@ -5040,7 +5040,7 @@ void ImGui::EndFrame()
     ImGuiContext& g = *GImGui;
     IM_ASSERT(g.Initialized);
 
-    // Don't process EndFrame() multiple times.
+    // Don'rotateVelocity_ process EndFrame() multiple times.
     if (g.FrameCountEnded == g.FrameCount)
         return;
     IM_ASSERT(g.WithinFrameScope && "Forgot to call ImGui::NewFrame()?");
@@ -5069,7 +5069,7 @@ void ImGui::EndFrame()
         }
     }
 
-    // Hide implicit/fallback "Debug" window if it hasn't been used
+    // Hide implicit/fallback "Debug" window if it hasn'rotateVelocity_ been used
     g.WithinFrameScopeWithImplicitWindow = false;
     if (g.CurrentWindow && !g.CurrentWindow->WriteAccessed)
         g.CurrentWindow->Active = false;
@@ -5131,7 +5131,7 @@ void ImGui::EndFrame()
 }
 
 // Prepare the data for rendering so you can call GetDrawData()
-// (As with anything within the ImGui:: namspace this doesn't touch your GPU or graphics API at all:
+// (As with anything within the ImGui:: namspace this doesn'rotateVelocity_ touch your GPU or graphics API at all:
 // it is the role of the ImGui_ImplXXXX_RenderDrawData() function provided by the renderer backend)
 void ImGui::Render()
 {
@@ -5230,7 +5230,7 @@ ImVec2 ImGui::CalcTextSize(const char* text, const char* text_end, bool hide_tex
 // Find window given position, search front-to-back
 // FIXME: Note that we have an inconsequential lag here: OuterRectClipped is updated in Begin(), so windows moved programmatically
 // with SetWindowPos() and not SetNextWindowPos() will have that rectangle lagging by a frame at the time FindHoveredWindow() is
-// called, aka before the next Begin(). Moving window isn't affected.
+// called, aka before the next Begin(). Moving window isn'rotateVelocity_ affected.
 static void FindHoveredWindow()
 {
     ImGuiContext& g = *GImGui;
@@ -5542,7 +5542,7 @@ bool ImGui::BeginChildEx(const char* name, ImGuiID id, const ImVec2& size_arg, I
     {
         FocusWindow(child_window);
         NavInitWindow(child_window, false);
-        SetActiveID(temp_id_for_activation, child_window); // Steal ActiveId with another arbitrary id so that key-press won't activate child item
+        SetActiveID(temp_id_for_activation, child_window); // Steal ActiveId with another arbitrary id so that key-press won'rotateVelocity_ activate child item
         g.ActiveIdSource = g.NavInputSource;
     }
     return ret;
@@ -5653,7 +5653,7 @@ static void InitOrLoadWindowSettings(ImGuiWindow* window, ImGuiWindowSettings* s
         SetWindowConditionAllowFlags(window, ImGuiCond_FirstUseEver, false);
         ApplyWindowSettings(window, settings);
     }
-    window->DC.CursorStartPos = window->DC.CursorMaxPos = window->DC.IdealMaxPos = window->Pos; // So first call to CalcWindowContentSizes() doesn't return crazy values
+    window->DC.CursorStartPos = window->DC.CursorMaxPos = window->DC.IdealMaxPos = window->Pos; // So first call to CalcWindowContentSizes() doesn'rotateVelocity_ return crazy values
 
     if ((window->Flags & ImGuiWindowFlags_AlwaysAutoResize) != 0)
     {
@@ -5951,7 +5951,7 @@ static int ImGui::UpdateWindowManualResize(ImGuiWindow* window, const ImVec2& si
         else if (held)
         {
             // Resize from any of the four corners
-            // We don't use an incremental MouseDelta but rather compute an absolute target size based on mouse position
+            // We don'rotateVelocity_ use an incremental MouseDelta but rather compute an absolute target size based on mouse position
             ImVec2 clamp_min = ImVec2(def.CornerPosN.x == 1.0f ? clamp_rect.Min.x : -FLT_MAX, (def.CornerPosN.y == 1.0f || (def.CornerPosN.y == 0.0f && window_move_from_title_bar)) ? clamp_rect.Min.y : -FLT_MAX);
             ImVec2 clamp_max = ImVec2(def.CornerPosN.x == 0.0f ? clamp_rect.Max.x : +FLT_MAX, def.CornerPosN.y == 0.0f ? clamp_rect.Max.y : +FLT_MAX);
             ImVec2 corner_target = g.IO.MousePos - g.ActiveIdClickOffset + ImLerp(def.InnerDir * grip_hover_outer_size, def.InnerDir * -grip_hover_inner_size, def.CornerPosN); // Corner of the window corresponding to our corner grip
@@ -5994,7 +5994,7 @@ static int ImGui::UpdateWindowManualResize(ImGuiWindow* window, const ImVec2& si
             {
                 size_target[axis] = CalcWindowSizeAfterConstraint(window, size_auto_fit)[axis];
                 ret_auto_fit_mask |= (1 << axis);
-                hovered = held = false; // So border doesn't show highlighted at new position
+                hovered = held = false; // So border doesn'rotateVelocity_ show highlighted at new position
             }
             ClearActiveID();
         }
@@ -6144,7 +6144,7 @@ void ImGui::RenderWindowDecorations(ImGuiWindow* window, const ImRect& title_bar
     ImGuiStyle& style = g.Style;
     ImGuiWindowFlags flags = window->Flags;
 
-    // Ensure that ScrollBar doesn't read last frame's SkipItems
+    // Ensure that ScrollBar doesn'rotateVelocity_ read last frame's SkipItems
     IM_ASSERT(window->BeginCount == 0);
     window->SkipItems = false;
 
@@ -6190,7 +6190,7 @@ void ImGui::RenderWindowDecorations(ImGuiWindow* window, const ImRect& title_bar
         if (flags & ImGuiWindowFlags_MenuBar)
         {
             ImRect menu_bar_rect = window->MenuBarRect();
-            menu_bar_rect.ClipWith(window->Rect());  // Soft clipping, in particular child window don't have minimum size covering the menu bar so this is useful for them.
+            menu_bar_rect.ClipWith(window->Rect());  // Soft clipping, in particular child window don'rotateVelocity_ have minimum size covering the menu bar so this is useful for them.
             window->DrawList->AddRectFilled(menu_bar_rect.Min + ImVec2(window_border_size, 0), menu_bar_rect.Max - ImVec2(window_border_size, 0), GetColorU32(ImGuiCol_MenuBarBg), (flags & ImGuiWindowFlags_NoTitleBar) ? window_rounding : 0.0f, ImDrawFlags_RoundCornersTop);
             if (style.FrameBorderSize > 0.0f && menu_bar_rect.Max.y < window->Pos.y + window->Size.y)
                 window->DrawList->AddLine(menu_bar_rect.GetBL(), menu_bar_rect.GetBR(), GetColorU32(ImGuiCol_Border), style.FrameBorderSize);
@@ -6202,7 +6202,7 @@ void ImGui::RenderWindowDecorations(ImGuiWindow* window, const ImRect& title_bar
         if (window->ScrollbarY)
             Scrollbar(ImGuiAxis_Y);
 
-        // Render resize grips (after their input handling so we don't have a frame of latency)
+        // Render resize grips (after their input handling so we don'rotateVelocity_ have a frame of latency)
         if (handle_borders_and_resize_grips && !(flags & ImGuiWindowFlags_NoResize))
         {
             for (int resize_grip_n = 0; resize_grip_n < resize_grip_count; resize_grip_n++)
@@ -6235,8 +6235,8 @@ void ImGui::RenderWindowTitleBarContents(ImGuiWindow* window, const ImRect& titl
     const bool has_close_button = (p_open != NULL);
     const bool has_collapse_button = !(flags & ImGuiWindowFlags_NoCollapse) && (style.WindowMenuButtonPosition != ImGuiDir_None);
 
-    // Close & Collapse button are on the Menu NavLayer and don't default focus (unless there's nothing else on that layer)
-    // FIXME-NAV: Might want (or not?) to set the equivalent of ImGuiButtonFlags_NoNavFocus so that mouse clicks on standard title bar items don't necessarily set nav/keyboard ref?
+    // Close & Collapse button are on the Menu NavLayer and don'rotateVelocity_ default focus (unless there's nothing else on that layer)
+    // FIXME-NAV: Might want (or not?) to set the equivalent of ImGuiButtonFlags_NoNavFocus so that mouse clicks on standard title bar items don'rotateVelocity_ necessarily set nav/keyboard ref?
     const ImGuiItemFlags item_flags_backup = g.CurrentItemFlags;
     g.CurrentItemFlags |= ImGuiItemFlags_NoNavDefaultFocus;
     window->DC.NavLayerCurrent = ImGuiNavLayer_Menu;
@@ -6282,7 +6282,7 @@ void ImGui::RenderWindowTitleBarContents(ImGuiWindow* window, const ImRect& titl
     const float marker_size_x = (flags & ImGuiWindowFlags_UnsavedDocument) ? button_sz * 0.80f : 0.0f;
     const ImVec2 text_size = CalcTextSize(name, NULL, true) + ImVec2(marker_size_x, 0.0f);
 
-    // As a nice touch we try to ensure that centered title text doesn't get affected by visibility of Close/Collapse button,
+    // As a nice touch we try to ensure that centered title text doesn'rotateVelocity_ get affected by visibility of Close/Collapse button,
     // while uncentered title text will still reach edges correctly.
     if (pad_l > style.FramePadding.x)
         pad_l += g.Style.ItemInnerSpacing.x;
@@ -6380,7 +6380,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
     const ImGuiStyle& style = g.Style;
     IM_ASSERT(name != NULL && name[0] != '\0');     // Window name required
     IM_ASSERT(g.WithinFrameScope);                  // Forgot to call ImGui::NewFrame()
-    IM_ASSERT(g.FrameCountEnded != g.FrameCount);   // Called ImGui::Render() or ImGui::EndFrame() and haven't called ImGui::NewFrame() again yet
+    IM_ASSERT(g.FrameCountEnded != g.FrameCount);   // Called ImGui::Render() or ImGui::EndFrame() and haven'rotateVelocity_ called ImGui::NewFrame() again yet
 
     // Find or create
     ImGuiWindow* window = FindWindowByName(name);
@@ -6523,7 +6523,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
     if (window->Appearing)
         SetWindowConditionAllowFlags(window, ImGuiCond_Appearing, false);
 
-    // When reusing window again multiple times a frame, just append content (don't need to setup again)
+    // When reusing window again multiple times a frame, just append content (don'rotateVelocity_ need to setup again)
     if (first_begin_of_the_frame)
     {
         // Initialize
@@ -6568,7 +6568,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
             window->HiddenFramesCannotSkipItems = 1;
 
         // Hide popup/tooltip window when re-opening while we measure size (because we recycle the windows)
-        // We reset Size/ContentSize for reappearing popups/tooltips early in this function, so further code won't be tempted to use the old size.
+        // We reset Size/ContentSize for reappearing popups/tooltips early in this function, so further code won'rotateVelocity_ be tempted to use the old size.
         if (window_just_activated_by_user && (flags & (ImGuiWindowFlags_Popup | ImGuiWindowFlags_Tooltip)) != 0)
         {
             window->HiddenFramesCannotSkipItems = 1;
@@ -6589,7 +6589,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         SetWindowViewport(window, viewport);
         SetCurrentWindow(window);
 
-        // LOCK BORDER SIZE AND PADDING FOR THE FRAME (so that altering them doesn't cause inconsistencies)
+        // LOCK BORDER SIZE AND PADDING FOR THE FRAME (so that altering them doesn'rotateVelocity_ cause inconsistencies)
 
         if (flags & ImGuiWindowFlags_ChildWindow)
             window->WindowBorderSize = style.ChildBorderSize;
@@ -6607,10 +6607,10 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         bool use_current_size_for_scrollbar_y = window_just_created;
 
         // Collapse window by double-clicking on title bar
-        // At this point we don't have a clipping rectangle setup yet, so we can use the title bar area for hit detection and drawing
+        // At this point we don'rotateVelocity_ have a clipping rectangle setup yet, so we can use the title bar area for hit detection and drawing
         if (!(flags & ImGuiWindowFlags_NoTitleBar) && !(flags & ImGuiWindowFlags_NoCollapse))
         {
-            // We don't use a regular button+id to test for double-click on title bar (mostly due to legacy reason, could be fixed), so verify that we don't have items over the title bar.
+            // We don'rotateVelocity_ use a regular button+id to test for double-click on title bar (mostly due to legacy reason, could be fixed), so verify that we don'rotateVelocity_ have items over the title bar.
             ImRect title_bar_rect = window->TitleBarRect();
             if (g.HoveredWindow == window && g.HoveredId == 0 && g.HoveredIdPreviousFrame == 0 && IsMouseHoveringRect(title_bar_rect.Min, title_bar_rect.Max) && g.IO.MouseClickedCount[0] == 2)
                 window->WantCollapseToggle = true;
@@ -6658,7 +6658,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         else if (window->AutoFitFramesX > 0 || window->AutoFitFramesY > 0)
         {
             // Auto-fit may only grow window during the first few frames
-            // We still process initial auto-fit on collapsed windows to get a window width, but otherwise don't honor ImGuiWindowFlags_AlwaysAutoResize when collapsed.
+            // We still process initial auto-fit on collapsed windows to get a window width, but otherwise don'rotateVelocity_ honor ImGuiWindowFlags_AlwaysAutoResize when collapsed.
             if (!window_size_x_set_by_api && window->AutoFitFramesX > 0)
             {
                 window->SizeFull.x = window->AutoFitOnlyGrows ? ImMax(window->SizeFull.x, size_auto_fit.x) : size_auto_fit.x;
@@ -6721,7 +6721,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
                 ClampWindowPos(window, visibility_rect);
         window->Pos = ImTrunc(window->Pos);
 
-        // Lock window rounding for the frame (so that altering them doesn't cause inconsistencies)
+        // Lock window rounding for the frame (so that altering them doesn'rotateVelocity_ cause inconsistencies)
         // Large values tend to lead to variety of artifacts and are not recommended.
         window->WindowRounding = (flags & ImGuiWindowFlags_ChildWindow) ? style.ChildRounding : ((flags & ImGuiWindowFlags_Popup) && !(flags & ImGuiWindowFlags_Modal)) ? style.PopupRounding : style.WindowRounding;
 
@@ -6744,7 +6744,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         if (g.TestEngineHookItems)
         {
             IM_ASSERT(window->IDStack.Size == 1);
-            window->IDStack.Size = 0; // As window->IDStack[0] == window->ID here, make sure TestEngine doesn't erroneously see window as parent of itself.
+            window->IDStack.Size = 0; // As window->IDStack[0] == window->ID here, make sure TestEngine doesn'rotateVelocity_ erroneously see window as parent of itself.
             IMGUI_TEST_ENGINE_ITEM_ADD(window->ID, window->Rect(), NULL);
             IMGUI_TEST_ENGINE_ITEM_INFO(window->ID, window->Name, (g.HoveredWindow == window) ? ImGuiItemStatusFlags_HoveredRect : 0);
             window->IDStack.Size = 1;
@@ -6774,7 +6774,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         {
             // When reading the current size we need to read it after size constraints have been applied.
             // Intentionally use previous frame values for InnerRect and ScrollbarSizes.
-            // And when we use window->DecorationUp here it doesn't have ScrollbarSizes.y applied yet.
+            // And when we use window->DecorationUp here it doesn'rotateVelocity_ have ScrollbarSizes.y applied yet.
             ImVec2 avail_size_from_current_frame = ImVec2(window->SizeFull.x, window->SizeFull.y - (window->DecoOuterSizeY1 + window->DecoOuterSizeY2));
             ImVec2 avail_size_from_last_frame = window->InnerRect.GetSize() + scrollbar_sizes_from_last_frame;
             ImVec2 needed_size_from_last_frame = window_just_created ? ImVec2(0, 0) : window->ContentSize + window->WindowPadding * 2.0f;
@@ -6794,7 +6794,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
 
         // UPDATE RECTANGLES (1- THOSE NOT AFFECTED BY SCROLLING)
         // Update various regions. Variables they depend on should be set above in this function.
-        // We set this up after processing the resize grip so that our rectangles doesn't lag by a frame.
+        // We set this up after processing the resize grip so that our rectangles doesn'rotateVelocity_ lag by a frame.
 
         // Outer rectangle
         // Not affected by window border size. Used by:
@@ -6977,7 +6977,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         window->HitTestHoleSize.x = window->HitTestHoleSize.y = 0;
 
         // Pressing CTRL+C while holding on a window copy its content to the clipboard
-        // This works but 1. doesn't handle multiple Begin/End pairs, 2. recursing into another Begin/End pair - so we need to work that out and add better logging scope.
+        // This works but 1. doesn'rotateVelocity_ handle multiple Begin/End pairs, 2. recursing into another Begin/End pair - so we need to work that out and add better logging scope.
         // Maybe we can support CTRL+C on every element?
         /*
         //if (g.NavWindow == window && g.ActiveId == 0)
@@ -7021,7 +7021,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         if ((flags & ImGuiWindowFlags_ChildWindow) && !(flags & ImGuiWindowFlags_ChildMenu))
         {
             // Child window can be out of sight and have "negative" clip windows.
-            // Mark them as collapsed so commands are skipped earlier (we can't manually collapse them because they have no title bar).
+            // Mark them as collapsed so commands are skipped earlier (we can'rotateVelocity_ manually collapse them because they have no title bar).
             IM_ASSERT((flags & ImGuiWindowFlags_NoTitleBar) != 0);
             const bool nav_request = (flags & ImGuiWindowFlags_NavFlattened) && (g.NavAnyRequest && g.NavWindow && g.NavWindow->RootWindowForNav == window->RootWindowForNav);
             if (!g.LogEnabled && !nav_request)
@@ -7040,7 +7040,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
                 window->HiddenFramesCannotSkipItems = 1;
         }
 
-        // Don't render if style alpha is 0.0 at the time of Begin(). This is arbitrary and inconsistent but has been there for a long while (may remove at some point)
+        // Don'rotateVelocity_ render if style alpha is 0.0 at the time of Begin(). This is arbitrary and inconsistent but has been there for a long while (may remove at some point)
         if (style.Alpha <= 0.0f)
             window->HiddenFramesCanSkipItems = 1;
 
@@ -7080,7 +7080,7 @@ void ImGui::End()
     ImGuiContext& g = *GImGui;
     ImGuiWindow* window = g.CurrentWindow;
 
-    // Error checking: verify that user hasn't called End() too many times!
+    // Error checking: verify that user hasn'rotateVelocity_ called End() too many times!
     if (g.CurrentWindowStack.Size <= 1 && g.WithinFrameScopeWithImplicitWindow)
     {
         IM_ASSERT_USER_ERROR(g.CurrentWindowStack.Size > 1, "Calling End() too many times!");
@@ -7088,7 +7088,7 @@ void ImGui::End()
     }
     IM_ASSERT(g.CurrentWindowStack.Size > 0);
 
-    // Error checking: verify that user doesn't directly call End() on a child window.
+    // Error checking: verify that user doesn'rotateVelocity_ directly call End() on a child window.
     if (window->Flags & ImGuiWindowFlags_ChildWindow)
         IM_ASSERT_USER_ERROR(g.WithinEndChild, "Must call EndChild() and not End()!");
 
@@ -7282,7 +7282,7 @@ void ImGui::FocusTopMostWindowUnderOne(ImGuiWindow* under_this_window, ImGuiWind
     FocusWindow(NULL, flags);
 }
 
-// Important: this alone doesn't alter current ImDrawList state. This is called by PushFont/PopFont only.
+// Important: this alone doesn'rotateVelocity_ alter current ImDrawList state. This is called by PushFont/PopFont only.
 void ImGui::SetCurrentFont(ImFont* font)
 {
     ImGuiContext& g = *GImGui;
@@ -7505,7 +7505,7 @@ bool ImGui::IsWindowHovered(ImGuiHoveredFlags flags)
             return false;
 
     // When changing hovered window we requires a bit of stationary delay before activating hover timer.
-    // FIXME: We don't support delay other than stationary one for now, other delay would need a way
+    // FIXME: We don'rotateVelocity_ support delay other than stationary one for now, other delay would need a way
     // to fullfill the possibility that multiple IsWindowHovered() with varying flag could return true
     // for different windows of the hierarchy. Possibly need a Hash(Current+Flags) ==> (Timer) cache.
     // We can implement this for _Stationary because the data is linked to HoveredWindow rather than CurrentWindow.
@@ -7572,7 +7572,7 @@ void ImGui::SetWindowPos(ImGuiWindow* window, const ImVec2& pos, ImGuiCond cond)
     if (cond && (window->SetWindowPosAllowFlags & cond) == 0)
         return;
 
-    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn't attempt to combine multiple condition flags.
+    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn'rotateVelocity_ attempt to combine multiple condition flags.
     window->SetWindowPosAllowFlags &= ~(ImGuiCond_Once | ImGuiCond_FirstUseEver | ImGuiCond_Appearing);
     window->SetWindowPosVal = ImVec2(FLT_MAX, FLT_MAX);
 
@@ -7584,7 +7584,7 @@ void ImGui::SetWindowPos(ImGuiWindow* window, const ImVec2& pos, ImGuiCond cond)
         return;
     MarkIniSettingsDirty(window);
     window->DC.CursorPos += offset;         // As we happen to move the window while it is being appended to (which is a bad idea - will smear) let's at least offset the cursor
-    window->DC.CursorMaxPos += offset;      // And more importantly we need to offset CursorMaxPos/CursorStartPos this so ContentSize calculation doesn't get affected.
+    window->DC.CursorMaxPos += offset;      // And more importantly we need to offset CursorMaxPos/CursorStartPos this so ContentSize calculation doesn'rotateVelocity_ get affected.
     window->DC.IdealMaxPos += offset;
     window->DC.CursorStartPos += offset;
 }
@@ -7613,7 +7613,7 @@ void ImGui::SetWindowSize(ImGuiWindow* window, const ImVec2& size, ImGuiCond con
     if (cond && (window->SetWindowSizeAllowFlags & cond) == 0)
         return;
 
-    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn't attempt to combine multiple condition flags.
+    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn'rotateVelocity_ attempt to combine multiple condition flags.
     window->SetWindowSizeAllowFlags &= ~(ImGuiCond_Once | ImGuiCond_FirstUseEver | ImGuiCond_Appearing);
 
     // Enable auto-fit (not done in BeginChild() path unless appearing or combined with ImGuiChildFlags_AlwaysAutoResize)
@@ -7660,7 +7660,7 @@ void ImGui::SetWindowCollapsed(ImGuiWindow* window, bool collapsed, ImGuiCond co
 
 void ImGui::SetWindowHitTestHole(ImGuiWindow* window, const ImVec2& pos, const ImVec2& size)
 {
-    IM_ASSERT(window->HitTestHoleSize.x == 0);     // We don't support multiple holes/hit test filters
+    IM_ASSERT(window->HitTestHoleSize.x == 0);     // We don'rotateVelocity_ support multiple holes/hit test filters
     window->HitTestHoleSize = ImVec2ih(size);
     window->HitTestHoleOffset = ImVec2ih(pos - window->Pos);
 }
@@ -7715,7 +7715,7 @@ void ImGui::SetWindowFocus(const char* name)
 void ImGui::SetNextWindowPos(const ImVec2& pos, ImGuiCond cond, const ImVec2& pivot)
 {
     ImGuiContext& g = *GImGui;
-    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn't attempt to combine multiple condition flags.
+    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn'rotateVelocity_ attempt to combine multiple condition flags.
     g.NextWindowData.Flags |= ImGuiNextWindowDataFlags_HasPos;
     g.NextWindowData.PosVal = pos;
     g.NextWindowData.PosPivotVal = pivot;
@@ -7725,14 +7725,14 @@ void ImGui::SetNextWindowPos(const ImVec2& pos, ImGuiCond cond, const ImVec2& pi
 void ImGui::SetNextWindowSize(const ImVec2& size, ImGuiCond cond)
 {
     ImGuiContext& g = *GImGui;
-    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn't attempt to combine multiple condition flags.
+    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn'rotateVelocity_ attempt to combine multiple condition flags.
     g.NextWindowData.Flags |= ImGuiNextWindowDataFlags_HasSize;
     g.NextWindowData.SizeVal = size;
     g.NextWindowData.SizeCond = cond ? cond : ImGuiCond_Always;
 }
 
 // For each axis:
-// - Use 0.0f as min or FLT_MAX as max if you don't want limits, e.g. size_min = (500.0f, 0.0f), size_max = (FLT_MAX, FLT_MAX) sets a minimum width.
+// - Use 0.0f as min or FLT_MAX as max if you don'rotateVelocity_ want limits, e.g. size_min = (500.0f, 0.0f), size_max = (FLT_MAX, FLT_MAX) sets a minimum width.
 // - Use -1 for both min and max of same axis to preserve current size which itself is a constraint.
 // - See "Demo->Examples->Constrained-resizing window" for examples.
 void ImGui::SetNextWindowSizeConstraints(const ImVec2& size_min, const ImVec2& size_max, ImGuiSizeCallback custom_callback, void* custom_callback_user_data)
@@ -7763,7 +7763,7 @@ void ImGui::SetNextWindowScroll(const ImVec2& scroll)
 void ImGui::SetNextWindowCollapsed(bool collapsed, ImGuiCond cond)
 {
     ImGuiContext& g = *GImGui;
-    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn't attempt to combine multiple condition flags.
+    IM_ASSERT(cond == 0 || ImIsPowerOfTwo(cond)); // Make sure the user doesn'rotateVelocity_ attempt to combine multiple condition flags.
     g.NextWindowData.Flags |= ImGuiNextWindowDataFlags_HasCollapsed;
     g.NextWindowData.CollapsedVal = collapsed;
     g.NextWindowData.CollapsedCond = cond ? cond : ImGuiCond_Always;
@@ -7901,7 +7901,7 @@ void ImGui::SetItemDefaultFocus()
     NavApplyItemToResult(&g.NavInitResult);
     NavUpdateAnyRequestFlag();
 
-    // Scroll could be done in NavInitRequestApplyResult() via an opt-in flag (we however don't want regular init requests to scroll)
+    // Scroll could be done in NavInitRequestApplyResult() via an opt-in flag (we however don'rotateVelocity_ want regular init requests to scroll)
     if (!window->ClipRect.Contains(g.LastItemData.Rect))
         ScrollToRectEx(window, g.LastItemData.Rect, ImGuiScrollFlags_None);
 }
@@ -8179,7 +8179,7 @@ void ImGui::GetKeyChordName(ImGuiKeyChord key_chord, char* out_buf, int out_buf_
 // t0 = previous time (e.g.: g.Time - g.IO.DeltaTime)
 // t1 = current time (e.g.: g.Time)
 // An event is triggered at:
-//  t = 0.0f     t = repeat_delay,    t = repeat_delay + repeat_rate*N
+//  rotateVelocity_ = 0.0f     rotateVelocity_ = repeat_delay,    rotateVelocity_ = repeat_delay + repeat_rate*N
 int ImGui::CalcTypematicRepeatAmount(float t0, float t1, float repeat_delay, float repeat_rate)
 {
     if (t1 == 0.0f)
@@ -8325,7 +8325,7 @@ static int CalcRoutingScore(ImGuiWindow* location, ImGuiID owner_id, ImGuiInputF
         ImGuiWindow* focused = g.NavWindow;
 
         // ActiveID gets top priority
-        // (we don't check g.ActiveIdUsingAllKeys here. Routing is applied but if input ownership is tested later it may discard it)
+        // (we don'rotateVelocity_ check g.ActiveIdUsingAllKeys here. Routing is applied but if input ownership is tested later it may discard it)
         if (owner_id != 0 && g.ActiveId == owner_id)
             return 1;
 
@@ -8334,7 +8334,7 @@ static int CalcRoutingScore(ImGuiWindow* location, ImGuiID owner_id, ImGuiInputF
         // - When Window....... is focused -> Window scores 3 (best), Window/ChildB scores 255 (no match)
         // - When Window/ChildB is focused -> Window scores 4,        Window/ChildB scores 3 (best)
         // Assuming only WindowA is submitting a routing request,
-        // - When Window/ChildB is focused -> Window scores 4 (best), Window/ChildB doesn't have a score.
+        // - When Window/ChildB is focused -> Window scores 4 (best), Window/ChildB doesn'rotateVelocity_ have a score.
         if (focused != NULL && focused->RootWindow == location->RootWindow)
             for (int next_score = 3; focused != NULL; next_score++)
             {
@@ -8405,7 +8405,7 @@ bool ImGui::TestShortcutRouting(ImGuiKeyChord key_chord, ImGuiID owner_id)
     return routing_data->RoutingCurr == routing_id;
 }
 
-// Note that Dear ImGui doesn't know the meaning/semantic of ImGuiKey from 0..511: they are legacy native keycodes.
+// Note that Dear ImGui doesn'rotateVelocity_ know the meaning/semantic of ImGuiKey from 0..511: they are legacy native keycodes.
 // Consider transitioning from 'IsKeyDown(MY_ENGINE_KEY_A)' (<1.87) to IsKeyDown(ImGuiKey_A) (>= 1.87)
 bool ImGui::IsKeyDown(ImGuiKey key)
 {
@@ -8562,7 +8562,7 @@ bool ImGui::IsMouseHoveringRect(const ImVec2& r_min, const ImVec2& r_max, bool c
 }
 
 // Return if a mouse click/drag went past the given threshold. Valid to call during the MouseReleased frame.
-// [Internal] This doesn't test if the button is pressed
+// [Internal] This doesn'rotateVelocity_ test if the button is pressed
 bool ImGui::IsMouseDragPastThreshold(ImGuiMouseButton button, float lock_threshold)
 {
     ImGuiContext& g = *GImGui;
@@ -8611,7 +8611,7 @@ ImVec2 ImGui::GetMousePosOnOpeningCurrentPopup()
 bool ImGui::IsMousePosValid(const ImVec2* mouse_pos)
 {
     // The assert is only to silence a false-positive in XCode Static Analysis.
-    // Because GImGui is not dereferenced in every code path, the static analyzer assume that it may be NULL (which it doesn't for other functions).
+    // Because GImGui is not dereferenced in every code path, the static analyzer assume that it may be NULL (which it doesn'rotateVelocity_ for other functions).
     IM_ASSERT(GImGui != NULL);
     const float MOUSE_INVALID = -256000.0f;
     ImVec2 p = mouse_pos ? *mouse_pos : GImGui->IO.MousePos;
@@ -8648,7 +8648,7 @@ void ImGui::ResetMouseDragDelta(ImGuiMouseButton button)
 {
     ImGuiContext& g = *GImGui;
     IM_ASSERT(button >= 0 && button < IM_ARRAYSIZE(g.IO.MouseDown));
-    // NB: We don't need to reset g.IO.MouseDragMaxDistanceSqr
+    // NB: We don'rotateVelocity_ need to reset g.IO.MouseDragMaxDistanceSqr
     g.IO.MouseClickedPos[button] = g.IO.MousePos;
 }
 
@@ -8797,7 +8797,7 @@ static void ImGui::UpdateKeyboardInputs()
         ImGuiKeyData* key_data = &io.KeysData[key - ImGuiKey_KeysData_OFFSET];
         ImGuiKeyOwnerData* owner_data = &g.KeysOwnerData[key - ImGuiKey_NamedKey_BEGIN];
         owner_data->OwnerCurr = owner_data->OwnerNext;
-        if (!key_data->Down) // Important: ownership is released on the frame after a release. Ensure a 'MouseDown -> CloseWindow -> MouseUp' chain doesn't lead to someone else seeing the MouseUp.
+        if (!key_data->Down) // Important: ownership is released on the frame after a release. Ensure a 'MouseDown -> CloseWindow -> MouseUp' chain doesn'rotateVelocity_ lead to someone else seeing the MouseUp.
             owner_data->OwnerNext = ImGuiKeyOwner_None;
         owner_data->LockThisFrame = owner_data->LockUntilRelease = owner_data->LockUntilRelease && key_data->Down;  // Clear LockUntilRelease when key is not Down anymore
     }
@@ -8817,7 +8817,7 @@ static void ImGui::UpdateMouseInputs()
     // - FIXME: When we can distinguish e.g. touchpad scroll events from mouse ones, we'll set this accordingly based on input source.
     io.MouseWheelRequestAxisSwap = io.KeyShift && !io.ConfigMacOSXBehaviors;
 
-    // Round mouse position to avoid spreading non-rounded position (e.g. UpdateManualResize doesn't support them well)
+    // Round mouse position to avoid spreading non-rounded position (e.g. UpdateManualResize doesn'rotateVelocity_ support them well)
     if (IsMousePosValid(&io.MousePos))
         io.MousePos = g.MouseLastValidPos = ImFloor(io.MousePos);
 
@@ -8908,9 +8908,9 @@ static ImGuiWindow* FindBestWheelingWindow(const ImVec2& wheel)
             for (ImGuiWindow* window = windows[axis] = g.HoveredWindow; window->Flags & ImGuiWindowFlags_ChildWindow; window = windows[axis] = window->ParentWindow)
             {
                 // Bubble up into parent window if:
-                // - a child window doesn't allow any scrolling.
+                // - a child window doesn'rotateVelocity_ allow any scrolling.
                 // - a child window has the ImGuiWindowFlags_NoScrollWithMouse flag.
-                //// - a child window doesn't need scrolling because it is already at the edge for the direction we are going in (FIXME-WIP)
+                //// - a child window doesn'rotateVelocity_ need scrolling because it is already at the edge for the direction we are going in (FIXME-WIP)
                 const bool has_scrolling = (window->ScrollMax[axis] != 0.0f);
                 const bool inputs_disabled = (window->Flags & ImGuiWindowFlags_NoScrollWithMouse) && !(window->Flags & ImGuiWindowFlags_NoMouseInputs);
                 //const bool scrolling_past_limits = (wheel_v < 0.0f) ? (window->Scroll[axis] <= 0.0f) : (window->Scroll[axis] >= window->ScrollMax[axis]);
@@ -8999,7 +8999,7 @@ void ImGui::UpdateMouseWheel()
         return;
 
     // Mouse wheel scrolling: find target and apply
-    // - don't renew lock if axis doesn't apply on the window.
+    // - don'rotateVelocity_ renew lock if axis doesn'rotateVelocity_ apply on the window.
     // - select a main axis when both axises are being moved.
     if (ImGuiWindow* window = (g.WheelingWindow ? g.WheelingWindow : FindBestWheelingWindow(wheel)))
         if (!(window->Flags & ImGuiWindowFlags_NoScrollWithMouse) && !(window->Flags & ImGuiWindowFlags_NoMouseInputs))
@@ -9183,7 +9183,7 @@ void ImGui::UpdateInputEvents(bool trickle_fast_inputs)
         g.InputEventsQueue.erase(g.InputEventsQueue.Data, g.InputEventsQueue.Data + event_n);
 
     // Clear buttons state when focus is lost
-    // - this is useful so e.g. releasing Alt after focus loss on Alt-Tab doesn't trigger the Alt menu toggle.
+    // - this is useful so e.g. releasing Alt after focus loss on Alt-Tab doesn'rotateVelocity_ trigger the Alt menu toggle.
     // - we clear in EndFrame() and not now in order allow application/user code polling this flag
     //   (e.g. custom backend may want to clear additional data, custom widgets may want to react with a "canceling" event).
     if (g.IO.AppFocusLost)
@@ -9274,7 +9274,7 @@ void ImGui::SetKeyOwnersForKeyChord(ImGuiKeyChord key_chord, ImGuiID owner_id, I
 //       SetKeyOwner(key, GetItemID());
 // Extensive uses of that (e.g. many calls for a single item) may want to manually perform the tests once and then call SetKeyOwner() multiple times.
 // More advanced usage scenarios may want to call SetKeyOwner() manually based on different condition.
-// Worth noting is that only one item can be hovered and only one item can be active, therefore this usage pattern doesn't need to bother with routing and priority.
+// Worth noting is that only one item can be hovered and only one item can be active, therefore this usage pattern doesn'rotateVelocity_ need to bother with routing and priority.
 void ImGui::SetItemKeyOwner(ImGuiKey key, ImGuiInputFlags flags)
 {
     ImGuiContext& g = *GImGui;
@@ -9437,7 +9437,7 @@ static void ImGui::ErrorCheckEndFrameSanityChecks()
 {
     ImGuiContext& g = *GImGui;
 
-    // Verify that io.KeyXXX fields haven't been tampered with. Key mods should not be modified between NewFrame() and EndFrame()
+    // Verify that io.KeyXXX fields haven'rotateVelocity_ been tampered with. Key mods should not be modified between NewFrame() and EndFrame()
     // One possible reason leading to this assert is that your backends update inputs _AFTER_ NewFrame().
     // It is known that when some modal native windows called mid-frame takes focus away, some backends such as GLFW will
     // send key release events mid-frame. This would normally trigger this assertion and lead to sheared inputs.
@@ -9474,8 +9474,8 @@ static void ImGui::ErrorCheckEndFrameSanityChecks()
 // Experimental recovery from incorrect usage of BeginXXX/EndXXX/PushXXX/PopXXX calls.
 // Must be called during or before EndFrame().
 // This is generally flawed as we are not necessarily End/Popping things in the right_ order.
-// FIXME: Can't recover from inside BeginTabItem/EndTabItem yet.
-// FIXME: Can't recover from interleaved BeginTabBar/Begin
+// FIXME: Can'rotateVelocity_ recover from inside BeginTabItem/EndTabItem yet.
+// FIXME: Can'rotateVelocity_ recover from interleaved BeginTabBar/Begin
 void    ImGui::ErrorCheckEndFrameRecover(ImGuiErrorLogCallback log_callback, void* user_data)
 {
     // PVS-Studio V1044 is "Loop break conditions do not depend on the colliderNumber_ of iterations"
@@ -9693,7 +9693,7 @@ bool ImGui::ItemAdd(const ImRect& bb, ImGuiID id, const ImRect* nav_bb_arg, ImGu
     g.LastItemData.NavRect = nav_bb_arg ? *nav_bb_arg : bb;
     g.LastItemData.InFlags = g.CurrentItemFlags | g.NextItemData.ItemFlags | extra_flags;
     g.LastItemData.StatusFlags = ImGuiItemStatusFlags_None;
-    // Note: we don't copy 'g.NextItemData.SelectionUserData' to an hypothetical g.LastItemData.SelectionUserData: since the former is not cleared.
+    // Note: we don'rotateVelocity_ copy 'g.NextItemData.SelectionUserData' to an hypothetical g.LastItemData.SelectionUserData: since the former is not cleared.
 
     // Directional navigation processing
     if (id != 0)
@@ -9705,9 +9705,9 @@ bool ImGui::ItemAdd(const ImRect& bb, ImGuiID id, const ImRect* nav_bb_arg, ImGu
         //  (b) So that we can scroll up/down past clipped items. This adds a small O(N) cost to regular navigation requests
         //      unfortunately, but it is still limited to one window. It may not scale very well for windows with ten of
         //      thousands of item, but at least NavMoveRequest is only set on user interaction, aka maximum once a frame.
-        //      We could early out with "if (is_clipped && !g.NavInitRequest) return false;" but when we wouldn't be able
+        //      We could early out with "if (is_clipped && !g.NavInitRequest) return false;" but when we wouldn'rotateVelocity_ be able
         //      to reach unclipped widgets. This would work if user had explicit scrolling control (e.g. mapped on a stick).
-        // We intentionally don't check if g.NavWindow != NULL because g.NavAnyRequest should only be set when it is non null.
+        // We intentionally don'rotateVelocity_ check if g.NavWindow != NULL because g.NavAnyRequest should only be set when it is non null.
         // If we crash on a NULL g.NavWindow we need to fix the bug elsewhere.
         if (!(g.LastItemData.InFlags & ImGuiItemFlags_NoNav))
         {
@@ -10125,7 +10125,7 @@ void ImGui::EndGroup()
 // Helper to snap on edges when aiming at an item very close to the edge,
 // So the difference_ between WindowPadding and ItemSpacing will be in the visible area after scrolling.
 // When we refactor the scrolling API this may be configurable with a flag?
-// Note that the effect for this won't be visible on X axis with default Style settings as WindowPadding.x == ItemSpacing.x by default.
+// Note that the effect for this won'rotateVelocity_ be visible on X axis with default Style settings as WindowPadding.x == ItemSpacing.x by default.
 static float CalcScrollEdgeSnap(float target, float snap_min, float snap_max, float snap_threshold, float center_ratio)
 {
     if (target <= snap_min + snap_threshold)
@@ -10400,7 +10400,7 @@ bool ImGui::BeginTooltipEx(ImGuiTooltipFlags tooltip_flags, ImGuiWindowFlags ext
         if (ImGuiWindow* window = FindWindowByName(window_name))
             if (window->Active)
             {
-                // Hide previous tooltip from being displayed. We can't easily "reset" the content of a window so we create a new one.
+                // Hide previous tooltip from being displayed. We can'rotateVelocity_ easily "reset" the content of a window so we create a new one.
                 SetWindowHiddendAndSkipItemsForCurrentFrame(window);
                 ImFormatString(window_name, IM_ARRAYSIZE(window_name), "##Tooltip_%02d", ++g.TooltipOverrideCount);
             }
@@ -10593,7 +10593,7 @@ void ImGui::ClosePopupsOverWindow(ImGuiWindow* ref_window, bool restore_focus_to
     if (g.OpenPopupStack.Size == 0)
         return;
 
-    // Don't close our own child popup windows.
+    // Don'rotateVelocity_ close our own child popup windows.
     int popup_count_to_keep = 0;
     if (ref_window)
     {
@@ -10753,7 +10753,7 @@ bool ImGui::BeginPopupModal(const char* name, bool* p_open, ImGuiWindowFlags fla
     }
 
     // Center modal windows by default for increased visibility
-    // (this won't really last as settings will kick in, and is mostly for backward compatibility. user may do the same themselves)
+    // (this won'rotateVelocity_ really last as settings will kick in, and is mostly for backward compatibility. user may do the same themselves)
     // FIXME: Should test for (PosCond & window->SetWindowPosAllowFlags) with the upcoming window.
     if ((g.NextWindowData.Flags & ImGuiNextWindowDataFlags_HasPos) == 0)
     {
@@ -10784,7 +10784,7 @@ void ImGui::EndPopup()
     if (g.NavWindow == window)
         NavMoveRequestTryWrapping(window, ImGuiNavMoveFlags_LoopY);
 
-    // Child-popups don't need to be laid out
+    // Child-popups don'rotateVelocity_ need to be laid out
     IM_ASSERT(g.WithinEndChild == false);
     if (window->Flags & ImGuiWindowFlags_ChildWindow)
         g.WithinEndChild = true;
@@ -10801,7 +10801,7 @@ void ImGui::OpenPopupOnItemClick(const char* str_id, ImGuiPopupFlags popup_flags
     int mouse_button = (popup_flags & ImGuiPopupFlags_MouseButtonMask_);
     if (IsMouseReleased(mouse_button) && IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup))
     {
-        ImGuiID id = str_id ? window->GetID(str_id) : g.LastItemData.ID;    // If user hasn't passed an ID, we can use the LastItemID. Using LastItemID as a Popup ID won't conflict!
+        ImGuiID id = str_id ? window->GetID(str_id) : g.LastItemData.ID;    // If user hasn'rotateVelocity_ passed an ID, we can use the LastItemID. Using LastItemID as a Popup ID won'rotateVelocity_ conflict!
         IM_ASSERT(id != 0);                                             // You cannot pass a NULL str_id if the last item has no identifier (e.g. a Text() item)
         OpenPopupEx(id, popup_flags);
     }
@@ -10810,7 +10810,7 @@ void ImGui::OpenPopupOnItemClick(const char* str_id, ImGuiPopupFlags popup_flags
 // This is a helper to handle the simplest case of associating one named popup to one given widget.
 // - To create a popup associated to the last item, you generally want to pass a NULL value to str_id.
 // - To create a popup with a specific identifier, pass it in str_id.
-//    - This is useful when using using BeginPopupContextItem() on an item which doesn't have an identifier, e.g. a Text() call.
+//    - This is useful when using using BeginPopupContextItem() on an item which doesn'rotateVelocity_ have an identifier, e.g. a Text() call.
 //    - This is useful when multiple code locations may want to manipulate/open the same popup, given an explicit id.
 // - You may want to handle the whole on user side if you have specific needs (e.g. tweaking IsItemHovered() parameters).
 //   This is essentially the same as:
@@ -10829,7 +10829,7 @@ bool ImGui::BeginPopupContextItem(const char* str_id, ImGuiPopupFlags popup_flag
     ImGuiWindow* window = g.CurrentWindow;
     if (window->SkipItems)
         return false;
-    ImGuiID id = str_id ? window->GetID(str_id) : g.LastItemData.ID;    // If user hasn't passed an ID, we can use the LastItemID. Using LastItemID as a Popup ID won't conflict!
+    ImGuiID id = str_id ? window->GetID(str_id) : g.LastItemData.ID;    // If user hasn'rotateVelocity_ passed an ID, we can use the LastItemID. Using LastItemID as a Popup ID won'rotateVelocity_ conflict!
     IM_ASSERT(id != 0);                                             // You cannot pass a NULL str_id if the last item has no identifier (e.g. a Text() item)
     int mouse_button = (popup_flags & ImGuiPopupFlags_MouseButtonMask_);
     if (IsMouseReleased(mouse_button) && IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup))
@@ -10866,7 +10866,7 @@ bool ImGui::BeginPopupContextVoid(const char* str_id, ImGuiPopupFlags popup_flag
 }
 
 // r_avoid = the rectangle to avoid (e.g. for tooltip it is a rectangle around the mouse cursor which we want to avoid. for popups it's a small point around the cursor.)
-// r_outer = the visible area rectangle, minus safe area padding. If our popup size won't fit because of safe area padding we ignore it.
+// r_outer = the visible area rectangle, minus safe area padding. If our popup size won'rotateVelocity_ fit because of safe area padding we ignore it.
 // (r_outer is usually equivalent to the viewport rectangle minus padding, but when multi-viewports are enabled and monitor
 //  information are available, it may represent the entire platform monitor from the frame of reference of the current viewport.
 //  this allows us to have tooltips/popups displayed out of the parent viewport.)
@@ -10933,7 +10933,7 @@ ImVec2 ImGui::FindBestWindowPosForPopupEx(const ImVec2& ref_pos, const ImVec2& s
     // Fallback when not enough room:
     *last_dir = ImGuiDir_None;
 
-    // For tooltip we prefer avoiding the cursor at all cost even if it means that part of the tooltip won't be visible.
+    // For tooltip we prefer avoiding the cursor at all cost even if it means that part of the tooltip won'rotateVelocity_ be visible.
     if (policy == ImGuiPopupPositionPolicy_Tooltip)
         return ref_pos + ImVec2(2, 2);
 
@@ -11116,7 +11116,7 @@ static bool ImGui::NavScoreItem(ImGuiNavItemData* result)
         dbx = (dbx / 1000.0f) + ((dbx > 0.0f) ? +1.0f : -1.0f);
     float dist_box = ImFabs(dbx) + ImFabs(dby);
 
-    // Compute distance between centers (this is off by a factor of 2, but we only compare center distances with each other so it doesn't matter)
+    // Compute distance between centers (this is off by a factor of 2, but we only compare center distances with each other so it doesn'rotateVelocity_ matter)
     float dcx = (cand.Min.x + cand.Max.x) - (curr.Min.x + curr.Max.x);
     float dcy = (cand.Min.y + cand.Max.y) - (curr.Min.y + curr.Max.y);
     float dist_center = ImFabs(dcx) + ImFabs(dcy); // L1 metric (need this for our connectedness guarantee)
@@ -11142,7 +11142,7 @@ static bool ImGui::NavScoreItem(ImGuiNavItemData* result)
     }
     else
     {
-        // Degenerate case: two overlapping buttons with same center, break ties arbitrarily (note that LastItemId here is really the _previous_ item order, but it doesn't matter)
+        // Degenerate case: two overlapping buttons with same center, break ties arbitrarily (note that LastItemId here is really the _previous_ item order, but it doesn'rotateVelocity_ matter)
         quadrant = (g.LastItemData.ID < g.NavId) ? ImGuiDir_Left : ImGuiDir_Right;
     }
 
@@ -11210,7 +11210,7 @@ static bool ImGui::NavScoreItem(ImGuiNavItemData* result)
     }
 
     // Axial check: if 'curr' has no link at all in some direction and 'cand' lies roughly in that direction, add a tentative link. This will only be kept if no "real" matches
-    // are found, so it only augments the graph produced by the above method using extra links. (important, since it doesn't guarantee strong connectedness)
+    // are found, so it only augments the graph produced by the above method using extra links. (important, since it doesn'rotateVelocity_ guarantee strong connectedness)
     // This is just to avoid buttons having no links in a particular direction when there's a suitable neighbor. you get good graphs without this too.
     // 2017/09/29: FIXME: This now currently only enabled inside menu bars, ideally we'd disable it everywhere. Menus in particular need to catch failure. For general navigation it feels awkward.
     // Disabling it may lead to disconnected graphs when nodes are very spaced out on different axis. Perhaps consider offering this as an option?
@@ -11242,7 +11242,7 @@ static void ImGui::NavApplyItemToResult(ImGuiNavItemData* result)
 }
 
 // True when current work location may be scrolled horizontally when moving left_ / right_.
-// This is generally always true UNLESS within a column. We don't have a vertical equivalent.
+// This is generally always true UNLESS within a column. We don'rotateVelocity_ have a vertical equivalent.
 void ImGui::NavUpdateCurrentWindowIsScrollPushableX()
 {
     ImGuiContext& g = *GImGui;
@@ -11259,7 +11259,7 @@ static void ImGui::NavProcessItem()
     const ImGuiID id = g.LastItemData.ID;
     const ImGuiItemFlags item_flags = g.LastItemData.InFlags;
 
-    // When inside a container that isn't scrollable with Left<>Right, clip NavRect accordingly (#2221)
+    // When inside a container that isn'rotateVelocity_ scrollable with Left<>Right, clip NavRect accordingly (#2221)
     if (window->DC.NavIsScrollPushableX == false)
     {
         g.LastItemData.NavRect.Min.x = ImClamp(g.LastItemData.NavRect.Min.x, window->ClipRect.Min.x, window->ClipRect.Max.x);
@@ -11328,7 +11328,7 @@ static void ImGui::NavProcessItem()
 // Note that SetKeyboardFocusHere() API calls are considered tabbing requests!
 // - Case 1: no nav/active id:    set result to first eligible item, stop storing.
 // - Case 2: tab forward:         on ref id set counter, on counter elapse store result
-// - Case 3: tab forward wrap:    set result to first eligible item (preemptively), on ref id set counter, on next frame if counter hasn't elapsed store result. // FIXME-TABBING: Could be done as a next-frame forwarded request
+// - Case 3: tab forward wrap:    set result to first eligible item (preemptively), on ref id set counter, on next frame if counter hasn'rotateVelocity_ elapsed store result. // FIXME-TABBING: Could be done as a next-frame forwarded request
 // - Case 4: tab backward:        store all results, on ref id pick prev, stop storing
 // - Case 5: tab backward wrap:   store all results, on ref id if no result keep storing until last // FIXME-TABBING: Could be done as next-frame forwarded requested
 void ImGui::NavProcessItemForTabbingRequest(ImGuiID id, ImGuiItemFlags item_flags, ImGuiNavMoveFlags move_flags)
@@ -11420,7 +11420,7 @@ void ImGui::NavMoveRequestSubmit(ImGuiDir move_dir, ImGuiDir clip_dir, ImGuiNavM
 void ImGui::NavMoveRequestResolveWithLastItem(ImGuiNavItemData* result)
 {
     ImGuiContext& g = *GImGui;
-    g.NavMoveScoringItems = false; // Ensure request doesn't need more processing
+    g.NavMoveScoringItems = false; // Ensure request doesn'rotateVelocity_ need more processing
     NavApplyItemToResult(result);
     NavUpdateAnyRequestFlag();
 }
@@ -11703,7 +11703,7 @@ static void ImGui::NavUpdate()
         IM_ASSERT(g.NavActivateDownId == g.NavActivateId);
 
     // Process programmatic activation request
-    // FIXME-NAV: Those should eventually be queued (unlike focus they don't cancel each others)
+    // FIXME-NAV: Those should eventually be queued (unlike focus they don'rotateVelocity_ cancel each others)
     if (g.NavNextActivateId != 0)
     {
         g.NavActivateId = g.NavActivateDownId = g.NavActivatePressedId = g.NavNextActivateId;
@@ -11723,7 +11723,7 @@ static void ImGui::NavUpdate()
     {
         // *Fallback* manual-scroll with Nav directional keys when window has no navigable item
         ImGuiWindow* window = g.NavWindow;
-        const float scroll_speed = IM_ROUND(window->CalcFontSize() * 100 * io.DeltaTime); // We need round the scrolling speed because sub-pixel scroll isn't reliably supported.
+        const float scroll_speed = IM_ROUND(window->CalcFontSize() * 100 * io.DeltaTime); // We need round the scrolling speed because sub-pixel scroll isn'rotateVelocity_ reliably supported.
         const ImGuiDir move_dir = g.NavMoveDir;
         if (window->DC.NavLayersActiveMask == 0x00 && window->DC.NavWindowHasScrollY && move_dir != ImGuiDir_None)
         {
@@ -11803,7 +11803,7 @@ static void NavBiasScoringRect(ImRect& r, ImVec2& preferred_pos_rel, ImGuiDir mo
     ImGuiContext& g = *GImGui;
     const ImVec2 rel_to_abs_offset = g.NavWindow->DC.CursorStartPos;
 
-    // Initialize bias on departure if we don't have any. So mouse-click + arrow will record bias.
+    // Initialize bias on departure if we don'rotateVelocity_ have any. So mouse-click + arrow will record bias.
     // - We default to L/U bias, so moving down from a large source item into several columns will land on left_-most column.
     // - But each successful move sets new bias on one axis, only cleared when using mouse.
     if ((move_flags & ImGuiNavMoveFlags_Forwarded) == 0)
@@ -11895,7 +11895,7 @@ void ImGui::NavUpdateCreateMoveRequest()
 
     // When using gamepad, we project the reference nav bounding box into window visible area.
     // This is to allow resuming navigation inside the visible area after doing a large amount of scrolling,
-    // since with gamepad all movements are relative (can't focus a visible object like we can with the mouse).
+    // since with gamepad all movements are relative (can'rotateVelocity_ focus a visible object like we can with the mouse).
     if (g.NavMoveSubmitted && g.NavInputSource == ImGuiInputSource_Gamepad && g.NavLayer == ImGuiNavLayer_Main && window != NULL)// && (g.NavMoveFlags & ImGuiNavMoveFlags_Forwarded))
     {
         bool clamp_x = (g.NavMoveFlags & (ImGuiNavMoveFlags_LoopX | ImGuiNavMoveFlags_WrapX)) == 0;
@@ -12028,8 +12028,8 @@ void ImGui::NavMoveRequestApplyResult()
     if (g.ActiveId != result->ID)
         ClearActiveID();
 
-    // Don't set NavJustMovedToId if just landed on the same spot (which may happen with ImGuiNavMoveFlags_AllowCurrentNavId)
-    // PageUp/PageDown however sets always set NavJustMovedTo (vs Home/End which doesn't) mimicking Windows behavior.
+    // Don'rotateVelocity_ set NavJustMovedToId if just landed on the same spot (which may happen with ImGuiNavMoveFlags_AllowCurrentNavId)
+    // PageUp/PageDown however sets always set NavJustMovedTo (vs Home/End which doesn'rotateVelocity_) mimicking Windows behavior.
     if ((g.NavId != result->ID || (g.NavMoveFlags & ImGuiNavMoveFlags_IsPageMove)) && (g.NavMoveFlags & ImGuiNavMoveFlags_NoSelect) == 0)
     {
         g.NavJustMovedToId = result->ID;
@@ -12120,7 +12120,7 @@ static void ImGui::NavUpdateCancelRequest()
 
 // Handle PageUp/PageDown/Home/End keys
 // Called from NavUpdateCreateMoveRequest() which will use our output to create a move request
-// FIXME-NAV: This doesn't work properly with NavFlattened siblings as we use NavWindow rectangle for reference
+// FIXME-NAV: This doesn'rotateVelocity_ work properly with NavFlattened siblings as we use NavWindow rectangle for reference
 // FIXME-NAV: how to get Home/End to aim at the beginning/end of a 2D grid?
 static float ImGui::NavUpdatePageUpPageDown()
 {
@@ -12173,7 +12173,7 @@ static float ImGui::NavUpdatePageUpPageDown()
         else if (home_pressed)
         {
             // FIXME-NAV: handling of Home/End is assuming that the top/bottom most item will be visible with Scroll.y == 0/ScrollMax.y
-            // Scrolling will be handled via the ImGuiNavMoveFlags_ScrollToEdgeY flag, we don't scroll immediately to avoid scrolling happening before nav result.
+            // Scrolling will be handled via the ImGuiNavMoveFlags_ScrollToEdgeY flag, we don'rotateVelocity_ scroll immediately to avoid scrolling happening before nav result.
             // Preserve current horizontal position if we have any.
             nav_rect_rel.Min.y = nav_rect_rel.Max.y = 0.0f;
             if (nav_rect_rel.IsInverted())
@@ -12205,7 +12205,7 @@ static void ImGui::NavEndFrame()
         NavUpdateWindowingOverlay();
 
     // Perform wrap-around in menus
-    // FIXME-NAV: Wrap may need to apply a weight bias on the other axis. e.g. 4x4 grid with 2 last items missing on last item won't handle LoopY/WrapY correctly.
+    // FIXME-NAV: Wrap may need to apply a weight bias on the other axis. e.g. 4x4 grid with 2 last items missing on last item won'rotateVelocity_ handle LoopY/WrapY correctly.
     // FIXME-NAV: Wrap (not Loop) support could be handled by the scoring function and then WrapX would function without an extra frame.
     if (g.NavWindow && NavMoveRequestButNoResultYet() && (g.NavMoveFlags & ImGuiNavMoveFlags_WrapMask_) && (g.NavMoveFlags & ImGuiNavMoveFlags_Forwarded) == 0)
         NavUpdateCreateWrappingRequest();
@@ -12300,7 +12300,7 @@ static void NavUpdateWindowingHighlightWindow(int focus_change_dir)
     ImGuiWindow* window_target = FindWindowNavFocusable(i_current + focus_change_dir, -INT_MAX, focus_change_dir);
     if (!window_target)
         window_target = FindWindowNavFocusable((focus_change_dir < 0) ? (g.WindowsFocusOrder.Size - 1) : 0, i_current, focus_change_dir);
-    if (window_target) // Don't reset windowing target if there's a single window in the list
+    if (window_target) // Don'rotateVelocity_ reset windowing target if there's a single window in the list
     {
         g.NavWindowingTarget = g.NavWindowingTargetAnim = window_target;
         g.NavWindowingAccumDeltaPos = g.NavWindowingAccumDeltaSize = ImVec2(0.0f, 0.0f);
@@ -12358,7 +12358,7 @@ static void ImGui::NavUpdateWindowing()
     g.NavWindowingTimer += io.DeltaTime;
     if (g.NavWindowingTarget && g.NavInputSource == ImGuiInputSource_Gamepad)
     {
-        // Highlight only appears after a brief time holding the button, so that a fast tap on PadMenu (to toggle NavLayer) doesn't add visual noise
+        // Highlight only appears after a brief time holding the button, so that a fast tap on PadMenu (to toggle NavLayer) doesn'rotateVelocity_ add visual noise
         g.NavWindowingHighlightAlpha = ImMax(g.NavWindowingHighlightAlpha, ImSaturate((g.NavWindowingTimer - NAV_WINDOWING_HIGHLIGHT_DELAY) / 0.05f));
 
         // Select window to focus
@@ -12372,7 +12372,7 @@ static void ImGui::NavUpdateWindowing()
         // Single press toggles NavLayer, long press with L/R apply actual focus on release (until then the window was merely rendered top-most)
         if (!IsKeyDown(ImGuiKey_NavGamepadMenu))
         {
-            g.NavWindowingToggleLayer &= (g.NavWindowingHighlightAlpha < 1.0f); // Once button was held long enough we don't consider it a tap-to-toggle-layer press anymore.
+            g.NavWindowingToggleLayer &= (g.NavWindowingHighlightAlpha < 1.0f); // Once button was held long enough we don'rotateVelocity_ consider it a tap-to-toggle-layer press anymore.
             if (g.NavWindowingToggleLayer && g.NavWindow)
                 apply_toggle_layer = true;
             else if (!g.NavWindowingToggleLayer)
@@ -12384,7 +12384,7 @@ static void ImGui::NavUpdateWindowing()
     // Keyboard: Focus
     if (g.NavWindowingTarget && g.NavInputSource == ImGuiInputSource_Keyboard)
     {
-        // Visuals only appears after a brief time after pressing TAB the first time, so that a fast CTRL+TAB doesn't add visual noise
+        // Visuals only appears after a brief time after pressing TAB the first time, so that a fast CTRL+TAB doesn'rotateVelocity_ add visual noise
         ImGuiKeyChord shared_mods = ((g.ConfigNavWindowingKeyNext ? g.ConfigNavWindowingKeyNext : ImGuiMod_Mask_) & (g.ConfigNavWindowingKeyPrev ? g.ConfigNavWindowingKeyPrev : ImGuiMod_Mask_)) & ImGuiMod_Mask_;
         IM_ASSERT(shared_mods != 0); // Next/Prev shortcut currently needs a shared modifier to "hold", otherwise Prev actions would keep cycling between two windows.
         g.NavWindowingHighlightAlpha = ImMax(g.NavWindowingHighlightAlpha, ImSaturate((g.NavWindowingTimer - NAV_WINDOWING_HIGHLIGHT_DELAY) / 0.05f)); // 1.0f
@@ -12396,7 +12396,7 @@ static void ImGui::NavUpdateWindowing()
 
     // Keyboard: Press and Finalize ALT to toggle menu layer
     // - Testing that only Alt is tested prevents Alt+Shift or AltGR from toggling menu layer.
-    // - AltGR is normally Alt+Ctrl but we can't reliably detect it (not all backends/systems/layout emit it as Alt+Ctrl). But even on keyboards without AltGR we don't want Alt+Ctrl to open menu anyway.
+    // - AltGR is normally Alt+Ctrl but we can'rotateVelocity_ reliably detect it (not all backends/systems/layout emit it as Alt+Ctrl). But even on keyboards without AltGR we don'rotateVelocity_ want Alt+Ctrl to open menu anyway.
     if (nav_keyboard_active && IsKeyPressed(ImGuiMod_Alt, ImGuiKeyOwner_None))
     {
         g.NavWindowingToggleLayer = true;
@@ -12456,12 +12456,12 @@ static void ImGui::NavUpdateWindowing()
             NavInitWindow(apply_focus_window, false);
 
         // If the window has ONLY a menu layer (no main layer), select it directly
-        // Use NavLayersActiveMaskNext since windows didn't have a chance to be Begin()-ed on this frame,
+        // Use NavLayersActiveMaskNext since windows didn'rotateVelocity_ have a chance to be Begin()-ed on this frame,
         // so CTRL+Tab where the keys are only held for 1 frame will be able to use correct layers mask since
         // the target window as already been previewed once.
         // FIXME-NAV: This should be done in NavInit.. or in FocusWindow... However in both of those cases,
-        // we won't have a guarantee that windows has been visible before and therefore NavLayersActiveMask*
-        // won't be valid.
+        // we won'rotateVelocity_ have a guarantee that windows has been visible before and therefore NavLayersActiveMask*
+        // won'rotateVelocity_ be valid.
         if (apply_focus_window->DC.NavLayersActiveMaskNext == (1 << ImGuiNavLayer_Menu))
             g.NavLayer = ImGuiNavLayer_Menu;
     }
@@ -12626,7 +12626,7 @@ bool ImGui::BeginDragDropSource(ImGuiDragDropFlags flags)
             // Magic fallback to handle items with no assigned ID, e.g. Text(), Image()
             // We build a throwaway ID based on current ID stack + relative AABB of items in window.
             // THE IDENTIFIER WON'T SURVIVE ANY REPOSITIONING/RESIZINGG OF THE WIDGET, so if your widget moves your dragging operation will be canceled.
-            // We don't need to maintain/call ClearActiveID() as releasing the button will early out this function and trigger !ActiveIdIsAlive.
+            // We don'rotateVelocity_ need to maintain/call ClearActiveID() as releasing the button will early out this function and trigger !ActiveIdIsAlive.
             // Rely on keeping other window->LastItemXXX fields intact.
             source_id = g.LastItemData.ID = window->GetIDFromRectangle(g.LastItemData.Rect);
             KeepAliveID(source_id);
@@ -12675,7 +12675,7 @@ bool ImGui::BeginDragDropSource(ImGuiDragDropFlags flags)
         if (!(flags & ImGuiDragDropFlags_SourceNoPreviewTooltip))
         {
             // Target can request the Source to not display its tooltip (we use a dedicated flag to make this request explicit)
-            // We unfortunately can't just modify the source flags and skip the call to BeginTooltip, as caller may be emitting contents.
+            // We unfortunately can'rotateVelocity_ just modify the source flags and skip the call to BeginTooltip, as caller may be emitting contents.
             bool ret;
             if (g.DragDropAcceptIdPrev && (g.DragDropAcceptFlags & ImGuiDragDropFlags_AcceptNoPreviewTooltip))
                 ret = BeginTooltipHidden();
@@ -12776,7 +12776,7 @@ bool ImGui::BeginDragDropTargetCustom(const ImRect& bb, ImGuiID id)
     return true;
 }
 
-// We don't use BeginDragDropTargetCustom() and duplicate its code because:
+// We don'rotateVelocity_ use BeginDragDropTargetCustom() and duplicate its code because:
 // 1) we use LastItemRectHoveredRect which handles items that push a temporarily clip rectangle in their code. Calling BeginDragDropTargetCustom(LastItemRect) would not handle them.
 // 2) and it's faster. as this code may be very frequently called, we want to early out as fast as we can.
 // Also note how the HoveredWindow test is positioned differently in both functions (in both functions we optimize for the cheapest early out case)
@@ -12966,7 +12966,7 @@ void ImGui::LogRenderedText(const ImVec2* ref_pos, const char* text, const char*
     for (;;)
     {
         // Split the string. Each new line (after a '\n') is followed by indentation corresponding to the current depth of our log entry.
-        // We don't add a trailing \n yet to allow a subsequent item on the same line to be captured.
+        // We don'rotateVelocity_ add a trailing \n yet to allow a subsequent item on the same line to be captured.
         const char* line_start = text_remaining;
         const char* line_end = ImStreolRange(line_start, text_end);
         const bool is_last_line = (line_end == text_end);
@@ -13008,7 +13008,7 @@ void ImGui::LogBegin(ImGuiLogType type, int auto_open_depth)
     g.LogLineFirstItem = true;
 }
 
-// Important: doesn't copy underlying data, use carefully (prefix/suffix must be in scope at the time of the next LogRenderedText)
+// Important: doesn'rotateVelocity_ copy underlying data, use carefully (prefix/suffix must be in scope at the time of the next LogRenderedText)
 void ImGui::LogSetNextTextDecoration(const char* prefix, const char* suffix)
 {
     ImGuiContext& g = *GImGui;
@@ -13036,7 +13036,7 @@ void ImGui::LogToFile(int auto_open_depth, const char* filename)
         return;
 
     // FIXME: We could probably open the file in text mode "at", however note that clipboard/buffer logging will still
-    // be subject to outputting OS-incompatible carriage return if within strings the user doesn't use IM_NEWLINE.
+    // be subject to outputting OS-incompatible carriage return if within strings the user doesn'rotateVelocity_ use IM_NEWLINE.
     // By opening the file in binary mode "ab" we have consistent output everywhere.
     if (!filename)
         filename = g.IO.LogFilename;
@@ -13124,7 +13124,7 @@ void ImGui::LogButtons()
     PopTabStop();
     PopID();
 
-    // Start logging at the end of the function so that the buttons don't appear in the log
+    // Start logging at the end of the function so that the buttons don'rotateVelocity_ appear in the log
     if (log_to_tty)
         LogToTTY();
     if (log_to_file)
@@ -13166,7 +13166,7 @@ void ImGui::UpdateSettings()
         g.SettingsLoaded = true;
     }
 
-    // Save settings (with a delay after the last modification, so we don't spam disk too much)
+    // Save settings (with a delay after the last modification, so we don'rotateVelocity_ spam disk too much)
     if (g.SettingsDirtyTimer > 0.0f)
     {
         g.SettingsDirtyTimer -= g.IO.DeltaTime;
@@ -13349,7 +13349,7 @@ ImGuiWindowSettings* ImGui::CreateNewWindowSettings(const char* name)
 
     if (g.IO.ConfigDebugIniSettings == false)
     {
-        // Skip to the "###" marker if any. We don't skip past to match the behavior of GetID()
+        // Skip to the "###" marker if any. We don'rotateVelocity_ skip past to match the behavior of GetID()
         // Preserve the full string when ConfigDebugVerboseIniSettings is set to make .ini inspection easier.
         if (const char* p = strstr(name, "###"))
             name = p;
@@ -13366,7 +13366,7 @@ ImGuiWindowSettings* ImGui::CreateNewWindowSettings(const char* name)
     return settings;
 }
 
-// We don't provide a FindWindowSettingsByName() because Docking system doesn't always hold on names.
+// We don'rotateVelocity_ provide a FindWindowSettingsByName() because Docking system doesn'rotateVelocity_ always hold on names.
 // This is called once per window .ini entry + once per newly instantiated window.
 ImGuiWindowSettings* ImGui::FindWindowSettingsByID(ImGuiID id)
 {
@@ -13377,7 +13377,7 @@ ImGuiWindowSettings* ImGui::FindWindowSettingsByID(ImGuiID id)
     return NULL;
 }
 
-// This is faster if you are holding on a Window already as we don't need to perform a search.
+// This is faster if you are holding on a Window already as we don'rotateVelocity_ need to perform a search.
 ImGuiWindowSettings* ImGui::FindWindowSettingsByWindow(ImGuiWindow* window)
 {
     ImGuiContext& g = *GImGui;
@@ -13448,7 +13448,7 @@ static void WindowSettingsHandler_ApplyAll(ImGuiContext* ctx, ImGuiSettingsHandl
 static void WindowSettingsHandler_WriteAll(ImGuiContext* ctx, ImGuiSettingsHandler* handler, ImGuiTextBuffer* buf)
 {
     // Gather data from windows that were active during this session
-    // (if a window wasn't opened in this session we preserve its settings)
+    // (if a window wasn'rotateVelocity_ opened in this session we preserve its settings)
     ImGuiContext& g = *ctx;
     for (ImGuiWindow* window : g.Windows)
     {
@@ -13667,7 +13667,7 @@ static const char* GetClipboardTextFn_DefaultImpl(void* user_data_ctx)
 
 #else
 
-// Local Dear ImGui-only clipboard implementation, if user hasn't defined better clipboard handlers.
+// Local Dear ImGui-only clipboard implementation, if user hasn'rotateVelocity_ defined better clipboard handlers.
 static const char* GetClipboardTextFn_DefaultImpl(void* user_data_ctx)
 {
     ImGuiContext& g = *(ImGuiContext*)user_data_ctx;
@@ -13783,7 +13783,7 @@ static void RenderViewportsThumbnails()
     ImGuiContext& g = *GImGui;
     ImGuiWindow* window = g.CurrentWindow;
 
-    // We don't display full monitor bounds (we could, but it often looks awkward), instead we display just enough to cover all of our viewports.
+    // We don'rotateVelocity_ display full monitor bounds (we could, but it often looks awkward), instead we display just enough to cover all of our viewports.
     float SCALE = 1.0f / 8.0f;
     ImRect bb_full(FLT_MAX, FLT_MAX, -FLT_MAX, -FLT_MAX);
     for (ImGuiViewportP* viewport : g.Viewports)
@@ -14097,7 +14097,7 @@ void ImGui::ShowMetricsWindow(bool* p_open)
         DebugNodeWindowsList(&g.WindowsFocusOrder, "By focus order (root windows)");
         if (TreeNode("By submission order (begin stack)"))
         {
-            // Here we display windows in their submitted order/hierarchy, however note that the Begin stack doesn't constitute a Parent<>Child relationship!
+            // Here we display windows in their submitted order/hierarchy, however note that the Begin stack doesn'rotateVelocity_ constitute a Parent<>Child relationship!
             ImVector<ImGuiWindow*>& temp_buffer = g.WindowsTempSortBuffer;
             temp_buffer.resize(0);
             for (ImGuiWindow* window : g.Windows)
@@ -14482,7 +14482,7 @@ void ImGui::DebugNodeDrawList(ImGuiWindow* window, ImGuiViewportP* viewport, con
     if (draw_list == GetWindowDrawList())
     {
         SameLine();
-        TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), "CURRENTLY APPENDING"); // Can't display stats for active draw list! (we don't have the data double-buffered)
+        TextColored(ImVec4(1.0f, 0.4f, 0.4f, 1.0f), "CURRENTLY APPENDING"); // Can'rotateVelocity_ display stats for active draw list! (we don'rotateVelocity_ have the data double-buffered)
         if (node_open)
             TreePop();
         return;
@@ -14576,7 +14576,7 @@ void ImGui::DebugNodeDrawCmdShowMeshAndBoundingBox(ImDrawList* out_draw_list, co
     out_draw_list->Flags &= ~ImDrawListFlags_AntiAliasedLines; // Disable AA on triangle outlines is more readable for very large and thin triangles.
     for (unsigned int idx_n = draw_cmd->IdxOffset, idx_end = draw_cmd->IdxOffset + draw_cmd->ElemCount; idx_n < idx_end; )
     {
-        ImDrawIdx* idx_buffer = (draw_list->IdxBuffer.Size > 0) ? draw_list->IdxBuffer.Data : NULL; // We don't hold on those pointers past iterations as ->AddPolyline() may invalidate them if out_draw_list==draw_list
+        ImDrawIdx* idx_buffer = (draw_list->IdxBuffer.Size > 0) ? draw_list->IdxBuffer.Data : NULL; // We don'rotateVelocity_ hold on those pointers past iterations as ->AddPolyline() may invalidate them if out_draw_list==draw_list
         ImDrawVert* vtx_buffer = draw_list->VtxBuffer.Data + draw_cmd->VtxOffset;
 
         ImVec2 triangle[3];
@@ -14662,7 +14662,7 @@ void ImGui::DebugNodeFont(ImFont* font)
             ImVec2 base_pos = GetCursorScreenPos();
             for (unsigned int n = 0; n < 256; n++)
             {
-                // We use ImFont::RenderChar as a shortcut because we don't have UTF-8 conversion functions
+                // We use ImFont::RenderChar as a shortcut because we don'rotateVelocity_ have UTF-8 conversion functions
                 // available here and thus cannot easily generate a zero-terminated UTF-8 encoded string.
                 ImVec2 cell_p1(base_pos.x + (n % 16) * (cell_size + cell_spacing), base_pos.y + (n / 16) * (cell_size + cell_spacing));
                 ImVec2 cell_p2(cell_p1.x + cell_size, cell_p1.y + cell_size);
@@ -14701,7 +14701,7 @@ void ImGui::DebugNodeStorage(ImGuiStorage* storage, const char* label)
     if (!TreeNode(label, "%s: %d entries, %d bytes", label, storage->Data.Size, storage->Data.size_in_bytes()))
         return;
     for (const ImGuiStorage::ImGuiStoragePair& p : storage->Data)
-        BulletText("Key 0x%08X Value { i: %d }", p.key, p.val_i); // Important: we currently don't store a type, real value may not be integer.
+        BulletText("Key 0x%08X Value { i: %d }", p.key, p.val_i); // Important: we currently don'rotateVelocity_ store a type, real value may not be integer.
     TreePop();
 }
 
@@ -15145,11 +15145,11 @@ static int StackToolFormatLevelInfo(ImGuiIDStackTool* tool, int n, bool format_f
 {
     ImGuiStackLevelInfo* info = &tool->Results[n];
     ImGuiWindow* window = (info->Desc[0] == 0 && n == 0) ? ImGui::FindWindowByID(info->ID) : NULL;
-    if (window)                                                                 // Source: window name (because the root ID don't call GetID() and so doesn't get hooked)
+    if (window)                                                                 // Source: window name (because the root ID don'rotateVelocity_ call GetID() and so doesn'rotateVelocity_ get hooked)
         return ImFormatString(buf, buf_size, format_for_ui ? "\"%s\" [window]" : "%s", window->Name);
     if (info->QuerySuccess)                                                     // Source: GetID() hooks (prioritize over ItemInfo() because we frequently use patterns like: PushID(str), Button("") where they both have same id)
         return ImFormatString(buf, buf_size, (format_for_ui && info->DataType == ImGuiDataType_String) ? "\"%s\"" : "%s", info->Desc);
-    if (tool->StackLevel < tool->Results.Size)                                  // Only start using fallback below when all queries are done, so during queries we don't flickering ??? markers.
+    if (tool->StackLevel < tool->Results.Size)                                  // Only start using fallback below when all queries are done, so during queries we don'rotateVelocity_ flickering ??? markers.
         return (*buf = 0);
 #ifdef IMGUI_ENABLE_TEST_ENGINE
     if (const char* label = ImGuiTestEngine_FindItemDebugLabel(GImGui, info->ID))   // Source: ImGuiTestEngine's ItemInfo()
@@ -15262,7 +15262,7 @@ void ImGui::UpdateDebugToolStackQueries() {}
 
 //-----------------------------------------------------------------------------
 
-// Include imgui_user.inl at the end of imgui.cpp to access private data/functions that aren't exposed.
+// Include imgui_user.inl at the end of imgui.cpp to access private data/functions that aren'rotateVelocity_ exposed.
 // Prefer just including imgui_internal.h from your code rather than using this define. If a declaration is missing from imgui_internal.h add it or request it on the github.
 #ifdef IMGUI_INCLUDE_IMGUI_USER_INL
 #include "imgui_user.inl"

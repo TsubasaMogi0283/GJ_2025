@@ -97,7 +97,7 @@ namespace QuaternionCalculation{
 	/// </summary>
 	/// <param name="q0"></param>
 	/// <param name="q1"></param>
-	/// <param name="t"></param>
+	/// <param name="rotateVelocity_"></param>
 	/// <returns></returns>
 	Quaternion QuaternionSlerp(const Quaternion& q0,const Quaternion& q1,const float& t);
 

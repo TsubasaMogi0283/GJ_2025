@@ -19,12 +19,12 @@
 // Also include Metrics! ItemPicker! DebugLog! and other debug features.
 // Removing this file from your project is hindering access to documentation for everyone in your team,
 // likely leading you to poorer usage of the library.
-// Everything in this file will be stripped out by the linker if you don't call ImGui::ShowDemoWindow().
+// Everything in this file will be stripped out by the linker if you don'rotateVelocity_ call ImGui::ShowDemoWindow().
 // If you want to link core Dear ImGui in your shipped builds but want a thorough guarantee that the demo will not be
 // linked, you can setup your imconfig.h with #define IMGUI_DISABLE_DEMO_WINDOWS and those functions will be empty.
 // In another situation, whenever you have Dear ImGui available you probably want this to be available for reference.
 // Thank you,
-// -Your beloved friend, imgui_demo.cpp (which you won't delete)
+// -Your beloved friend, imgui_demo.cpp (which you won'rotateVelocity_ delete)
 
 //--------------------------------------------
 // ABOUT THE MEANING OF THE 'static' KEYWORD:
@@ -36,7 +36,7 @@
 // - to gather code and data in the same place.
 // - to make the demo source code faster to read, faster to change, smaller in size.
 // - it is also a convenient way of storing simple UI related information as long as your function
-//   doesn't need to be reentrant or used in multiple threads.
+//   doesn'rotateVelocity_ need to be reentrant or used in multiple threads.
 // This might be a pattern you will want to use in your code, but most of the data you would be working
 // with in a complex codebase is likely going to be stored outside your functions.
 
@@ -51,7 +51,7 @@
 // - We never use maths operators on ImVec2/ImVec4. For our other sources files we use them, and they are provided
 //   by imgui.h using the IMGUI_DEFINE_MATH_OPERATORS define. For your own sources file they are optional
 //   and require you either enable those, either provide your own via IM_VEC2_CLASS_EXTRA in imconfig.h.
-//   Because we can't assume anything about your support of maths operators, we cannot use them in imgui_demo.cpp.
+//   Because we can'rotateVelocity_ assume anything about your support of maths operators, we cannot use them in imgui_demo.cpp.
 
 // Navigating this file:
 // - In Visual Studio IDE: CTRL+comma ("Edit.GoToAll") can follow symbols in comments, whereas CTRL+F12 ("Edit.GoToImplementation") cannot.
@@ -154,7 +154,7 @@ Index of this file:
 #define vsnprintf   _vsnprintf
 #endif
 
-// Format specifiers for 64-bit values (hasn't been decently standardized before VS2013)
+// Format specifiers for 64-bit values (hasn'rotateVelocity_ been decently standardized before VS2013)
 #if !defined(PRId64) && defined(_MSC_VER)
 #define PRId64 "I64d"
 #define PRIu64 "I64u"
@@ -333,10 +333,10 @@ void ImGui::ShowDemoWindow(bool* p_open)
     if (no_background)      window_flags |= ImGuiWindowFlags_NoBackground;
     if (no_bring_to_front)  window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
     if (unsaved_document)   window_flags |= ImGuiWindowFlags_UnsavedDocument;
-    if (no_close)           p_open = NULL; // Don't pass our bool* to Begin
+    if (no_close)           p_open = NULL; // Don'rotateVelocity_ pass our bool* to Begin
 
     // We specify a default position/size in case there's no data in the .ini file.
-    // We only do it to make the demo applications a little more welcoming, but typically this isn't required.
+    // We only do it to make the demo applications a little more welcoming, but typically this isn'rotateVelocity_ required.
     const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_FirstUseEver);
@@ -928,7 +928,7 @@ static void ShowDemoWindowWidgets()
             for (int i = 0; i < 6; i++)
             {
                 // Disable the default "open on single-click behavior" + set Selected flag according to our selection.
-                // To alter selection we use IsItemClicked() && !IsItemToggledOpen(), so clicking on an arrow doesn't alter selection.
+                // To alter selection we use IsItemClicked() && !IsItemToggledOpen(), so clicking on an arrow doesn'rotateVelocity_ alter selection.
                 ImGuiTreeNodeFlags node_flags = base_flags;
                 const bool is_selected = (selection_mask & (1 << i)) != 0;
                 if (is_selected)
@@ -1081,7 +1081,7 @@ static void ShowDemoWindowWidgets()
             //   can save your source files as 'UTF-8 without signature').
             // - FOR THIS DEMO FILE ONLY, BECAUSE WE WANT TO SUPPORT OLD COMPILERS, WE ARE *NOT* INCLUDING RAW UTF-8
             //   CHARACTERS IN THIS SOURCE FILE. Instead we are encoding a few strings with hexadecimal constants.
-            //   Don't do this in your application! Please use u8"text in any language" in your application!
+            //   Don'rotateVelocity_ do this in your application! Please use u8"text in any language" in your application!
             // Note that characters values are preserved even by InputText() if the font cannot be displayed,
             // so you can safely copy & paste garbled characters into another application.
             ImGui::TextWrapped(
@@ -1237,7 +1237,7 @@ static void ShowDemoWindowWidgets()
 
         // Simplified one-liner Combo() using an array of const char*
         // This is not very useful (may obsolete): prefer using BeginCombo()/EndCombo() for full control.
-        static int item_current_3 = -1; // If the selection isn't within 0..count, Combo won't display a preview
+        static int item_current_3 = -1; // If the selection isn'rotateVelocity_ within 0..count, Combo won'rotateVelocity_ display a preview
         ImGui::Combo("combo 3 (array)", &item_current_3, items, IM_ARRAYSIZE(items));
 
         // Simplified one-liner Combo() using an accessor function
@@ -1801,7 +1801,7 @@ static void ShowDemoWindowWidgets()
         ImGui::PlotHistogram("Histogram", arr, IM_ARRAYSIZE(arr), 0, NULL, 0.0f, 1.0f, ImVec2(0, 80.0f));
 
         // Fill an array of contiguous float values to plot
-        // Tip: If your float aren't contiguous but part of a structure, you can pass a pointer to your first float
+        // Tip: If your float aren'rotateVelocity_ contiguous but part of a structure, you can pass a pointer to your first float
         // and the sizeof() of your structure in the "stride" parameter.
         static float values[90] = {};
         static int values_offset = 0;
@@ -2671,7 +2671,7 @@ static void ShowDemoWindowWidgets()
     }
 
     // Demonstrate BeginDisabled/EndDisabled using a checkbox located at the bottom of the section (which is a bit odd:
-    // logically we'd have this checkbox at the top of the section, but we don't want this feature to steal that space)
+    // logically we'd have this checkbox at the top of the section, but we don'rotateVelocity_ want this feature to steal that space)
     if (disable_all)
         ImGui::EndDisabled();
 
@@ -3075,7 +3075,7 @@ static void ShowDemoWindowLayout()
             HelpMarker("Baseline of button will look misaligned with text..");
 
             // If your line starts with text, call AlignTextToFramePadding() to align text to upcoming widgets.
-            // (because we don't know what's coming after the Text() statement, we need to move the text baseline
+            // (because we don'rotateVelocity_ know what's coming after the Text() statement, we need to move the text baseline
             // down by FramePadding.y ahead of time)
             ImGui::AlignTextToFramePadding();
             ImGui::Text("OK Blahblah"); ImGui::SameLine();
@@ -3714,7 +3714,7 @@ static void ShowDemoWindowPopups()
         }
 
         // Example 2
-        // Popup on a Text() element which doesn't have an identifier: we need to provide an identifier to BeginPopupContextItem().
+        // Popup on a Text() element which doesn'rotateVelocity_ have an identifier: we need to provide an identifier to BeginPopupContextItem().
         // Using an explicit identifier is also convenient if you want to activate the popups from different locations.
         {
             HelpMarker("Text() elements don't have stable identifiers so we need to provide one.");
@@ -3822,7 +3822,7 @@ static void ShowDemoWindowPopups()
 
             // Also demonstrate passing a bool* to BeginPopupModal(), this will create a regular close button which
             // will close the popup. Note that the visibility state of popups is owned by imgui, so the input value
-            // of the bool actually doesn't matter here.
+            // of the bool actually doesn'rotateVelocity_ matter here.
             bool unused_open = true;
             if (ImGui::BeginPopupModal("Stacked 2", &unused_open))
             {
@@ -3858,13 +3858,13 @@ static void ShowDemoWindowPopups()
 }
 
 // Dummy data structure that we use for the Table demo.
-// (pre-C++11 doesn't allow us to instantiate ImVector<MyItem> template if this structure is defined inside the demo function)
+// (pre-C++11 doesn'rotateVelocity_ allow us to instantiate ImVector<MyItem> template if this structure is defined inside the demo function)
 namespace
 {
 // We are passing our own identifier to TableSetupColumn() to facilitate identifying columns in the sorting code.
 // This identifier will be passed down into ImGuiTableSortSpec::ColumnUserID.
 // But it is possible to omit the user id parameter of TableSetupColumn() and just use the column index instead! (ImGuiTableSortSpec::ColumnIndex)
-// If you don't use sorting, you will generally never care about giving column an ID!
+// If you don'rotateVelocity_ use sorting, you will generally never care about giving column an ID!
 enum MyItemColumnID
 {
     MyItemColumnID_ID,
@@ -3881,8 +3881,8 @@ struct MyItem
     int         Quantity;
 
     // We have a problem which is affecting _only this demo_ and should not affect your code:
-    // As we don't rely on std:: or other third-party library to compile dear imgui, we only have reliable access to qsort(),
-    // however qsort doesn't allow passing user data to comparing function.
+    // As we don'rotateVelocity_ rely on std:: or other third-party library to compile dear imgui, we only have reliable access to qsort(),
+    // however qsort doesn'rotateVelocity_ allow passing user data to comparing function.
     // As a workaround, we are storing the sort specs in a static/global for the comparing function to access.
     // In your own use case you would probably pass the sort specs to your sorting/comparing functions directly and not use a global.
     // We could technically call ImGui::TableGetSortSpecs() in CompareWithSortSpecs(), but considering that this function is called
@@ -3923,7 +3923,7 @@ struct MyItem
         }
 
         // qsort() is instable so always return a way to differenciate items.
-        // Your own compare function may want to avoid fallback on implicit sort specs e.g. a Name compare if it wasn't already part of the sort specs.
+        // Your own compare function may want to avoid fallback on implicit sort specs e.g. a Name compare if it wasn'rotateVelocity_ already part of the sort specs.
         return (a->ID - b->ID);
     }
 };
@@ -4197,7 +4197,7 @@ static void ShowDemoWindowTables()
     IMGUI_DEMO_MARKER("Tables/Resizable, stretch");
     if (ImGui::TreeNode("Resizable, stretch"))
     {
-        // By default, if we don't enable ScrollX the sizing policy for each column is "Stretch"
+        // By default, if we don'rotateVelocity_ enable ScrollX the sizing policy for each column is "Stretch"
         // All columns maintain a sizing weight, and they will occupy all available width.
         static ImGuiTableFlags flags = ImGuiTableFlags_SizingStretchSame | ImGuiTableFlags_Resizable | ImGuiTableFlags_BordersOuter | ImGuiTableFlags_BordersV | ImGuiTableFlags_ContextMenuInBody;
         PushStyleCompact();
@@ -4230,7 +4230,7 @@ static void ShowDemoWindowTables()
         // Here we use ImGuiTableFlags_SizingFixedFit (even though _ScrollX is not set)
         // So columns will adopt the "Fixed" policy and will maintain a fixed width regardless of the whole available width (unless table is small)
         // If there is not enough available width to fit all columns, they will however be resized down.
-        // FIXME-TABLE: Providing a stretch-on-init would make sense especially for tables which don't have saved settings
+        // FIXME-TABLE: Providing a stretch-on-init would make sense especially for tables which don'rotateVelocity_ have saved settings
         HelpMarker(
             "Using _Resizable + _SizingFixedFit flags.\n"
             "Fixed-width columns generally makes more sense if you want to use horizontal scrolling.\n\n"
@@ -4371,7 +4371,7 @@ static void ShowDemoWindowTables()
     if (ImGui::TreeNode("Padding"))
     {
         // First example: showcase use of padding flags and effect of BorderOuterV/BorderInnerV on X padding.
-        // We don't expose BorderOuterH/BorderInnerH here because they have no effect on X padding.
+        // We don'rotateVelocity_ expose BorderOuterH/BorderInnerH here because they have no effect on X padding.
         HelpMarker(
             "We often want outer padding activated when any using features which makes the edges of a column visible:\n"
             "e.g.:\n"
@@ -6426,7 +6426,7 @@ void ImGui::ShowAboutWindow(bool* p_open)
 // - ShowStyleEditor()
 //-----------------------------------------------------------------------------
 
-// Forward declare ShowFontAtlas() which isn't worth putting in public API yet
+// Forward declare ShowFontAtlas() which isn'rotateVelocity_ worth putting in public API yet
 namespace ImGui { IMGUI_API void ShowFontAtlas(ImFontAtlas* atlas); }
 
 // Demo helper function to select among loaded fonts.
@@ -6734,7 +6734,7 @@ void ImGui::ShowStyleEditor(ImGuiStyle* ref)
             ImGui::SameLine();
             HelpMarker("When drawing circle primitives with \"num_segments == 0\" tesselation will be calculated automatically.");
 
-            ImGui::DragFloat("Global Alpha", &style.Alpha, 0.005f, 0.20f, 1.0f, "%.2f"); // Not exposing zero here so user doesn't "lose" the UI (zero alpha clips all widgets). But application code could have a toggle to switch between zero and non-zero.
+            ImGui::DragFloat("Global Alpha", &style.Alpha, 0.005f, 0.20f, 1.0f, "%.2f"); // Not exposing zero here so user doesn'rotateVelocity_ "lose" the UI (zero alpha clips all widgets). But application code could have a toggle to switch between zero and non-zero.
             ImGui::DragFloat("Disabled Alpha", &style.DisabledAlpha, 0.005f, 0.0f, 1.0f, "%.2f"); ImGui::SameLine(); HelpMarker("Additional alpha multiplier for disabled items (multiply over current value of Alpha).");
             ImGui::PopItemWidth();
 
@@ -6996,7 +6996,7 @@ struct ExampleAppConsole
         if (ImGui::SmallButton("Clear"))           { ClearLog(); }
         ImGui::SameLine();
         bool copy_to_clipboard = ImGui::SmallButton("Copy");
-        //static float t = 0.0f; if (ImGui::GetTime() - t > 0.02f) { t = ImGui::GetTime(); AddLog("Spam %f", t); }
+        //static float rotateVelocity_ = 0.0f; if (ImGui::GetTime() - rotateVelocity_ > 0.02f) { rotateVelocity_ = ImGui::GetTime(); AddLog("Spam %f", rotateVelocity_); }
 
         ImGui::Separator();
 
@@ -7108,7 +7108,7 @@ struct ExampleAppConsole
         AddLog("# %s\n", command_line);
 
         // Insert into history. First find match and delete it so it can be pushed to the back.
-        // This isn't trying to be smart or optimal.
+        // This isn'rotateVelocity_ trying to be smart or optimal.
         HistoryPos = -1;
         for (int i = History.Size - 1; i >= 0; i--)
             if (Stricmp(History[i], command_line) == 0)
@@ -7339,8 +7339,8 @@ struct ExampleAppLog
             const char* buf_end = Buf.end();
             if (Filter.IsActive())
             {
-                // In this example we don't use the clipper when Filter is enabled.
-                // This is because we don't have random access to the result of our filter.
+                // In this example we don'rotateVelocity_ use the clipper when Filter is enabled.
+                // This is because we don'rotateVelocity_ have random access to the result of our filter.
                 // A real application processing logs with ten of thousands of entries may want to store the result of
                 // search/filter.. especially if the filtering function is not trivial (e.g. reg-exp).
                 for (int line_no = 0; line_no < LineOffsets.Size; line_no++)
@@ -7363,8 +7363,8 @@ struct ExampleAppLog
                 // - A) random access into your data
                 // - B) items all being the  same height,
                 // both of which we can handle since we have an array pointing to the beginning of each line of text.
-                // When using the filter (in the block of code above) we don't have random access into the data to display
-                // anymore, which is why we don't use the clipper. Storing or skimming through the search result would make
+                // When using the filter (in the block of code above) we don'rotateVelocity_ have random access into the data to display
+                // anymore, which is why we don'rotateVelocity_ use the clipper. Storing or skimming through the search result would make
                 // it possible (and would be recommended if you want to search through tens of thousands of entries).
                 ImGuiListClipper clipper;
                 clipper.Begin(LineOffsets.Size);
@@ -7667,13 +7667,13 @@ static void ShowExampleAppAutoResize(bool* p_open)
 //-----------------------------------------------------------------------------
 
 // Demonstrate creating a window with custom resize constraints.
-// Note that size constraints currently don't work on a docked window (when in 'docking' branch)
+// Note that size constraints currently don'rotateVelocity_ work on a docked window (when in 'docking' branch)
 static void ShowExampleAppConstrainedResize(bool* p_open)
 {
     struct CustomConstraints
     {
         // Helper functions to demonstrate programmatic constraints
-        // FIXME: This doesn't take account of decoration size (e.g. title bar), library should make this easier.
+        // FIXME: This doesn'rotateVelocity_ take account of decoration size (e.g. title bar), library should make this easier.
         // FIXME: None of the three demos works consistently when resizing from borders.
         static void AspectRatio(ImGuiSizeCallbackData* data)
         {

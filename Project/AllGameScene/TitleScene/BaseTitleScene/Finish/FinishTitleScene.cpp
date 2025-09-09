@@ -8,6 +8,7 @@
 #include "Audio.h"
 
 #include "TitleScene/TitleScene.h"
+#include <SingleCalculation.h>
 
 FinishTitleScene::FinishTitleScene(){
 	//インスタンスの取得
@@ -22,18 +23,27 @@ FinishTitleScene::FinishTitleScene(){
 }
 
 void FinishTitleScene::Initialize(){
-
+	camera_.translate.y = 1.4f;
+	camera_.translate.z = -9.8f;
+	pointLight_.radius = MAX_RADIUS_;
 }
 
 void FinishTitleScene::Update(TitleScene* titleScene){
 
+
+	threshold_ += 0.01f;
+	dissolve_.threshold = SingleCalculation::Lerp(0.0f,1.0f, threshold_);
+
 	//高速
-	if (false) {
+	if (threshold_>2.0f) {
 		//指定した時間を超えたらノイズシーンへ
 			//ノイズへ
 			titleScene->SetIsEnd();
+			titleScene->SetIsGameEnd();
 			return;
 	}
+
+
 
 #ifdef _DEBUG
 	//ImGui表示用
@@ -51,6 +61,9 @@ void FinishTitleScene::DrawSprite(){
 void FinishTitleScene::DisplayImGui(){
 
 	ImGui::Begin("終わり(タイトルシーン)");
+	ImGui::SliderFloat("しきい値", &dissolve_.threshold, 0.0f, 2.0f);
+
+	//ImGui::SliderFloat("しきい値",&dissolve_.threshold,0.0f,2.0f);
 	ImGui::End();
 
 

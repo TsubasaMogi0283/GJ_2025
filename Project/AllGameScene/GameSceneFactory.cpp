@@ -5,6 +5,7 @@
 #include "WinScene/WinScene.h"
 #include "LoseScene/LoseScene.h"
 #include "TestScene/TestScene.h"
+#include "SelectScene/SelectScene.h"
 
 std::unique_ptr<Elysia::IGameScene> GameSceneFactory::CreateScene(const std::string& sceneName){
 
@@ -14,6 +15,9 @@ std::unique_ptr<Elysia::IGameScene> GameSceneFactory::CreateScene(const std::str
     //タイトル
     if (sceneName == "Title") {
         newScene = std::make_unique<TitleScene>();
+    }
+    else if (sceneName == "Select") {
+        newScene = std::make_unique<SelectScene>();
     }
     //ゲーム
     else if (sceneName == "Game") {

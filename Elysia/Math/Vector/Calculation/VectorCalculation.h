@@ -102,7 +102,7 @@ namespace VectorCalculation {
 	/// </summary>
 	/// <param name="v1"></param>
 	/// <param name="v2"></param>
-	/// <param name="t"></param>
+	/// <param name="rotateVelocity_"></param>
 	/// <returns></returns>
 	Vector2 Lerp(const Vector2& v1, const Vector2& v2, const float_t& t);
 
@@ -111,7 +111,7 @@ namespace VectorCalculation {
 	/// </summary>
 	/// <param name="v1">ベクトル1</param>
 	/// <param name="v2">ベクトル2</param>
-	/// <param name="t">t</param>
+	/// <param name="rotateVelocity_">rotateVelocity_</param>
 	/// <returns></returns>
 	Vector3 Lerp(const Vector3& v1, const Vector3& v2, const float_t& t);
 
@@ -120,7 +120,7 @@ namespace VectorCalculation {
 	/// </summary>
 	/// <param name="v1">ベクトル1</param>
 	/// <param name="v2">ベクトル2</param>
-	/// <param name="t">t</param>
+	/// <param name="rotateVelocity_">rotateVelocity_</param>
 	/// <returns></returns>
 	Vector3 Slerp(const Vector3& v1, const Vector3& v2, const float_t& t);
 
@@ -159,7 +159,7 @@ namespace VectorCalculation {
 	/// <param name="p1"></param>
 	/// <param name="p2"></param>
 	/// <param name="p3"></param>
-	/// <param name="t"></param>
+	/// <param name="rotateVelocity_"></param>
 	/// <returns></returns>
 	Vector3 CatmullRom(const Vector3& p0,const Vector3& p1,const Vector3& p2,const Vector3& p3,const float_t& t);
 

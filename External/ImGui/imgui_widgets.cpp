@@ -175,7 +175,7 @@ void ImGui::TextEx(const char* text, const char* text_end, ImGuiTextFlags flags)
         if (!ItemAdd(bb, 0))
             return;
 
-        // Render (we don't hide text after ## in this end-user function)
+        // Render (we don'rotateVelocity_ hide text after ## in this end-user function)
         RenderTextWrapped(bb.Min, text_begin, text_end, wrap_width);
     }
     else
@@ -183,13 +183,13 @@ void ImGui::TextEx(const char* text, const char* text_end, ImGuiTextFlags flags)
         // Long text!
         // Perform manual coarse clipping to optimize for long multi-line text
         // - From this point we will only compute the width of lines that are visible. Optimization only available when word-wrapping is disabled.
-        // - We also don't vertically center the text within the line full height, which is unlikely to matter because we are likely the biggest and only item on the line.
+        // - We also don'rotateVelocity_ vertically center the text within the line full height, which is unlikely to matter because we are likely the biggest and only item on the line.
         // - We use memchr(), pay attention that well optimized versions of those str/mem functions are much faster than a casually written loop.
         const char* line = text;
         const float line_height = GetTextLineHeight();
         ImVec2 text_size(0, 0);
 
-        // Lines to skip (can't skip when logging text)
+        // Lines to skip (can'rotateVelocity_ skip when logging text)
         ImVec2 pos = text_pos;
         if (!g.LogEnabled)
         {
@@ -385,7 +385,7 @@ void ImGui::BulletTextV(const char* fmt, va_list args)
     const char* text_begin, *text_end;
     ImFormatStringToTempBufferV(&text_begin, &text_end, fmt, args);
     const ImVec2 label_size = CalcTextSize(text_begin, text_end, false);
-    const ImVec2 total_size = ImVec2(g.FontSize + (label_size.x > 0.0f ? (label_size.x + style.FramePadding.x * 2) : 0.0f), label_size.y);  // Empty text doesn't add padding
+    const ImVec2 total_size = ImVec2(g.FontSize + (label_size.x > 0.0f ? (label_size.x + style.FramePadding.x * 2) : 0.0f), label_size.y);  // Empty text doesn'rotateVelocity_ add padding
     ImVec2 pos = window->DC.CursorPos;
     pos.y += window->DC.CurrLineTextBaseOffset;
     ItemSize(total_size, 0.0f);
@@ -464,7 +464,7 @@ void ImGui::BulletTextV(const char* fmt, va_list args)
 //------------------------------------------------------------------------------------------------------------------------------------------------
 // Note that some combinations are supported,
 // - PressedOnDragDropHold can generally be associated with any flag.
-// - PressedOnDoubleClick can be associated by PressedOnClickRelease/PressedOnRelease, in which case the second release event won't be reported.
+// - PressedOnDoubleClick can be associated by PressedOnClickRelease/PressedOnRelease, in which case the second release event won'rotateVelocity_ be reported.
 //------------------------------------------------------------------------------------------------------------------------------------------------
 // The behavior of the return-value changes when ImGuiButtonFlags_Repeat is set:
 //                                         Repeat+                  Repeat+           Repeat+             Repeat+
@@ -504,7 +504,7 @@ bool ImGui::ButtonBehavior(const ImRect& bb, ImGuiID id, bool* out_hovered, bool
         g.HoveredWindow = window;
 
 #ifdef IMGUI_ENABLE_TEST_ENGINE
-    // Alternate registration spot, for when caller didn't use ItemAdd()
+    // Alternate registration spot, for when caller didn'rotateVelocity_ use ItemAdd()
     if (id != 0 && g.LastItemData.ID != id)
         IMGUI_TEST_ENGINE_ITEM_ADD(id, bb, NULL);
 #endif
@@ -598,7 +598,7 @@ bool ImGui::ButtonBehavior(const ImRect& bb, ImGuiID id, bool* out_hovered, bool
     }
 
     // Gamepad/Keyboard navigation
-    // We report navigated item as hovered but we don't set g.HoveredId to not interfere with mouse.
+    // We report navigated item as hovered but we don'rotateVelocity_ set g.HoveredId to not interfere with mouse.
     if (g.NavId == id && !g.NavDisableHighlight && g.NavDisableMouseHover && (g.ActiveId == 0 || g.ActiveId == id || g.ActiveId == window->MoveId))
         if (!(flags & ImGuiButtonFlags_NoHoveredOnFocus))
             hovered = true;
@@ -691,7 +691,7 @@ bool ImGui::ButtonEx(const char* label, const ImVec2& size_arg, ImGuiButtonFlags
     const ImVec2 label_size = CalcTextSize(label, NULL, true);
 
     ImVec2 pos = window->DC.CursorPos;
-    if ((flags & ImGuiButtonFlags_AlignTextBaseLine) && style.FramePadding.y < window->DC.CurrLineTextBaseOffset) // Try to vertically align buttons that are smaller/have no padding so that text baseline matches (bit hacky, since it shouldn't be a flag)
+    if ((flags & ImGuiButtonFlags_AlignTextBaseLine) && style.FramePadding.y < window->DC.CurrLineTextBaseOffset) // Try to vertically align buttons that are smaller/have no padding so that text baseline matches (bit hacky, since it shouldn'rotateVelocity_ be a flag)
         pos.y += window->DC.CurrLineTextBaseOffset - style.FramePadding.y;
     ImVec2 size = CalcItemSize(size_arg, label_size.x + style.FramePadding.x * 2.0f, label_size.y + style.FramePadding.y * 2.0f);
 
@@ -811,7 +811,7 @@ bool ImGui::CloseButton(ImGuiID id, const ImVec2& pos)
         bb_interact.Expand(ImTrunc(bb_interact.GetSize() * -0.25f));
 
     // Tweak 2: We intentionally allow interaction when clipped so that a mechanical Alt,Right,Activate sequence can always close a window.
-    // (this isn't the common behavior of buttons, but it doesn't affect the user because navigation tends to keep items visible in scrolling layer).
+    // (this isn'rotateVelocity_ the common behavior of buttons, but it doesn'rotateVelocity_ affect the user because navigation tends to keep items visible in scrolling layer).
     bool is_clipped = !ItemAdd(bb_interact, id);
 
     bool hovered, held;
@@ -1420,7 +1420,7 @@ void ImGui::SeparatorEx(ImGuiSeparatorFlags flags, float thickness)
 
         // Preserve legacy behavior inside Columns()
         // Before Tables API happened, we relied on Separator() to span all columns of a Columns() set.
-        // We currently don't need to provide the same feature for tables because tables naturally have border features.
+        // We currently don'rotateVelocity_ need to provide the same feature for tables because tables naturally have border features.
         ImGuiOldColumns* columns = (flags & ImGuiSeparatorFlags_SpanAllColumns) ? window->DC.CurrentColumns : NULL;
         if (columns)
         {
@@ -1429,7 +1429,7 @@ void ImGui::SeparatorEx(ImGuiSeparatorFlags flags, float thickness)
             PushColumnsBackground();
         }
 
-        // We don't provide our width to the layout so that it doesn't get feed back into AutoFit
+        // We don'rotateVelocity_ provide our width to the layout so that it doesn'rotateVelocity_ get feed back into AutoFit
         // FIXME: This prevents ->CursorMaxPos based bounding box evaluation from working (e.g. TableEndCell)
         const float thickness_for_layout = (thickness == 1.0f) ? 0.0f : thickness; // FIXME: See 1.70/1.71 Separator() change: makes legacy 1-px separator not affect layout yet. Should change.
         const ImRect bb(ImVec2(x1, window->DC.CursorPos.y), ImVec2(x2, window->DC.CursorPos.y + thickness));
@@ -1528,7 +1528,7 @@ void ImGui::SeparatorText(const char* label)
     // The SeparatorText() vs SeparatorTextEx() distinction is designed to be considerate that we may want:
     // - allow separator-text to be draggable items (would require a stable ID + a noticeable highlight)
     // - this high-level entry point to allow formatting? (which in turns may require ID separate from formatted string)
-    // - because of this we probably can't turn 'const char* label' into 'const char* fmt, ...'
+    // - because of this we probably can'rotateVelocity_ turn 'const char* label' into 'const char* fmt, ...'
     // Otherwise, we can decide that users wanting to drag this would layout a dedicated drag-item,
     // and then we can turn this into a format function.
     SeparatorTextEx(0, label, FindRenderedTextEnd(label), 0.0f);
@@ -1677,7 +1677,7 @@ bool ImGui::BeginCombo(const char* label, const char* preview_value, ImGuiComboF
 
     const ImGuiStyle& style = g.Style;
     const ImGuiID id = window->GetID(label);
-    IM_ASSERT((flags & (ImGuiComboFlags_NoArrowButton | ImGuiComboFlags_NoPreview)) != (ImGuiComboFlags_NoArrowButton | ImGuiComboFlags_NoPreview)); // Can't use both flags together
+    IM_ASSERT((flags & (ImGuiComboFlags_NoArrowButton | ImGuiComboFlags_NoPreview)) != (ImGuiComboFlags_NoArrowButton | ImGuiComboFlags_NoPreview)); // Can'rotateVelocity_ use both flags together
     if (flags & ImGuiComboFlags_WidthFitPreview)
         IM_ASSERT((flags & (ImGuiComboFlags_NoPreview | ImGuiComboFlags_CustomPreview)) == 0);
 
@@ -1768,7 +1768,7 @@ bool ImGui::BeginComboPopup(ImGuiID popup_id, const ImRect& bb, ImGuiComboFlags 
         else if (flags & ImGuiComboFlags_HeightSmall)  popup_max_height_in_items = 4;
         else if (flags & ImGuiComboFlags_HeightLarge)  popup_max_height_in_items = 20;
         ImVec2 constraint_min(0.0f, 0.0f), constraint_max(FLT_MAX, FLT_MAX);
-        if ((g.NextWindowData.Flags & ImGuiNextWindowDataFlags_HasSize) == 0 || g.NextWindowData.SizeVal.x <= 0.0f) // Don't apply constraints if user specified a size
+        if ((g.NextWindowData.Flags & ImGuiNextWindowDataFlags_HasSize) == 0 || g.NextWindowData.SizeVal.x <= 0.0f) // Don'rotateVelocity_ apply constraints if user specified a size
             constraint_min.x = w;
         if ((g.NextWindowData.Flags & ImGuiNextWindowDataFlags_HasSize) == 0 || g.NextWindowData.SizeVal.y <= 0.0f)
             constraint_max.y = CalcMaxPopupHeightFromItemCount(popup_max_height_in_items);
@@ -1793,7 +1793,7 @@ bool ImGui::BeginComboPopup(ImGuiID popup_id, const ImRect& bb, ImGuiComboFlags 
             SetNextWindowPos(pos);
         }
 
-    // We don't use BeginPopupEx() solely because we have a custom name string, which we could make an argument to BeginPopupEx()
+    // We don'rotateVelocity_ use BeginPopupEx() solely because we have a custom name string, which we could make an argument to BeginPopupEx()
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_Popup | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove;
     PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(g.Style.FramePadding.x, g.Style.WindowPadding.y)); // Horizontally align ourselves with the framed text
     bool ret = Begin(name, NULL, window_flags);
@@ -1822,7 +1822,7 @@ bool ImGui::BeginComboPreview()
 
     if (window->SkipItems || !(g.LastItemData.StatusFlags & ImGuiItemStatusFlags_Visible))
         return false;
-    IM_ASSERT(g.LastItemData.Rect.Min.x == preview_data->PreviewRect.Min.x && g.LastItemData.Rect.Min.y == preview_data->PreviewRect.Min.y); // Didn't call after BeginCombo/EndCombo block or forgot to pass ImGuiComboFlags_CustomPreview flag?
+    IM_ASSERT(g.LastItemData.Rect.Min.x == preview_data->PreviewRect.Min.x && g.LastItemData.Rect.Min.y == preview_data->PreviewRect.Min.y); // Didn'rotateVelocity_ call after BeginCombo/EndCombo block or forgot to pass ImGuiComboFlags_CustomPreview flag?
     if (!window->ClipRect.Overlaps(preview_data->PreviewRect)) // Narrower test (optional)
         return false;
 
@@ -1850,7 +1850,7 @@ void ImGui::EndComboPreview()
     // FIXME: Using CursorMaxPos approximation instead of correct AABB which we will store in ImDrawCmd in the future
     ImDrawList* draw_list = window->DrawList;
     if (window->DC.CursorMaxPos.x < preview_data->PreviewRect.Max.x && window->DC.CursorMaxPos.y < preview_data->PreviewRect.Max.y)
-        if (draw_list->CmdBuffer.Size > 1) // Unlikely case that the PushClipRect() didn't create a command
+        if (draw_list->CmdBuffer.Size > 1) // Unlikely case that the PushClipRect() didn'rotateVelocity_ create a command
         {
             draw_list->_CmdHeader.ClipRect = draw_list->CmdBuffer[draw_list->CmdBuffer.Size - 1].ClipRect = draw_list->CmdBuffer[draw_list->CmdBuffer.Size - 2].ClipRect;
             draw_list->_TryMergeDrawCmds();
@@ -1898,7 +1898,7 @@ bool ImGui::Combo(const char* label, int* current_item, const char* (*getter)(vo
     if (*current_item >= 0 && *current_item < items_count)
         preview_value = getter(user_data, *current_item);
 
-    // The old Combo() API exposed "popup_max_height_in_items". The new more general BeginCombo() API doesn't have/need it, but we emulate it here.
+    // The old Combo() API exposed "popup_max_height_in_items". The new more general BeginCombo() API doesn'rotateVelocity_ have/need it, but we emulate it here.
     if (popup_max_height_in_items != -1 && !(g.NextWindowData.Flags & ImGuiNextWindowDataFlags_HasSizeConstraint))
         SetNextWindowSizeConstraints(ImVec2(0, 0), ImVec2(FLT_MAX, CalcMaxPopupHeightFromItemCount(popup_max_height_in_items)));
 
@@ -2020,7 +2020,7 @@ const ImGuiDataTypeInfo* ImGui::DataTypeGetInfo(ImGuiDataType data_type)
 
 int ImGui::DataTypeFormatString(char* buf, int buf_size, ImGuiDataType data_type, const void* p_data, const char* format)
 {
-    // Signedness doesn't matter when pushing integer arguments
+    // Signedness doesn'rotateVelocity_ matter when pushing integer arguments
     if (data_type == ImGuiDataType_S32 || data_type == ImGuiDataType_U32)
         return ImFormatString(buf, buf_size, format, *(const ImU32*)p_data);
     if (data_type == ImGuiDataType_S64 || data_type == ImGuiDataType_U64)
@@ -2106,7 +2106,7 @@ bool ImGui::DataTypeApplyFromText(const char* buf, ImGuiDataType data_type, void
     memcpy(&data_backup, p_data, type_info->Size);
 
     // Sanitize format
-    // - For float/double we have to ignore format with precision (e.g. "%.2f") because sscanf doesn't take them in, so force them into %f and %lf
+    // - For float/double we have to ignore format with precision (e.g. "%.2f") because sscanf doesn'rotateVelocity_ take them in, so force them into %f and %lf
     // - In theory could treat empty format as using default, but this would only cover rare/bizarre case of using InputScalar() + integer + format string without %.
     char format_sanitized[32];
     if (data_type == ImGuiDataType_Float || data_type == ImGuiDataType_Double)
@@ -2206,7 +2206,7 @@ TYPE ImGui::RoundScalarWithFormatT(const char* format, ImGuiDataType data_type, 
     IM_UNUSED(data_type);
     IM_ASSERT(data_type == ImGuiDataType_Float || data_type == ImGuiDataType_Double);
     const char* fmt_start = ImParseFormatFindStart(format);
-    if (fmt_start[0] != '%' || fmt_start[1] == '%') // Don't apply if the value is not visible in the format string
+    if (fmt_start[0] != '%' || fmt_start[1] == '%') // Don'rotateVelocity_ apply if the value is not visible in the format string
         return v;
 
     // Sanitize format
@@ -2309,7 +2309,7 @@ bool ImGui::DragBehaviorT(ImGuiDataType data_type, TYPE* v, float v_speed, const
     FLOATTYPE v_old_ref_for_accum_remainder = (FLOATTYPE)0.0f;
 
     float logarithmic_zero_epsilon = 0.0f; // Only valid when is_logarithmic is true
-    const float zero_deadzone_halfsize = 0.0f; // Drag widgets have no deadzone (as it doesn't make sense)
+    const float zero_deadzone_halfsize = 0.0f; // Drag widgets have no deadzone (as it doesn'rotateVelocity_ make sense)
     if (is_logarithmic)
     {
         // When using logarithmic sliders, we need to clamp to avoid hitting zero, but our choice of clamp value greatly affects slider precision. We attempt to use the specified precision to estimate a good lower bound.
@@ -2739,7 +2739,7 @@ TYPE ImGui::ScaleValueFromRatioT(ImGuiDataType data_type, float t, TYPE v_min, T
         if ((v_max == 0.0f) && (v_min < 0.0f))
             v_max_fudged = -logarithmic_zero_epsilon;
 
-        float t_with_flip = flipped ? (1.0f - t) : t; // t, but flipped if necessary to account for us flipping the range
+        float t_with_flip = flipped ? (1.0f - t) : t; // rotateVelocity_, but flipped if necessary to account for us flipping the range
 
         if ((v_min * v_max) < 0.0f) // Range crosses zero, so we have to do this in two parts
         {
@@ -2790,7 +2790,7 @@ bool ImGui::SliderBehaviorT(const ImRect& bb, ImGuiID id, ImGuiDataType data_typ
     const ImGuiAxis axis = (flags & ImGuiSliderFlags_Vertical) ? ImGuiAxis_Y : ImGuiAxis_X;
     const bool is_logarithmic = (flags & ImGuiSliderFlags_Logarithmic) != 0;
     const bool is_floating_point = (data_type == ImGuiDataType_Float) || (data_type == ImGuiDataType_Double);
-    const float v_range_f = (float)(v_min < v_max ? v_max - v_min : v_min - v_max); // We don't need high precision for what we do with it.
+    const float v_range_f = (float)(v_min < v_max ? v_max - v_min : v_min - v_max); // We don'rotateVelocity_ need high precision for what we do with it.
 
     // Calculate bounds
     const float grab_padding = 2.0f; // FIXME: Should be part of style.
@@ -2890,7 +2890,7 @@ bool ImGui::SliderBehaviorT(const ImRect& bb, ImGuiID id, ImGuiDataType data_typ
                 if ((clicked_t >= 1.0f && delta > 0.0f) || (clicked_t <= 0.0f && delta < 0.0f)) // This is to avoid applying the saturation when already past the limits
                 {
                     set_new_value = false;
-                    g.SliderCurrentAccum = 0.0f; // If pushing up against the limits, don't continue to accumulate
+                    g.SliderCurrentAccum = 0.0f; // If pushing up against the limits, don'rotateVelocity_ continue to accumulate
                 }
                 else
                 {
@@ -2957,7 +2957,7 @@ bool ImGui::SliderBehaviorT(const ImRect& bb, ImGuiID id, ImGuiDataType data_typ
 
 // For 32-bit and larger types, slider bounds are limited to half the natural type range.
 // So e.g. an integer Slider between INT_MAX-10 and INT_MAX will fail, but an integer Slider between INT_MAX/2-10 and INT_MAX/2 will be ok.
-// It would be possible to lift that limitation with some work but it doesn't seem to be worth it for sliders.
+// It would be possible to lift that limitation with some work but it doesn'rotateVelocity_ seem to be worth it for sliders.
 bool ImGui::SliderBehavior(const ImRect& bb, ImGuiID id, ImGuiDataType data_type, void* p_v, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags, ImRect* out_grab_bb)
 {
     // Read imgui.cpp "API BREAKING CHANGES" section for 1.78 if you hit this assert.
@@ -3257,7 +3257,7 @@ bool ImGui::VSliderInt(const char* label, const ImVec2& size, int* v, int v_min,
 // - InputDouble()
 //-------------------------------------------------------------------------
 
-// We don't use strchr() because our strings are usually very short and often start with '%'
+// We don'rotateVelocity_ use strchr() because our strings are usually very short and often start with '%'
 const char* ImParseFormatFindStart(const char* fmt)
 {
     while (char c = fmt[0])
@@ -3273,7 +3273,7 @@ const char* ImParseFormatFindStart(const char* fmt)
 
 const char* ImParseFormatFindEnd(const char* fmt)
 {
-    // Printf/scanf types modifiers: I/L/h/j/l/t/w/z. Other uppercase letters qualify as types aka end of the format.
+    // Printf/scanf types modifiers: I/L/h/j/l/rotateVelocity_/w/z. Other uppercase letters qualify as types aka end of the format.
     if (fmt[0] != '%')
         return fmt;
     const unsigned int ignored_uppercase_mask = (1 << ('I'-'A')) | (1 << ('L'-'A'));
@@ -3299,14 +3299,14 @@ const char* ImParseFormatTrimDecorations(const char* fmt, char* buf, size_t buf_
     if (fmt_start[0] != '%')
         return "";
     const char* fmt_end = ImParseFormatFindEnd(fmt_start);
-    if (fmt_end[0] == 0) // If we only have leading decoration, we don't need to copy the data.
+    if (fmt_end[0] == 0) // If we only have leading decoration, we don'rotateVelocity_ need to copy the data.
         return fmt_start;
     ImStrncpy(buf, fmt_start, ImMin((size_t)(fmt_end - fmt_start) + 1, buf_size));
     return buf;
 }
 
 // Sanitize format
-// - Zero terminate so extra characters after format (e.g. "%f123") don't confuse atof/atoi
+// - Zero terminate so extra characters after format (e.g. "%f123") don'rotateVelocity_ confuse atof/atoi
 // - stb_sprintf.h supports several new modifiers which format numbers in a way that also makes them incompatible atof/atoi.
 void ImParseFormatSanitizeForPrinting(const char* fmt_in, char* fmt_out, size_t fmt_out_size)
 {
@@ -3322,7 +3322,7 @@ void ImParseFormatSanitizeForPrinting(const char* fmt_in, char* fmt_out, size_t 
     *fmt_out = 0; // Zero-terminate
 }
 
-// - For scanning we need to remove all width and precision fields and flags "%+3.7f" -> "%f". BUT don't strip types like "%I64d" which includes digits. ! "%07I64d" -> "%I64d"
+// - For scanning we need to remove all width and precision fields and flags "%+3.7f" -> "%f". BUT don'rotateVelocity_ strip types like "%I64d" which includes digits. ! "%07I64d" -> "%I64d"
 const char* ImParseFormatSanitizeForScanning(const char* fmt_in, char* fmt_out, size_t fmt_out_size)
 {
     const char* fmt_end = ImParseFormatFindEnd(fmt_in);
@@ -3357,7 +3357,7 @@ static const char* ImAtoi(const char* src, TYPE* output)
 }
 
 // Parse display precision back from the display format string
-// FIXME: This is still used by some navigation code path to infer a minimum tweak step, but we should aim to rework widgets so it isn't needed.
+// FIXME: This is still used by some navigation code path to infer a minimum tweak step, but we should aim to rework widgets so it isn'rotateVelocity_ needed.
 int ImParseFormatPrecision(const char* fmt, int default_precision)
 {
     fmt = ImParseFormatFindStart(fmt);
@@ -3415,7 +3415,7 @@ static inline ImGuiInputTextFlags InputScalar_DefaultCharsFilter(ImGuiDataType d
 // However this may not be ideal for all uses, as some user code may break on out of bound values.
 bool ImGui::TempInputScalar(const ImRect& bb, ImGuiID id, const char* label, ImGuiDataType data_type, void* p_data, const char* format, const void* p_clamp_min, const void* p_clamp_max)
 {
-    // FIXME: May need to clarify display behavior if format doesn't contain %.
+    // FIXME: May need to clarify display behavior if format doesn'rotateVelocity_ contain %.
     // "%d" -> "%d" / "There are %d items" -> "%d" / "items" -> "%d" (fallback). Also see #6405
     const ImGuiDataTypeInfo* type_info = DataTypeGetInfo(data_type);
     char fmt_buf[32];
@@ -3733,7 +3733,7 @@ static bool is_separator(unsigned int c)
 
 static int is_word_boundary_from_right(ImGuiInputTextState* obj, int idx)
 {
-    // When ImGuiInputTextFlags_Password is set, we don't want actions such as CTRL+Arrow to leak the fact that underlying data are blanks or separators.
+    // When ImGuiInputTextFlags_Password is set, we don'rotateVelocity_ want actions such as CTRL+Arrow to leak the fact that underlying data are blanks or separators.
     if ((obj->Flags & ImGuiInputTextFlags_Password) || idx <= 0)
         return 0;
 
@@ -3809,7 +3809,7 @@ static bool STB_TEXTEDIT_INSERTCHARS(ImGuiInputTextState* obj, int pos, const Im
     return true;
 }
 
-// We don't use an enum so we can build even with conflicting symbols (if another user of stb_textedit.h leak their STB_TEXTEDIT_K_* symbols)
+// We don'rotateVelocity_ use an enum so we can build even with conflicting symbols (if another user of stb_textedit.h leak their STB_TEXTEDIT_K_* symbols)
 #define STB_TEXTEDIT_K_LEFT         0x200000 // keyboard input to move cursor left_
 #define STB_TEXTEDIT_K_RIGHT        0x200001 // keyboard input to move cursor right_
 #define STB_TEXTEDIT_K_UP           0x200002 // keyboard input to move cursor up
@@ -3847,7 +3847,7 @@ static void stb_textedit_replace(ImGuiInputTextState* str, STB_TexteditState* st
         state->has_preferred_x = 0;
         return;
     }
-    IM_ASSERT(0); // Failed to insert character, normally shouldn't happen because of how we currently use stb_textedit_replace()
+    IM_ASSERT(0); // Failed to insert character, normally shouldn'rotateVelocity_ happen because of how we currently use stb_textedit_replace()
 }
 
 } // namespace ImStb
@@ -3959,7 +3959,7 @@ static bool InputTextFilterCharacter(ImGuiContext* ctx, unsigned int* p_char, Im
     {
         // The libc allows overriding locale, with e.g. 'setlocale(LC_NUMERIC, "de_DE.UTF-8");' which affect the output/input of printf/scanf to use e.g. ',' instead of '.'.
         // The standard mandate that programs starts in the "C" locale where the decimal point is '.'.
-        // We don't really intend to provide widespread support for it, but out of empathy for people stuck with using odd API, we support the bare minimum aka overriding the decimal point.
+        // We don'rotateVelocity_ really intend to provide widespread support for it, but out of empathy for people stuck with using odd API, we support the bare minimum aka overriding the decimal point.
         // Change the default decimal_point with:
         //   ImGui::GetIO()->PlatformLocaleDecimalPoint = *localeconv()->decimal_point;
         // Users of non-default decimal point (in particular ',') may be affected by word-selection logic (is_word_boundary_from_right/is_word_boundary_from_left) functions.
@@ -4071,7 +4071,7 @@ void ImGui::InputTextDeactivateHook(ImGuiID id)
     g.InputTextDeactivatedState.ID = state->ID;
     if (state->Flags & ImGuiInputTextFlags_ReadOnly)
     {
-        g.InputTextDeactivatedState.TextA.resize(0); // In theory this data won't be used, but clear to be neat.
+        g.InputTextDeactivatedState.TextA.resize(0); // In theory this data won'rotateVelocity_ be used, but clear to be neat.
     }
     else
     {
@@ -4096,8 +4096,8 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         return false;
 
     IM_ASSERT(buf != NULL && buf_size >= 0);
-    IM_ASSERT(!((flags & ImGuiInputTextFlags_CallbackHistory) && (flags & ImGuiInputTextFlags_Multiline)));        // Can't use both together (they both use up/down keys)
-    IM_ASSERT(!((flags & ImGuiInputTextFlags_CallbackCompletion) && (flags & ImGuiInputTextFlags_AllowTabInput))); // Can't use both together (they both use tab key)
+    IM_ASSERT(!((flags & ImGuiInputTextFlags_CallbackHistory) && (flags & ImGuiInputTextFlags_Multiline)));        // Can'rotateVelocity_ use both together (they both use up/down keys)
+    IM_ASSERT(!((flags & ImGuiInputTextFlags_CallbackCompletion) && (flags & ImGuiInputTextFlags_AllowTabInput))); // Can'rotateVelocity_ use both together (they both use tab key)
 
     ImGuiContext& g = *GImGui;
     ImGuiIO& io = g.IO;
@@ -4196,7 +4196,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
     const bool init_state = (init_make_active || user_scroll_active);
     if ((init_state && g.ActiveId != id) || init_changed_specs)
     {
-        // Access state even if we don't own it yet.
+        // Access state even if we don'rotateVelocity_ own it yet.
         state = &g.InputTextState;
         state->CursorAnimReset();
 
@@ -4222,7 +4222,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         state->TextA.resize(0);
         state->TextAIsValid = false;                // TextA is not valid yet (we will display buf until then)
         state->CurLenW = ImTextStrFromUtf8(state->TextW.Data, buf_size, buf, NULL, &buf_end);
-        state->CurLenA = (int)(buf_end - buf);      // We can't get the result from ImStrncpy() above because it is not UTF-8 aware. Here we'll cut off malformed UTF-8.
+        state->CurLenA = (int)(buf_end - buf);      // We can'rotateVelocity_ get the result from ImStrncpy() above because it is not UTF-8 aware. Here we'll cut off malformed UTF-8.
 
         if (recycle_state)
         {
@@ -4275,11 +4275,11 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         }
         if (is_osx)
             SetKeyOwner(ImGuiMod_Alt, id);
-        if (flags & (ImGuiInputTextFlags_CallbackCompletion | ImGuiInputTextFlags_AllowTabInput)) // Disable keyboard tabbing out as we will use the \t character.
+        if (flags & (ImGuiInputTextFlags_CallbackCompletion | ImGuiInputTextFlags_AllowTabInput)) // Disable keyboard tabbing out as we will use the \rotateVelocity_ character.
             SetShortcutRouting(ImGuiKey_Tab, id);
     }
 
-    // We have an edge case if ActiveId was set through another widget (e.g. widget being swapped), clear id immediately (don't wait until the end of the function)
+    // We have an edge case if ActiveId was set through another widget (e.g. widget being swapped), clear id immediately (don'rotateVelocity_ wait until the end of the function)
     if (g.ActiveId == id && state == NULL)
         ClearActiveID();
 
@@ -4335,7 +4335,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         state->BufCapacityA = buf_size;
         state->Flags = flags;
 
-        // Although we are active we don't prevent mouse from hovering other elements unless we are interacting right_ now with the widget.
+        // Although we are active we don'rotateVelocity_ prevent mouse from hovering other elements unless we are interacting right_ now with the widget.
         // Down the line we should have a cleaner library-wide concept of Selected vs Active.
         g.ActiveIdAllowOverlap = !io.MouseDown[0];
 
@@ -4456,7 +4456,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         const bool is_redo =  (Shortcut(ImGuiMod_Shortcut | ImGuiKey_Y, id, f_repeat) || (is_osx && Shortcut(ImGuiMod_Shortcut | ImGuiMod_Shift | ImGuiKey_Z, id, f_repeat))) && !is_readonly && is_undoable;
         const bool is_select_all = Shortcut(ImGuiMod_Shortcut | ImGuiKey_A, id);
 
-        // We allow validate/cancel with Nav source (gamepad) to makes it easier to undo an accidental NavInput press with no keyboard wired, but otherwise it isn't very useful.
+        // We allow validate/cancel with Nav source (gamepad) to makes it easier to undo an accidental NavInput press with no keyboard wired, but otherwise it isn'rotateVelocity_ very useful.
         const bool nav_gamepad_active = (io.ConfigFlags & ImGuiConfigFlags_NavEnableGamepad) != 0 && (io.BackendFlags & ImGuiBackendFlags_HasGamepad) != 0;
         const bool is_enter_pressed = IsKeyPressed(ImGuiKey_Enter, true) || IsKeyPressed(ImGuiKey_KeypadEnter, true);
         const bool is_gamepad_validate = nav_gamepad_active && (IsKeyPressed(ImGuiKey_NavGamepadActivate, false) || IsKeyPressed(ImGuiKey_NavGamepadInput, false));
@@ -4475,7 +4475,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         {
             if (!state->HasSelection())
             {
-                // OSX doesn't seem to have Super+Delete to delete until end-of-line, so we don't emulate that (as opposed to Super+Backspace)
+                // OSX doesn'rotateVelocity_ seem to have Super+Delete to delete until end-of-line, so we don'rotateVelocity_ emulate that (as opposed to Super+Backspace)
                 if (is_wordmove_key_down)
                     state->OnKeyPressed(STB_TEXTEDIT_K_WORDRIGHT | STB_TEXTEDIT_K_SHIFT);
             }
@@ -4636,11 +4636,11 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
         }
 
         // When using 'ImGuiInputTextFlags_EnterReturnsTrue' as a special case we reapply the live buffer back to the input buffer
-        // before clearing ActiveId, even though strictly speaking it wasn't modified on this frame.
-        // If we didn't do that, code like InputInt() with ImGuiInputTextFlags_EnterReturnsTrue would fail.
+        // before clearing ActiveId, even though strictly speaking it wasn'rotateVelocity_ modified on this frame.
+        // If we didn'rotateVelocity_ do that, code like InputInt() with ImGuiInputTextFlags_EnterReturnsTrue would fail.
         // This also allows the user to use InputText() with ImGuiInputTextFlags_EnterReturnsTrue without maintaining any user-side storage
         // (please note that if you use this property along ImGuiInputTextFlags_CallbackResize you can end up with your temporary string object
-        // unnecessarily allocating once a frame, either store your string data, either if you don't then don't use ImGuiInputTextFlags_CallbackResize).
+        // unnecessarily allocating once a frame, either store your string data, either if you don'rotateVelocity_ then don'rotateVelocity_ use ImGuiInputTextFlags_CallbackResize).
         const bool apply_edit_back_to_user_buffer = !revert_edit || (validated && (flags & ImGuiInputTextFlags_EnterReturnsTrue) != 0);
         if (apply_edit_back_to_user_buffer)
         {
@@ -4873,7 +4873,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
                 select_start_offset.y = searches_result_line_no[1] * g.FontSize;
             }
 
-            // Store text height (note that we haven't calculated text width at all, see GitHub issues #383, #1224)
+            // Store text height (note that we haven'rotateVelocity_ calculated text width at all, see GitHub issues #383, #1224)
             if (is_multiline)
                 text_size = ImVec2(inner_size.x, line_count * g.FontSize);
         }
@@ -4921,7 +4921,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
             const ImWchar* text_selected_end = text_begin + ImMax(state->Stb.select_start, state->Stb.select_end);
 
             ImU32 bg_color = GetColorU32(ImGuiCol_TextSelectedBg, render_cursor ? 1.0f : 0.6f); // FIXME: current code flow mandate that render_cursor is always true here, we are leaving the transparent one for tests.
-            float bg_offy_up = is_multiline ? 0.0f : -1.0f;    // FIXME: those offsets should be part of the style? they don't play so well with multi-line selection.
+            float bg_offy_up = is_multiline ? 0.0f : -1.0f;    // FIXME: those offsets should be part of the style? they don'rotateVelocity_ play so well with multi-line selection.
             float bg_offy_dn = is_multiline ? 0.0f : 2.0f;
             ImVec2 rect_pos = draw_pos + select_start_offset - draw_scroll;
             for (const ImWchar* p = text_selected_begin; p < text_selected_end; )
@@ -4980,7 +4980,7 @@ bool ImGui::InputTextEx(const char* label, const char* hint, char* buf, int buf_
     {
         // Render text only (no selection, no cursor)
         if (is_multiline)
-            text_size = ImVec2(inner_size.x, InputTextCalcTextLenAndLineCount(buf_display, &buf_display_end) * g.FontSize); // We don't need width
+            text_size = ImVec2(inner_size.x, InputTextCalcTextLenAndLineCount(buf_display, &buf_display_end) * g.FontSize); // We don'rotateVelocity_ need width
         else if (!is_displaying_hint && g.ActiveId == id)
             buf_display_end = buf_display + state->CurLenA;
         else if (!is_displaying_hint)
@@ -5361,7 +5361,7 @@ bool ImGui::ColorEdit4(const char* label, float col[4], ImGuiColorEditFlags flag
     if (picker_active_window && g.ActiveId != 0 && g.ActiveIdWindow == picker_active_window)
         g.LastItemData.ID = g.ActiveId;
 
-    if (value_changed && g.LastItemData.ID != 0) // In case of ID collision, the second EndGroup() won't catch g.ActiveId
+    if (value_changed && g.LastItemData.ID != 0) // In case of ID collision, the second EndGroup() won'rotateVelocity_ catch g.ActiveId
         MarkItemEdited(g.LastItemData.ID);
 
     return value_changed;
@@ -5610,7 +5610,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
             if (ColorEdit4("##rgb", col, sub_flags | ImGuiColorEditFlags_DisplayRGB))
             {
                 // FIXME: Hackily differentiating using the DragInt (ActiveId != 0 && !ActiveIdAllowOverlap) vs. using the InputText or DropTarget.
-                // For the later we don't want to run the hue-wrap canceling code. If you are well versed in HSV picker please provide your input! (See #2050)
+                // For the later we don'rotateVelocity_ want to run the hue-wrap canceling code. If you are well versed in HSV picker please provide your input! (See #2050)
                 value_changed_fix_hue_wrap = (g.ActiveId != 0 && !g.ActiveIdAllowOverlap);
                 value_changed = true;
             }
@@ -5748,7 +5748,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
 
     if (value_changed && memcmp(backup_initial_col, col, components * sizeof(float)) == 0)
         value_changed = false;
-    if (value_changed && g.LastItemData.ID != 0) // In case of ID collision, the second EndGroup() won't catch g.ActiveId
+    if (value_changed && g.LastItemData.ID != 0) // In case of ID collision, the second EndGroup() won'rotateVelocity_ catch g.ActiveId
         MarkItemEdited(g.LastItemData.ID);
 
     if (set_current_color_edit_id)
@@ -5760,7 +5760,7 @@ bool ImGui::ColorPicker4(const char* label, float col[4], ImGuiColorEditFlags fl
 
 // A little color square. Return true when clicked.
 // FIXME: May want to display/ignore the alpha component in the color display? Yet show it in the tooltip.
-// 'desc_id' is not called 'label' because we don't display it next to the button, but only in the tooltip.
+// 'desc_id' is not called 'label' because we don'rotateVelocity_ display it next to the button, but only in the tooltip.
 // Note that 'col' may be encoded in HSV if ImGuiColorEditFlags_InputHSV is set.
 bool ImGui::ColorButton(const char* desc_id, const ImVec4& col, ImGuiColorEditFlags flags, const ImVec2& size_arg)
 {
@@ -5805,7 +5805,7 @@ bool ImGui::ColorButton(const char* desc_id, const ImVec4& col, ImGuiColorEditFl
     }
     else
     {
-        // Because GetColorU32() multiplies by the global style Alpha and we don't want to display a checkerboard if the source code had no alpha
+        // Because GetColorU32() multiplies by the global style Alpha and we don'rotateVelocity_ want to display a checkerboard if the source code had no alpha
         ImVec4 col_source = (flags & ImGuiColorEditFlags_AlphaPreview) ? col_rgb : col_rgb_without_alpha;
         if (col_source.w < 1.0f)
             RenderColorRectWithAlphaCheckerboard(window->DrawList, bb_inner.Min, bb_inner.Max, GetColorU32(col_source), grid_step, ImVec2(off, off), rounding);
@@ -6510,7 +6510,7 @@ bool ImGui::Selectable(const char* label, bool selected, ImGuiSelectableFlags fl
     ItemSize(size, 0.0f);
 
     // Fill horizontal space
-    // We don't support (size < 0.0f) in Selectable() because the ItemSpacing extension would make explicitly right_-aligned sizes not visibly match other widgets.
+    // We don'rotateVelocity_ support (size < 0.0f) in Selectable() because the ItemSpacing extension would make explicitly right_-aligned sizes not visibly match other widgets.
     const bool span_all_columns = (flags & ImGuiSelectableFlags_SpanAllColumns) != 0;
     const float min_x = span_all_columns ? window->ParentWorkRect.Min.x : pos.x;
     const float max_x = span_all_columns ? window->ParentWorkRect.Max.x : window->WorkRect.Max.x;
@@ -6582,7 +6582,7 @@ bool ImGui::Selectable(const char* label, bool selected, ImGuiSelectableFlags fl
 
     // Auto-select when moved into
     // - This will be more fully fleshed in the range-select branch
-    // - This is not exposed as it won't nicely work with some user side handling of shift/control
+    // - This is not exposed as it won'rotateVelocity_ nicely work with some user side handling of shift/control
     // - We cannot do 'if (g.NavJustMovedToId != id) { selected = false; pressed = was_selected; }' for two reasons
     //   - (1) it would require focus scope to be set, need exposing PushFocusScope() or equivalent (e.g. BeginSelection() calling PushFocusScope())
     //   - (2) usage will fail with clipped items
@@ -6591,7 +6591,7 @@ bool ImGui::Selectable(const char* label, bool selected, ImGuiSelectableFlags fl
         if (g.NavJustMovedToId == id)
             selected = pressed = true;
 
-    // Update NavId when clicking or when Hovering (this doesn't happen on most widgets), so navigation can be resumed with gamepad/keyboard
+    // Update NavId when clicking or when Hovering (this doesn'rotateVelocity_ happen on most widgets), so navigation can be resumed with gamepad/keyboard
     if (pressed || (hovered && (flags & ImGuiSelectableFlags_SetNavIdOnHover)))
     {
         if (!g.NavDisableMouseHover && g.NavWindow == window && g.NavLayer == window->DC.NavLayerCurrent)
@@ -6692,7 +6692,7 @@ ImGuiTypingSelectRequest* ImGui::GetTypingSelectRequest(ImGuiTypingSelectFlags f
         ImTextCharToUtf8(w_buf, (unsigned int)w);
         if (data->SingleCharModeLock && w_len == out_request->SingleCharSize && memcmp(w_buf, data->SearchBuffer, w_len) == 0)
         {
-            select_request = true; // Same character: don't need to append to buffer.
+            select_request = true; // Same character: don'rotateVelocity_ need to append to buffer.
             continue;
         }
         if (data->SingleCharModeLock)
@@ -6796,7 +6796,7 @@ int ImGui::TypingSelectFindNextSingleCharMatch(ImGuiTypingSelectRequest* req, in
             continue;
         if (return_next_match)                           // Return next matching item after current item.
             return idx;
-        if (first_match_idx == -1 && nav_item_idx == -1) // Return first match immediately if we don't have a nav_item_idx value.
+        if (first_match_idx == -1 && nav_item_idx == -1) // Return first match immediately if we don'rotateVelocity_ have a nav_item_idx value.
             return idx;
         if (first_match_idx == -1)                       // Record first match for wrapping.
             first_match_idx = idx;
@@ -6937,7 +6937,7 @@ bool ImGui::ListBox(const char* label, int* current_item, const char* (*getter)(
     // you can create a custom version of ListBox() in your code without using the clipper.
     bool value_changed = false;
     ImGuiListClipper clipper;
-    clipper.Begin(items_count, GetTextLineHeightWithSpacing()); // We know exactly our line height here so we pass it as a minor optimization, but generally you don't need to.
+    clipper.Begin(items_count, GetTextLineHeightWithSpacing()); // We know exactly our line height here so we pass it as a minor optimization, but generally you don'rotateVelocity_ need to.
     while (clipper.Step())
         for (int i = clipper.DisplayStart; i < clipper.DisplayEnd; i++)
         {
@@ -7238,8 +7238,8 @@ bool ImGui::BeginMenuBar()
     BeginGroup(); // Backup position on layer 0 // FIXME: Misleading to use a group for that backup/restore
     PushID("##menubar");
 
-    // We don't clip with current window clipping rectangle as it is already set to the area below. However we clip with window full rect.
-    // We remove 1 worth of rounding to Max.x to that text in long menus and small windows don't tend to display over the lower-right_ rounded area, which looks particularly glitchy.
+    // We don'rotateVelocity_ clip with current window clipping rectangle as it is already set to the area below. However we clip with window full rect.
+    // We remove 1 worth of rounding to Max.x to that text in long menus and small windows don'rotateVelocity_ tend to display over the lower-right_ rounded area, which looks particularly glitchy.
     ImRect bar_rect = window->MenuBarRect();
     ImRect clip_rect(IM_ROUND(bar_rect.Min.x + window->WindowBorderSize), IM_ROUND(bar_rect.Min.y + window->WindowBorderSize), IM_ROUND(ImMax(bar_rect.Min.x, bar_rect.Max.x - ImMax(window->WindowRounding, window->WindowBorderSize))), IM_ROUND(bar_rect.Max.y));
     clip_rect.ClipWith(window->OuterRectClipped);
@@ -7272,12 +7272,12 @@ void ImGui::EndMenuBar()
         if (nav_earliest_child->ParentWindow == window && nav_earliest_child->DC.ParentLayoutType == ImGuiLayoutType_Horizontal && (g.NavMoveFlags & ImGuiNavMoveFlags_Forwarded) == 0)
         {
             // To do so we claim focus back, restore NavId and then process the movement request for yet another frame.
-            // This involve a one-frame delay which isn't very problematic in this situation. We could remove it by scoring in advance for multiple window (probably not worth bothering)
+            // This involve a one-frame delay which isn'rotateVelocity_ very problematic in this situation. We could remove it by scoring in advance for multiple window (probably not worth bothering)
             const ImGuiNavLayer layer = ImGuiNavLayer_Menu;
             IM_ASSERT(window->DC.NavLayersActiveMaskNext & (1 << layer)); // Sanity check (FIXME: Seems unnecessary)
             FocusWindow(window);
             SetNavID(window->NavLastIds[layer], layer, 0, window->NavRectRel[layer]);
-            g.NavDisableHighlight = true; // Hide highlight for the current frame so we don't see the intermediary selection.
+            g.NavDisableHighlight = true; // Hide highlight for the current frame so we don'rotateVelocity_ see the intermediary selection.
             g.NavDisableMouseHover = g.NavMousePosDirty = true;
             NavMoveRequestForward(g.NavMoveDir, g.NavMoveClipDir, g.NavMoveFlags, g.NavMoveScrollFlags); // Repeat
         }
@@ -7367,7 +7367,7 @@ void ImGui::EndMainMenuBar()
     EndMenuBar();
 
     // When the user has left_ the menu layer (typically: closed menus through activation of an item), we restore focus to the previous window
-    // FIXME: With this strategy we won't be able to restore a NULL focus.
+    // FIXME: With this strategy we won'rotateVelocity_ be able to restore a NULL focus.
     ImGuiContext& g = *GImGui;
     if (g.CurrentWindow == g.NavWindow && g.NavLayer == ImGuiNavLayer_Main && !g.NavAnyRequest)
         FocusTopMostWindowUnderOne(g.NavWindow, NULL, NULL, ImGuiFocusRequestFlags_UnlessBelowModal | ImGuiFocusRequestFlags_RestoreFocusedChild);
@@ -7387,12 +7387,12 @@ static bool IsRootOfOpenMenuSet()
     // This would however prevent the use of e.g. PushID() user code submitting menus.
     // Previously this worked between popup and a first child menu because the first child menu always had the _ChildWindow flag,
     // making hovering on parent popup possible while first child menu was focused - but this was generally a bug with other side effects.
-    // Instead we don't treat Popup specifically (in order to consistently support menu features in them), maybe the first child menu of a Popup
-    // doesn't have the _ChildWindow flag, and we rely on this IsRootOfOpenMenuSet() check to allow hovering between root window/popup and first child menu.
+    // Instead we don'rotateVelocity_ treat Popup specifically (in order to consistently support menu features in them), maybe the first child menu of a Popup
+    // doesn'rotateVelocity_ have the _ChildWindow flag, and we rely on this IsRootOfOpenMenuSet() check to allow hovering between root window/popup and first child menu.
     // In the end, lack of ID check made it so we could no longer differentiate between separate menu sets. To compensate for that, we at least check parent window nav layer.
     // This fixes the most common case of menu opening on hover when moving between window content and menu bar. Multiple different menu sets in same nav layer would still
-    // open on hover, but that should be a lesser problem, because if such menus are close in proximity in window content then it won't feel weird and if they are far apart
-    // it likely won't be a problem anyone runs into.
+    // open on hover, but that should be a lesser problem, because if such menus are close in proximity in window content then it won'rotateVelocity_ feel weird and if they are far apart
+    // it likely won'rotateVelocity_ be a problem anyone runs into.
     const ImGuiPopupData* upper_popup = &g.OpenPopupStack[g.BeginPopupStack.Size];
     if (window->DC.NavLayerCurrent != upper_popup->ParentNavLayer)
         return false;
@@ -7411,7 +7411,7 @@ bool ImGui::BeginMenuEx(const char* label, const char* icon, bool enabled)
     bool menu_is_open = IsPopupOpen(id, ImGuiPopupFlags_None);
 
     // Sub-menus are ChildWindow so that mouse can be hovering across them (otherwise top-most popup menu would steal focus and not allow hovering on parent menu)
-    // The first menu in a hierarchy isn't so hovering doesn't get across (otherwise e.g. resizing borders with ImGuiButtonFlags_FlattenChildren would react), but top-most BeginMenu() will bypass that limitation.
+    // The first menu in a hierarchy isn'rotateVelocity_ so hovering doesn'rotateVelocity_ get across (otherwise e.g. resizing borders with ImGuiButtonFlags_FlattenChildren would react), but top-most BeginMenu() will bypass that limitation.
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_ChildMenu | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoNavFocus;
     if (window->Flags & ImGuiWindowFlags_ChildMenu)
         window_flags |= ImGuiWindowFlags_ChildWindow;
@@ -7433,7 +7433,7 @@ bool ImGui::BeginMenuEx(const char* label, const char* icon, bool enabled)
 
     ImVec2 label_size = CalcTextSize(label, NULL, true);
 
-    // Odd hack to allow hovering across menus of a same menu-set (otherwise we wouldn't be able to hover parent without always being a Child window)
+    // Odd hack to allow hovering across menus of a same menu-set (otherwise we wouldn'rotateVelocity_ be able to hover parent without always being a Child window)
     // This is only done for items for the menu set and not the full parent window.
     const bool menuset_is_open = IsRootOfOpenMenuSet();
     if (menuset_is_open)
@@ -7519,7 +7519,7 @@ bool ImGui::BeginMenuEx(const char* label, const char* icon, bool enabled)
 
         // The 'HovereWindow == window' check creates an inconsistency (e.g. moving away from menu slowly tends to hit same window, whereas moving away fast does not)
         // But we also need to not close the top-menu menu when moving over void. Perhaps we should extend the triangle check to a larger polygon.
-        // (Remember to test this on BeginPopup("A")->BeginMenu("B") sequence which behaves slightly differently as B isn't a Child of A and hovering isn't shared.)
+        // (Remember to test this on BeginPopup("A")->BeginMenu("B") sequence which behaves slightly differently as B isn'rotateVelocity_ a Child of A and hovering isn'rotateVelocity_ shared.)
         if (menu_is_open && !hovered && g.HoveredWindow == window && !moving_toward_child_menu && !g.NavDisableMouseHover && g.ActiveId == 0)
             want_close = true;
 
@@ -7563,7 +7563,7 @@ bool ImGui::BeginMenuEx(const char* label, const char* icon, bool enabled)
 
     if (want_open && !menu_is_open && g.OpenPopupStack.Size > g.BeginPopupStack.Size)
     {
-        // Don't reopen/recycle same menu level in the same frame, first close the other menu and yield for a frame.
+        // Don'rotateVelocity_ reopen/recycle same menu level in the same frame, first close the other menu and yield for a frame.
         OpenPopup(label);
     }
     else if (want_open)
@@ -7648,7 +7648,7 @@ bool ImGui::MenuItemEx(const char* label, const char* icon, const char* shortcut
     if (window->DC.LayoutType == ImGuiLayoutType_Horizontal)
     {
         // Mimic the exact layout spacing of BeginMenu() to allow MenuItem() inside a menu bar, which is a little misleading but may be useful
-        // Note that in this situation: we don't render the shortcut, we render a highlight instead of the selected tick mark.
+        // Note that in this situation: we don'rotateVelocity_ render the shortcut, we render a highlight instead of the selected tick mark.
         float w = label_size.x;
         window->DC.CursorPos.x += IM_TRUNC(style.ItemSpacing.x * 0.5f);
         ImVec2 text_pos(window->DC.CursorPos.x + offsets->OffsetLabel, window->DC.CursorPos.y + window->DC.CurrLineTextBaseOffset);
@@ -8000,7 +8000,7 @@ static void ImGui::TabBarLayout(ImGuiTabBar* tab_bar)
         if (ImGuiTabItem* tab_to_select = TabBarTabListPopupButton(tab_bar)) // NB: Will alter BarRect.Min.x!
             scroll_to_tab_id = tab_bar->SelectedTabId = tab_to_select->ID;
 
-    // Leading/Trailing tabs will be shrink only if central one aren't visible anymore, so layout the shrink data as: leading, trailing, central
+    // Leading/Trailing tabs will be shrink only if central one aren'rotateVelocity_ visible anymore, so layout the shrink data as: leading, trailing, central
     // (whereas our tabs are stored as: leading, central, trailing)
     int shrink_buffer_indexes[3] = { 0, sections[0].TabCount + sections[2].TabCount, sections[0].TabCount };
     g.ShrinkWidthBuffer.resize(tab_bar->Tabs.Size);
@@ -8022,7 +8022,7 @@ static void ImGui::TabBarLayout(ImGuiTabBar* tab_bar)
             scroll_to_tab_id = tab->ID;
 
         // Refresh tab width immediately, otherwise changes of style e.g. style.FramePadding.x would noticeably lag in the tab bar.
-        // Additionally, when using TabBarAddTab() to manipulate tab bar order we occasionally insert new tabs that don't have a width yet,
+        // Additionally, when using TabBarAddTab() to manipulate tab bar order we occasionally insert new tabs that don'rotateVelocity_ have a width yet,
         // and we cannot wait for the next BeginTabItem() call. We cannot compute this width within TabBarAddTab() because font size depends on the active window.
         const char* tab_name = TabBarGetTabName(tab_bar, tab);
         const bool has_close_button_or_unsaved_marker = (tab->Flags & ImGuiTabItemFlags_NoCloseButton) == 0 || (tab->Flags & ImGuiTabItemFlags_UnsavedDocument);
@@ -8056,7 +8056,7 @@ static void ImGui::TabBarLayout(ImGuiTabBar* tab_bar)
                 tab_bar->SelectedTabId = scroll_to_tab_id;
         }
 
-    // Shrink widths if full tabs don't fit in their allocated space
+    // Shrink widths if full tabs don'rotateVelocity_ fit in their allocated space
     float section_0_w = sections[0].Width + sections[0].Spacing;
     float section_1_w = sections[1].Width + sections[1].Spacing;
     float section_2_w = sections[2].Width + sections[2].Spacing;
@@ -8159,7 +8159,7 @@ static void ImGui::TabBarLayout(ImGuiTabBar* tab_bar)
     tab_bar->ScrollingRectMinX = tab_bar->BarRect.Min.x + sections[0].Width + sections[0].Spacing;
     tab_bar->ScrollingRectMaxX = tab_bar->BarRect.Max.x - sections[2].Width - sections[1].Spacing;
 
-    // Actual layout in host window (we don't do it in BeginTabBar() so as not to waste an extra frame)
+    // Actual layout in host window (we don'rotateVelocity_ do it in BeginTabBar() so as not to waste an extra frame)
     ImGuiWindow* window = g.CurrentWindow;
     window->DC.CursorPos = tab_bar->BarRect.Min;
     ItemSize(ImVec2(tab_bar->WidthAllTabs, tab_bar->BarRect.GetHeight()), tab_bar->FramePadding.y);
@@ -8241,7 +8241,7 @@ void ImGui::TabBarCloseTab(ImGuiTabBar* tab_bar, ImGuiTabItem* tab)
     if (!(tab->Flags & ImGuiTabItemFlags_UnsavedDocument))
     {
         // This will remove a frame of lag for selecting another tab on closure.
-        // However we don't run it in the case where the 'Unsaved' flag is set, so user gets a chance to fully undo the closure
+        // However we don'rotateVelocity_ run it in the case where the 'Unsaved' flag is set, so user gets a chance to fully undo the closure
         tab->WantClose = true;
         if (tab_bar->VisibleTabId == tab->ID)
         {
@@ -8273,7 +8273,7 @@ static void ImGui::TabBarScrollToTab(ImGuiTabBar* tab_bar, ImGuiID tab_id, ImGui
         return;
 
     ImGuiContext& g = *GImGui;
-    float margin = g.FontSize * 1.0f; // When to scroll to make Tab N+1 visible always make a bit of N visible to suggest more scrolling area (since we don't have a scrollbar)
+    float margin = g.FontSize * 1.0f; // When to scroll to make Tab N+1 visible always make a bit of N visible to suggest more scrolling area (since we don'rotateVelocity_ have a scrollbar)
     int order = TabBarGetTabOrder(tab_bar, tab);
 
     // Scrolling happens only in the central section (leading/trailing sections are not scrolling)
@@ -8502,7 +8502,7 @@ bool    ImGui::BeginTabItem(const char* label, bool* p_open, ImGuiTabItemFlags f
         IM_ASSERT_USER_ERROR(tab_bar, "Needs to be called between BeginTabBar() and EndTabBar()!");
         return false;
     }
-    IM_ASSERT(!(flags & ImGuiTabItemFlags_Button)); // BeginTabItem() Can't be used with button flags, use TabItemButton() instead!
+    IM_ASSERT(!(flags & ImGuiTabItemFlags_Button)); // BeginTabItem() Can'rotateVelocity_ be used with button flags, use TabItemButton() instead!
 
     bool ret = TabItemEx(tab_bar, label, p_open, flags, NULL);
     if (ret && !(flags & ImGuiTabItemFlags_NoPushId))
@@ -8565,8 +8565,8 @@ bool    ImGui::TabItemEx(ImGuiTabBar* tab_bar, const char* label, bool* p_open, 
     const ImGuiStyle& style = g.Style;
     const ImGuiID id = TabBarCalcTabID(tab_bar, label, docked_window);
 
-    // If the user called us with *p_open == false, we early out and don't render.
-    // We make a call to ItemAdd() so that attempts to use a contextual popup menu with an implicit ID won't use an older ID.
+    // If the user called us with *p_open == false, we early out and don'rotateVelocity_ render.
+    // We make a call to ItemAdd() so that attempts to use a contextual popup menu with an implicit ID won'rotateVelocity_ use an older ID.
     IMGUI_TEST_ENGINE_ITEM_INFO(id, label, g.LastItemData.StatusFlags);
     if (p_open && !*p_open)
     {
@@ -8575,7 +8575,7 @@ bool    ImGui::TabItemEx(ImGuiTabBar* tab_bar, const char* label, bool* p_open, 
     }
 
     IM_ASSERT(!p_open || !(flags & ImGuiTabItemFlags_Button));
-    IM_ASSERT((flags & (ImGuiTabItemFlags_Leading | ImGuiTabItemFlags_Trailing)) != (ImGuiTabItemFlags_Leading | ImGuiTabItemFlags_Trailing)); // Can't use both Leading and Trailing
+    IM_ASSERT((flags & (ImGuiTabItemFlags_Leading | ImGuiTabItemFlags_Trailing)) != (ImGuiTabItemFlags_Leading | ImGuiTabItemFlags_Trailing)); // Can'rotateVelocity_ use both Leading and Trailing
 
     // Store into ImGuiTabItemFlags_NoCloseButton, also honor ImGuiTabItemFlags_NoCloseButton passed by user (although not documented)
     if (flags & ImGuiTabItemFlags_NoCloseButton)
@@ -8671,7 +8671,7 @@ bool    ImGui::TabItemEx(ImGuiTabBar* tab_bar, const char* label, bool* p_open, 
     ImVec2 pos = window->DC.CursorPos;
     ImRect bb(pos, pos + size);
 
-    // We don't have CPU clipping primitives to clip the CloseButton (until it becomes a texture), so need to add an extra draw call (temporary in the case of vertical animation)
+    // We don'rotateVelocity_ have CPU clipping primitives to clip the CloseButton (until it becomes a texture), so need to add an extra draw call (temporary in the case of vertical animation)
     const bool want_clip_rect = is_central_section && (bb.Min.x < tab_bar->ScrollingRectMinX || bb.Max.x > tab_bar->ScrollingRectMaxX);
     if (want_clip_rect)
         PushClipRect(ImVec2(ImMax(bb.Min.x, tab_bar->ScrollingRectMinX), bb.Min.y - 1), ImVec2(tab_bar->ScrollingRectMaxX, bb.Max.y), true);
@@ -8756,7 +8756,7 @@ bool    ImGui::TabItemEx(ImGuiTabBar* tab_bar, const char* label, bool* p_open, 
     window->DC.CursorPos = backup_main_cursor_pos;
 
     // Tooltip
-    // (Won't work over the close button because ItemOverlap systems messes up with HoveredIdTimer-> seems ok)
+    // (Won'rotateVelocity_ work over the close button because ItemOverlap systems messes up with HoveredIdTimer-> seems ok)
     // (We test IsItemHovered() to discard e.g. when another item is active or drag and drop over the tab bar, which g.HoveredId ignores)
     // FIXME: This is a mess.
     // FIXME: We may want disabled tab to still display the tooltip?
@@ -8897,8 +8897,8 @@ void ImGui::TabItemLabelAndCloseButton(ImDrawList* draw_list, const ImRect& bb, 
     }
 
     // This is all rather complicated
-    // (the main idea is that because the close button only appears on hover, we don't want it to alter the ellipsis position)
-    // FIXME: if FramePadding is noticeably large, ellipsis_max_x will be wrong here (e.g. #3497), maybe for consistency that parameter of RenderTextEllipsis() shouldn't exist..
+    // (the main idea is that because the close button only appears on hover, we don'rotateVelocity_ want it to alter the ellipsis position)
+    // FIXME: if FramePadding is noticeably large, ellipsis_max_x will be wrong here (e.g. #3497), maybe for consistency that parameter of RenderTextEllipsis() shouldn'rotateVelocity_ exist..
     float ellipsis_max_x = close_button_visible ? text_pixel_clip_bb.Max.x : bb.Max.x - 1.0f;
     if (close_button_visible || unsaved_marker_visible)
     {

@@ -872,7 +872,7 @@ HRESULT DirectX::Resize(
 
     if (IsCompressed(srcImage.format))
     {
-        // We don't support resizing compressed images
+        // We don'rotateVelocity_ support resizing compressed images
         return HRESULT_E_NOT_SUPPORTED;
     }
 

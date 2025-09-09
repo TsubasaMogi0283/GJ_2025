@@ -38,7 +38,7 @@ namespace SingleCalculation{
 	/// </summary>
 	/// <param name="start">始点</param>
 	/// <param name="end">終点</param>
-	/// <param name="t">値</param>
+	/// <param name="rotateVelocity_">値</param>
 	/// <returns>始点から終点までの値</returns>
 	float_t Lerp(const float_t& start, const float_t& end, const float_t& t);
 

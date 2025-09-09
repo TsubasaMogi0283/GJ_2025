@@ -199,7 +199,7 @@ HRESULT DirectX::FlipRotate(
 
     if (IsCompressed(srcImage.format))
     {
-        // We don't support flip/rotate operations on compressed images
+        // We don'rotateVelocity_ support flip/rotate operations on compressed images
         return HRESULT_E_NOT_SUPPORTED;
     }
 
@@ -292,7 +292,7 @@ HRESULT DirectX::FlipRotate(
 
     if (IsCompressed(metadata.format))
     {
-        // We don't support flip/rotate operations on compressed images
+        // We don'rotateVelocity_ support flip/rotate operations on compressed images
         return HRESULT_E_NOT_SUPPORTED;
     }
 

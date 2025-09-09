@@ -601,7 +601,7 @@ HRESULT DirectX::PrepareUpload(
             return E_INVALIDARG;
 
         if (metadata.arraySize > 1)
-            // Direct3D 12 doesn't support arrays of 3D textures
+            // Direct3D 12 doesn'rotateVelocity_ support arrays of 3D textures
             return HRESULT_E_NOT_SUPPORTED;
 
         for (size_t plane = 0; plane < numberOfPlanes; ++plane)

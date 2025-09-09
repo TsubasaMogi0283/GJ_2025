@@ -161,7 +161,7 @@ bool DirectX::Internal::DXGIToWIC(DXGI_FORMAT format, GUID& guid, bool ignoreRGB
     case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
         if (ignoreRGBvsBGR)
         {
-            // If we are not doing conversion so don't really care about BGR vs RGB color-order,
+            // If we are not doing conversion so don'rotateVelocity_ really care about BGR vs RGB color-order,
             // we can use the canonical WIC 32bppBGRA format which avoids an extra format conversion when using the WIC scaler
             memcpy(&guid, &GUID_WICPixelFormat32bppBGRA, sizeof(GUID));
         }

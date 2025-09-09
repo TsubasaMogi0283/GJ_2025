@@ -113,8 +113,12 @@ public:
 	/// <summary>
 	/// 処理の終了
 	/// </summary>
-	void SetIsEnd() {
+	inline void SetIsEnd() {
 		this->isEnd_ = true;
+	}
+
+	inline void SetIsGameEnd() {
+		this->isGameEnd_ = true;
 	}
 
 private:
@@ -151,5 +155,8 @@ private:
 	std::unique_ptr<BaseTitleScene> detailScene_ = nullptr;
 	//処理終わり
 	bool isEnd_ = false;
+
+
+	bool isGameEnd_ = false;
 
 };

@@ -213,7 +213,7 @@ namespace DirectX
         // Some older DXTn DDS files incorrectly handle mipchain tails for blocks smaller than 4x4
 
         DDS_FLAGS_FORCE_DX10_EXT = 0x10000,
-        // Always use the 'DX10' header extension for DDS writer (i.e. don't try to write DX9 compatible DDS files)
+        // Always use the 'DX10' header extension for DDS writer (i.e. don'rotateVelocity_ try to write DX9 compatible DDS files)
 
         DDS_FLAGS_FORCE_DX10_EXT_MISC2 = 0x20000,
         // DDS_FLAGS_FORCE_DX10_EXT including miscFlags2 information (result may not be compatible with D3DX10 or D3DX11)

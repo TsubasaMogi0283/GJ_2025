@@ -306,7 +306,7 @@ HRESULT DirectX::CopyRectangle(
 
     if (sbpp < 8)
     {
-        // We don't support monochrome (DXGI_FORMAT_R1_UNORM)
+        // We don'rotateVelocity_ support monochrome (DXGI_FORMAT_R1_UNORM)
         return HRESULT_E_NOT_SUPPORTED;
     }
 
@@ -344,7 +344,7 @@ HRESULT DirectX::CopyRectangle(
 
     if (dbpp < 8)
     {
-        // We don't support monochrome (DXGI_FORMAT_R1_UNORM)
+        // We don'rotateVelocity_ support monochrome (DXGI_FORMAT_R1_UNORM)
         return HRESULT_E_NOT_SUPPORTED;
     }
 

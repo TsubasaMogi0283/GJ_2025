@@ -146,8 +146,8 @@ STBRP_DEF void stbrp_init_target (stbrp_context *context, int width, int height,
 //       1. make sure 'num_nodes' >= 'width'
 //   or  2. call stbrp_allow_out_of_mem() defined below with 'allow_out_of_mem = 1'
 //
-// If you don't do either of the above things, widths will be quantized to multiples
-// of small integers to guarantee the algorithm doesn't run out of temporary storage.
+// If you don'rotateVelocity_ do either of the above things, widths will be quantized to multiples
+// of small integers to guarantee the algorithm doesn'rotateVelocity_ run out of temporary storage.
 //
 // If you do #2, then the non-quantized algorithm will be used, but the algorithm
 // may run out of temporary storage and be unable to pack some rectangles.
@@ -173,7 +173,7 @@ enum
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// the details of the following structures don't matter to you, but they must
+// the details of the following structures don'rotateVelocity_ matter to you, but they must
 // be visible so you can handle the memory allocations for them
 
 struct stbrp_node
@@ -245,7 +245,7 @@ STBRP_DEF void stbrp_setup_heuristic(stbrp_context *context, int heuristic)
 STBRP_DEF void stbrp_setup_allow_out_of_mem(stbrp_context *context, int allow_out_of_mem)
 {
    if (allow_out_of_mem)
-      // if it's ok to run out of memory, then don't bother aligning them;
+      // if it's ok to run out of memory, then don'rotateVelocity_ bother aligning them;
       // this gives better packing, but may fail due to OOM (even though
       // the rectangles easily fit). @TODO a smarter approach would be to only
       // quantize once we've hit OOM, then we could get rid of this parameter.
@@ -355,7 +355,7 @@ static stbrp__findresult stbrp__skyline_find_best_pos(stbrp_context *c, int widt
    width -= width % c->align;
    STBRP_ASSERT(width % c->align == 0);
 
-   // if it can't possibly fit, bail immediately
+   // if it can'rotateVelocity_ possibly fit, bail immediately
    if (width > c->width || height > c->height) {
       fr.prev_link = NULL;
       fr.x = fr.y = 0;
@@ -454,7 +454,7 @@ static stbrp__findresult stbrp__skyline_pack_rectangle(stbrp_context *context, i
 
    // bail if:
    //    1. it failed
-   //    2. the best node doesn't fit (we don't always check this)
+   //    2. the best node doesn'rotateVelocity_ fit (we don'rotateVelocity_ always check this)
    //    3. we're out of memory
    if (res.prev_link == NULL || res.y + height > context->height || context->free_head == NULL) {
       res.prev_link = NULL;
@@ -483,7 +483,7 @@ static stbrp__findresult stbrp__skyline_pack_rectangle(stbrp_context *context, i
    }
 
    // from here, traverse cur and free the nodes, until we get to one
-   // that shouldn't be freed
+   // that shouldn'rotateVelocity_ be freed
    while (cur->next && cur->next->x <= res.x + width) {
       stbrp_node *next = cur->next;
       // move the current node to the free list
