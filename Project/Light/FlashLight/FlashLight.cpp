@@ -65,7 +65,7 @@ void FlashLight::Initialize() {
 	attackWhiteFadeSprite_->SetTransparency(INITIAL_TRANSPARENCY);
 	//ゲージのスプライトを生成
 	uint32_t gaugeTextureHandle = textureManager_->Load("Resources/Sprite/Gauge/Gauge.png");
-	chargeGaugeSpritePosition_ = globalVariables_->GetVector2Value(FLASH_LIGHT_CHARGE_VALUE_, CHARGE_GAUGE_SPRITE_POSITION_STRING_);
+	chargeGaugeSpritePosition_ = {.x=20.0f,.y=20.0f};
 	chargeGaugeSprite_.reset(Elysia::Sprite::Create(gaugeTextureHandle, chargeGaugeSpritePosition_));
 	//チャージの増減値
 	chargeIncreaseValue_ = globalVariables_->GetFloatValue(FLASH_LIGHT_CHARGE_VALUE_, CHARGE_INCREASE_STRING_);
@@ -267,7 +267,7 @@ void FlashLight::Charge() {
 			if (chargeValue_ >= MAX_CHARGE_VALUE_) {
 				//赤
 				chargeColor_ = Convert::Color::Adapter(RED);
-				//今日攻撃
+				//強攻撃
 				chargeConditionValue_ = ChargeCondition::StrongChargeAttack;
 			}
 			else {

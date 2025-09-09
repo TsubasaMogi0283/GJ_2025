@@ -172,14 +172,15 @@ void GameScene::PlayerMove(){
 	
 	//エンターキーまたはYボタンを離した瞬間に攻撃する
 	if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
-		isReleaseAttack_ = true;
+		//完全にチャージしないとダメ
+		if (player_->GetFlashLight()->GetChargeCondition() == ChargeCondition::StrongChargeAttack) {
+			//カメラシェイク
+			player_->GetEyeCamera()->SetIsShake(true);
+			isReleaseAttack_ = true;
+		}
+
 		//クールタイムにする
 		player_->GetFlashLight()->SetIsCoolTime(true);
-		//カメラの振動
-		//攻撃できる時だけにする。
-		if (player_->GetFlashLight()->GetChargeCondition() >= ChargeCondition::NormalChargeAttack) {
-			player_->GetEyeCamera()->SetIsShake(true);
-		}
 	}
 	else {
 		isReleaseAttack_ = false;
@@ -258,11 +259,11 @@ void GameScene::PlayerRotate() {
 
 	//±π/6くらいに制限を掛けておきたい
 	//それ以下以上だと首が大変なことになっているように見えるからね
-	if (phi_ > std::numbers::pi_v<float_t> / 6.0f) {
-		phi_ = std::numbers::pi_v<float_t> / 6.0f;
+	if (phi_ > std::numbers::pi_v<float_t> / 12.0f) {
+		phi_ = std::numbers::pi_v<float_t> / 12.0f;
 	}
-	if (phi_ < -std::numbers::pi_v<float_t> / 6.0f) {
-		phi_ = -std::numbers::pi_v<float_t> / 6.0f;
+	if (phi_ < -std::numbers::pi_v<float_t> / 12.0f) {
+		phi_ = -std::numbers::pi_v<float_t> / 12.0f;
 	}
 }
 
@@ -407,6 +408,9 @@ void GameScene::DrawPostEffect() {
 }
 
 void GameScene::DrawSprite() {
+	//プレイヤー
+	player_->DrawSprite();
+
 	//矢印
 	escapeAssistArrow_->DrawSprite();
 
