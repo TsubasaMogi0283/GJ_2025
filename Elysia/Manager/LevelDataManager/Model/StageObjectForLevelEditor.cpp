@@ -151,3 +151,9 @@ void StageObjectForLevelEditor::Draw(const Camera& camera, const SpotLight& spot
 	//モデルの描画
 	model_->Draw(worldTransform_, camera, material_, spotLight);
 }
+
+
+void StageObjectForLevelEditor::UpdateDisappearing()
+{
+
+}

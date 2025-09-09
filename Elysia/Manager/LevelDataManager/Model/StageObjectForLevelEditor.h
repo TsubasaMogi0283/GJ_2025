@@ -59,6 +59,11 @@ public:
 		this->size_ = size;
 	}
 
+
+private:
+
+	void UpdateDisappearing();
+
 private:
 	//AABB用のサイズ
 	Vector3 size_ = {};

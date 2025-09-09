@@ -32,6 +32,12 @@ enum ColliderType {
 /// </summary>
 class Collider{
 public:
+
+	/// <summary>
+	/// 仮想デストラクタ : 基底クラスには仮想デストラクタ作りなさい　by Tsumita_Hinata
+	/// </summary>
+	virtual ~Collider() = default;
+
 	/// <summary>
 	/// 接触
 	/// </summary>

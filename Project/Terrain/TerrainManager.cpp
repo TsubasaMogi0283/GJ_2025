@@ -32,7 +32,7 @@ void TerrainManager::Update()
 
 	if (input_->IsTriggerKey(DIK_I)) {
 		for (auto& terr : terrains_) {
-			terr->On();
+			terr->OnReveal();
 		}
 	}
 }
@@ -64,4 +64,18 @@ void TerrainManager::Create_NewWall(const Vector3& pos)
 	wall->SetTranslate(pos); // 座標の設定
 
 	terrains_.push_back(std::move(wall));
+}
+
+std::vector<TerrainCollider*> TerrainManager::GetAllColliders() const
+{
+	std::vector<TerrainCollider*> colliders;
+	colliders.reserve(terrains_.size());
+
+	for (const auto& terrain : terrains_) {
+		if (terrain && terrain->GetCollision()) {
+			colliders.push_back(terrain->GetCollision());
+		}
+	}
+
+	return colliders;
 }

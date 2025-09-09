@@ -10,6 +10,7 @@
 #include <array>
 #include <numbers>
 #include <string>
+#include <array>
 #include "Sprite.h"
 #include "TitleScene/BaseTitleScene/BaseTitleScene.h"
 

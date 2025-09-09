@@ -214,6 +214,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Player\PlayerCollisionToNormalEnemyAttack.cpp" />
     <ClCompile Include="Project\Player\PlayerCollisionToStageObject.cpp" />
     <ClCompile Include="Project\Player\PlayerCollisionToStrongEnemy.cpp" />
+    <ClCompile Include="Project\Terrain\Collider\TerrainCollider.cpp" />
     <ClCompile Include="Project\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Project\Terrain\ITerrain.cpp" />
     <ClCompile Include="Project\Terrain\TerrainManager.cpp" />
@@ -517,6 +518,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Player\PlayerCollisionToNormalEnemyAttack.h" />
     <ClInclude Include="Project\Player\PlayerCollisionToStageObject.h" />
     <ClInclude Include="Project\Player\PlayerCollisionToStrongEnemy.h" />
+    <ClInclude Include="Project\Terrain\Collider\TerrainCollider.h" />
     <ClInclude Include="Project\Terrain\Floor\Floor.h" />
     <ClInclude Include="Project\Terrain\ITerrain.h" />
     <ClInclude Include="Project\Terrain\TerrainManager.h" />
