@@ -54,19 +54,30 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 		isArrowDown_ = true;
 	}
 
+	startScale_ = { .x = NO_SELECTED_SCALE_ ,.y = NO_SELECTED_SCALE_ ,.z = NO_SELECTED_SCALE_ };
+	endScale_ = { .x = NO_SELECTED_SCALE_ ,.y = NO_SELECTED_SCALE_ ,.z = NO_SELECTED_SCALE_ };
+
+	//上選択時
 	if (isArrowUp_ == true) {
-		const float_t OFFSET = 0.1f;
-		arrowPosition_.y = startInitialPosition_.y+OFFSET;
+		arrowPosition_.y = startInitialPosition_.y+ARROW_POSITION_OFFSET_;
+		startScale_ = { .x = SELECTED_SCALE_ ,.y = SELECTED_SCALE_ ,.z = SELECTED_SCALE_ };
 	}
+	//下選択時
 	if (isArrowDown_ == true) {
-		const float_t OFFSET = 0.1f;
-		arrowPosition_.y = endInitialPosition_.y+OFFSET;
+		arrowPosition_.y = endInitialPosition_.y+ARROW_POSITION_OFFSET_;
+		endScale_ = { .x = SELECTED_SCALE_ ,.y = SELECTED_SCALE_ ,.z = SELECTED_SCALE_ };
 	}
 
 	//XZはそのままの座標にする
 	arrowPosition_.x = arrowInitialPosition_.x;
 	arrowPosition_.z = arrowInitialPosition_.z;
 	
+	//スケールの設定
+	levelDataManager_->SetScale(levelDataHandle_, START_, startScale_);
+	levelDataManager_->SetScale(levelDataHandle_, END_, endScale_);
+
+
+
 	//矢印の設定
 	levelDataManager_->SetRotate(levelDataHandle_, ARROW_, arrowRotate_);
 	levelDataManager_->SetTranslate(levelDataHandle_, ARROW_, arrowPosition_);
@@ -97,8 +108,8 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 			rotateT_ = std::clamp(rotateT_, 0.0f, 1.0f);
 			float_t newRotateT = Easing::EaseOutBack(rotateT_);
 			
-			t = SingleCalculation::Lerp(RAPID_ROTATE_VALUE_, 0.0f, newRotateT);
-			arrowRotate_.x += t;
+			rotateVelocity_ = SingleCalculation::Lerp(RAPID_ROTATE_VALUE_, 0.0f, newRotateT);
+			arrowRotate_.x += rotateVelocity_;
 		}
 	}
 	else {
@@ -136,7 +147,7 @@ void SelectTitleScene::DrawSprite(){
 
 void SelectTitleScene::DisplayImGui(){
 	ImGui::Begin("ゲームシーンへ(タイトル)");
-	ImGui::InputFloat("A", &t);
+	ImGui::InputFloat("A", &rotateVelocity_);
 	ImGui::InputFloat("回転T", &rotateT_);
 	ImGui::Checkbox("上", &isArrowUp_);
 	ImGui::Checkbox("下", &isArrowDown_);

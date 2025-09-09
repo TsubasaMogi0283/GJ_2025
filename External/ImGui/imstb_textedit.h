@@ -92,7 +92,7 @@
 //      STB_TEXTEDIT_UNDOSTATECOUNT       the colliderNumber_ of undo states to allow
 //      STB_TEXTEDIT_UNDOCHARCOUNT        the colliderNumber_ of characters to store in the undo buffer
 //
-//   If you don't define these, they are set to permissive types and
+//   If you don'rotateVelocity_ define these, they are set to permissive types and
 //   moderate sizes. The undo system does no memory allocations, so
 //   it grows STB_TexteditState by the worst-case storage which is (in bytes):
 //
@@ -263,7 +263,7 @@
 // down-arrow movement.)
 //
 // If it's run in a widget that *has* cached the layout, then this is less
-// efficient, but it's not horrible on modern computers. But you wouldn't
+// efficient, but it's not horrible on modern computers. But you wouldn'rotateVelocity_
 // want to edit million-line files with it.
 
 
@@ -382,7 +382,7 @@ typedef struct
 ////
 
 
-// implementation isn't include-guarded, since it might have indirectly
+// implementation isn'rotateVelocity_ include-guarded, since it might have indirectly
 // included just the "header" portion
 #ifdef STB_TEXTEDIT_IMPLEMENTATION
 
@@ -447,7 +447,7 @@ static int stb_text_locate_coord(STB_TEXTEDIT_STRING *str, float x, float y)
          }
          prev_x += w;
       }
-      // shouldn't happen, but if it does, fall through to end-of-line case
+      // shouldn'rotateVelocity_ happen, but if it does, fall through to end-of-line case
    }
 
    // if the last character is a newline, return that. otherwise return 'after' the last character
@@ -729,7 +729,7 @@ retry:
          if (c > 0) {
             STB_TEXTEDIT_CHARTYPE ch = (STB_TEXTEDIT_CHARTYPE) c;
 
-            // can't add newline in single-line mode
+            // can'rotateVelocity_ add newline in single-line mode
             if (c == '\n' && state->single_line)
                break;
 
@@ -882,7 +882,7 @@ retry:
                break;
 
             // [DEAR IMGUI]
-            // going down while being on the last line shouldn't bring us to that line end
+            // going down while being on the last line shouldn'rotateVelocity_ bring us to that line end
             if (STB_TEXTEDIT_GETCHAR(str, find.first_char + find.length - 1) != STB_TEXTEDIT_NEWLINE)
                break;
 
@@ -1138,7 +1138,7 @@ static void stb_textedit_discard_undo(StbUndoState *state)
 // discard the oldest entry in the redo list--it's bad if this
 // ever happens, but because undo & redo have to store the actual
 // characters in different cases, the redo character buffer can
-// fill up even though the undo buffer didn't
+// fill up even though the undo buffer didn'rotateVelocity_
 static void stb_textedit_discard_redo(StbUndoState *state)
 {
    int k = STB_TEXTEDIT_UNDOSTATECOUNT-1;
@@ -1179,14 +1179,14 @@ static StbUndoRecord *stb_text_create_undo_record(StbUndoState *state, int numch
    if (state->undo_point == STB_TEXTEDIT_UNDOSTATECOUNT)
       stb_textedit_discard_undo(state);
 
-   // if the characters to store won't possibly fit in the buffer, we can't undo
+   // if the characters to store won'rotateVelocity_ possibly fit in the buffer, we can'rotateVelocity_ undo
    if (numchars > STB_TEXTEDIT_UNDOCHARCOUNT) {
       state->undo_point = 0;
       state->undo_char_point = 0;
       return NULL;
    }
 
-   // if we don't have enough free characters in the buffer, we have to make room
+   // if we don'rotateVelocity_ have enough free characters in the buffer, we have to make room
    while (state->undo_char_point + numchars > STB_TEXTEDIT_UNDOCHARCOUNT)
       stb_textedit_discard_undo(state);
 
@@ -1236,8 +1236,8 @@ static void stb_text_undo(STB_TEXTEDIT_STRING *str, STB_TexteditState *state)
 
       // there are three cases:
       //    there's enough room to store the characters
-      //    characters stored for *redoing* don't leave room for redo
-      //    characters stored for *undoing* don't leave room for redo
+      //    characters stored for *redoing* don'rotateVelocity_ leave room for redo
+      //    characters stored for *undoing* don'rotateVelocity_ leave room for redo
       // if the last is true, we have to bail
 
       if (s->undo_char_point + u.delete_length >= STB_TEXTEDIT_UNDOCHARCOUNT) {

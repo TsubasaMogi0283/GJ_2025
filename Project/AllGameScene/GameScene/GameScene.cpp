@@ -50,7 +50,7 @@ void GameScene::Initialize() {
 	//最初はコントロールは出来ない用にする
 	player_->SetIsAbleToControll(false);
 	//向き
-	theta_ = -std::numbers::pi_v<float_t> / 2.0f;
+	theta_ = std::numbers::pi_v<float_t>/2.0f ;
 
 	levelDataManager_->SetListener(levelHandle_, player_.get());
 

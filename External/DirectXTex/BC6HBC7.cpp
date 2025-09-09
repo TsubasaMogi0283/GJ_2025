@@ -1851,7 +1851,7 @@ void D3DX_BC6H::Encode(bool bSigned, const HDRColorA* const pIn) noexcept
 _Use_decl_annotations_
 int D3DX_BC6H::Quantize(int iValue, int prec, bool bSigned) noexcept
 {
-    assert(prec > 1);	// didn't bother to make it work for 1
+    assert(prec > 1);	// didn'rotateVelocity_ bother to make it work for 1
     int q, s = 0;
     if (bSigned)
     {

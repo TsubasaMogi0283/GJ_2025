@@ -1534,7 +1534,7 @@ HRESULT DirectX::GetMetadataFromTGAFile(const wchar_t* szFile, TGA_FLAGS flags, 
         return E_FAIL;
     }
 
-    // Read the standard header (we don't need the file footer to parse the file)
+    // Read the standard header (we don'rotateVelocity_ need the file footer to parse the file)
     uint8_t header[TGA_HEADER_LEN] = {};
 
 #ifdef _WIN32

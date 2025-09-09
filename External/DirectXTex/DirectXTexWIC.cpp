@@ -82,7 +82,7 @@ namespace
         { GUID_WICPixelFormat64bppPRGBAHalf,        GUID_WICPixelFormat64bppRGBAHalf, TEX_ALPHA_MODE_UNKNOWN }, // DXGI_FORMAT_R16G16B16A16_FLOAT
     #endif
 
-        // We don't support n-channel formats
+        // We don'rotateVelocity_ support n-channel formats
     };
 
     //-------------------------------------------------------------------------------------
@@ -641,7 +641,7 @@ namespace
             }
             else if (hr == WINCODEC_ERR_UNSUPPORTEDOPERATION)
             {
-                // Some formats just don't support metadata (BMP, ICO, etc.), so ignore this failure
+                // Some formats just don'rotateVelocity_ support metadata (BMP, ICO, etc.), so ignore this failure
                 hr = S_OK;
             }
         }
@@ -958,7 +958,7 @@ namespace
         }
         else if (hr == WINCODEC_ERR_UNSUPPORTEDOPERATION)
         {
-            // Some formats just don't support metadata (BMP, ICO, etc.), so ignore this failure
+            // Some formats just don'rotateVelocity_ support metadata (BMP, ICO, etc.), so ignore this failure
             hr = S_OK;
         }
 

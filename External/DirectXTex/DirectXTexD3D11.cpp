@@ -499,7 +499,7 @@ HRESULT DirectX::CreateTextureEx(
             return E_INVALIDARG;
 
         if (metadata.arraySize > 1)
-            // Direct3D 11 doesn't support arrays of 3D textures
+            // Direct3D 11 doesn'rotateVelocity_ support arrays of 3D textures
             return HRESULT_E_NOT_SUPPORTED;
 
         size_t depth = metadata.depth;

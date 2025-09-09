@@ -58,7 +58,17 @@ private:
 	const std::string START_ = "Start";
 	const std::string END_ = "End";
 
+	//高速回転の値
 	const float_t RAPID_ROTATE_VALUE_ = 0.4f;
+
+	//矢印の高さ補正
+	const float_t ARROW_POSITION_OFFSET_ = 0.2f;
+
+	//選択時のスケール
+	float_t SELECTED_SCALE_=0.5f;
+	//選択時ではない時のスケール
+	float_t NO_SELECTED_SCALE_ = 0.3f;
+
 private:
 	//初期座標
 	Vector3 startInitialPosition_ = {};
@@ -74,16 +84,23 @@ private:
 	Vector3 arrowPosition_ = {};
 	//回転
 	Vector3 arrowRotate_ = {};
+	//高速回転をするかどうか
 	bool isRapidRotate_ = true;
+	//高速回転の時間
 	float_t rapidRotateTime_ = 0.0f;
 	//回転用の線形補間
 	float_t rotateT_ = 0.0;
+	//回転速度
+	float_t rotateVelocity_ = 0.0f;
 
-	float_t t = 0.0f;
-
-	//
+	// 待機時間
 	float_t changeWaitingTime_ = 0.0f;
 	
+	//開始のスケール
+	Vector3 startScale_ = {};
+	//終了のスケール
+	Vector3 endScale_ = {};
+
 	//選択
 	bool isDecice_ = false;
 

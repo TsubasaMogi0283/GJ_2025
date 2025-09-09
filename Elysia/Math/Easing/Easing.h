@@ -32,7 +32,7 @@ namespace Easing{
 	/// <summary>
 	/// SineのIn
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseInSine(const float_t& value) {
 		//計算
@@ -44,7 +44,7 @@ namespace Easing{
 	/// <summary>
 	/// SineのOut
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseOutSine(const float_t& value) {
 		//計算
@@ -56,7 +56,7 @@ namespace Easing{
 	/// <summary>
 	/// SineのInとOut
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseInOutSine(const float_t& value) {
 		//計算
@@ -71,7 +71,7 @@ namespace Easing{
 	/// <summary>
 	///　QuadのIn
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseInQuad(const float_t& value) {
 		//計算
@@ -83,7 +83,7 @@ namespace Easing{
 	/// <summary>
 	/// QuadのOut
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseOutQuad(const float_t& value) {
 		//計算
@@ -117,7 +117,7 @@ namespace Easing{
 	/// <summary>
 	///　CubicのIn
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseInCubic(const float_t& value) {
 		//計算
@@ -129,7 +129,7 @@ namespace Easing{
 	/// <summary>
 	/// CubicのOut
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseOutCubic(const float_t& value) {
 		//計算
@@ -162,7 +162,7 @@ namespace Easing{
 	/// <summary>
 	/// QuartのIn
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseInQuart(const float_t& value) {
 		//計算
@@ -174,7 +174,7 @@ namespace Easing{
 	/// <summary>
 	/// QuartのOut
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseOutQuart(const float_t& value) {
 		//計算
@@ -207,7 +207,7 @@ namespace Easing{
 	/// <summary>
 	/// BackのIn
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseInBack(const float_t& value) {
 		//指定された定数1
@@ -224,7 +224,7 @@ namespace Easing{
 	/// <summary>
 	/// BackのOut
 	/// </summary>
-	/// <param name="value">値(t)</param>
+	/// <param name="value">値(rotateVelocity_)</param>
 	/// <returns></returns>
 	inline float_t EaseOutBack(const float_t& value) {
 		//指定された定数1

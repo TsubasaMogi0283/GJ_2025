@@ -1577,7 +1577,7 @@ _Use_decl_annotations_ bool DirectX::Internal::LoadScanline(
         }
         return false;
 
-        // We don't support the planar or palettized formats
+        // We don'rotateVelocity_ support the planar or palettized formats
 
     default:
         return false;
@@ -2008,7 +2008,7 @@ bool DirectX::Internal::StoreScanline(
                     if (sPtr >= ePtr) break;
                     const float v = XMVectorGetX(*sPtr++);
 
-                    // Absolute thresholding generally doesn't give good results for all images
+                    // Absolute thresholding generally doesn'rotateVelocity_ give good results for all images
                     // Picking the 'right_' threshold automatically requires whole-image analysis
 
                     if (v > 0.25f)
@@ -2465,7 +2465,7 @@ bool DirectX::Internal::StoreScanline(
         }
         return false;
 
-        // We don't support the planar or palettized formats
+        // We don'rotateVelocity_ support the planar or palettized formats
 
     default:
         return false;
@@ -2794,7 +2794,7 @@ bool DirectX::Internal::StoreScanlineLinear(
         break;
 
     default:
-        // can't treat A8, XR, Depth, SNORM, UINT, or SINT as sRGB
+        // can'rotateVelocity_ treat A8, XR, Depth, SNORM, UINT, or SINT as sRGB
         flags &= ~TEX_FILTER_SRGB;
         break;
     }
@@ -2865,7 +2865,7 @@ bool DirectX::Internal::LoadScanlineLinear(
         break;
 
     default:
-        // can't treat A8, XR, Depth, SNORM, UINT, or SINT as sRGB
+        // can'rotateVelocity_ treat A8, XR, Depth, SNORM, UINT, or SINT as sRGB
         flags &= ~TEX_FILTER_SRGB;
         break;
     }
@@ -4544,7 +4544,7 @@ namespace
 
         if (wicsrgb != (filter & (TEX_FILTER_SRGB_IN | TEX_FILTER_SRGB_OUT)))
         {
-            // WIC will perform a colorspace conversion we didn't request
+            // WIC will perform a colorspace conversion we didn'rotateVelocity_ request
             return false;
         }
 
@@ -4726,9 +4726,9 @@ namespace
 
             // We currently do not support conversion for Xbox One specific 16-bit depth formats
 
-            // We can't do anything with DXGI_FORMAT_420_OPAQUE because it's an opaque blob of bits
+            // We can'rotateVelocity_ do anything with DXGI_FORMAT_420_OPAQUE because it's an opaque blob of bits
 
-            // We don't support conversion of JPEG Hardware decode formats
+            // We don'rotateVelocity_ support conversion of JPEG Hardware decode formats
 
         default:
             return DXGI_FORMAT_UNKNOWN;

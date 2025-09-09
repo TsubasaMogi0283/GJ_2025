@@ -105,7 +105,7 @@
 //   To make the implementation private to the file that generates the implementation,
 //      #define STBTT_STATIC
 //
-//   Simple 3D API (don't ship this, but it's fine for tools and quick start)
+//   Simple 3D API (don'rotateVelocity_ ship this, but it's fine for tools and quick start)
 //           stbtt_BakeFontBitmap()               -- bake a font to a bitmap for use as texture
 //           stbtt_GetBakedQuad()                 -- compute quad to draw for a given char
 //
@@ -185,7 +185,7 @@
 //         Most font APIs instead use "points", which are a common typographic
 //         measurement for describing font size, defined as 72 points per inch.
 //         stb_truetype provides a point API for compatibility. However, true
-//         "per inch" conventions don't make much sense on computer displays
+//         "per inch" conventions don'rotateVelocity_ make much sense on computer displays
 //         since different monitors have different colliderNumber_ of pixels per
 //         inch. For example, Windows traditionally uses a convention that
 //         there are 96 pixels per inch, thus making 'inch' measurements have
@@ -244,7 +244,7 @@
 //   Performance:
 //
 //    - Convert Unicode codepoints to glyph indexes and operate on the glyphs;
-//      if you don't do this, stb_truetype is forced to do the conversion on
+//      if you don'rotateVelocity_ do this, stb_truetype is forced to do the conversion on
 //      every call.
 //
 //    - There are a lot of memory allocations. We should modify it to take
@@ -256,10 +256,10 @@
 //   The system uses the raw data found in the .ttf file without changing it
 //   and without building auxiliary data structures. This is a bit inefficient
 //   on little-endian systems (the data is big-endian), but assuming you're
-//   caching the bitmaps or glyph shapes this shouldn't be a big deal.
+//   caching the bitmaps or glyph shapes this shouldn'rotateVelocity_ be a big deal.
 //
 //   It appears to be very hard to programmatically determine what font a
-//   given file is in a general way. I provide an API for this, but I don't
+//   given file is in a general way. I provide an API for this, but I don'rotateVelocity_
 //   recommend it.
 //
 //
@@ -424,7 +424,7 @@ int main(int arg, char **argv)
 ////   INTEGRATION WITH YOUR CODEBASE
 ////
 ////   The following sections allow you to supply alternate definitions
-////   of C library functions used by stb_truetype, e.g. if you don't
+////   of C library functions used by stb_truetype, e.g. if you don'rotateVelocity_
 ////   link with the C runtime library.
 
 #ifdef STB_TRUETYPE_IMPLEMENTATION
@@ -609,7 +609,7 @@ STBTT_DEF void stbtt_PackEnd  (stbtt_pack_context *spc);
 STBTT_DEF int  stbtt_PackFontRange(stbtt_pack_context *spc, const unsigned char *fontdata, int font_index, float font_size,
                                 int first_unicode_char_in_range, int num_chars_in_range, stbtt_packedchar *chardata_for_range);
 // Creates character bitmaps from the font_index'th font found in fontdata (use
-// font_index=0 if you don't know what that is). It creates num_chars_in_range
+// font_index=0 if you don'rotateVelocity_ know what that is). It creates num_chars_in_range
 // bitmaps for characters with unicode values starting at first_unicode_char_in_range
 // and increasing. Data for how to render them is stored in chardata_for_range;
 // pass these to stbtt_GetPackedQuad to get back renderable quads.
@@ -628,7 +628,7 @@ typedef struct
    int *array_of_unicode_codepoints;       // if non-zero, then this is an array of unicode codepoints
    int num_chars;
    stbtt_packedchar *chardata_for_range; // output
-   unsigned char h_oversample, v_oversample; // don't set these, they're used internally
+   unsigned char h_oversample, v_oversample; // don'rotateVelocity_ set these, they're used internally
 } stbtt_pack_range;
 
 STBTT_DEF int  stbtt_PackFontRanges(stbtt_pack_context *spc, const unsigned char *fontdata, int font_index, stbtt_pack_range *ranges, int num_ranges);
@@ -678,7 +678,7 @@ STBTT_DEF int  stbtt_PackFontRangesRenderIntoRects(stbtt_pack_context *spc, cons
 // better packing than calling PackFontRanges multiple times
 // (or it may not).
 
-// this is an opaque structure that you shouldn't mess with which holds
+// this is an opaque structure that you shouldn'rotateVelocity_ mess with which holds
 // all the context needed from PackBegin to PackEnd.
 struct stbtt_pack_context {
    void *user_allocator_context;
@@ -738,7 +738,7 @@ struct stbtt_fontinfo
 STBTT_DEF int stbtt_InitFont(stbtt_fontinfo *info, const unsigned char *data, int offset);
 // Given an offset into the file that defines a font, this function builds
 // the necessary cached info for the rest of the system. You must allocate
-// the stbtt_fontinfo yourself, and stbtt_InitFont will fill it out. You don't
+// the stbtt_fontinfo yourself, and stbtt_InitFont will fill it out. You don'rotateVelocity_
 // need to do anything special to free it, because the contents are pure
 // value data with no additional data structures. Returns 0 on failure.
 
@@ -821,7 +821,7 @@ STBTT_DEF int  stbtt_GetKerningTable(const stbtt_fontinfo *info, stbtt_kerningen
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// GLYPH SHAPES (you probably don't need these, but they have to go before
+// GLYPH SHAPES (you probably don'rotateVelocity_ need these, but they have to go before
 // the bitmaps for C declaration-order reasons)
 //
 
@@ -836,7 +836,7 @@ STBTT_DEF int  stbtt_GetKerningTable(const stbtt_fontinfo *info, stbtt_kerningen
 
 #ifndef stbtt_vertex // you can predefine this to use different values
                    // (we share this with other code at RAD)
-   #define stbtt_vertex_type short // can't use stbtt_int16 because that's not visible in the header file
+   #define stbtt_vertex_type short // can'rotateVelocity_ use stbtt_int16 because that's not visible in the header file
    typedef struct
    {
       stbtt_vertex_type x,y,cx,cy,cx1,cy1;
@@ -925,7 +925,7 @@ STBTT_DEF void stbtt_GetGlyphBitmapBox(const stbtt_fontinfo *font, int glyph, fl
 STBTT_DEF void stbtt_GetGlyphBitmapBoxSubpixel(const stbtt_fontinfo *font, int glyph, float scale_x, float scale_y,float shift_x, float shift_y, int *ix0, int *iy0, int *ix1, int *iy1);
 
 
-// @TODO: don't expose this structure
+// @TODO: don'rotateVelocity_ expose this structure
 typedef struct
 {
    int w,h,stride;
@@ -1006,7 +1006,7 @@ STBTT_DEF unsigned char * stbtt_GetCodepointSDF(const stbtt_fontinfo *info, floa
 // Finding the right_ font...
 //
 // You should really just solve this offline, keep your own tables
-// of what font is what, and don't try to get it out of the .ttf file.
+// of what font is what, and don'rotateVelocity_ try to get it out of the .ttf file.
 // That's because getting it out of the .ttf file is really hard, because
 // the names in the file can appear in many possible encodings, in many
 // possible languages, and e.g. if you need a case-insensitive comparison,
@@ -1027,7 +1027,7 @@ STBTT_DEF int stbtt_FindMatchingFont(const unsigned char *fontdata, const char *
 // returns the offset (not index) of the font that matches, or -1 if none
 //   if you use STBTT_MACSTYLE_DONTCARE, use a font name like "Arial Bold".
 //   if you use any other flag, use a font name like "Arial"; this checks
-//     the 'macStyle' header field; i don't know if fonts set this consistently
+//     the 'macStyle' header field; i don'rotateVelocity_ know if fonts set this consistently
 #define STBTT_MACSTYLE_DONTCARE     0
 #define STBTT_MACSTYLE_BOLD         1
 #define STBTT_MACSTYLE_ITALIC       2
@@ -1281,8 +1281,8 @@ static stbtt__buf stbtt__cff_index_get(stbtt__buf b, int i)
 // accessors to parse data from file
 //
 
-// on platforms that don't allow misaligned reads, if we want to allow
-// truetype fonts that aren't padded to alignment, define ALLOW_UNALIGNED_TRUETYPE
+// on platforms that don'rotateVelocity_ allow misaligned reads, if we want to allow
+// truetype fonts that aren'rotateVelocity_ padded to alignment, define ALLOW_UNALIGNED_TRUETYPE
 
 #define ttBYTE(p)     (* (stbtt_uint8 *) (p))
 #define ttCHAR(p)     (* (stbtt_int8 *) (p))
@@ -1300,7 +1300,7 @@ static int stbtt__isfont(stbtt_uint8 *font)
 {
    // check the version colliderNumber_
    if (stbtt_tag4(font, '1',0,0,0))  return 1; // TrueType 1
-   if (stbtt_tag(font, "typ1"))   return 1; // TrueType with type 1 font -- we don't support this!
+   if (stbtt_tag(font, "typ1"))   return 1; // TrueType with type 1 font -- we don'rotateVelocity_ support this!
    if (stbtt_tag(font, "OTTO"))   return 1; // OpenType with CFF
    if (stbtt_tag4(font, 0,1,0,0)) return 1; // OpenType 1.0
    if (stbtt_tag(font, "true"))   return 1; // Apple specification for TrueType fonts
@@ -1369,7 +1369,7 @@ static stbtt__buf stbtt__get_subrs(stbtt__buf cff, stbtt__buf fontdict)
    return stbtt__cff_get_index(&cff);
 }
 
-// since most people won't use this, find this table the first time it's needed
+// since most people won'rotateVelocity_ use this, find this table the first time it's needed
 static int stbtt__get_svg(stbtt_fontinfo *info)
 {
    stbtt_uint32 t;
@@ -1486,7 +1486,7 @@ static int stbtt_InitFont_internal(stbtt_fontinfo *info, unsigned char *data, in
             break;
         case STBTT_PLATFORM_ID_UNICODE:
             // Mac/iOS has these
-            // all the encodingIDs are unicode, so we don't bother to check it
+            // all the encodingIDs are unicode, so we don'rotateVelocity_ bother to check it
             info->index_map = cmap + ttULONG(data+encoding_record+4);
             break;
       }
@@ -1711,7 +1711,7 @@ static int stbtt__GetGlyphShapeTT(const stbtt_fontinfo *info, int glyph_index, s
       flagcount=0;
 
       // in first pass, we load uninterpreted data into the allocated array
-      // above, shifted to the end of the array so we won't overwrite it when
+      // above, shifted to the end of the array so we won'rotateVelocity_ overwrite it when
       // we create our final data starting from the front
 
       off = m - n; // starting offset for uninterpreted data, regardless of how m ends up being calculated
@@ -2022,7 +2022,7 @@ static int stbtt__run_charstring(const stbtt_fontinfo *info, int glyph_index, st
 
 #define STBTT__CSERR(s) (0)
 
-   // this currently ignores the initial width value, which isn't needed if we have hmtx
+   // this currently ignores the initial width value, which isn'rotateVelocity_ needed if we have hmtx
    b = stbtt__cff_index_get(info->charstrings, glyph_index);
    while (b.cursor < b.size) {
       i = 0;
@@ -2626,7 +2626,7 @@ STBTT_DEF int  stbtt_GetGlyphKernAdvance(const stbtt_fontinfo *info, int g1, int
 
 STBTT_DEF int  stbtt_GetCodepointKernAdvance(const stbtt_fontinfo *info, int ch1, int ch2)
 {
-   if (!info->kern && !info->gpos) // if no kerning table, don't waste time looking up both codepoint->glyphs
+   if (!info->kern && !info->gpos) // if no kerning table, don'rotateVelocity_ waste time looking up both codepoint->glyphs
       return 0;
    return stbtt_GetGlyphKernAdvance(info, stbtt_FindGlyphIndex(info,ch1), stbtt_FindGlyphIndex(info,ch2));
 }
@@ -2882,7 +2882,7 @@ static stbtt__active_edge *stbtt__new_active(stbtt__hheap *hh, stbtt__edge *e, i
 
 #if STBTT_RASTERIZER_VERSION == 1
 // note: this routine clips fills that extend off the edges... ideally this
-// wouldn't happen, but it could happen if the truetype glyph bounding boxes
+// wouldn'rotateVelocity_ happen, but it could happen if the truetype glyph bounding boxes
 // are wrong, or if the user supplies a too-small bitmap
 static void stbtt__fill_active_edges(unsigned char *scanline, int len, stbtt__active_edge *e, int max_weight)
 {
@@ -3132,7 +3132,7 @@ static void stbtt__fill_active_edges_new(float *scanline, float *scanline_fill, 
          }
 
          if (x_top >= 0 && x_bottom >= 0 && x_top < len && x_bottom < len) {
-            // from here on, we don't have to range check x values
+            // from here on, we don'rotateVelocity_ have to range check x values
 
             if ((int) x_top == (int) x_bottom) {
                float height;
@@ -3446,7 +3446,7 @@ static void stbtt__sort_edges_quicksort(stbtt__edge *p, int n)
          p[m] = t;
       }
       /* now p[m] is the median-of-three */
-      /* swap it to the beginning so it won't move around */
+      /* swap it to the beginning so it won'rotateVelocity_ move around */
       t = p[0];
       p[0] = p[m];
       p[m] = t;
@@ -3463,7 +3463,7 @@ static void stbtt__sort_edges_quicksort(stbtt__edge *p, int n)
          for (;;--j) {
             if (!STBTT__COMPARE(&p[0], &p[j])) break;
          }
-         /* make sure we haven't crossed */
+         /* make sure we haven'rotateVelocity_ crossed */
          if (i >= j) break;
          t = p[i];
          p[i] = p[j];
@@ -3507,7 +3507,7 @@ static void stbtt__rasterize(stbtt__bitmap *result, stbtt__point *pts, int *wcou
 #else
    #error "Unrecognized value of STBTT_RASTERIZER_VERSION"
 #endif
-   // vsubsample should divide 255 evenly; otherwise we won't reach full opacity
+   // vsubsample should divide 255 evenly; otherwise we won'rotateVelocity_ reach full opacity
 
    // now we have to blow out the windings into explicit edge lists
    n = 0;
@@ -3646,7 +3646,7 @@ static stbtt__point *stbtt_FlattenCurves(stbtt_vertex *vertices, int num_verts, 
       return 0;
    }
 
-   // make two passes through the points so we don't need to realloc
+   // make two passes through the points so we don'rotateVelocity_ need to realloc
    for (pass=0; pass < 2; ++pass) {
       float x=0,y=0;
       if (pass == 1) {
@@ -3887,7 +3887,7 @@ STBTT_DEF void stbtt_GetBakedQuad(const stbtt_bakedchar *chardata, int pw, int p
 
 //////////////////////////////////////////////////////////////////////////////
 //
-// rectangle packing replacement routines if you don't have stb_rect_pack.h
+// rectangle packing replacement routines if you don'rotateVelocity_ have stb_rect_pack.h
 //
 
 #ifndef STB_RECT_PACK_VERSION
@@ -3960,7 +3960,7 @@ static void stbrp_pack_rects(stbrp_context *con, stbrp_rect *rects, int num_rect
 // bitmap baking
 //
 // This is SUPER-AWESOME (tm Ryan Gordon) packing using stb_rect_pack.h. If
-// stb_rect_pack.h isn't available, it uses the BakeFontBitmap strategy.
+// stb_rect_pack.h isn'rotateVelocity_ available, it uses the BakeFontBitmap strategy.
 
 STBTT_DEF int stbtt_PackBegin(stbtt_pack_context *spc, unsigned char *pixels, int pw, int ph, int stride_in_bytes, int padding, void *alloc_context)
 {
@@ -4573,7 +4573,7 @@ static int stbtt__solve_cubic(float a, float b, float c, float* r)
       r[1] = s - u * (m + n);
       r[2] = s - u * (m - n);
 
-      //STBTT_assert( STBTT_fabs(((r[0]+a)*r[0]+b)*r[0]+c) < 0.05f);  // these asserts may not be safe at all scales, though they're in bezier t parameter units so maybe?
+      //STBTT_assert( STBTT_fabs(((r[0]+a)*r[0]+b)*r[0]+c) < 0.05f);  // these asserts may not be safe at all scales, though they're in bezier rotateVelocity_ parameter units so maybe?
       //STBTT_assert( STBTT_fabs(((r[1]+a)*r[1]+b)*r[1]+c) < 0.05f);
       //STBTT_assert( STBTT_fabs(((r[2]+a)*r[2]+b)*r[2]+c) < 0.05f);
       return 3;
@@ -4667,12 +4667,12 @@ STBTT_DEF unsigned char * stbtt_GetGlyphSDF(const stbtt_fontinfo *info, float sc
                   STBTT_assert(i != 0);
                   if (dist < min_dist) {
                      // check position along line
-                     // x' = x0 + t*(x1-x0), y' = y0 + t*(y1-y0)
+                     // x' = x0 + rotateVelocity_*(x1-x0), y' = y0 + rotateVelocity_*(y1-y0)
                      // minimize (x'-sx)*(x'-sx)+(y'-sy)*(y'-sy)
                      float dx = x1-x0, dy = y1-y0;
                      float px = x0-sx, py = y0-sy;
-                     // minimize (px+t*dx)^2 + (py+t*dy)^2 = px*px + 2*px*dx*t + t^2*dx*dx + py*py + 2*py*dy*t + t^2*dy*dy
-                     // derivative: 2*px*dx + 2*py*dy + (2*dx*dx+2*dy*dy)*t, set to 0 and solve
+                     // minimize (px+rotateVelocity_*dx)^2 + (py+rotateVelocity_*dy)^2 = px*px + 2*px*dx*rotateVelocity_ + rotateVelocity_^2*dx*dx + py*py + 2*py*dy*rotateVelocity_ + rotateVelocity_^2*dy*dy
+                     // derivative: 2*px*dx + 2*py*dy + (2*dx*dx+2*dy*dy)*rotateVelocity_, set to 0 and solve
                      float t = -(px*dx + py*dy) / (dx*dx + dy*dy);
                      if (t >= 0.0f && t <= 1.0f)
                         min_dist = dist;
@@ -4709,11 +4709,11 @@ STBTT_DEF unsigned char * stbtt_GetGlyphSDF(const stbtt_fontinfo *info, float sc
                               float root = (float) STBTT_sqrt(discriminant);
                               res[0] = (-b - root)/(2*a);
                               res[1] = (-b + root)/(2*a);
-                              num = 2; // don't bother distinguishing 1-solution case, as code below will still work
+                              num = 2; // don'rotateVelocity_ bother distinguishing 1-solution case, as code below will still work
                            }
                         }
                      } else {
-                        float b = 3*(ax*bx + ay*by) * a_inv; // could precompute this as it doesn't depend on sample point
+                        float b = 3*(ax*bx + ay*by) * a_inv; // could precompute this as it doesn'rotateVelocity_ depend on sample point
                         float c = (2*(ax*ax + ay*ay) + (mx*bx+my*by)) * a_inv;
                         float d = (mx*ax+my*ay) * a_inv;
                         num = stbtt__solve_cubic(b, c, d, res);
