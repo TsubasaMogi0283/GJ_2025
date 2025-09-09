@@ -61,9 +61,21 @@ void GameScene::Initialize() {
 	escapeAssistArrow_->SetPlayer(player_.get());
 	escapeAssistArrow_->Initialize();
 
+	//スプライト用の座標
+	const Vector2 SPRITE_INITIAL_POSITION_ = { .x = 0.0f,.y = 0.0f };
+
+	//説明
+	uint32_t operationTextureHandle = textureManager_->Load("Resources/Sprite/Operation/Operation.png");
+	explanation_.reset(Elysia::Sprite::Create(operationTextureHandle, SPRITE_INITIAL_POSITION_));
+
+	//脱出
+	uint32_t escapeTextureHandle = textureManager_->Load("Resources/Sprite/Escape/EscapeText.png");
+	escape_.reset(Elysia::Sprite::Create(escapeTextureHandle, SPRITE_INITIAL_POSITION_));
+	escape_->SetInvisible(true);
+
 	//フェード
 	uint32_t whiteTextureHandle = textureManager_->Load("Resources/Sprite/Back/White.png");
-	whiteSprite_.reset(Elysia::Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
+	whiteSprite_.reset(Elysia::Sprite::Create(whiteTextureHandle, SPRITE_INITIAL_POSITION_));
 	whiteFadeTransparency_ = 0.0f;
 	whiteSprite_->SetTransparency(whiteFadeTransparency_);
 
@@ -354,9 +366,17 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	collisionManager_->CheckAllCollision();
 
 	if (isOnGoalArea_ == true) {
+		//表示
+		escape_->SetInvisible(false);
+
 		if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
 			isSucceed_ = true;
 		}
+	}
+	else {
+		//表示
+		escape_->SetInvisible(true);
+
 	}
 
 	//成功時
@@ -413,6 +433,10 @@ void GameScene::DrawSprite() {
 
 	//矢印
 	escapeAssistArrow_->DrawSprite();
+	//説明
+	explanation_->Draw();
+	//脱出
+	escape_->Draw();
 
 	//白フェード
 	whiteSprite_->Draw();
