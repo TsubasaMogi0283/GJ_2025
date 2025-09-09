@@ -88,7 +88,8 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Initialize();
+	/// <param name="initialPosition"></param>
+	void Initialize(const Vector3& initialPosition);
 
 	/// <summary>
 	/// 更新

@@ -61,8 +61,6 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 	//詳細シーンの更新
 	detailScene_->Update(this);
 	
-	
-	
 	//レベルエディターの更新
 	levelDataManager_->Update(levelHandle_);
 

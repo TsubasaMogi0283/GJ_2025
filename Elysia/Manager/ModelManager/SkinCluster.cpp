@@ -56,7 +56,7 @@ void  SkinCluster::Create(const Skeleton& newSkeleton, const ModelData& modelDat
     ////std::generate...初期化するときに便利！
     ////for文と似ているのでそっちでやっても◎
     ////実際はこんな感じ
-    //for (int i = 0; i < skeleton.joints.size(); ++i) {
+    //for (int i = 0; i < skeleton.joints.main_size_(); ++i) {
     //    skinCluster.inverseBindPoseMatrices[i] = MakeIdentity4x4();
     //}
 

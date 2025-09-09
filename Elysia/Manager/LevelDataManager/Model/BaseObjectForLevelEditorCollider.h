@@ -57,7 +57,7 @@ public:
 	/// <summary>
 	/// 中心座標
 	/// </summary>
-	/// <param name="size"></param>
+	/// <param name="main_size_"></param>
 	virtual void SetCenterPosition(const Vector3& centerPosition) {
 		this->centerPosition_ = centerPosition;
 	}
@@ -65,7 +65,7 @@ public:
 	/// <summary>
 	/// サイズの設定
 	/// </summary>
-	/// <param name="size"></param>
+	/// <param name="main_size_"></param>
 	virtual void SetSize(const Vector3& size) {
 		this->size_ = size;
 	}

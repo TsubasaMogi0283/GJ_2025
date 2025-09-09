@@ -108,13 +108,13 @@ namespace DirectX
         // BC formats with malformed mipchain blocks smaller than 4x4
 
         CP_FLAGS_24BPP = 0x10000,
-        // Override with a legacy 24 bits-per-pixel format size
+        // Override with a legacy 24 bits-per-pixel format main_size_
 
         CP_FLAGS_16BPP = 0x20000,
-        // Override with a legacy 16 bits-per-pixel format size
+        // Override with a legacy 16 bits-per-pixel format main_size_
 
         CP_FLAGS_8BPP = 0x40000,
-        // Override with a legacy 8 bits-per-pixel format size
+        // Override with a legacy 8 bits-per-pixel format main_size_
     };
 
     HRESULT __cdecl ComputePitch(
@@ -422,10 +422,10 @@ namespace DirectX
         size_t __cdecl GetBufferSize() const noexcept { return m_size; }
 
         HRESULT __cdecl Resize(size_t size) noexcept;
-            // Reallocate for a new size
+            // Reallocate for a new main_size_
 
         HRESULT __cdecl Trim(size_t size) noexcept;
-            // Shorten size without reallocation
+            // Shorten main_size_ without reallocation
 
     private:
         void*   m_buffer;

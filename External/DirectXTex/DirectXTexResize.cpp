@@ -884,7 +884,7 @@ HRESULT DirectX::Resize(
 
     if (usewic && !wicpf)
     {
-        // Check to see if the source and/or result size is too big for WIC
+        // Check to see if the source and/or result main_size_ is too big for WIC
         const uint64_t expandedSize = uint64_t(width) * uint64_t(height) * sizeof(float) * 4;
         const uint64_t expandedSize2 = uint64_t(srcImage.width) * uint64_t(srcImage.height) * sizeof(float) * 4;
         if (expandedSize > UINT32_MAX || expandedSize2 > UINT32_MAX)
@@ -971,7 +971,7 @@ HRESULT DirectX::Resize(
 
     if (usewic && !wicpf)
     {
-        // Check to see if the source and/or result size is too big for WIC
+        // Check to see if the source and/or result main_size_ is too big for WIC
         const uint64_t expandedSize = uint64_t(width) * uint64_t(height) * sizeof(float) * 4;
         const uint64_t expandedSize2 = uint64_t(metadata.width) * uint64_t(metadata.height) * sizeof(float) * 4;
         if (expandedSize > UINT32_MAX || expandedSize2 > UINT32_MAX)

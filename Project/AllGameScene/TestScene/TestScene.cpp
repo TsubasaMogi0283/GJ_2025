@@ -153,9 +153,9 @@ void TestScene::Update(Elysia::GameManager* gameManager){
 
 void TestScene::DrawObject3D(){
 	//レベルエディタ  
-	//levelDataManager_->Draw(levelHandle_, camera_, directionalLight_);
+	//levelDataManager_->DrawSprite(levelHandle_, camera_, directionalLight_);
 	//仮プレイヤー
-	//playerModel_->Draw(playerWorldTransform_,camera_, playerMaterial_, directionalLight_);
+	//playerModel_->DrawSprite(playerWorldTransform_,camera_, playerMaterial_, directionalLight_);
 
 	
 	//パーティクル

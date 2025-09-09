@@ -25,12 +25,11 @@ Player::Player(){
 	levelDataManager_ = Elysia::LevelDataManager::GetInstance();
 }
 
-void Player::Initialize(){
+void Player::Initialize(const Vector3& initialPosition){
 
 	//ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
-	const Vector3 INITIAL_POSITION = { .x=0.0f,.y=0.0f,.z=-15.0f };
-	worldTransform_.translate = INITIAL_POSITION;
+	worldTransform_.translate = initialPosition;
 
 	//懐中電灯
 	flashLight_ = std::make_unique<FlashLight>();
