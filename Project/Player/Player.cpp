@@ -114,6 +114,8 @@ void Player::DrawObject3D(const Camera& camera, const SpotLight& spotLight){
 }
 
 void Player::DrawSprite(){
+	//懐中電灯
+	flashLight_->DrawSprite();
 }
 
 Player::~Player() {

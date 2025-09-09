@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <list>
+#include <array>
 
 #include "SpotLight.h"
 #include "Sprite.h"
@@ -167,6 +168,14 @@ public:
 	}
 
 	/// <summary>
+	/// 使用制限の設定
+	/// </summary>
+	/// <param name="count"></param>
+	inline void SetUseLimitation(const uint8_t& count) {
+		this->useLimitationCount_ = count;
+	}
+
+	/// <summary>
 	/// 攻撃可能かどうかを取得
 	/// </summary>
 	/// <returns>攻撃可能フラグ</returns>
@@ -253,6 +262,9 @@ private:
 	const float_t ATTACL_LIGHT_OFFSET_ = 0.5f;
 	//攻撃時の強さ
 	const float_t ATTACK_LIGHT_INTENCITY_ = 800.0f;
+	//数
+	static const uint8_t NUMBER_QUANTITY_ = 10u;
+
 private:
 	//スポットライト
 	SpotLight spotLight_ = {};
@@ -289,6 +301,8 @@ private:
 	std::unique_ptr<Elysia::Sprite>chargeGaugeSprite_ = nullptr;
 	//通常のチャージの色
 	Vector4 chargeColor_ = {};
+	//ライトの使用制限
+	std::unique_ptr<Elysia::Sprite>useLimitationFrameSprite_ = nullptr;
 
 	//フレーム
 	std::unique_ptr<Elysia::Sprite>frameSprite_ = nullptr;
@@ -307,6 +321,14 @@ private:
 	//攻撃のホワイトフェード
 	std::unique_ptr<Elysia::Sprite>attackWhiteFadeSprite_ = nullptr;
 
+	//ライトの使用制限
+	//カウント
+	uint8_t useLimitationCount_ = 0u;
+	//数
+	std::array<uint32_t, NUMBER_QUANTITY_>numberTextureHandleArray_ = {};
+	uint32_t numberTextureHandle_ = 0u;
+	//スプライト
+	std::unique_ptr<Elysia::Sprite> useLimitationCountSprite_ = nullptr;
 
 private:
 	//当たり判定

@@ -170,6 +170,11 @@ private:
 	//矢印
 	std::unique_ptr<EscapeAssistArrow>escapeAssistArrow_ = nullptr;
 
+	//操作
+	std::unique_ptr<Elysia::Sprite>explanation_ = nullptr;
+
+	std::unique_ptr<Elysia::Sprite>escape_ = nullptr;
+
 	//白フェード用
 	std::unique_ptr<Elysia::Sprite>whiteSprite_ = nullptr;
 	float_t whiteFadeTransparency_ = 0.0f;

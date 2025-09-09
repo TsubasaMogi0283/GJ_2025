@@ -61,9 +61,21 @@ void GameScene::Initialize() {
 	escapeAssistArrow_->SetPlayer(player_.get());
 	escapeAssistArrow_->Initialize();
 
+	//スプライト用の座標
+	const Vector2 SPRITE_INITIAL_POSITION_ = { .x = 0.0f,.y = 0.0f };
+
+	//説明
+	uint32_t operationTextureHandle = textureManager_->Load("Resources/Sprite/Operation/Operation.png");
+	explanation_.reset(Elysia::Sprite::Create(operationTextureHandle, SPRITE_INITIAL_POSITION_));
+
+	//脱出
+	uint32_t escapeTextureHandle = textureManager_->Load("Resources/Sprite/Escape/EscapeText.png");
+	escape_.reset(Elysia::Sprite::Create(escapeTextureHandle, SPRITE_INITIAL_POSITION_));
+	escape_->SetInvisible(true);
+
 	//フェード
 	uint32_t whiteTextureHandle = textureManager_->Load("Resources/Sprite/Back/White.png");
-	whiteSprite_.reset(Elysia::Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
+	whiteSprite_.reset(Elysia::Sprite::Create(whiteTextureHandle, SPRITE_INITIAL_POSITION_));
 	whiteFadeTransparency_ = 0.0f;
 	whiteSprite_->SetTransparency(whiteFadeTransparency_);
 
@@ -172,14 +184,15 @@ void GameScene::PlayerMove(){
 	
 	//エンターキーまたはYボタンを離した瞬間に攻撃する
 	if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
-		isReleaseAttack_ = true;
+		//完全にチャージしないとダメ
+		if (player_->GetFlashLight()->GetChargeCondition() == ChargeCondition::StrongChargeAttack) {
+			//カメラシェイク
+			player_->GetEyeCamera()->SetIsShake(true);
+			isReleaseAttack_ = true;
+		}
+
 		//クールタイムにする
 		player_->GetFlashLight()->SetIsCoolTime(true);
-		//カメラの振動
-		//攻撃できる時だけにする。
-		if (player_->GetFlashLight()->GetChargeCondition() >= ChargeCondition::NormalChargeAttack) {
-			player_->GetEyeCamera()->SetIsShake(true);
-		}
 	}
 	else {
 		isReleaseAttack_ = false;
@@ -258,11 +271,11 @@ void GameScene::PlayerRotate() {
 
 	//±π/6くらいに制限を掛けておきたい
 	//それ以下以上だと首が大変なことになっているように見えるからね
-	if (phi_ > std::numbers::pi_v<float_t> / 6.0f) {
-		phi_ = std::numbers::pi_v<float_t> / 6.0f;
+	if (phi_ > std::numbers::pi_v<float_t> / 12.0f) {
+		phi_ = std::numbers::pi_v<float_t> / 12.0f;
 	}
-	if (phi_ < -std::numbers::pi_v<float_t> / 6.0f) {
-		phi_ = -std::numbers::pi_v<float_t> / 6.0f;
+	if (phi_ < -std::numbers::pi_v<float_t> / 12.0f) {
+		phi_ = -std::numbers::pi_v<float_t> / 12.0f;
 	}
 }
 
@@ -353,9 +366,17 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	collisionManager_->CheckAllCollision();
 
 	if (isOnGoalArea_ == true) {
+		//表示
+		escape_->SetInvisible(false);
+
 		if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
 			isSucceed_ = true;
 		}
+	}
+	else {
+		//表示
+		escape_->SetInvisible(true);
+
 	}
 
 	//成功時
@@ -407,8 +428,15 @@ void GameScene::DrawPostEffect() {
 }
 
 void GameScene::DrawSprite() {
+	//プレイヤー
+	player_->DrawSprite();
+
 	//矢印
 	escapeAssistArrow_->DrawSprite();
+	//説明
+	explanation_->Draw();
+	//脱出
+	escape_->Draw();
 
 	//白フェード
 	whiteSprite_->Draw();

@@ -19,6 +19,7 @@ void EscapeAssistArrow::Initialize(){
 	//プレイヤーが空だった場合停止
 	assert(player_);
 
+	//ウィンドウサイズ
 	float_t windowWidth = static_cast<float_t>(windowsSetup_->GetClientWidth());
 
 	//フレーム
@@ -27,8 +28,9 @@ void EscapeAssistArrow::Initialize(){
 		.x = static_cast<float_t>(textureManager_->GetTextureWidth(frameTextureHandle)),
 		.y = static_cast<float_t>(textureManager_->GetTextureHeight(frameTextureHandle))
 	};
-
-	frame_.reset(Elysia::Sprite::Create(frameTextureHandle, {.x= windowWidth -frameSize.x,.y=0.0f}));
+	//スペースを開けたいため
+	const float_t OFFSET = 20.0f;
+	frame_.reset(Elysia::Sprite::Create(frameTextureHandle, {.x= windowWidth -frameSize.x- OFFSET,.y= OFFSET }));
 	//メイン
 	uint32_t mainTextureHandle= textureManager_->Load("Resources/Sprite/Arrow/Arrow.png");
 	//サイズ
@@ -38,7 +40,7 @@ void EscapeAssistArrow::Initialize(){
 		.y = static_cast<float_t>(textureManager_->GetTextureHeight(mainTextureHandle)/2.0f)
 	};
 	
-	main_.reset(Elysia::Sprite::Create(mainTextureHandle, {.x = windowWidth - mainSize_.x,.y = mainSize_.y }));
+	main_.reset(Elysia::Sprite::Create(mainTextureHandle, {.x = windowWidth - mainSize_.x- OFFSET,.y = mainSize_.y+ OFFSET }));
 	main_->SetAnchorPoint({ 0.5f,0.5f });
 }
 
