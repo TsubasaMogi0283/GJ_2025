@@ -10,6 +10,7 @@
 #include <TitleScene/BaseTitleScene/Select/SelectTitleScene.h>
 #include <SingleCalculation.h>
 #include <VectorCalculation.h>
+#include <Easing.h>
 
 StartTitleScene::StartTitleScene(){
 	//インスタンスの取得
@@ -72,7 +73,8 @@ void StartTitleScene::Update(TitleScene* titleScene){
 
 		radiusT_ += INCREASE_T_VALUE_;
 		radiusT_ = std::clamp(radiusT_, 0.0f, 1.0f);
-		pointLight_.radius = SingleCalculation::Lerp(MIN_, MAX_RADIUS_, radiusT_);
+		float_t newRadiusT = Easing::EaseInOutQuad(radiusT_);
+		pointLight_.radius = SingleCalculation::Lerp(MIN_, MAX_RADIUS_, newRadiusT);
 
 		//ライトアップ完了
 		if (radiusT_>=1.0f) {

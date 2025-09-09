@@ -27,13 +27,20 @@ void FinishTitleScene::Initialize(){
 
 void FinishTitleScene::Update(TitleScene* titleScene){
 
+
+
+	dissolve_.threshold = 1.0f;
+
 	//高速
 	if (false) {
 		//指定した時間を超えたらノイズシーンへ
 			//ノイズへ
 			titleScene->SetIsEnd();
+			titleScene->SetIsGameEnd();
 			return;
 	}
+
+
 
 #ifdef _DEBUG
 	//ImGui表示用
@@ -51,6 +58,9 @@ void FinishTitleScene::DrawSprite(){
 void FinishTitleScene::DisplayImGui(){
 
 	ImGui::Begin("終わり(タイトルシーン)");
+	ImGui::SliderFloat("しきい値", &dissolve_.threshold, 0.0f, 2.0f);
+
+	//ImGui::SliderFloat("しきい値",&dissolve_.threshold,0.0f,2.0f);
 	ImGui::End();
 
 

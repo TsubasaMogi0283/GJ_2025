@@ -54,9 +54,38 @@ private:
 	//透明度の変化
 	const float_t INITIAL_TRANSPARENCY = 0.01f;
 
+	const std::string ARROW_ = "Arrow";
+	const std::string START_ = "Start";
+	const std::string END_ = "End";
+
+	const float_t RAPID_ROTATE_VALUE_ = 0.4f;
 private:
+	//初期座標
+	Vector3 startInitialPosition_ = {};
+	Vector3 endInitialPosition_ = {};
+	Vector3 arrowInitialPosition_ = {};
+	//上
+	bool isArrowUp_ = false;
+	//下
+	bool isArrowDown_ = false;
+	
+	//矢印
+	//座標
+	Vector3 arrowPosition_ = {};
+	//回転
+	Vector3 arrowRotate_ = {};
+	bool isRapidRotate_ = true;
+	float_t rapidRotateTime_ = 0.0f;
+	//回転用の線形補間
+	float_t rotateT_ = 0.0;
 
+	float_t t = 0.0f;
 
+	//
+	float_t changeWaitingTime_ = 0.0f;
+	
+	//選択
+	bool isDecice_ = false;
 
 };
 

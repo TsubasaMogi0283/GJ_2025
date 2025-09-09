@@ -208,7 +208,7 @@ void Elysia::Framework::Run(){
 			Update();
 
 			//ESCAPE押されたら終了
-			if (input_->IsTriggerKey(DIK_ESCAPE)==true) {
+			if (input_->IsTriggerKey(DIK_ESCAPE)==true||gameManager_->GetIsGameEnd()==true) {
 				break;
 			}
 

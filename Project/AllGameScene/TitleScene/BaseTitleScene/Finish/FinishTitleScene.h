@@ -65,6 +65,7 @@ private:
 	//点滅の間隔
 	const uint32_t FLASH_INTERVAL_ = 2u;
 private:
-
+	//ディゾルブ
+	Dissolve dissolve_ = {};
 
 };

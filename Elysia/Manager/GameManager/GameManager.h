@@ -69,6 +69,22 @@ namespace Elysia {
 		/// </summary>
 		~GameManager() = default;
 
+	public:
+		/// <summary>
+		/// ゲームが終了されたかどうかを取得
+		/// </summary>
+		/// <returns></returns>
+		inline bool GetIsGameEnd()const {
+			return isGameEnd_;
+		}
+
+		/// <summary>
+		/// ゲーム終了の設定
+		/// </summary>
+		/// <param name="isGameEnd"></param>
+		inline void SetIsGameEnd(const bool& isGameEnd) {
+			this->isGameEnd_ = isGameEnd;
+		}
 
 	private:
 		//シーンファクトリー
@@ -81,6 +97,8 @@ namespace Elysia {
 
 		//現在のシーンの数
 		uint32_t currentSceneNumber_ = 0;
+		bool isGameEnd_ = false;
+
 	};
 
 }

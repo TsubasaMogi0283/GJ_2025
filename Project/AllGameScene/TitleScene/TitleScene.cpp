@@ -46,6 +46,7 @@ void TitleScene::Initialize() {
 	dissolve_.Initialize();
 	dissolve_.maskTextureHandle = maskTexture;
 	dissolve_.threshold = 0.0f;
+	dissolve_.edgeThinkness = 0.0f;
 	//ポストエフェクト
 	dissolvePostEffect_ = std::make_unique<Elysia::DissolvePostEffect>();
 	dissolvePostEffect_->Initialize({ .x = 0.0f,.y = 0.0f,.z = 0.0f,.w = 1.0f });
@@ -67,6 +68,7 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 	pointLight_.radius = detailScene_->GetPointLight().radius;
 	pointLight_.Update();
 	//ディゾルブの更新
+	dissolve_.threshold = detailScene_->GetDissolve().threshold;
 	dissolve_.Update();
 
 	//カメラの更新
@@ -77,6 +79,12 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 		gameManager->ChangeScene("Select");
 		return;
 	}
+	//ゲーム終了
+	if (isGameEnd_ == true) {
+		gameManager->SetIsGameEnd(true);
+		return;
+	}
+
 	
 #ifdef _DEBUG
 	//再読み込み
