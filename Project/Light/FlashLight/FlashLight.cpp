@@ -65,6 +65,7 @@ void FlashLight::Initialize() {
 	attackWhiteFadeSprite_->SetTransparency(INITIAL_TRANSPARENCY);
 	//ゲージのスプライトを生成
 	uint32_t gaugeTextureHandle = textureManager_->Load("Resources/Sprite/Gauge/Gauge.png");
+	float_t gaugeHeight = static_cast<float_t>(textureManager_->GetTextureHeight(gaugeTextureHandle));
 	chargeGaugeSpritePosition_ = {.x=20.0f,.y=20.0f};
 	chargeGaugeSprite_.reset(Elysia::Sprite::Create(gaugeTextureHandle, chargeGaugeSpritePosition_));
 	//チャージの増減値
@@ -73,6 +74,18 @@ void FlashLight::Initialize() {
 
 	//パーティクルの放出時間
 	releaseTime_=globalVariables_->GetFloatValue(FLASH_LIGHT_CHARGE_VALUE_, CHARGE_PARTICLE_RELEASE_TIME_);
+
+	//使用制限
+	uint32_t lightListTextureHandle = textureManager_->Load("Resources/Sprite/Item/LightList.png");
+	useLimitationFrameSprite_.reset(Elysia::Sprite::Create(lightListTextureHandle, { chargeGaugeSpritePosition_.x,chargeGaugeSpritePosition_.y + gaugeHeight}));
+
+	for (uint8_t i = 0u; i < NUMBER_QUANTITY_; ++i) {
+		std::string path = "Resources/Sprite/Number/";
+		std::string fixedPath = path + std::to_string(i) + ".png";
+		numberTextureHandleArray_[i] = textureManager_->Load(fixedPath);
+	}
+	numberTextureHandle_ = numberTextureHandleArray_[0];
+	useLimitationCountSprite_.reset(Elysia::Sprite::Create(numberTextureHandle_, {.x=148.0f ,.y= chargeGaugeSpritePosition_.y + gaugeHeight }));
 
 	//フレーム
 	uint32_t frameSpriteHandle = textureManager_->Load("Resources/Sprite/Gauge/GaugeFrame.png");
@@ -220,6 +233,9 @@ void FlashLight::DrawSprite(){
 	chargeGaugeSprite_->Draw();
 	//フレーム
 	frameSprite_->Draw();
+	//使用制限回数
+	useLimitationFrameSprite_->Draw();
+	useLimitationCountSprite_->Draw(numberTextureHandle_);
 }
 
 void FlashLight::GenerateParticle() {
