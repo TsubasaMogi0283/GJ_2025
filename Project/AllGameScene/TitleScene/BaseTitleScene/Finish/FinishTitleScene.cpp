@@ -8,6 +8,7 @@
 #include "Audio.h"
 
 #include "TitleScene/TitleScene.h"
+#include <SingleCalculation.h>
 
 FinishTitleScene::FinishTitleScene(){
 	//インスタンスの取得
@@ -28,11 +29,11 @@ void FinishTitleScene::Initialize(){
 void FinishTitleScene::Update(TitleScene* titleScene){
 
 
-
-	dissolve_.threshold = 1.0f;
+	threshold_ += 0.01f;
+	dissolve_.threshold = SingleCalculation::Lerp(0.0f,1.0f, threshold_);
 
 	//高速
-	if (false) {
+	if (threshold_>2.0f) {
 		//指定した時間を超えたらノイズシーンへ
 			//ノイズへ
 			titleScene->SetIsEnd();
