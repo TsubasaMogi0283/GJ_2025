@@ -9,6 +9,7 @@
 
 #include "PointLight.h"
 #include <Dissolve.h>
+#include <Camera.h>
 
 /// <summary>
 /// ElysiaEngine
@@ -109,6 +110,14 @@ public:
 		return dissolve_;
 	};
 
+	/// <summary>
+	/// カメラの取得
+	/// </summary>
+	/// <returns></returns>
+	Camera GetCamera()const {
+		return camera_;
+	}
+
 
 protected:
 	//テクスチャ管理クラス
@@ -139,7 +148,7 @@ protected:
 	const float_t INCREASE_T_VALUE_ = 0.01f;
 
 	//最大半径
-	const float_t MAX_RADIUS_ = 4.0f;
+	const float_t MAX_RADIUS_ = 5.0f;
 	//最小値
 	const float_t MIN_ = 0.0f;
 
@@ -148,6 +157,8 @@ protected:
 	PointLight pointLight_ = {};
 	//ディゾルブ
 	Dissolve dissolve_ = {};
+
+	Camera camera_ = {};
 
 	//決定音のハンドル
 	uint32_t desideSEHandle_ = 0u;

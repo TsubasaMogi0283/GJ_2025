@@ -120,6 +120,7 @@
     <ClCompile Include="Project\Player\PlayerCollisionToStageObject.cpp" />
     <ClCompile Include="Project\Player\PlayerCollisionToStrongEnemy.cpp" />
     <ClCompile Include="Project\AllGameScene\TitleScene\BaseTitleScene\ToGame\ToGameTitleScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\SelectScene\SelectScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
@@ -442,6 +443,7 @@
     <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\Select\SelectTitleScene.h" />
     <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\Finish\FinishTitleScene.h" />
     <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\ToGame\ToGameTitleScene.h" />
+    <ClInclude Include="Project\AllGameScene\SelectScene\SelectScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

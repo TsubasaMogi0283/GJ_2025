@@ -69,4 +69,6 @@ private:
 
 private:
 
+	float_t velocity_ = {};
+	float_t accel_ = 0.005f;
 };

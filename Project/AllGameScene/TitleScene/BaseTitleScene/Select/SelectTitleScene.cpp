@@ -29,6 +29,10 @@ void SelectTitleScene::Initialize(){
 	arrowInitialPosition_=levelDataManager_->GetInitialTranslate(levelDataHandle_, ARROW_);
 
 	isArrowUp_ = true;
+
+	pointLight_.radius = MAX_RADIUS_;
+	camera_.translate.y = 1.4f;
+	camera_.translate.z = -9.8f;
 }
 
 void SelectTitleScene::Update(TitleScene* titleScene){

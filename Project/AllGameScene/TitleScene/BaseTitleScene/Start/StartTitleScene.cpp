@@ -63,6 +63,11 @@ void StartTitleScene::Initialize(){
 	levelDataManager_->SetTransparency(levelDataHandle_, "Start", selectTransparency_);
 	levelDataManager_->SetTransparency(levelDataHandle_, "End", selectTransparency_);
 	levelDataManager_->SetTransparency(levelDataHandle_, "Arrow", selectTransparency_);
+
+	pointLight_.radius = MAX_RADIUS_;
+	
+	camera_.translate.y = 1.4f;
+	camera_.translate.z = -9.8f;
 }
 
 void StartTitleScene::Update(TitleScene* titleScene){

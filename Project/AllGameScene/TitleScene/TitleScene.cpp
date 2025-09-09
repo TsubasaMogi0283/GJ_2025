@@ -60,7 +60,9 @@ void TitleScene::Initialize() {
 void TitleScene::Update(Elysia::GameManager* gameManager) {
 	//詳細シーンの更新
 	detailScene_->Update(this);
-
+	
+	
+	
 	//レベルエディターの更新
 	levelDataManager_->Update(levelHandle_);
 
@@ -72,26 +74,26 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 	dissolve_.Update();
 
 	//カメラの更新
+	camera_.translate = detailScene_->GetCamera().translate;
 	camera_.Update();
 	
-	//処理を終えたらゲームシーンへ
-	if(false) {
-		gameManager->ChangeScene("Select");
-		return;
-	}
 	//ゲーム終了
-	if (isGameEnd_ == true) {
-		gameManager->SetIsGameEnd(true);
-		return;
+	if (isEnd_ == true) {
+		if (isGameEnd_ == true) {
+			gameManager->SetIsGameEnd(true);
+			return;
+		}
+		else {
+			gameManager->ChangeScene("Select");
+			return;
+		}
 	}
 
-	
 #ifdef _DEBUG
 	//再読み込み
 	if (input_->IsTriggerKey(DIK_R) == true) {
 		levelDataManager_->Reload(levelHandle_);
 	}
-
 	//ImGui用
 	DisplayImGui();
 #endif
@@ -100,9 +102,6 @@ void TitleScene::Update(Elysia::GameManager* gameManager) {
 void TitleScene::DrawObject3D() {
 	//ステージオブジェクト
 	levelDataManager_->Draw(levelHandle_, camera_, pointLight_);
-
-	
-
 }
 
 void TitleScene::PreDrawPostEffect() {

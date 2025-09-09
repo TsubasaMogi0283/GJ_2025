@@ -23,7 +23,9 @@ FinishTitleScene::FinishTitleScene(){
 }
 
 void FinishTitleScene::Initialize(){
-
+	camera_.translate.y = 1.4f;
+	camera_.translate.z = -9.8f;
+	pointLight_.radius = MAX_RADIUS_;
 }
 
 void FinishTitleScene::Update(TitleScene* titleScene){

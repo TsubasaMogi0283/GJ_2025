@@ -25,10 +25,23 @@ ToGameTitleScene::ToGameTitleScene(){
 
 void ToGameTitleScene::Initialize(){
 
+	pointLight_.radius = MAX_RADIUS_;
+	camera_.translate.y = 1.4f;
+	camera_.translate.z = -9.8f;
 }
 
 void ToGameTitleScene::Update(TitleScene* titleScene){
-	titleScene;
+
+	//加速
+	velocity_ += accel_;
+	camera_.translate.z += velocity_;
+
+
+	if (camera_.translate.z >= 30.0f) {
+		titleScene->SetIsEnd();
+		return;
+	}
+
 #ifdef _DEBUG
 	//ImGui表示用
 	DisplayImGui();
@@ -44,7 +57,7 @@ void ToGameTitleScene::DrawSprite(){
 
 void ToGameTitleScene::DisplayImGui(){
 	ImGui::Begin("ゲームへ(タイトル)");
-
+	ImGui::InputFloat("加速", &velocity_);
 	ImGui::End();
 
 
