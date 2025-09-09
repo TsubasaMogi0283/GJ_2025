@@ -125,6 +125,11 @@ private:
 	void PlayerRotate();
 
 	/// <summary>
+	/// ゴール
+	/// </summary>
+	void Goal();
+
+	/// <summary>
 	/// ImGuiの表示
 	/// </summary>
 	void DisplayImGui();
@@ -161,6 +166,16 @@ private:
 	Vector3 playerDirection_ = {};
 	float_t theta_ = 0.0f;
 	float_t phi_ = 0.0f;
+
+	//白フェード用
+	std::unique_ptr<Elysia::Sprite>whiteSprite_ = nullptr;
+	float_t whiteFadeTransparency_ = 0.0f;
+
+	//ゴールにいるかどうか
+	bool isOnGoalArea_ = false;
+	//成功したか
+	bool isSucceed_ = false;
+
 
 	//衝突判定管理クラス
 	std::unique_ptr<Elysia::CollisionManager> collisionManager_ = nullptr;

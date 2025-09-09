@@ -39,22 +39,28 @@ GameScene::GameScene() {
 void GameScene::Initialize() {
 
 	//ハンドルの取得
-	levelHandle_ = levelDataManager_->Load("GameStage/GameStage.json");
+	levelHandle_ = levelDataManager_->Load("GameStage/Stage1.json");
 
 	Vector3 playerInitialPosition = levelDataManager_->GetInitialTranslate(levelHandle_, "Player");
 
 	//生成
 	player_ = std::make_unique<Player>();
 	//初期化
-	player_->Initialize();
+	player_->Initialize(playerInitialPosition);
 	//ハンドルの設定
 	player_->SetLevelHandle(levelHandle_);
 	//最初はコントロールは出来ない用にする
 	player_->SetIsAbleToControll(false);
 	//向き
 	theta_ = std::numbers::pi_v<float_t>/2.0f ;
-
+	//リスナーの設定
 	levelDataManager_->SetListener(levelHandle_, player_.get());
+
+	//フェード
+	uint32_t whiteTextureHandle = textureManager_->Load("Resources/Sprite/Back/White.png");
+	whiteSprite_.reset(Elysia::Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
+	whiteFadeTransparency_ = 0.0f;
+	whiteSprite_->SetTransparency(whiteFadeTransparency_);
 
 	//カメラの初期化
 	camera_.Initialize();
@@ -255,6 +261,27 @@ void GameScene::PlayerRotate() {
 	}
 }
 
+void GameScene::Goal(){
+	//ゴール座標の取得
+	Vector3 goalPosition = levelDataManager_->GetInitialTranslate(levelHandle_, "Goal");
+	//
+	const float_t SIZE = 2.0f;
+
+	Vector3 playerWorldPosition = player_->GetWorldPosition();
+
+	if (playerWorldPosition.x >= goalPosition.x - SIZE &&
+		playerWorldPosition.x <= goalPosition.x + SIZE &&
+		playerWorldPosition.z >= goalPosition.z - SIZE &&
+		playerWorldPosition.z <= goalPosition.z + SIZE) {
+		isOnGoalArea_ = true;
+	}
+	else {
+		isOnGoalArea_ = false;
+	}
+
+
+}
+
 void GameScene::DisplayImGui() {
 
 	ImGui::Begin("ゲームシーン");
@@ -263,7 +290,9 @@ void GameScene::DisplayImGui() {
 		ImGui::SliderFloat3("回転", &camera_.rotate.x, -3.0f, 3.0f);
 		ImGui::TreePop();
 	}
-	
+
+	ImGui::Checkbox("ゴールエリア上", &isOnGoalArea_);
+	ImGui::InputFloat("フェードの透明度", &whiteFadeTransparency_);
 	ImGui::End();
 }
 
@@ -271,8 +300,6 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//中身を空にする
 	collisionManager_->ClearList();
 	
-	gameManager;
-
 	//レベルエディタの更新
 	levelDataManager_->Update(levelHandle_);
 	//レベルエディタのオブジェクトのコライダーを取得し登録
@@ -287,16 +314,11 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 			collisionManager_->RegisterList(collider);
 		}
 	}
-
-
-
 	for (const auto& collider : playerColliders) {
 		if (collider != nullptr) {
 			collisionManager_->RegisterList(collider);
 		}
 	}
-
-	
 	//プレイヤーの移動と回転
 	PlayerMove();
 	PlayerRotate();
@@ -305,6 +327,9 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	player_->SetPhi(phi_);
 	//更新
 	player_->Update();
+	//ゴール処理
+	Goal();
+	//プレイヤーのコリジョンを登録
 	collisionManager_->RegisterList(player_->GetPlayerCollision());
 	//カメラの更新
 	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
@@ -314,25 +339,26 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	// 地形
 	terrainManager_->Update();
 
-
-
-
-#ifdef _DEBUG
-	ImGui::Begin("確認");
-	ImGui::Checkbox("リリース", &isReleaseAttack_);
-	ImGui::End();
-#endif // _DEBUG
-	
-
-
-	//カメラの更新
-	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
-	//転送
-	camera_.Transfer();
-	
-	
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
+
+	if (isOnGoalArea_ == true) {
+		if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
+			isSucceed_ = true;
+		}
+	}
+
+
+	if (isSucceed_ == true) {
+		whiteFadeTransparency_ += 0.01f;
+		whiteSprite_->SetTransparency(whiteFadeTransparency_);
+	}
+	//フェードが終わったら勝ち(成功へ)
+	if (whiteFadeTransparency_ >= 1.0f) {
+		gameManager->ChangeScene("Win");
+		return;
+	}
+
 
 #ifdef _DEBUG 
 	//再読み込み
@@ -370,5 +396,6 @@ void GameScene::DrawPostEffect() {
 }
 
 void GameScene::DrawSprite() {
-
+	//白フェード
+	whiteSprite_->Draw();
 }

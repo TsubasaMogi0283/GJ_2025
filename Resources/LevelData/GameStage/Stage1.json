@@ -63,6 +63,29 @@
         },
         {
             "type": "MESH",
+            "name": "Goal",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.0,
+                    27.9598331451416,
+                    0.04057713970541954
+                ]
+            },
+            "file_name": "Goal",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
             "name": "Cube",
             "transform": {
                 "scaling": [
@@ -237,41 +260,6 @@
                 "size": [
                     2.0,
                     2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "平面",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    90.00000762939453,
-                    -0.0,
-                    179.99998474121094
-                ],
-                "translation": [
-                    0.0,
-                    27.9598331451416,
-                    0.04057713970541954
-                ]
-            },
-            "file_name": "Goal",
-            "collider": {
-                "type": "Plane",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    0.0010000000474974513,
                     2.0
                 ]
             }
