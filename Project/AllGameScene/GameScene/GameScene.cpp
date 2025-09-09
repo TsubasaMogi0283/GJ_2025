@@ -41,6 +41,8 @@ void GameScene::Initialize() {
 	//ハンドルの取得
 	levelHandle_ = levelDataManager_->Load("GameStage/GameStage.json");
 
+	Vector3 playerInitialPosition = levelDataManager_->GetInitialTranslate(levelHandle_, "Player");
+
 	//生成
 	player_ = std::make_unique<Player>();
 	//初期化
