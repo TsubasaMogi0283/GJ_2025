@@ -54,7 +54,7 @@ public:
 	/// <summary>
 	/// AABB用のサイズを設定。コライダーのサイズから取得してね。
 	/// </summary>
-	/// <param name="size"></param>
+	/// <param name="main_size_"></param>
 	inline void SetSize(const Vector3& size) {
 		this->size_ = size;
 	}

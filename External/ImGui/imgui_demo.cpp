@@ -34,7 +34,7 @@
 // Think of "static int n = 0;" as "global int n = 0;" !
 // We do this IN THE DEMO because we want:
 // - to gather code and data in the same place.
-// - to make the demo source code faster to read, faster to change, smaller in size.
+// - to make the demo source code faster to read, faster to change, smaller in main_size_.
 // - it is also a convenient way of storing simple UI related information as long as your function
 //   doesn'rotateVelocity_ need to be reentrant or used in multiple threads.
 // This might be a pattern you will want to use in your code, but most of the data you would be working
@@ -132,7 +132,7 @@ Index of this file:
 #pragma clang diagnostic ignored "-Wimplicit-int-float-conversion"  // warning: implicit conversion from 'xxx' to 'float' may lose precision
 #elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Wpragmas"                  // warning: unknown option after '#pragma GCC diagnostic' kind
-#pragma GCC diagnostic ignored "-Wint-to-pointer-cast"      // warning: cast to pointer from integer of different size
+#pragma GCC diagnostic ignored "-Wint-to-pointer-cast"      // warning: cast to pointer from integer of different main_size_
 #pragma GCC diagnostic ignored "-Wformat-security"          // warning: format string is not a string literal (potentially insecure)
 #pragma GCC diagnostic ignored "-Wdouble-promotion"         // warning: implicit conversion from 'float' to 'double' when passing argument to function
 #pragma GCC diagnostic ignored "-Wconversion"               // warning: conversion to 'xxxx' from 'xxxx' may alter its value
@@ -335,7 +335,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
     if (unsaved_document)   window_flags |= ImGuiWindowFlags_UnsavedDocument;
     if (no_close)           p_open = NULL; // Don'rotateVelocity_ pass our bool* to Begin
 
-    // We specify a default position/size in case there's no data in the .ini file.
+    // We specify a default position/main_size_ in case there's no data in the .ini file.
     // We only do it to make the demo applications a little more welcoming, but typically this isn'rotateVelocity_ required.
     const ImGuiViewport* main_viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
@@ -1273,7 +1273,7 @@ static void ShowDemoWindowWidgets()
             ImGui::EndListBox();
         }
 
-        // Custom size: use all width, 5 items tall
+        // Custom main_size_: use all width, 5 items tall
         ImGui::Text("Full-width:");
         if (ImGui::BeginListBox("##listbox 2", ImVec2(-FLT_MIN, 5 * ImGui::GetTextLineHeightWithSpacing())))
         {
@@ -1617,7 +1617,7 @@ static void ShowDemoWindowWidgets()
             };
 
             // For this demo we are using ImVector as a string container.
-            // Note that because we need to store a terminating zero character, our size/capacity are 1 more
+            // Note that because we need to store a terminating zero character, our main_size_/capacity are 1 more
             // than usually reported by a typical string class.
             static ImVector<char> my_str;
             if (my_str.empty())
@@ -2850,7 +2850,7 @@ static void ShowDemoWindowLayout()
 
         // Use SetNextItemWidth() to set the width of a single upcoming item.
         // Use PushItemWidth()/PopItemWidth() to set the width of a group of items.
-        // In real code use you'll probably want to choose width values that are proportional to your font size
+        // In real code use you'll probably want to choose width values that are proportional to your font main_size_
         // e.g. Using '20.0f * GetFontSize()' as width instead of '200.0f', etc.
 
         ImGui::Text("SetNextItemWidth/PushItemWidth(100)");
@@ -3036,7 +3036,7 @@ static void ShowDemoWindowLayout()
             ImGui::EndGroup();
             ImGui::SetItemTooltip("First group hovered");
         }
-        // Capture the group size and create widgets using the same size
+        // Capture the group main_size_ and create widgets using the same main_size_
         ImVec2 size = ImGui::GetItemRectSize();
         const float values[5] = { 0.5f, 0.20f, 0.80f, 0.60f, 0.25f };
         ImGui::PlotHistogram("##values", values, IM_ARRAYSIZE(values), 0, NULL, 0.0f, 1.0f, size);
@@ -3382,12 +3382,12 @@ static void ShowDemoWindowLayout()
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(2, 0));
             HelpMarker("Test of different widgets react and impact the work rectangle growing when horizontal scrolling is enabled.\n\nUse 'Metrics->Tools->Show windows rectangles' to visualize rectangles.");
             ImGui::Checkbox("H-scrollbar", &show_h_scrollbar);
-            ImGui::Checkbox("Button", &show_button);            // Will grow contents size (unless explicitly overwritten)
-            ImGui::Checkbox("Tree nodes", &show_tree_nodes);    // Will grow contents size and display highlight over full width
-            ImGui::Checkbox("Text wrapped", &show_text_wrapped);// Will grow and use contents size
-            ImGui::Checkbox("Columns", &show_columns);          // Will use contents size
-            ImGui::Checkbox("Tab bar", &show_tab_bar);          // Will use contents size
-            ImGui::Checkbox("Child", &show_child);              // Will grow and use contents size
+            ImGui::Checkbox("Button", &show_button);            // Will grow contents main_size_ (unless explicitly overwritten)
+            ImGui::Checkbox("Tree nodes", &show_tree_nodes);    // Will grow contents main_size_ and display highlight over full width
+            ImGui::Checkbox("Text wrapped", &show_text_wrapped);// Will grow and use contents main_size_
+            ImGui::Checkbox("Columns", &show_columns);          // Will use contents main_size_
+            ImGui::Checkbox("Tab bar", &show_tab_bar);          // Will use contents main_size_
+            ImGui::Checkbox("Child", &show_child);              // Will grow and use contents main_size_
             ImGui::Checkbox("Explicit content size", &explicit_content_size);
             ImGui::Text("Scroll %.1f/%.1f %.1f/%.1f", ImGui::GetScrollX(), ImGui::GetScrollMaxX(), ImGui::GetScrollY(), ImGui::GetScrollMaxY());
             if (explicit_content_size)
@@ -4025,7 +4025,7 @@ static void ShowDemoWindowTables()
     if (!ImGui::CollapsingHeader("Tables & Columns"))
         return;
 
-    // Using those as a base value to create width/height that are factor of the size of our font
+    // Using those as a base value to create width/height that are factor of the main_size_ of our font
     const float TEXT_BASE_WIDTH = ImGui::CalcTextSize("A").x;
     const float TEXT_BASE_HEIGHT = ImGui::GetTextLineHeightWithSpacing();
 
@@ -4590,7 +4590,7 @@ static void ShowDemoWindowTables()
         ImGui::CheckboxFlags("ImGuiTableFlags_ScrollY", &flags, ImGuiTableFlags_ScrollY);
         PopStyleCompact();
 
-        // When using ScrollX or ScrollY we need to specify a size for our table container!
+        // When using ScrollX or ScrollY we need to specify a main_size_ for our table container!
         // Otherwise by default the table will fit all available space, like a BeginChild() call.
         ImVec2 outer_size = ImVec2(0.0f, TEXT_BASE_HEIGHT * 8);
         if (ImGui::BeginTable("table_scrolly", 3, flags, outer_size))
@@ -4645,7 +4645,7 @@ static void ShowDemoWindowTables()
         ImGui::DragInt("freeze_rows", &freeze_rows, 0.2f, 0, 9, NULL, ImGuiSliderFlags_NoInput);
         PopStyleCompact();
 
-        // When using ScrollX or ScrollY we need to specify a size for our table container!
+        // When using ScrollX or ScrollY we need to specify a main_size_ for our table container!
         // Otherwise by default the table will fit all available space, like a BeginChild() call.
         ImVec2 outer_size = ImVec2(0.0f, TEXT_BASE_HEIGHT * 8);
         if (ImGui::BeginTable("table_scrollx", 7, flags, outer_size))
@@ -7658,7 +7658,7 @@ static void ShowExampleAppAutoResize(bool* p_open)
         "output your content because that would create a feedback loop.");
     ImGui::SliderInt("Number of lines", &lines, 1, 20);
     for (int i = 0; i < lines; i++)
-        ImGui::Text("%*sThis is line %d", i * 4, "", i); // Pad with space to extend size horizontally
+        ImGui::Text("%*sThis is line %d", i * 4, "", i); // Pad with space to extend main_size_ horizontally
     ImGui::End();
 }
 
@@ -7667,13 +7667,13 @@ static void ShowExampleAppAutoResize(bool* p_open)
 //-----------------------------------------------------------------------------
 
 // Demonstrate creating a window with custom resize constraints.
-// Note that size constraints currently don'rotateVelocity_ work on a docked window (when in 'docking' branch)
+// Note that main_size_ constraints currently don'rotateVelocity_ work on a docked window (when in 'docking' branch)
 static void ShowExampleAppConstrainedResize(bool* p_open)
 {
     struct CustomConstraints
     {
         // Helper functions to demonstrate programmatic constraints
-        // FIXME: This doesn'rotateVelocity_ take account of decoration size (e.g. title bar), library should make this easier.
+        // FIXME: This doesn'rotateVelocity_ take account of decoration main_size_ (e.g. title bar), library should make this easier.
         // FIXME: None of the three demos works consistently when resizing from borders.
         static void AspectRatio(ImGuiSizeCallbackData* data)
         {

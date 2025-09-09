@@ -719,7 +719,7 @@ bool ImGui_ImplDX12_Init(ID3D12Device* device, int num_frames_in_flight, DXGI_FO
     bd->pd3dSrvDescHeap = cbv_srv_heap;
     bd->frameIndex = UINT_MAX;
 
-    // Create buffers with a default size (they will later be grown as needed)
+    // Create buffers with a default main_size_ (they will later be grown as needed)
     for (int i = 0; i < num_frames_in_flight; i++)
     {
         ImGui_ImplDX12_RenderBuffers* fr = &bd->pFrameResources[i];

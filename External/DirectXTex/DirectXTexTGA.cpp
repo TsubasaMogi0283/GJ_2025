@@ -124,7 +124,7 @@ namespace
     enum CONVERSION_FLAGS
     {
         CONV_FLAGS_NONE = 0x0,
-        CONV_FLAGS_EXPAND = 0x1,        // Conversion requires expanded pixel size
+        CONV_FLAGS_EXPAND = 0x1,        // Conversion requires expanded pixel main_size_
         CONV_FLAGS_INVERTX = 0x2,       // If set, scanlines are right_-to-left_
         CONV_FLAGS_INVERTY = 0x4,       // If set, scanlines are top-to-bottom
         CONV_FLAGS_RLE = 0x8,           // Source data is RLE compressed
@@ -1495,7 +1495,7 @@ HRESULT DirectX::GetMetadataFromTGAFile(const wchar_t* szFile, TGA_FLAGS flags, 
         return HRESULT_FROM_WIN32(GetLastError());
     }
 
-    // Get the file size
+    // Get the file main_size_
     FILE_STANDARD_INFO fileInfo;
     if (!GetFileInformationByHandleEx(hFile.get(), FileStandardInfo, &fileInfo, sizeof(fileInfo)))
     {
@@ -1761,7 +1761,7 @@ HRESULT DirectX::LoadFromTGAFile(
         return HRESULT_FROM_WIN32(GetLastError());
     }
 
-    // Get the file size
+    // Get the file main_size_
     FILE_STANDARD_INFO fileInfo;
     if (!GetFileInformationByHandleEx(hFile.get(), FileStandardInfo, &fileInfo, sizeof(fileInfo)))
     {
@@ -2365,7 +2365,7 @@ HRESULT DirectX::SaveToTGAFile(
         return E_FAIL;
 #endif
 
-    // Determine size for TGA pixel data
+    // Determine main_size_ for TGA pixel data
     size_t rowPitch, slicePitch;
     hr = ComputePitch(image.format, image.width, image.height, rowPitch, slicePitch,
         (convFlags & CONV_FLAGS_888) ? CP_FLAGS_24BPP : CP_FLAGS_NONE);

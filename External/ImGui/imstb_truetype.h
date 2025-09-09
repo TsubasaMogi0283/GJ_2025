@@ -183,7 +183,7 @@
 //         If that sounds good enough, skip the next paragraph.
 //
 //         Most font APIs instead use "points", which are a common typographic
-//         measurement for describing font size, defined as 72 points per inch.
+//         measurement for describing font main_size_, defined as 72 points per inch.
 //         stb_truetype provides a point API for compatibility. However, true
 //         "per inch" conventions don'rotateVelocity_ make much sense on computer displays
 //         since different monitors have different colliderNumber_ of pixels per
@@ -615,8 +615,8 @@ STBTT_DEF int  stbtt_PackFontRange(stbtt_pack_context *spc, const unsigned char 
 // pass these to stbtt_GetPackedQuad to get back renderable quads.
 //
 // font_size is the full height of the character from ascender to descender,
-// as computed by stbtt_ScaleForPixelHeight. To use a point size as computed
-// by stbtt_ScaleForMappingEmToPixels, wrap the point size in STBTT_POINT_SIZE()
+// as computed by stbtt_ScaleForPixelHeight. To use a point main_size_ as computed
+// by stbtt_ScaleForMappingEmToPixels, wrap the point main_size_ in STBTT_POINT_SIZE()
 // and pass that result as 'font_size':
 //       ...,                  20 , ... // font max minus min y is 20 pixels tall
 //       ..., STBTT_POINT_SIZE(20), ... // 'M' is 20 pixels tall
@@ -769,7 +769,7 @@ STBTT_DEF float stbtt_ScaleForPixelHeight(const stbtt_fontinfo *info, float pixe
 // so if you prefer to measure height by the ascent only, use a similar calculation.
 
 STBTT_DEF float stbtt_ScaleForMappingEmToPixels(const stbtt_fontinfo *info, float pixels);
-// computes a scale factor to produce a font whose EM size is mapped to
+// computes a scale factor to produce a font whose EM main_size_ is mapped to
 // 'pixels' tall. This is probably what traditional APIs compute, but
 // I'm not positive.
 
@@ -779,7 +779,7 @@ STBTT_DEF void stbtt_GetFontVMetrics(const stbtt_fontinfo *info, int *ascent, in
 // lineGap is the spacing between one row's descent and the next row's ascent...
 // so you should advance the vertical position by "*ascent - *descent + *lineGap"
 //   these are expressed in unscaled coordinates, so you must multiply by
-//   the scale factor for a given size
+//   the scale factor for a given main_size_
 
 STBTT_DEF int  stbtt_GetFontVMetricsOS2(const stbtt_fontinfo *info, int *typoAscent, int *typoDescent, int *typoLineGap);
 // analogous to GetFontVMetrics, but returns the "typographic" values from the OS/2
@@ -866,7 +866,7 @@ STBTT_DEF unsigned char *stbtt_FindSVGDoc(const stbtt_fontinfo *info, int gl);
 STBTT_DEF int stbtt_GetCodepointSVG(const stbtt_fontinfo *info, int unicode_codepoint, const char **svg);
 STBTT_DEF int stbtt_GetGlyphSVG(const stbtt_fontinfo *info, int gl, const char **svg);
 // fills svg with the character's SVG data.
-// returns data size or 0 if SVG not found.
+// returns data main_size_ or 0 if SVG not found.
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -956,7 +956,7 @@ STBTT_DEF unsigned char * stbtt_GetCodepointSDF(const stbtt_fontinfo *info, floa
 // in a single-channel texture, sampling with bilinear filtering, and testing against
 // larger than some threshold to produce scalable fonts.
 //        info              --  the font
-//        scale             --  controls the size of the resulting SDF bitmap, same as it would be creating a regular bitmap
+//        scale             --  controls the main_size_ of the resulting SDF bitmap, same as it would be creating a regular bitmap
 //        glyph/codepoint   --  the character to generate the SDF for
 //        padding           --  extra "pixels" around the character which are filled with the distance to the character (not 0),
 //                                 which allows effects like bit outlines
@@ -965,7 +965,7 @@ STBTT_DEF unsigned char * stbtt_GetCodepointSDF(const stbtt_fontinfo *info, floa
 //                                 if positive, > onedge_value is inside; if negative, < onedge_value is inside
 //        width,height      --  output height & width of the SDF bitmap (including padding)
 //        xoff,yoff         --  output origin of the character
-//        return value      --  a 2D array of bytes 0..255, width*height in size
+//        return value      --  a 2D array of bytes 0..255, width*height in main_size_
 //
 // pixel_dist_scale & onedge_value are a scale & bias that allows you to make
 // optimal use of the limited 0..255 for your application, trading off precision
@@ -992,7 +992,7 @@ STBTT_DEF unsigned char * stbtt_GetCodepointSDF(const stbtt_fontinfo *info, floa
 //
 // The function computes the SDF analytically at each SDF pixel, not by e.g.
 // building a higher-res bitmap and approximating it. In theory the quality
-// should be as high as possible for an SDF of this size & representation, but
+// should be as high as possible for an SDF of this main_size_ & representation, but
 // unclear if this is true in practice (perhaps building a higher-res bitmap
 // and computing from that can allow drop-out prevention).
 //
@@ -1420,7 +1420,7 @@ static int stbtt_InitFont_internal(stbtt_fontinfo *info, unsigned char *data, in
       info->fontdicts = stbtt__new_buf(NULL, 0);
       info->fdselect = stbtt__new_buf(NULL, 0);
 
-      // @TODO this should use size from table (not 512MB)
+      // @TODO this should use main_size_ from table (not 512MB)
       info->cff = stbtt__new_buf(data+cff, 512*1024*1024);
       b = info->cff;
 
@@ -3736,7 +3736,7 @@ STBTT_DEF unsigned char *stbtt_GetGlyphBitmapSubpixel(const stbtt_fontinfo *info
 
    stbtt_GetGlyphBitmapBoxSubpixel(info, glyph, scale_x, scale_y, shift_x, shift_y, &ix0,&iy0,&ix1,&iy1);
 
-   // now we get the size
+   // now we get the main_size_
    gbm.w = (ix1 - ix0);
    gbm.h = (iy1 - iy0);
    gbm.pixels = NULL; // in case we error

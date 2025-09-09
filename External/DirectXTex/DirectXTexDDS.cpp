@@ -30,7 +30,7 @@ namespace
     enum CONVERSION_FLAGS : uint32_t
     {
         CONV_FLAGS_NONE = 0x0,
-        CONV_FLAGS_EXPAND = 0x1,      // Conversion requires expanded pixel size
+        CONV_FLAGS_EXPAND = 0x1,      // Conversion requires expanded pixel main_size_
         CONV_FLAGS_NOALPHA = 0x2,      // Conversion requires setting alpha to known value
         CONV_FLAGS_SWIZZLE = 0x4,      // BGR/RGB order swizzling required
         CONV_FLAGS_PAL8 = 0x8,      // Has an 8-bit palette
@@ -536,7 +536,7 @@ namespace
         // Check for .dds files that exceed known hardware support
         if (!(flags & DDS_FLAGS_ALLOW_LARGE_FILES))
         {
-            // 16k is the maximum required resource size supported by Direct3D
+            // 16k is the maximum required resource main_size_ supported by Direct3D
             if (metadata.width > 16384u /* D3D12_REQ_TEXTURE1D_U_DIMENSION, D3D12_REQ_TEXTURE2D_U_OR_V_DIMENSION */
                 || metadata.height > 16384u /* D3D12_REQ_TEXTURE2D_U_OR_V_DIMENSION */
                 || metadata.mipLevels > 15u /* D3D12_REQ_MIP_LEVELS */)
@@ -544,7 +544,7 @@ namespace
                 return HRESULT_E_NOT_SUPPORTED;
             }
 
-            // 2048 is the maximum required depth/array size supported by Direct3D
+            // 2048 is the maximum required depth/array main_size_ supported by Direct3D
             if (metadata.arraySize > 2048u /* D3D12_REQ_TEXTURE1D_ARRAY_AXIS_DIMENSION, D3D12_REQ_TEXTURE2D_ARRAY_AXIS_DIMENSION */
                 || metadata.depth > 2048u /* D3D12_REQ_TEXTURE3D_U_V_OR_W_DIMENSION */)
             {
@@ -1596,7 +1596,7 @@ HRESULT DirectX::GetMetadataFromDDSFile(
         return HRESULT_FROM_WIN32(GetLastError());
     }
 
-    // Get the file size
+    // Get the file main_size_
     FILE_STANDARD_INFO fileInfo;
     if (!GetFileInformationByHandleEx(hFile.get(), FileStandardInfo, &fileInfo, sizeof(fileInfo)))
     {
@@ -1759,7 +1759,7 @@ HRESULT DirectX::LoadFromDDSFile(
         return HRESULT_FROM_WIN32(GetLastError());
     }
 
-    // Get the file size
+    // Get the file main_size_
     FILE_STANDARD_INFO fileInfo;
     if (!GetFileInformationByHandleEx(hFile.get(), FileStandardInfo, &fileInfo, sizeof(fileInfo)))
     {

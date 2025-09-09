@@ -7,8 +7,23 @@
 
 #include <memory>
 #include <Model.h>
-#include <WorldTransform.h>
-#include <Material.h>
+#include <Sprite.h>
+
+/// <summary>
+/// ElysiaEngine
+/// </summary>
+namespace Elysia {
+	/// <summary>
+	/// テクスチャ管理クラス
+	/// </summary>
+	class TextureManager;
+
+	/// <summary>
+	/// ウィンドウクラス
+	/// </summary>
+	class WindowsSetup;
+
+}
 
 
 /// <summary>
@@ -34,14 +49,12 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EscapeAssistArrow() = default;
+	EscapeAssistArrow();
 
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	/// <param name="modelHandle"></param>
-	/// <param name="gateCenterPosition"></param>
-	void Initialize(const uint32_t& modelHandle, const Vector3& gateCenterPosition);
+	void Initialize();
 
 	/// <summary>
 	/// 更新
@@ -51,9 +64,7 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	/// <param name="camera">カメラ</param>
-	/// <param name="spotLight">スポットライト</param>
-	void Draw(const Camera& camera, const SpotLight& spotLight);
+	void DrawSprite();
 
 	/// <summary>
 	/// デストラクタ
@@ -70,51 +81,55 @@ public:
 	}
 
 	/// <summary>
-	/// 不透明にしていくかどうか
+	/// ゴールの座標を設定
 	/// </summary>
-	/// <param name="isOpaque">不透明にするかのフラグ</param>
-	inline void SetIsOpaque(const bool& isOpaque) {
-		this->isOpaque_ = isOpaque;
+	/// <param name="position"></param>
+	void SetGoalPosition(const Vector2& position) {
+		this->goalPosition_ = position;
 	}
 
+	/// <summary>
+	/// シータの設定
+	/// </summary>
+	/// <param name="theta"></param>
+	inline void SetTheta(const float_t& theta) {
+		this->theta_ = theta;
+	}
 
 private:
-	//プレイヤーと矢印の距離
-	const float_t PLAYER_TO_ARROW_DISTANCE_ = 3.0f;
+	//テクスチャ管理クラス
+	Elysia::TextureManager* textureManager_ = nullptr;
+	//ウィンドウクラス
+	Elysia::WindowsSetup* windowsSetup_ = nullptr;
+
+private:
+
 	//大きさ
 	const float_t SCALE_ = 0.3f;
 	//線形補間の増える量
 	const float_t INCREASE_T_VALUE_ = 0.01f;
-	//高さ
-	const float_t HEIGHT_ = 0.75f;
+
 	//透明度の増える値
 	const float_t INCREASE_TRANSPARENCY_VALUE_ = 0.01f;
 
 private:
 	//プレイヤー
 	Player* player_ = nullptr;
+	//フレーム
+	std::unique_ptr<Elysia::Sprite>frame_ = nullptr;
+	//メインの矢印
+	std::unique_ptr<Elysia::Sprite>main_ = nullptr;
 
-	//脱出アシスト用の矢印
-	std::unique_ptr<Elysia::Model>model_ = nullptr;
-	WorldTransform worldTransform_ = {};
-	Material material_ = {};
-	//指し示す動きの量
-	float_t indicateValueZ_ = {};
-	//線形補間
-	float_t indicateT_ = 0.0f;
-	
-	//不透明にしていくかどうか
-	bool isOpaque_ = false;
 
-	//透明度
-	float_t transparency_ = 0.0f;
-
-	//門の中心座標
-	Vector3 gateCenterPosition_ = {};
+	//シータ
+	float_t theta_ = 0.0f;
+	//ゴールの中心座標
+	Vector2 goalPosition_ = {};
 	//差分
-	Vector3 difference_ = {};
+	Vector2 difference_ = {};
 	//角度
 	float_t arrowTheta_ = 0.0f;
 
+	float_t offset_ = 0.0f;
 };
 

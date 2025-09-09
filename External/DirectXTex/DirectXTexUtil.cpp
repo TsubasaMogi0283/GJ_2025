@@ -885,7 +885,7 @@ size_t DirectX::BitsPerColor(DXGI_FORMAT fmt) noexcept
 
 
 //-------------------------------------------------------------------------------------
-// Computes the image row pitch in bytes, and the slice ptich (size in bytes of the image)
+// Computes the image row pitch in bytes, and the slice ptich (main_size_ in bytes of the image)
 // based on DXGI format, width, and height
 //-------------------------------------------------------------------------------------
 _Use_decl_annotations_

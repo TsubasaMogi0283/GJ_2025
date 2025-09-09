@@ -21,7 +21,7 @@
 #include "VignettePostEffect.h"
 #include "Vignette.h"
 #include <BackTexture.h>
-
+#include <EscapeAssistArrow/EscapeAssistArrow.h>
 #include "Terrain/TerrainManager.h"
 
  /// <summary>
@@ -166,6 +166,9 @@ private:
 	Vector3 playerDirection_ = {};
 	float_t theta_ = 0.0f;
 	float_t phi_ = 0.0f;
+
+	//矢印
+	std::unique_ptr<EscapeAssistArrow>escapeAssistArrow_ = nullptr;
 
 	//白フェード用
 	std::unique_ptr<Elysia::Sprite>whiteSprite_ = nullptr;

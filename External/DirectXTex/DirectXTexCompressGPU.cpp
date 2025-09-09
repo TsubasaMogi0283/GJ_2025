@@ -311,7 +311,7 @@ HRESULT DirectX::Compress(
         return E_POINTER;
     }
 
-    // Process images (ordered by size)
+    // Process images (ordered by main_size_)
     switch (metadata.dimension)
     {
     case TEX_DIMENSION_TEXTURE1D:

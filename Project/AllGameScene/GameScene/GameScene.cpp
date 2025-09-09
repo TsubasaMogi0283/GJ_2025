@@ -56,6 +56,11 @@ void GameScene::Initialize() {
 	//リスナーの設定
 	levelDataManager_->SetListener(levelHandle_, player_.get());
 
+	//矢印
+	escapeAssistArrow_ = std::make_unique<EscapeAssistArrow>();
+	escapeAssistArrow_->SetPlayer(player_.get());
+	escapeAssistArrow_->Initialize();
+
 	//フェード
 	uint32_t whiteTextureHandle = textureManager_->Load("Resources/Sprite/Back/White.png");
 	whiteSprite_.reset(Elysia::Sprite::Create(whiteTextureHandle, { 0.0f,0.0f }));
@@ -264,11 +269,12 @@ void GameScene::PlayerRotate() {
 void GameScene::Goal(){
 	//ゴール座標の取得
 	Vector3 goalPosition = levelDataManager_->GetInitialTranslate(levelHandle_, "Goal");
-	//
+	//サイズ
 	const float_t SIZE = 2.0f;
-
+	//プレイヤーの座標
 	Vector3 playerWorldPosition = player_->GetWorldPosition();
 
+	//エリア内にいた場合
 	if (playerWorldPosition.x >= goalPosition.x - SIZE &&
 		playerWorldPosition.x <= goalPosition.x + SIZE &&
 		playerWorldPosition.z >= goalPosition.z - SIZE &&
@@ -279,7 +285,9 @@ void GameScene::Goal(){
 		isOnGoalArea_ = false;
 	}
 
-
+	//ゴールの座標を設定
+	escapeAssistArrow_->SetGoalPosition({ .x = goalPosition.x,.y = goalPosition.z });
+	escapeAssistArrow_->SetTheta(theta_);
 }
 
 void GameScene::DisplayImGui() {
@@ -325,10 +333,12 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//プレイヤーにそれぞれの角度を設定する
 	player_->SetTheta(theta_);
 	player_->SetPhi(phi_);
-	//更新
+	//プレイヤー
 	player_->Update();
 	//ゴール処理
 	Goal();
+	//矢印
+	escapeAssistArrow_->Update();
 	//プレイヤーのコリジョンを登録
 	collisionManager_->RegisterList(player_->GetPlayerCollision());
 	//カメラの更新
@@ -348,7 +358,7 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 		}
 	}
 
-
+	//成功時
 	if (isSucceed_ == true) {
 		whiteFadeTransparency_ += 0.01f;
 		whiteSprite_->SetTransparency(whiteFadeTransparency_);
@@ -388,6 +398,7 @@ void GameScene::DrawObject3D() {
 	player_->DrawObject3D(camera_,spotLight);
 	// 地形
 	terrainManager_->Draw(camera_, spotLight);
+	
 }
 
 void GameScene::DrawPostEffect() {
@@ -396,6 +407,9 @@ void GameScene::DrawPostEffect() {
 }
 
 void GameScene::DrawSprite() {
+	//矢印
+	escapeAssistArrow_->DrawSprite();
+
 	//白フェード
 	whiteSprite_->Draw();
 }

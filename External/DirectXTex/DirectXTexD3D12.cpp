@@ -391,7 +391,7 @@ bool DirectX::IsSupportedTexture(
     if (metadata.mipLevels > D3D12_REQ_MIP_LEVELS)
         return false;
 
-    // Validate array size, dimension, and width/height
+    // Validate array main_size_, dimension, and width/height
     const size_t arraySize = metadata.arraySize;
     const size_t iDepth = metadata.depth;
 

@@ -610,7 +610,7 @@ HRESULT DirectX::GetMetadataFromHDRFile(const wchar_t* szFile, TexMetadata& meta
         return HRESULT_FROM_WIN32(GetLastError());
     }
 
-    // Get the file size
+    // Get the file main_size_
     FILE_STANDARD_INFO fileInfo;
     if (!GetFileInformationByHandleEx(hFile.get(), FileStandardInfo, &fileInfo, sizeof(fileInfo)))
     {
@@ -914,7 +914,7 @@ HRESULT DirectX::LoadFromHDRFile(const wchar_t* szFile, TexMetadata* metadata, S
         return HRESULT_FROM_WIN32(GetLastError());
     }
 
-    // Get the file size
+    // Get the file main_size_
     FILE_STANDARD_INFO fileInfo;
     if (!GetFileInformationByHandleEx(hFile.get(), FileStandardInfo, &fileInfo, sizeof(fileInfo)))
     {
