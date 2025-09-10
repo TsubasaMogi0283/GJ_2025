@@ -23,6 +23,7 @@
 #include <BackTexture.h>
 #include <EscapeAssistArrow/EscapeAssistArrow.h>
 #include "Terrain/TerrainManager.h"
+#include <Particle3D.h>
 
  /// <summary>
  /// ElysiaEngine(前方宣言)
@@ -162,6 +163,7 @@ private:
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
+	uint8_t lightUseLimitation_ = 3u;
 	//移動方向
 	Vector3 playerDirection_ = {};
 	float_t theta_ = 0.0f;
@@ -172,7 +174,7 @@ private:
 
 	//操作
 	std::unique_ptr<Elysia::Sprite>explanation_ = nullptr;
-
+	//脱出
 	std::unique_ptr<Elysia::Sprite>escape_ = nullptr;
 
 	//白フェード用

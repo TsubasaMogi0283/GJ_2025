@@ -89,7 +89,8 @@ void FlashLight::Initialize() {
 
 	//フレーム
 	uint32_t frameSpriteHandle = textureManager_->Load("Resources/Sprite/Gauge/GaugeFrame.png");
-	frameSprite_.reset(Elysia::Sprite::Create(frameSpriteHandle, chargeGaugeSpritePosition_));
+	frameSprite_.reset(Elysia::Sprite::Create(frameSpriteHandle,{ chargeGaugeSpritePosition_.x, 150.0f
+}));
 	//当たり判定の初期化
 	flashLightCollision_ = std::make_unique<FlashLightCollision>();
 	flashLightCollision_->Initialize();
@@ -158,9 +159,6 @@ void FlashLight::Update() {
 	//片方の角度
 	spotLight_.cosAngle = std::cosf(lightSideTheta_);
 
-
-
-	//cosFallowoffStart
 	//最大
 	maxStart_ = globalVariables_->GetFloatValue(FLASH_LIGHT_COS_FALLOWOFF_START_STRING_, MAX_STRING_);
 	//最小
@@ -221,21 +219,21 @@ void FlashLight::DrawObject3D(const Camera& camera) {
 			//スポットライトの座標に集まってくるようにする
 			particle->Draw(camera, particleMaterial);
 		}
-
-
 	}
 }
 
 void FlashLight::DrawSprite(){
-	//ホワイトフェード
-	attackWhiteFadeSprite_->Draw();
+	
 	//ゲージの描画
 	chargeGaugeSprite_->Draw();
 	//フレーム
 	frameSprite_->Draw();
 	//使用制限回数
 	useLimitationFrameSprite_->Draw();
-	useLimitationCountSprite_->Draw(numberTextureHandle_);
+	//数を設定
+	useLimitationCountSprite_->Draw(numberTextureHandleArray_[useLimitationCount_]);
+	//ホワイトフェード
+	attackWhiteFadeSprite_->Draw();
 }
 
 void FlashLight::GenerateParticle() {

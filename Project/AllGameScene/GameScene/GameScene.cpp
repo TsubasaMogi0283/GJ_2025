@@ -51,6 +51,8 @@ void GameScene::Initialize() {
 	player_->SetLevelHandle(levelHandle_);
 	//最初はコントロールは出来ない用にする
 	player_->SetIsAbleToControll(false);
+	//ライトの制限を設定
+	player_->GetFlashLight()->SetUseLimitation(lightUseLimitation_);
 	//向き
 	theta_ = std::numbers::pi_v<float_t>/2.0f ;
 	//リスナーの設定
@@ -71,6 +73,7 @@ void GameScene::Initialize() {
 	//脱出
 	uint32_t escapeTextureHandle = textureManager_->Load("Resources/Sprite/Escape/EscapeText.png");
 	escape_.reset(Elysia::Sprite::Create(escapeTextureHandle, SPRITE_INITIAL_POSITION_));
+	//非表示
 	escape_->SetInvisible(true);
 
 	//フェード
@@ -171,32 +174,43 @@ void GameScene::PlayerMove(){
 
 	//チャージ
 	bool isCharge = false;
-	//エンターキーまたはXボタンでチャージ開始
-	if (input_->IsPushKey(DIK_RETURN) == true || input_->IsPushButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
-		isCharge = true;
-	}
-	else {
-		isCharge = false;
-	}
+	//エンターキーまたはRSHOLDERでチャージ開始
+	if (lightUseLimitation_>0u) {
+		if (input_->IsPushKey(DIK_RETURN) == true || input_->IsPushButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
 
-	//チャージ状態を設定
-	player_->GetFlashLight()->SetIsCharge(isCharge);
-	
-	//エンターキーまたはYボタンを離した瞬間に攻撃する
-	if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
-		//完全にチャージしないとダメ
-		if (player_->GetFlashLight()->GetChargeCondition() == ChargeCondition::StrongChargeAttack) {
-			//カメラシェイク
-			player_->GetEyeCamera()->SetIsShake(true);
-			isReleaseAttack_ = true;
+			isCharge = true;
+		}
+		else {
+			isCharge = false;
 		}
 
-		//クールタイムにする
-		player_->GetFlashLight()->SetIsCoolTime(true);
+
+
+		
+		//チャージ状態を設定
+		player_->GetFlashLight()->SetIsCharge(isCharge);
+
+		//エンターキーまたはYボタンを離した瞬間に攻撃する
+		if (input_->IsReleaseKey(DIK_RETURN) == true || input_->IsReleaseButton(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true) {
+			//完全にチャージしないとダメ
+			if (player_->GetFlashLight()->GetChargeCondition() == ChargeCondition::StrongChargeAttack) {
+				//使用回数を減らす
+				lightUseLimitation_--;
+				//カメラシェイク
+				player_->GetEyeCamera()->SetIsShake(true);
+				isReleaseAttack_ = true;
+			}
+
+			//クールタイムにする
+			player_->GetFlashLight()->SetIsCoolTime(true);
+		}
+		else {
+			isReleaseAttack_ = false;
+		}
 	}
-	else {
-		isReleaseAttack_ = false;
-	}
+	
+	//ライトの制限を設定
+	player_->GetFlashLight()->SetUseLimitation(lightUseLimitation_);
 
 
 	//ライトのコライダーを登録
@@ -279,7 +293,7 @@ void GameScene::PlayerRotate() {
 	}
 }
 
-void GameScene::Goal(){
+void GameScene::Goal() {
 	//ゴール座標の取得
 	Vector3 goalPosition = levelDataManager_->GetInitialTranslate(levelHandle_, "Goal");
 	//サイズ
@@ -301,6 +315,7 @@ void GameScene::Goal(){
 	//ゴールの座標を設定
 	escapeAssistArrow_->SetGoalPosition({ .x = goalPosition.x,.y = goalPosition.z });
 	escapeAssistArrow_->SetTheta(theta_);
+
 }
 
 void GameScene::DisplayImGui() {
@@ -419,7 +434,6 @@ void GameScene::DrawObject3D() {
 	player_->DrawObject3D(camera_,spotLight);
 	// 地形
 	terrainManager_->Draw(camera_, spotLight);
-	
 }
 
 void GameScene::DrawPostEffect() {
