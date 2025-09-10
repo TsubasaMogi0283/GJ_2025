@@ -193,4 +193,16 @@ private:
 
 	// 地形管理クラス
 	std::shared_ptr<TerrainManager> terrainManager_;
+
+	bool isResult_;
+	enum ResultSelect {
+		kTitle,
+		kSelect
+	};
+	ResultSelect resultNo_;
+
+	//resultスプライト
+	std::unique_ptr<Elysia::Sprite>titleSprite_ = nullptr;
+	std::unique_ptr<Elysia::Sprite>selectSprite_ = nullptr;
+	float blinkTimer_;
 };

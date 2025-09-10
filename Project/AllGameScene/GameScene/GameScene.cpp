@@ -79,6 +79,12 @@ void GameScene::Initialize() {
 	whiteFadeTransparency_ = 0.0f;
 	whiteSprite_->SetTransparency(whiteFadeTransparency_);
 
+	//リザルト
+	uint32_t titleTextureHandle = textureManager_->Load("Resources/Sprite/Result/title.png");
+	uint32_t selectTextureHandle = textureManager_->Load("Resources/Sprite/Result/select.png");
+	titleSprite_.reset(Elysia::Sprite::Create(titleTextureHandle, SPRITE_INITIAL_POSITION_));
+	selectSprite_.reset(Elysia::Sprite::Create(selectTextureHandle, SPRITE_INITIAL_POSITION_));
+
 	//カメラの初期化
 	camera_.Initialize();
 	camera_.translate = { .x = 0.0f,.y = 2.0f,.z = -5.0f };
@@ -96,6 +102,9 @@ void GameScene::Initialize() {
 	terrainManager_->Init();
 	terrainManager_->Create_NewFloor(Vector3{ -1.0f, 1.0f, 5.0f });
 	terrainManager_->Create_NewWall(Vector3{ 1.0f, 1.0f, 5.0f });
+
+	isResult_ = false;
+	blinkTimer_ = 0.0f;
 }
 
 
@@ -318,78 +327,106 @@ void GameScene::DisplayImGui() {
 }
 
 void GameScene::Update(Elysia::GameManager* gameManager) {
-	//中身を空にする
-	collisionManager_->ClearList();
-	
-	//レベルエディタの更新
-	levelDataManager_->Update(levelHandle_);
-	//レベルエディタのオブジェクトのコライダーを取得し登録
-	//レベルエディタの更新
-	levelDataManager_->Update(levelHandle_);
-	//レベルエディタのオブジェクトのコライダーを取得し登録
-	const auto& lightColliders = levelDataManager_->GetColliderToLight(levelHandle_, "Stage");
-	const auto& playerColliders = levelDataManager_->GetColliderToPlayer(levelHandle_, "Stage");
 
-	for (const auto& collider : lightColliders) {
-		if (collider != nullptr) {
-			collisionManager_->RegisterList(collider);
+	if (isResult_) {
+
+		blinkTimer_ += 1.0f / 60.0f;
+		if (blinkTimer_ >= 0.5f) {
+			blinkTimer_ -= 0.5f;
 		}
-	}
-	for (const auto& collider : playerColliders) {
-		if (collider != nullptr) {
-			collisionManager_->RegisterList(collider);
+
+		if (input_->IsTriggerKey(DIK_A) || input_->IsTriggerKey(DIK_LEFTARROW) ||
+			input_->IsTriggerKey(DIK_D) || input_->IsTriggerKey(DIK_RIGHTARROW)) {
+			if (resultNo_ == kTitle) {
+				resultNo_ = kSelect;
+			}
+			else if (resultNo_ == kSelect) {
+				resultNo_ = kTitle;
+			}
 		}
-	}
-	//プレイヤーの移動と回転
-	PlayerMove();
-	PlayerRotate();
-	//プレイヤーにそれぞれの角度を設定する
-	player_->SetTheta(theta_);
-	player_->SetPhi(phi_);
-	//プレイヤー
-	player_->Update();
-	//ゴール処理
-	Goal();
-	//矢印
-	escapeAssistArrow_->Update();
-	//プレイヤーのコリジョンを登録
-	collisionManager_->RegisterList(player_->GetPlayerCollision());
-	//カメラの更新
-	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
-	//転送
-	camera_.Transfer();
+		if (input_->IsTriggerKey(DIK_SPACE) || input_->IsTriggerKey(DIK_RETURN) || input_->IsTriggerButton(XINPUT_GAMEPAD_B)) {
+			if (resultNo_ == kTitle) {
+				gameManager->ChangeScene("Title");
+			}
+			else if (resultNo_ == kSelect) {
 
-	// 地形
-	terrainManager_->Update();
-
-	//衝突判定の計算
-	collisionManager_->CheckAllCollision();
-
-	if (isOnGoalArea_ == true) {
-		//表示
-		escape_->SetInvisible(false);
-
-		if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
-			isSucceed_ = true;
+				gameManager->ChangeScene("Select");
+			}
+			return;
 		}
 	}
 	else {
-		//表示
-		escape_->SetInvisible(true);
+		//中身を空にする
+		collisionManager_->ClearList();
 
-	}
+		//レベルエディタの更新
+		levelDataManager_->Update(levelHandle_);
+		//レベルエディタのオブジェクトのコライダーを取得し登録
+		//レベルエディタの更新
+		levelDataManager_->Update(levelHandle_);
+		//レベルエディタのオブジェクトのコライダーを取得し登録
+		const auto& lightColliders = levelDataManager_->GetColliderToLight(levelHandle_, "Stage");
+		const auto& playerColliders = levelDataManager_->GetColliderToPlayer(levelHandle_, "Stage");
 
-	//成功時
-	if (isSucceed_ == true) {
-		whiteFadeTransparency_ += 0.01f;
-		whiteSprite_->SetTransparency(whiteFadeTransparency_);
-	}
-	//フェードが終わったら勝ち(成功へ)
-	if (whiteFadeTransparency_ >= 1.0f) {
-		gameManager->ChangeScene("Win");
-		return;
-	}
+		for (const auto& collider : lightColliders) {
+			if (collider != nullptr) {
+				collisionManager_->RegisterList(collider);
+			}
+		}
+		for (const auto& collider : playerColliders) {
+			if (collider != nullptr) {
+				collisionManager_->RegisterList(collider);
+			}
+		}
+		//プレイヤーの移動と回転
+		PlayerMove();
+		PlayerRotate();
+		//プレイヤーにそれぞれの角度を設定する
+		player_->SetTheta(theta_);
+		player_->SetPhi(phi_);
+		//プレイヤー
+		player_->Update();
+		//ゴール処理
+		Goal();
+		//矢印
+		escapeAssistArrow_->Update();
+		//プレイヤーのコリジョンを登録
+		collisionManager_->RegisterList(player_->GetPlayerCollision());
+		//カメラの更新
+		camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
+		//転送
+		camera_.Transfer();
 
+		// 地形
+		terrainManager_->Update();
+
+		//衝突判定の計算
+		collisionManager_->CheckAllCollision();
+
+		if (isOnGoalArea_ == true) {
+			//表示
+			escape_->SetInvisible(false);
+
+			if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
+				isSucceed_ = true;
+			}
+		}
+		else {
+			//表示
+			escape_->SetInvisible(true);
+
+		}
+
+		//成功時
+		if (isSucceed_ == true) {
+			whiteFadeTransparency_ += 0.01f;
+			whiteSprite_->SetColor({0.0f, 0.0f, 0.0f, whiteFadeTransparency_ });
+		}
+		//フェードが終わったら勝ち(成功へ)
+		if (whiteFadeTransparency_ >= 0.9f) {
+			isResult_ = true;
+		}
+	}
 
 #ifdef _DEBUG 
 	//再読み込み
@@ -431,13 +468,30 @@ void GameScene::DrawSprite() {
 	//プレイヤー
 	player_->DrawSprite();
 
-	//矢印
-	escapeAssistArrow_->DrawSprite();
-	//説明
-	explanation_->Draw();
-	//脱出
-	escape_->Draw();
+	if (!isResult_) {
+		//矢印
+		escapeAssistArrow_->DrawSprite();
+		//説明
+		explanation_->Draw();
+		//脱出
+		escape_->Draw();
+	}
 
 	//白フェード
 	whiteSprite_->Draw();
+
+	if (isResult_) {
+		if (resultNo_ == kTitle) {
+			if (blinkTimer_ <= 0.25f) {
+				titleSprite_->Draw();
+			}
+			selectSprite_->Draw();
+		}
+		else {
+			titleSprite_->Draw();
+			if (blinkTimer_ <= 0.25f) {
+				selectSprite_->Draw();
+			}
+		}
+	}
 }
