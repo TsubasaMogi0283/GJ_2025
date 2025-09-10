@@ -163,7 +163,8 @@ private:
 	std::unique_ptr<Elysia::BackTexture> backTexture_ = nullptr;
 	//プレイヤー
 	std::unique_ptr<Player> player_ = nullptr;
-	uint8_t lightUseLimitation_ = 3u;
+	Vector3 playerInitialPosition_ = {};
+	uint8_t lightUseLimitation_ = 9u;
 	//移動方向
 	Vector3 playerDirection_ = {};
 	float_t theta_ = 0.0f;
