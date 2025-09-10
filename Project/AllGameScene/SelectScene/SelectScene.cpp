@@ -67,6 +67,8 @@ void SelectScene::Initialize(){
 	decideSEhandle_ = audio_->Load("Resources/Audio/SE/Deside.wav");
 	selectSEHandle_ = audio_->Load("Resources/Audio/SE/Select.wav");
 
+	noiseSEHandle_ = audio_->Load("Resources/Audio/Select/Noise.wav");
+
 	selectBgmhandle_ = audio_->Load("Resources/Audio/Select/Select.wav");
 	audio_->Play(selectBgmhandle_, true);
 	audio_->ChangeVolume(selectBgmhandle_, 0.0f);
@@ -75,7 +77,7 @@ void SelectScene::Initialize(){
 void SelectScene::Update(Elysia::GameManager* gameManager){
 
 	backTexture_->Update();
-	audio_->ChangeVolume(selectBgmhandle_, bgmVolume_);
+	
 
 	if (isStart_ == true) {
 		//ライトアップ
@@ -122,9 +124,18 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 			}
 
 			if (secretStageCount_ >= 10u) {
+				audio_->Stop(selectBgmhandle_);
+
 				ChangebackTexture(std::make_unique<SecretBackTexture>());
+				secretWaitingTime_ += 1.0f / 60.0f;
+
+				audio_->Play(noiseSEHandle_, true);
+
 				if (secretWaitingTime_ > 3.0f) {
 					SelectedStageInformation::GetInstance()->RecordSelectedStageNumber(9u);
+					
+					audio_->Stop(noiseSEHandle_);
+
 					gameManager->ChangeScene("Game");
 					return;
 				}
@@ -237,7 +248,9 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 				pointLight_.radius = SingleCalculation::Lerp(MAX_LIGHT_RADIUS, 0.0f, newScaleDownLightT);
 
 				bgmVolume_ = 1.0f - scaleDownLightT_;
-
+				if (bgmVolume_ <= 0.0f) {
+					bgmVolume_ = 0.0f;
+				}
 				//ゲームへ
 				if (scaleDownLightT_ > 1.5f) {
 					audio_->Stop(selectBgmhandle_);
@@ -286,7 +299,7 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 
 	}
 	
-
+	audio_->ChangeVolume(selectBgmhandle_, bgmVolume_);
 	//レベルデータの更新
 	levelDataManager_->Update(levelDataHandle_);
 
@@ -332,6 +345,8 @@ void SelectScene::DisplayImGui(){
 
 	ImGui::Begin("選択");
 	ImGui::InputFloat("決定時の線形補間", &changeT_);
+	int32_t newValue = static_cast<int32_t>(secretStageCount_);
+	ImGui::InputInt("カウント", &newValue);
 	if (ImGui::TreeNode("点光源")) {
 		ImGui::SliderFloat3("座標", &pointLight_.position.x, -40.0f, 40.0f);
 		ImGui::SliderFloat("Decay", &pointLight_.decay, 0.0f, 20.0f);

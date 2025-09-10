@@ -198,5 +198,8 @@ private:
 
 	uint32_t decideSEhandle_ = 0u;
 	uint32_t selectSEHandle_ = 0u;
+
+
+	uint32_t noiseSEHandle_ = 0u;
 };
 

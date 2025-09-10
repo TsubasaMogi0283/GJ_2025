@@ -40,9 +40,6 @@ void GameScene::Initialize() {
 	//数を取得
 	std::string number = std::to_string(SelectedStageInformation::GetInstance()->GetRecordedNumber());
 	std::string fullPath = levelString + number + ".json";
-#ifdef _DEBUG
-	//fullPath = "GameStage/Stage1.json";
-#endif // _DEBUG
 
 
 	levelHandle_ = levelDataManager_->Load(fullPath);
@@ -474,6 +471,11 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	}
 	//フェードが終わったら勝ち(成功へ)
 	if (whiteFadeTransparency_ >= 1.0f) {
+		if (SelectedStageInformation::GetInstance()->GetRecordedNumber() == 9u) {
+			gameManager->ChangeScene("Title");
+			return;
+		}
+
 		gameManager->ChangeScene("Win");
 		return;
 	}
