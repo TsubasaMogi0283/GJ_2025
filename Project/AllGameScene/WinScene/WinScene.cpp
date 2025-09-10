@@ -45,6 +45,9 @@ void WinScene::Initialize() {
 	whiteFade_->SetTransparency(0.0f);
 	//初期化は左
 	isLeft_ = true;
+
+	selectBgmhandle_ = audio_->Load("Resources/Audio/Win/WinBGM.wav");
+	audio_->Play(selectBgmhandle_, true);
 }
 
 void WinScene::Update(Elysia::GameManager* gameManager){
