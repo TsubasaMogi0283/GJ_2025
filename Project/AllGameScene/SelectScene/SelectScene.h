@@ -5,7 +5,7 @@
  * @author 茂木翼
  */
 #include <memory>
-
+#include <array>
 #include "IGameScene.h"
 #include "Sprite.h"
 #include "Model.h"
@@ -116,6 +116,26 @@ private:
 	Elysia::Audio* audio_ = nullptr;
 
 
+	const std::string one_ = "One";
+	const std::string two_ = "Two";
+	const std::string three_ = "Three";
+	const std::string four_ = "Four";
+	const std::string five_ = "Five";
+	const std::string six_ = "Six";
+	const std::string seven_ = "Seven";
+	const std::string eight_ = "Eight";
+	const std::string nine_ = "Nine";
+	const std::string returnString_ = "Return";
+
+	//数字
+	static const uint8_t NUMBER_QUANTITY_ = 10u;
+	//移動の間隔
+	const float_t INTERVAL_ = 4.0f;
+	//初期スケール
+	const Vector3 INITIAL_SCALE_ = { 1.0f,1.0f,1.0f };
+	//選択時のスケール
+	const Vector3 SELECTED_SCALE_ = { 3.0f,3.0f,3.0f };
+
 private:
 	//カメラ
 	Camera camera_ = {};
@@ -125,6 +145,17 @@ private:
 
 	//背景(ポストエフェクト)
 	std::unique_ptr<Elysia::BackTexture>backTexture_ = nullptr;
+
+	//初期座標
+	Vector3 initialPosition_ = {};
+
+	std::array<Vector3, NUMBER_QUANTITY_>numberPositions_ = {};
+
+	//
+	Vector3 moveInterval_ = {};
+
+	//ステージ
+	uint8_t stageNumber_ = 1u;
 
 };
 

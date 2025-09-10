@@ -380,13 +380,11 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
 
-
+	//リセット
 	if (input_->IsTriggerKey(DIK_R) == true||input_->IsTriggerButton(XINPUT_GAMEPAD_START)==true) {
 		lightUseLimitation_ = 9u;
 		player_->ResetPosition(playerInitialPosition_);
 	}
-
-
 
 	//ゴールエリア上
 	if (isOnGoalArea_ == true) {

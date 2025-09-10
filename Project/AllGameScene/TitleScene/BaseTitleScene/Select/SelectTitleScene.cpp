@@ -86,7 +86,7 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 
 
 
-	if (input_->IsPushKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_DOWN) == true) {
+	if (input_->IsPushKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
 		isDecice_ = true;
 	}
 

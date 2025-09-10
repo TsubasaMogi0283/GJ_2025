@@ -68,7 +68,7 @@
         },
         {
             "type": "MESH",
-            "name": "テキスト",
+            "name": "One",
             "transform": {
                 "scaling": [
                     1.0,
@@ -91,30 +91,7 @@
         },
         {
             "type": "MESH",
-            "name": "テキスト.001",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    2.0,
-                    0.0,
-                    0.0
-                ]
-            },
-            "file_name": "Two",
-            "object_type": "Stage"
-        },
-        {
-            "type": "MESH",
-            "name": "テキスト.002",
+            "name": "Two",
             "transform": {
                 "scaling": [
                     1.0,
@@ -132,58 +109,12 @@
                     0.0
                 ]
             },
-            "file_name": "Three",
+            "file_name": "Two",
             "object_type": "Stage"
         },
         {
             "type": "MESH",
-            "name": "テキスト.003",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    6.0,
-                    0.0,
-                    0.0
-                ]
-            },
-            "file_name": "Four",
-            "object_type": "Stage"
-        },
-        {
-            "type": "MESH",
-            "name": "立方体",
-            "transform": {
-                "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    -2.0,
-                    0.0,
-                    0.0
-                ]
-            },
-            "file_name": "Return",
-            "object_type": "Stage"
-        },
-        {
-            "type": "MESH",
-            "name": "テキスト.004",
+            "name": "Three",
             "transform": {
                 "scaling": [
                     1.0,
@@ -197,6 +128,75 @@
                 ],
                 "translation": [
                     8.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "file_name": "Three",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Four",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    12.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "file_name": "Four",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Return",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -4.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "file_name": "Return",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Five",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    16.0,
                     0.0,
                     0.0
                 ]
