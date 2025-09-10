@@ -1,0 +1,166 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Grass",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ]
+            },
+            "file_name": "Grass",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Succeeded",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    2.1974244117736816
+                ]
+            },
+            "file_name": "Succeeded",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Next",
+            "transform": {
+                "scaling": [
+                    0.30000001192092896,
+                    0.30000001192092896,
+                    0.30000001192092896
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    -2.0,
+                    0.0,
+                    0.5
+                ]
+            },
+            "file_name": "Next",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Title",
+            "transform": {
+                "scaling": [
+                    0.30000001192092896,
+                    0.30000001192092896,
+                    0.30000001192092896
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "translation": [
+                    2.0,
+                    0.0,
+                    0.5
+                ]
+            },
+            "file_name": "Title",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    1.970170021057129,
+                    14.797835350036621,
+                    28.031047821044922
+                ],
+                "translation": [
+                    4.962769508361816,
+                    10.204781532287598,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.001",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.9999999403953552
+                ],
+                "rotation": [
+                    41.36859130859375,
+                    -19.24627113342285,
+                    46.443023681640625
+                ],
+                "translation": [
+                    -5.322350978851318,
+                    4.476513862609863,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.002",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.9999999403953552
+                ],
+                "rotation": [
+                    39.46324920654297,
+                    5.124766826629639,
+                    29.915388107299805
+                ],
+                "translation": [
+                    -4.1163330078125,
+                    14.723424911499023,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "object_type": "Stage"
+        }
+    ]
+}

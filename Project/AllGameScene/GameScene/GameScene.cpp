@@ -40,6 +40,11 @@ void GameScene::Initialize() {
 	//数を取得
 	std::string number = std::to_string(SelectedStageInformation::GetInstance()->GetRecordedNumber());
 	std::string fullPath = levelString + number + ".json";
+#ifdef _DEBUG
+	//fullPath = "GameStage/Stage1.json";
+#endif // _DEBUG
+
+
 	levelHandle_ = levelDataManager_->Load(fullPath);
 
 	playerInitialPosition_ = levelDataManager_->GetInitialTranslate(levelHandle_, "Player");

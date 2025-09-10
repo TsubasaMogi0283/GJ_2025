@@ -212,6 +212,7 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 				if (scaleDownLightT_ > 1.5f) {
 
 					if (stageNumber_ != 0u) {
+						SelectedStageInformation::GetInstance()->RecordSelectedStageNumber(stageNumber_);
 						gameManager->ChangeScene("Game");
 						return;
 					}
