@@ -9,6 +9,16 @@
 #include "BaseObjectForLevelEditor.h"
 #include "StageObjectForLevelEditorCollider.h"
 
+
+#pragma region 見え隠れの状態列挙型 顕幽
+enum class SOFLEEVisibilityState {
+	Hidden,       // 完全に隠れている
+	Appearing,    // 出現演出中
+	Visible,      // 完全に見えている
+	Disappearing  // 消失演出中
+};
+#pragma endregion
+
 /// <summary>
 /// レベルエディタ用のステージオブジェクト
 /// </summary>
@@ -62,13 +72,44 @@ public:
 
 private:
 
+	/// <summary>
+	/// 現す処理
+	/// </summary>
+	void OnDisplay();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	void UpdateVisibilityState();
+
+	/// <summary>
+	/// 個別演出
+	/// </summary>
+	void UpdateAppearing();
+	void UpdateVisible();
 	void UpdateDisappearing();
+	void UpdateHidden();
 
 private:
 	//AABB用のサイズ
 	Vector3 size_ = {};
 	bool isDisplay_ = false;
+
+
 	float_t transparency_ = 0.0f;
-	float_t displayTime_ = 0.0f;
+
+	SOFLEEVisibilityState sofleeState_ = SOFLEEVisibilityState::Hidden;
+
+	// 出現演出の経過時間
+	float appearTimer_ = 0.0f;
+	const float kAppearDuration_ = 1.0f;
+
+	// 表示中の経過時間
+	float visibleTimer_ = 0.0f;
+	const float kVisibleDuration_ = 5.0f * 60.0f;
+
+	// 消失演出の経過時間
+	float disappearTimer_ = 0.0f;
+	const float kDisappearDuration_ = 3.0f * 60.0f;
 };
 

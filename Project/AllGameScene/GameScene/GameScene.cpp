@@ -31,9 +31,6 @@ GameScene::GameScene() {
 	globalVariables_ = Elysia::GlobalVariables::GetInstance();
 	//オーディオ
 	audio_ = Elysia::Audio::GetInstance();
-
-	// 地形管理クラス
-	terrainManager_ = std::make_shared<TerrainManager>();
 }
 
 void GameScene::Initialize() {
@@ -95,10 +92,6 @@ void GameScene::Initialize() {
 	//衝突管理クラス
 	collisionManager_ = std::make_unique<Elysia::CollisionManager>();
 
-	// 地形初期化
-	terrainManager_->Init();
-	terrainManager_->Create_NewFloor(Vector3{ -1.0f, 1.0f, 5.0f });
-	terrainManager_->Create_NewWall(Vector3{ 1.0f, 1.0f, 5.0f });
 }
 
 
@@ -374,8 +367,6 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//転送
 	camera_.Transfer();
 
-	// 地形
-	terrainManager_->Update();
 
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
@@ -383,6 +374,12 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	if (isOnGoalArea_ == true) {
 		//表示
 		escape_->SetInvisible(false);
+#ifdef _DEBUG
+	ImGui::Begin("確認");
+	ImGui::Checkbox("リリース", &isReleaseAttack_);
+	ImGui::End();
+#endif // _DEBUG
+	
 
 		if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
 			isSucceed_ = true;
@@ -432,8 +429,6 @@ void GameScene::DrawObject3D() {
 	levelDataManager_->Draw(levelHandle_, camera_, spotLight);
 	//プレイヤーの描画
 	player_->DrawObject3D(camera_,spotLight);
-	// 地形
-	terrainManager_->Draw(camera_, spotLight);
 }
 
 void GameScene::DrawPostEffect() {
