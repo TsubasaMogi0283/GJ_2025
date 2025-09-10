@@ -89,8 +89,7 @@ void FlashLight::Initialize() {
 
 	//フレーム
 	uint32_t frameSpriteHandle = textureManager_->Load("Resources/Sprite/Gauge/GaugeFrame.png");
-	frameSprite_.reset(Elysia::Sprite::Create(frameSpriteHandle,{ chargeGaugeSpritePosition_.x, 150.0f
-}));
+	frameSprite_.reset(Elysia::Sprite::Create(frameSpriteHandle, chargeGaugeSpritePosition_));
 	//当たり判定の初期化
 	flashLightCollision_ = std::make_unique<FlashLightCollision>();
 	flashLightCollision_->Initialize();

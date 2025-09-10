@@ -54,6 +54,7 @@ public:
 			isRecord_ = false;
 			return result;
 		}
+		return 0u;
 	}
 
 private:
