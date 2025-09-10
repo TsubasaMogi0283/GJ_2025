@@ -38,32 +38,22 @@ public:
 
 public:
 	inline void RecordSelectedStageNumber(const uint8_t& number) {
-		if (isRecord_ == false &&number!=0u) {
-			stageNumber_ = number;
-			isRecord_ = true;
-		}
+		stageNumber_ = number;
 	}
 
-	inline uint8_t GetRecordedNumber() {
-		//記録していたものを取得
-		if (isRecord_ == true) {
-			uint8_t result = stageNumber_;
-
-			//一次的に記録しそれを取得させる
-			stageNumber_=1u;
-			isRecord_ = false;
-			return result;
-		}
-		return 0u;
+	inline uint8_t GetRecordedNumber() const{
+		return stageNumber_;
 	}
 
+	/// <summary>
+	/// リセット
+	/// </summary>
+	inline void Reset() {
+		stageNumber_ = 1u;
+	}
 private:
 	//ステージナンバー
 	uint8_t stageNumber_ = 0u;
-	//記録したか
-	bool isRecord_ = false;;
-
-
 
 };
 
