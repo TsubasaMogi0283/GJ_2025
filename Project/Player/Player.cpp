@@ -78,7 +78,7 @@ void Player::Update(){
 
 	//懐中電灯
 	//角度はゲームシーンで取得する
-	flashLight_->SetPlayerPosition(&worldTransform_.GetPWorldPosition());
+	flashLight_->SetPlayerPosition(worldTransform_.GetPWorldPosition());
 	//目線の角度の設定
 	flashLight_->SetTheta(theta_);
 	flashLight_->SetPhi(-phi_);

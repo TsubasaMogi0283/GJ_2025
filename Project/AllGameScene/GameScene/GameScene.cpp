@@ -381,14 +381,17 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//転送
 	camera_.Transfer();
 
+	//リセット
+	if (input_->IsTriggerKey(DIK_R) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_START) == true) {
+		lightUseLimitation_ = 9u;
+		player_->ResetPosition(playerInitialPosition_);
+	}
+
+
 	if (isOnGoalArea_ == true) {
 		//表示
 		escape_->SetInvisible(false);
-#ifdef _DEBUG
-	ImGui::Begin("確認");
-	ImGui::Checkbox("リリース", &isReleaseAttack_);
-	ImGui::End();
-#endif // _DEBUG
+
 	
 
 		if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {

@@ -131,7 +131,7 @@ public:
 	/// プレイヤーの座標を取得
 	/// </summary>
 	/// <param name="position">座標</param>
-	inline void SetPlayerPosition(const Vector3* position) {
+	inline void SetPlayerPosition(const Vector3& position) {
 		this->playerPosition_ = position;
 	}
 
@@ -269,7 +269,7 @@ private:
 	//スポットライト
 	SpotLight spotLight_ = {};
 	//プレイヤーの座標
-	const Vector3* playerPosition_ = {};
+	Vector3 playerPosition_ = {};
 	//座標
 	Vector3 position_ = {};
 	//方向
