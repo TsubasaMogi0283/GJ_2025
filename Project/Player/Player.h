@@ -152,6 +152,13 @@ public:
 		return flashLight_->GetSpotLight().direction;
 	}
 
+	/// <summary>
+	/// リセット
+	/// </summary>
+	/// <param name="position"></param>
+	inline void ResetPosition(const Vector3& position) {
+		this->worldTransform_.translate = position;
+	}
 
 	/// <summary>
 	/// 目線シータの設定

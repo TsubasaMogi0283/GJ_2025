@@ -76,17 +76,12 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 	levelDataManager_->SetScale(levelDataHandle_, START_, startScale_);
 	levelDataManager_->SetScale(levelDataHandle_, END_, endScale_);
 
-
-
 	//矢印の設定
 	levelDataManager_->SetRotate(levelDataHandle_, ARROW_, arrowRotate_);
 	levelDataManager_->SetTranslate(levelDataHandle_, ARROW_, arrowPosition_);
 	
 
-
-
-
-	if (input_->IsPushKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_DOWN) == true) {
+	if (input_->IsPushKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
 		isDecice_ = true;
 	}
 

@@ -38,12 +38,12 @@ void GameScene::Initialize() {
 	//ハンドルの取得
 	levelHandle_ = levelDataManager_->Load("GameStage/Stage1.json");
 
-	Vector3 playerInitialPosition = levelDataManager_->GetInitialTranslate(levelHandle_, "Player");
+	playerInitialPosition_ = levelDataManager_->GetInitialTranslate(levelHandle_, "Player");
 
 	//生成
 	player_ = std::make_unique<Player>();
 	//初期化
-	player_->Initialize(playerInitialPosition);
+	player_->Initialize(playerInitialPosition_);
 	//ハンドルの設定
 	player_->SetLevelHandle(levelHandle_);
 	//最初はコントロールは出来ない用にする
@@ -371,6 +371,13 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
 
+	//リセット
+	if (input_->IsTriggerKey(DIK_R) == true||input_->IsTriggerButton(XINPUT_GAMEPAD_START)==true) {
+		lightUseLimitation_ = 9u;
+		player_->ResetPosition(playerInitialPosition_);
+	}
+
+	//ゴールエリア上
 	if (isOnGoalArea_ == true) {
 		//表示
 		escape_->SetInvisible(false);
