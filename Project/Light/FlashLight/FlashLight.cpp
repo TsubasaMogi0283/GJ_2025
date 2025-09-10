@@ -150,7 +150,7 @@ void FlashLight::Update() {
 	//ライトを持つときの高さは地面と同じだと変だよね
 	const float_t LIGHT_HEIGHT = 0.9f;
 	const Vector3 OFFSET = { .x = 0.0f, .y = LIGHT_HEIGHT,.z = 0.0f };
-	position_ = VectorCalculation::Add(playerPosition_, OFFSET);
+	position_ = VectorCalculation::Add(*playerPosition_, OFFSET);
 
 	//計算したものをSpotLightの方に入れる
 	spotLight_.position = position_;
@@ -203,6 +203,8 @@ void FlashLight::Update() {
 
 void FlashLight::DrawObject3D(const Camera& camera) {
 #ifdef _DEBUG
+
+	Update();
 
 	//端
 	for (uint32_t i = 0; i < SIDE_QUANTITY_; ++i) {
@@ -424,8 +426,8 @@ void FlashLight::DebugProcess(){
 	};
 
 	//端の位置を計算
-	worldTransform_[LEFT_].translate = VectorCalculation::Add(playerPosition_, { fanLeft.x ,0.0f,fanLeft.y });
-	worldTransform_[RIGHT_].translate = VectorCalculation::Add(playerPosition_, { fanRight.x ,0.0f,fanRight.y });
+	worldTransform_[LEFT_].translate = VectorCalculation::Add(*playerPosition_, { fanLeft.x ,0.0f,fanLeft.y });
+	worldTransform_[RIGHT_].translate = VectorCalculation::Add(*playerPosition_, { fanRight.x ,0.0f,fanRight.y });
 
 	//中心
 	lightCenterWorldTransform_.translate = position_;

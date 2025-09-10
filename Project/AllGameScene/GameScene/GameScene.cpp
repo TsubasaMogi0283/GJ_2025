@@ -366,22 +366,16 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	escapeAssistArrow_->Update();
 	//プレイヤーのコリジョンを登録
 	collisionManager_->RegisterList(player_->GetPlayerCollision());
-	//カメラの更新
-	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
-	//転送
-	camera_.Transfer();
-
 
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
 
-	//リセット
-	if (input_->IsTriggerKey(DIK_R) == true||input_->IsTriggerButton(XINPUT_GAMEPAD_START)==true) {
-		lightUseLimitation_ = 9u;
-		player_->ResetPosition(playerInitialPosition_);
-	}
+	//カメラの更新
+	player_->GetEyeCamera()->Update();
+	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
+	//転送
+	camera_.Transfer();
 
-	//ゴールエリア上
 	if (isOnGoalArea_ == true) {
 		//表示
 		escape_->SetInvisible(false);

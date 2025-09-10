@@ -49,6 +49,14 @@ public:
 		return position;
 	}
 
+	/// <summary>
+	/// ワールド座標を取得
+	/// </summary>
+	/// <returns></returns>
+	inline Vector3& GetPWorldPosition() {
+		return reinterpret_cast<Vector3&>(worldMatrix.m[3][0]);
+	}
+
 
 private:
 	/// <summary>

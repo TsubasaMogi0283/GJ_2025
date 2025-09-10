@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <string>
 
+#include "Matrix4x4.h"
 #include "Vector3.h"
 #include "AABB.h"
 #include "Fan.h"
@@ -151,6 +152,10 @@ public:
 		position_ = position;
 	}
 
+	inline void ParentWorldMatrix(Matrix4x4* matrix) {
+		pMatrix_ = matrix;
+	}
+
 protected:
 
 	Vector3 CalculateAABBPushbackVector(const AABB& staticAABB);
@@ -169,6 +174,7 @@ protected:
 	Vector3 velocity_ = {};
 
 	Vector3* position_;
+	Matrix4x4* pMatrix_;
 
 	//AABB
 	AABB aabb_ = {};
