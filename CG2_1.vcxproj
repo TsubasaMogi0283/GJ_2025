@@ -195,6 +195,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\AllGameScene\GameSceneFactory.cpp" />
     <ClCompile Include="Project\AllGameScene\GameScene\GameScene.cpp" />
     <ClCompile Include="Project\AllGameScene\LoseScene\LoseScene.cpp" />
+    <ClCompile Include="Project\AllGameScene\SelectScene\BaseBackTexture\Normal\NormalBackTexture.cpp" />
+    <ClCompile Include="Project\AllGameScene\SelectScene\BaseBackTexture\Secret\SecretBackTexture.cpp" />
     <ClCompile Include="Project\AllGameScene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Project\AllGameScene\TestScene\TestScene.cpp" />
     <ClCompile Include="Project\AllGameScene\TitleScene\BaseTitleScene\Finish\FinishTitleScene.cpp" />
@@ -498,6 +500,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\AllGameScene\GameSceneFactory.h" />
     <ClInclude Include="Project\AllGameScene\GameScene\GameScene.h" />
     <ClInclude Include="Project\AllGameScene\LoseScene\LoseScene.h" />
+    <ClInclude Include="Project\AllGameScene\SelectScene\BaseBackTexture\BaseSelectBackTexture.h" />
+    <ClInclude Include="Project\AllGameScene\SelectScene\BaseBackTexture\Normal\NormalBackTexture.h" />
+    <ClInclude Include="Project\AllGameScene\SelectScene\BaseBackTexture\Secret\SecretBackTexture.h" />
     <ClInclude Include="Project\AllGameScene\SelectScene\SelectScene.h" />
     <ClInclude Include="Project\AllGameScene\TestScene\TestScene.h" />
     <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\BaseTitleScene.h" />

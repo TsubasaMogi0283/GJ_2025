@@ -122,6 +122,8 @@
     <ClCompile Include="Project\AllGameScene\TitleScene\BaseTitleScene\ToGame\ToGameTitleScene.cpp" />
     <ClCompile Include="Project\AllGameScene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Project\SelectedStageInformation\SelectedStageInformation.cpp" />
+    <ClCompile Include="Project\AllGameScene\SelectScene\BaseBackTexture\Normal\NormalBackTexture.cpp" />
+    <ClCompile Include="Project\AllGameScene\SelectScene\BaseBackTexture\Secret\SecretBackTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shader\Particle3D\Particle3d.PS.hlsl">
@@ -448,6 +450,9 @@
     <ClInclude Include="Project\AllGameScene\TitleScene\BaseTitleScene\ToGame\ToGameTitleScene.h" />
     <ClInclude Include="Project\AllGameScene\SelectScene\SelectScene.h" />
     <ClInclude Include="Project\SelectedStageInformation\SelectedStageInformation.h" />
+    <ClInclude Include="Project\AllGameScene\SelectScene\BaseBackTexture\BaseSelectBackTexture.h" />
+    <ClInclude Include="Project\AllGameScene\SelectScene\BaseBackTexture\Normal\NormalBackTexture.h" />
+    <ClInclude Include="Project\AllGameScene\SelectScene\BaseBackTexture\Secret\SecretBackTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

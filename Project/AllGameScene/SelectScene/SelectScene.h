@@ -13,7 +13,7 @@
 #include "Camera.h"
 #include "PointLight.h" 
 #include "BackTexture.h"
-
+#include <SelectScene/BaseBackTexture/BaseSelectBackTexture.h>
 
 
 /// <summary>
@@ -96,6 +96,16 @@ public:
 	/// </summary>
 	~SelectScene()=default;
 
+public:
+	void ChangebackTexture(std::unique_ptr<BaseSelectBackTexture>backTexture) {
+		//違った時だけ遷移する
+		if (backTexture_ != backTexture) {
+			backTexture_ = std::move(backTexture);
+			//次に遷移する
+			backTexture_->Initialize();
+		}
+	}
+
 
 
 private:
@@ -157,7 +167,7 @@ private:
 	//点光源
 	PointLight pointLight_ = {};
 	//背景(ポストエフェクト)
-	std::unique_ptr<Elysia::BackTexture>backTexture_ = nullptr;
+	std::unique_ptr<BaseSelectBackTexture>backTexture_ = nullptr;
 
 	//数初期座標
 	std::array<Vector3, NUMBER_QUANTITY_>numberInitialPositions_ = {};
@@ -179,5 +189,10 @@ private:
 	float_t waitingTime_ = 0.0f;
 	//ライトの縮小
 	float_t scaleDownLightT_ = 0.0f;
+	//隠しステージ
+	uint8_t secretStageCount_ = 0u;
+	float_t secretWaitingTime_ = 0.0f;
+
+
 };
 

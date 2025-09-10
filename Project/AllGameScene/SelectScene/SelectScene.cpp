@@ -13,6 +13,8 @@
 #include "GlobalVariables.h"
 #include "Easing.h"
 #include <SelectedStageInformation/SelectedStageInformation.h>
+#include "BaseBackTexture/Normal/NormalBackTexture.h"
+#include "BaseBackTexture/Secret/SecretBackTexture.h"
 
 SelectScene::SelectScene(){
 
@@ -34,9 +36,7 @@ void SelectScene::Initialize(){
 	
 
 	//背景(ポストエフェクト)
-	backTexture_ = std::make_unique<Elysia::BackTexture>();
-	const Vector4 CLEAR_COLOR = { .x = 0.0f,.y = 0.0f,.z = 0.0f,.w = 1.0f };
-	backTexture_->SetClearColour(CLEAR_COLOR);
+	backTexture_ = std::make_unique<NormalBackTexture>();
 	backTexture_->Initialize();
 
 	//カメラの初期化
@@ -64,9 +64,12 @@ void SelectScene::Initialize(){
 	numberInitialPositions_[9] = levelDataManager_->GetInitialTranslate(levelDataHandle_, nine_);
 
 
+	
 }
 
 void SelectScene::Update(Elysia::GameManager* gameManager){
+
+	backTexture_->Update();
 
 	if (isStart_ == true) {
 		//ライトアップ
@@ -102,7 +105,22 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 					moveInterval_.x -= INTERVAL_;
 					stageNumber_++;
 				}
+				//
+				if (stageNumber_ == 8u) {
+					secretStageCount_++;
+				}
 			}
+
+			if (secretStageCount_ >= 10u) {
+				ChangebackTexture(std::make_unique<SecretBackTexture>());
+				if (secretWaitingTime_ > 3.0f) {
+					SelectedStageInformation::GetInstance()->RecordSelectedStageNumber(9u);
+					gameManager->ChangeScene("Game");
+					return;
+				}
+			}
+
+
 
 			std::array<Vector3, NUMBER_QUANTITY_>numberScales = {
 				INITIAL_SCALE_,
