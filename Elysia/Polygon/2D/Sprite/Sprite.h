@@ -122,6 +122,14 @@ namespace Elysia {
 		}
 
 		/// <summary>
+		/// 座標の取得
+		/// </summary>
+		/// <returns></returns>
+		inline Vector2 GetPosition()const {
+			return position_;
+		}
+
+		/// <summary>
 		/// アンカーポイントの設定
 		/// </summary>
 		/// <param name="point">ポイント</param>
