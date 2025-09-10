@@ -61,7 +61,7 @@ public:
 	/// 本体の座標を設定
 	/// </summary>
 	/// <param name="position">座標</param>
-	inline void SetPlayerPosition(const Vector3& position) {
+	inline void SetPlayerPosition(const Vector3* position) {
 		this->playerPosition_ = position;
 	}
 
@@ -117,7 +117,7 @@ private:
 	//ワールドトランスフォーム
 	WorldTransform worldTransform_ = {};
 	//プレイヤーの座標
-	Vector3 playerPosition_ = {};
+	const Vector3* playerPosition_;
 
 	//プレイヤー用のカメラ
 	Camera camera_ = {};

@@ -362,14 +362,15 @@ void GameScene::Update(Elysia::GameManager* gameManager) {
 	escapeAssistArrow_->Update();
 	//プレイヤーのコリジョンを登録
 	collisionManager_->RegisterList(player_->GetPlayerCollision());
-	//カメラの更新
-	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
-	//転送
-	camera_.Transfer();
-
 
 	//衝突判定の計算
 	collisionManager_->CheckAllCollision();
+
+	//カメラの更新
+	player_->GetEyeCamera()->Update();
+	camera_.viewMatrix = player_->GetEyeCamera()->GetCamera().viewMatrix;
+	//転送
+	camera_.Transfer();
 
 	if (isOnGoalArea_ == true) {
 		//表示

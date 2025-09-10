@@ -13,6 +13,8 @@ PlayerEyeCamera::PlayerEyeCamera(){
 	//インスタンスの取得
 	//グローバル変数
 	globalVariables_ = Elysia::GlobalVariables::GetInstance();
+
+	playerPosition_ = nullptr;
 }
 
 void PlayerEyeCamera::Initialize(){
@@ -28,7 +30,7 @@ void PlayerEyeCamera::Initialize(){
 void PlayerEyeCamera::Update(){
 
 	//位置の計算
-	worldTransform_.translate = VectorCalculation::Add(playerPosition_, cameraPositionOffset_);
+	worldTransform_.translate = VectorCalculation::Add(*playerPosition_, cameraPositionOffset_);
 	
 	//振動
 	Shake();

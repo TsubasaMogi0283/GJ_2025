@@ -47,6 +47,7 @@ void Player::Initialize(const Vector3& initialPosition){
 	collider_ = std::make_unique<PlayerCollisionToStageObject>();
 	collider_->Initialize();
 	collider_->ParentPosition(&worldTransform_.translate);
+	collider_->ParentWorldMatrix(&worldTransform_.worldMatrix);
 
 }
 
@@ -67,18 +68,17 @@ void Player::Update(){
 	worldTransform_.Update();
 
 	//ワールド座標の取得
-	Vector3 worldPosition = worldTransform_.GetWorldPosition();
-	position_ = worldPosition;
+	position_ = worldTransform_.GetPWorldPosition();
 	move_ = moveDirection_;
 
 	//AABBの計算
-	aabb_.min = VectorCalculation::Subtract(worldPosition, { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
-	aabb_.max = VectorCalculation::Add(worldPosition, { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
+	aabb_.min = VectorCalculation::Subtract(worldTransform_.GetPWorldPosition(), { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
+	aabb_.max = VectorCalculation::Add(worldTransform_.GetPWorldPosition(), { SIDE_SIZE ,SIDE_SIZE ,SIDE_SIZE });
 
 
 	//懐中電灯
 	//角度はゲームシーンで取得する
-	flashLight_->SetPlayerPosition(worldPosition);
+	flashLight_->SetPlayerPosition(&worldTransform_.GetPWorldPosition());
 	//目線の角度の設定
 	flashLight_->SetTheta(theta_);
 	flashLight_->SetPhi(-phi_);
@@ -88,7 +88,7 @@ void Player::Update(){
 
 	//カメラ(目)
 	//座標の設定
-	eyeCamera_->SetPlayerPosition(worldPosition);
+	eyeCamera_->SetPlayerPosition(&worldTransform_.GetPWorldPosition());
 	//角度の設定
 	eyeCamera_->SetTheta(theta_);
 	eyeCamera_->SetPhi(phi_);
