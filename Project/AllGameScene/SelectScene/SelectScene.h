@@ -6,6 +6,7 @@
  */
 #include <memory>
 #include <array>
+#include <numbers>
 #include "IGameScene.h"
 #include "Sprite.h"
 #include "Model.h"
@@ -135,6 +136,14 @@ private:
 	const Vector3 INITIAL_SCALE_ = { 1.0f,1.0f,1.0f };
 	//選択時のスケール
 	const Vector3 SELECTED_SCALE_ = { 3.0f,3.0f,3.0f };
+	//決定時のスケール
+	const Vector3 DECIDED_SCALE_ = { 5.0f,5.0f,5.0f };
+	//決定時の回転
+	const Vector3 DECIDED_ROTATE_ = { 0.0f,std::numbers::pi_v<float_t>*8.0f,0.0f };
+
+	//線形補間
+	const float_t INCREASE_T_VALUE_ = 0.02f;
+	
 
 private:
 	//カメラ
@@ -157,5 +166,10 @@ private:
 	//ステージ
 	uint8_t stageNumber_ = 1u;
 
+
+	//選択したかどうか
+	bool isDecide_ = false;
+
+	float_t changeT_ = 0.0f;
 };
 

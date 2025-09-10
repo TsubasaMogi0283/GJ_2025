@@ -17,7 +17,10 @@ public:
 	/// インスタンスの取得
 	/// </summary>
 	/// <returns></returns>
-	static SelectedStageInformation* GetInstance();
+	static SelectedStageInformation* GetInstance() {
+		static SelectedStageInformation instance;
+		return &instance;
+	};
 
 	/// <summary>
 	/// コピーコンストラクタ禁止
@@ -35,7 +38,7 @@ public:
 
 public:
 	inline void RecordSelectedStageNumber(const uint8_t& number) {
-		if (isRecord_ == false) {
+		if (isRecord_ == false &&number!=0u) {
 			stageNumber_ = number;
 			isRecord_ = true;
 		}
@@ -44,7 +47,7 @@ public:
 	inline uint8_t GetRecordedNumber() {
 		//記録していたものを取得
 		if (isRecord_ == true) {
-			int result = stageNumber_;
+			uint8_t result = stageNumber_;
 
 			//一次的に記録しそれを取得させる
 			stageNumber_=1u;
