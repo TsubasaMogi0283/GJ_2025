@@ -138,38 +138,46 @@ private:
 	const Vector3 SELECTED_SCALE_ = { 3.0f,3.0f,3.0f };
 	//決定時のスケール
 	const Vector3 DECIDED_SCALE_ = { 5.0f,5.0f,5.0f };
+	//決定時のスケール(矢印用)
+	const Vector3 DECIDED_RETURN_SCALE_ = { 2.0f,2.0f,2.0f };
+
 	//決定時の回転
 	const Vector3 DECIDED_ROTATE_ = { 0.0f,std::numbers::pi_v<float_t>*8.0f,0.0f };
 
 	//線形補間
 	const float_t INCREASE_T_VALUE_ = 0.02f;
-	
+	//時間変化
+	const float_t DELTA_TIME_ = 1.0f/60.0f;
+	//最大の半径
+	const float_t MAX_LIGHT_RADIUS = 25.0f;
 
 private:
 	//カメラ
 	Camera camera_ = {};
-
 	//点光源
 	PointLight pointLight_ = {};
-
 	//背景(ポストエフェクト)
 	std::unique_ptr<Elysia::BackTexture>backTexture_ = nullptr;
 
-	//初期座標
-	Vector3 initialPosition_ = {};
+	//数初期座標
+	std::array<Vector3, NUMBER_QUANTITY_>numberInitialPositions_ = {};
 
-	std::array<Vector3, NUMBER_QUANTITY_>numberPositions_ = {};
+	//開始
+	bool isStart_ = true;
+	float_t lightUpT_ = 0.0f;
 
-	//
+	//移動の間隔
 	Vector3 moveInterval_ = {};
-
 	//ステージ
 	uint8_t stageNumber_ = 1u;
-
-
 	//選択したかどうか
 	bool isDecide_ = false;
-
+	//線形補間の変化
 	float_t changeT_ = 0.0f;
+
+	//遷移までの待機時間
+	float_t waitingTime_ = 0.0f;
+	//ライトの縮小
+	float_t scaleDownLightT_ = 0.0f;
 };
 
