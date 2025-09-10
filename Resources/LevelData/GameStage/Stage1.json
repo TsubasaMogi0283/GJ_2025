@@ -58,8 +58,7 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Player",
-            "is_invisible": true
+            "object_type": "Player"
         },
         {
             "type": "MESH",
@@ -77,8 +76,8 @@
                 ],
                 "translation": [
                     0.0,
-                    27.9598331451416,
-                    0.04057713970541954
+                    27.959800720214844,
+                    0.05000000074505806
                 ]
             },
             "file_name": "Goal",

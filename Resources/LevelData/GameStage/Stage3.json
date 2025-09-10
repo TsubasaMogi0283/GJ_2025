@@ -1093,42 +1093,6 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.076",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    4.024510860443115,
-                    -18.0,
-                    1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
             "name": "Cube.077",
             "transform": {
                 "scaling": [
@@ -1273,42 +1237,6 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.086",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    4.02451229095459,
-                    -8.0,
-                    1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
             "name": "Cube.087",
             "transform": {
                 "scaling": [
@@ -1322,44 +1250,8 @@
                     0.0
                 ],
                 "translation": [
-                    4.024511814117432,
+                    2.0245120525360107,
                     -10.0,
-                    1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.088",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    4.024511814117432,
-                    -12.0,
                     1.0
                 ]
             },
@@ -1468,42 +1360,6 @@
                 "translation": [
                     4.0245137214660645,
                     4.0,
-                    1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "Cube.098",
-            "transform": {
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "translation": [
-                    4.024512767791748,
-                    -2.0,
                     1.0
                 ]
             },

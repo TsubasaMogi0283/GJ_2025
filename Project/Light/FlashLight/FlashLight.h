@@ -257,11 +257,11 @@ private:
 	//時間増加
 	const float_t DELTA_ANIMATION_TIME_ = 1.0f / 60.0f;
 	//初期の強さ
-	const float_t INITIAL_INTENCITY_ = 100.0f;
+	const float_t INITIAL_INTENCITY_ = 30.0f;
 	//まぶしすぎたので弱める
 	const float_t ATTACL_LIGHT_OFFSET_ = 0.5f;
 	//攻撃時の強さ
-	const float_t ATTACK_LIGHT_INTENCITY_ = 800.0f;
+	const float_t ATTACK_LIGHT_INTENCITY_ = 100.0f;
 	//数
 	static const uint8_t NUMBER_QUANTITY_ = 10u;
 
