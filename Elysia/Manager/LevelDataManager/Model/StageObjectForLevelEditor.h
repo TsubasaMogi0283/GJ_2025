@@ -106,7 +106,7 @@ private:
 
 	// 表示中の経過時間
 	float visibleTimer_ = 0.0f;
-	const float kVisibleDuration_ = 30.0f * 60.0f;
+	const float kVisibleDuration_ = 60.0f * 60.0f;
 
 	// 消失演出の経過時間
 	float disappearTimer_ = 0.0f;
