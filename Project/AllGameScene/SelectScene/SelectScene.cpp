@@ -98,7 +98,7 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 			if (input_->IsTriggerKey(DIK_RIGHT) == true ||
 				input_->IsTriggerKey(DIK_D) == true ||
 				input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_RIGHT) == true) {
-				if (stageNumber_ < 5u) {
+				if (stageNumber_ < 8u) {
 					moveInterval_.x -= INTERVAL_;
 					stageNumber_++;
 				}
