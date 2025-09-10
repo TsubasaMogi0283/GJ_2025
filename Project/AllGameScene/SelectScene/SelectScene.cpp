@@ -64,18 +64,26 @@ void SelectScene::Initialize(){
 	numberInitialPositions_[9] = levelDataManager_->GetInitialTranslate(levelDataHandle_, nine_);
 
 
-	
+	decideSEhandle_ = audio_->Load("Resources/Audio/SE/Deside.wav");
+	selectSEHandle_ = audio_->Load("Resources/Audio/SE/Select.wav");
+
+	selectBgmhandle_ = audio_->Load("Resources/Audio/Select/Select.wav");
+	audio_->Play(selectBgmhandle_, true);
+	audio_->ChangeVolume(selectBgmhandle_, 0.0f);
 }
 
 void SelectScene::Update(Elysia::GameManager* gameManager){
 
 	backTexture_->Update();
+	audio_->ChangeVolume(selectBgmhandle_, bgmVolume_);
 
 	if (isStart_ == true) {
 		//ライトアップ
 		lightUpT_ += INCREASE_T_VALUE_ / 2.0f;
 		float_t newLightUpT = Easing::EaseInQuad(lightUpT_);
 		pointLight_.radius = SingleCalculation::Lerp(0.0f, MAX_LIGHT_RADIUS, newLightUpT);
+
+		bgmVolume_ = lightUpT_;
 
 		if (lightUpT_ >= 1.0f) {
 			isStart_ = false;
@@ -89,8 +97,9 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 			if (input_->IsTriggerKey(DIK_LEFT) == true ||
 				input_->IsTriggerKey(DIK_A) == true ||
 				input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_LEFT) == true) {
-
+				audio_->Play(selectSEHandle_, false);
 				if (stageNumber_ > 0u) {
+					
 					moveInterval_.x += INTERVAL_;
 					stageNumber_--;
 				}
@@ -101,6 +110,7 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 			if (input_->IsTriggerKey(DIK_RIGHT) == true ||
 				input_->IsTriggerKey(DIK_D) == true ||
 				input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_RIGHT) == true) {
+				audio_->Play(selectSEHandle_, false);
 				if (stageNumber_ < 8u) {
 					moveInterval_.x -= INTERVAL_;
 					stageNumber_++;
@@ -167,6 +177,7 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 
 			//決定
 			if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
+				audio_->Play(decideSEhandle_, false);
 				isDecide_ = true;
 				SelectedStageInformation::GetInstance()->RecordSelectedStageNumber(stageNumber_);
 			}
@@ -225,12 +236,15 @@ void SelectScene::Update(Elysia::GameManager* gameManager){
 				float_t newScaleDownLightT = Easing::EaseInOutCubic(scaleDownLightT_);
 				pointLight_.radius = SingleCalculation::Lerp(MAX_LIGHT_RADIUS, 0.0f, newScaleDownLightT);
 
+				bgmVolume_ = 1.0f - scaleDownLightT_;
 
 				//ゲームへ
 				if (scaleDownLightT_ > 1.5f) {
+					audio_->Stop(selectBgmhandle_);
 
 					if (stageNumber_ != 0u) {
 						SelectedStageInformation::GetInstance()->RecordSelectedStageNumber(stageNumber_);
+						
 						gameManager->ChangeScene("Game");
 						return;
 					}

@@ -104,5 +104,13 @@ private:
 	//選択
 	bool isDecice_ = false;
 
+	//BGM
+	uint32_t titleBgmHandle_ = 0u;
+	float_t bgmVolume_ = 1.0f;
+
+
+	uint32_t decideSEhandle_ = 0u;
+	uint32_t selectSEHandle_ = 0u;
+
 };
 

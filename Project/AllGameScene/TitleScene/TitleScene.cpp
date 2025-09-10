@@ -55,6 +55,9 @@ void TitleScene::Initialize() {
 	detailScene_->SetLevelDataHandle(levelHandle_);
 	detailScene_->Initialize();
 
+
+
+
 }
 
 void TitleScene::Update(Elysia::GameManager* gameManager) {

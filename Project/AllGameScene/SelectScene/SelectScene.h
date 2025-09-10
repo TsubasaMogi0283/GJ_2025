@@ -193,6 +193,10 @@ private:
 	uint8_t secretStageCount_ = 0u;
 	float_t secretWaitingTime_ = 0.0f;
 
+	uint32_t selectBgmhandle_ = 0u;
+	float_t bgmVolume_ = 0.0f;
 
+	uint32_t decideSEhandle_ = 0u;
+	uint32_t selectSEHandle_ = 0u;
 };
 

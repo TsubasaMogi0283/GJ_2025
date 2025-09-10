@@ -10,6 +10,7 @@
 #include <TitleScene/BaseTitleScene/Finish/FinishTitleScene.h>
 #include <Easing.h>
 #include <SingleCalculation.h>
+#include <Audio.h>
 
 SelectTitleScene::SelectTitleScene(){
 
@@ -20,6 +21,8 @@ SelectTitleScene::SelectTitleScene(){
 	input_ = Elysia::Input::GetInstance();
 	//レベルエディタ管理クラス
 	levelDataManager_ = Elysia::LevelDataManager::GetInstance();
+	//オーディオ
+	audio_=Elysia::Audio::GetInstance();
 }
 
 void SelectTitleScene::Initialize(){
@@ -33,6 +36,14 @@ void SelectTitleScene::Initialize(){
 	pointLight_.radius = MAX_RADIUS_;
 	camera_.translate.y = 1.4f;
 	camera_.translate.z = -9.8f;
+
+	decideSEhandle_ = audio_->Load("Resources/Audio/SE/Deside.wav");
+	selectSEHandle_ = audio_->Load("Resources/Audio/SE/Select.wav");
+
+	//BGM
+	titleBgmHandle_ = audio_->Load("Resources/Audio/Title/Title.wav");
+	audio_->Play(titleBgmHandle_, true);
+
 }
 
 void SelectTitleScene::Update(TitleScene* titleScene){
@@ -45,6 +56,8 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 		(input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_UP) == true)) {
 		isArrowUp_ = true;
 		isArrowDown_ = false;
+
+		audio_->Play(selectSEHandle_, false);
 	}
 	//下
 	if ((input_->IsPushKey(DIK_DOWN) == true) ||
@@ -52,6 +65,7 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 		(input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_DOWN) == true)) {
 		isArrowUp_ = false;
 		isArrowDown_ = true;
+		audio_->Play(selectSEHandle_, false);
 	}
 
 	startScale_ = { .x = NO_SELECTED_SCALE_ ,.y = NO_SELECTED_SCALE_ ,.z = NO_SELECTED_SCALE_ };
@@ -81,8 +95,10 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 	levelDataManager_->SetTranslate(levelDataHandle_, ARROW_, arrowPosition_);
 	
 
-	if (input_->IsPushKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
+	if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
 		isDecice_ = true;
+		audio_->Play(decideSEhandle_, false);
+		audio_->ChangeVolume(decideSEhandle_, 0.6f);
 	}
 
 
@@ -105,6 +121,7 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 			
 			rotateVelocity_ = SingleCalculation::Lerp(RAPID_ROTATE_VALUE_, 0.0f, newRotateT);
 			arrowRotate_.x += rotateVelocity_;
+			audio_->ChangeVolume(titleBgmHandle_, 1.0f - rotateT_);
 		}
 	}
 	else {
@@ -114,7 +131,10 @@ void SelectTitleScene::Update(TitleScene* titleScene){
 	if (rotateT_ >= 1.0f) {
 		changeWaitingTime_ += DELTA_TIME;
 
+		
+
 		if (changeWaitingTime_ >= 1.0f) {
+			audio_->Stop(titleBgmHandle_);
 			if (isArrowUp_ == true) {
 				titleScene->ChangeDetailScene(std::make_unique<ToGameTitleScene>());
 				return;
