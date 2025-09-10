@@ -146,6 +146,6 @@ private:
 	float_t selectTransparency_ = 0.0f;
 	bool isDisplaySelection_ = false;
 
-
+	uint32_t textSeHandle_ = 0u;
 
 };

@@ -68,6 +68,8 @@ void StartTitleScene::Initialize(){
 	
 	camera_.translate.y = 1.4f;
 	camera_.translate.z = -9.8f;
+
+	textSeHandle_ = audio_->Load("Resources/Audio/Action/Text.wav");
 }
 
 void StartTitleScene::Update(TitleScene* titleScene){
@@ -122,6 +124,8 @@ void StartTitleScene::Update(TitleScene* titleScene){
 
 				//移動終了
 				if (textInformations_[i].positionT_ >= 1.0f) {
+					audio_->Play(textSeHandle_, false);
+
 					//移動終了
 					textInformations_[i].isEndMove_ = true;
 					textInformations_[i].isStartMove_ = false;

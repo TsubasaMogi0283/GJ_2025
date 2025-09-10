@@ -1889,9 +1889,9 @@
             "name": "平面.004",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -1912,9 +1912,9 @@
             "name": "平面.005",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -1935,9 +1935,9 @@
             "name": "平面.006",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -1958,9 +1958,9 @@
             "name": "平面.007",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -1981,9 +1981,9 @@
             "name": "平面.008",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2004,9 +2004,9 @@
             "name": "平面.009",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2027,9 +2027,9 @@
             "name": "平面.010",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2050,9 +2050,9 @@
             "name": "平面.011",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2073,9 +2073,9 @@
             "name": "平面.012",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2096,9 +2096,9 @@
             "name": "平面.013",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2119,9 +2119,9 @@
             "name": "平面.014",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2142,9 +2142,9 @@
             "name": "平面.015",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2165,9 +2165,9 @@
             "name": "平面.016",
             "transform": {
                 "scaling": [
-                    0.5,
-                    0.5,
-                    0.5
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "rotation": [
                     0.0,
@@ -2202,7 +2202,9 @@
                     10.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2223,7 +2225,9 @@
                     12.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2244,7 +2248,9 @@
                     14.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2265,7 +2271,9 @@
                     16.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2286,7 +2294,9 @@
                     18.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2307,7 +2317,9 @@
                     20.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2328,7 +2340,9 @@
                     22.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2349,7 +2363,9 @@
                     24.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2370,7 +2386,9 @@
                     26.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2391,7 +2409,9 @@
                     28.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2412,7 +2432,9 @@
                     30.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",
@@ -2433,7 +2455,9 @@
                     32.0,
                     1.0
                 ]
-            }
+            },
+            "file_name": "IK",
+            "object_type": "Stage"
         },
         {
             "type": "MESH",

@@ -48,6 +48,7 @@ void WinScene::Initialize() {
 
 	decideSEhandle_ = audio_->Load("Resources/Audio/SE/Deside.wav");
 	selectSEHandle_ = audio_->Load("Resources/Audio/SE/Select.wav");
+	accelSEHandle_ = audio_->Load("Resources/Audio/SE/SweepUp.wav");
 
 	winBgmHandle_ = audio_->Load("Resources/Audio/Win/WinBGM.wav");
 	audio_->Play(winBgmHandle_, true);
@@ -147,6 +148,8 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 		}
 
 		if (isCameraMove_ == true) {
+			audio_->Play(accelSEHandle_, false);
+
 			//カメラ加速
 			cameraVelocity_ += cameraAccel_;
 			camera_.translate.z += cameraVelocity_;
@@ -155,6 +158,8 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 			whiteTramsparency_ += FADE_AMOUNT_;
 			whiteFade_->SetTransparency(whiteTramsparency_);
 			if (whiteTramsparency_ >= 2.0f) {
+				audio_->Stop(accelSEHandle_);
+
 				if (isLeft_ == true) {
 
 					uint8_t nextNumber=SelectedStageInformation::GetInstance()->GetRecordedNumber()+1u;
