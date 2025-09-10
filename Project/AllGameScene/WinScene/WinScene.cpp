@@ -46,16 +46,19 @@ void WinScene::Initialize() {
 	//初期化は左
 	isLeft_ = true;
 
-	selectBgmhandle_ = audio_->Load("Resources/Audio/Win/WinBGM.wav");
-	audio_->Play(selectBgmhandle_, true);
+	decideSEhandle_ = audio_->Load("Resources/Audio/SE/Deside.wav");
+	selectSEHandle_ = audio_->Load("Resources/Audio/SE/Select.wav");
+
+	winBgmHandle_ = audio_->Load("Resources/Audio/Win/WinBGM.wav");
+	audio_->Play(winBgmHandle_, true);
+	bgmVolume_ = 1.0f;
+	audio_->ChangeVolume(winBgmHandle_, bgmVolume_);
 }
 
 void WinScene::Update(Elysia::GameManager* gameManager){
-	gameManager;
-
+	
 	if (isDecide_ == false) {
 
-		
 		//左
 		if (isLeft_ == true) {
 			//大きく回転
@@ -65,6 +68,7 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 			//右は縮小と無回転
 			rightScale_ = INITIAL_SCALE_;
 			rightRotate_ = 0.0f;
+
 		}
 		//右
 		if (isRight_ == true) {
@@ -76,6 +80,7 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 			leftScale_ = INITIAL_SCALE_;
 			leftRotate_ = 0.0f;
 
+			
 		}
 
 		//スケールの設定
@@ -92,6 +97,7 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 			input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_LEFT) == true) {
 			isLeft_ = true;
 			isRight_ = false;
+			audio_->Play(selectSEHandle_, false);
 		}
 		//右
 		if (input_->IsTriggerKey(DIK_RIGHT) == true ||
@@ -99,12 +105,14 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 			input_->IsTriggerButton(XINPUT_GAMEPAD_DPAD_RIGHT) == true) {
 			isRight_ = true;
 			isLeft_ = false;
+			audio_->Play(selectSEHandle_, false);
 		}
 
 
 		//決定
 		if (input_->IsTriggerKey(DIK_SPACE) == true || input_->IsTriggerButton(XINPUT_GAMEPAD_B) == true) {
 			isDecide_ = true;
+			audio_->Play(decideSEhandle_, false);
 		}
 
 	}
@@ -120,13 +128,19 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 			leftScale_ = VectorCalculation::Lerp(leftScale_, { 0.0f,0.0f,0.0f }, scaleDownT_);
 			
 		}
+		bgmVolume_ = 1.0f - scaleDownT_;
+		if (bgmVolume_ <= 0.0f) {
+			bgmVolume_ = 0.0f;
+		}
 		
-		//rapidRotateTime_ += DELTA_TIME_;
+
 		if (scaleDownT_ < 1.0f) {
 			leftRotate_ += RAPID_ROTATE_AMOUNT_;
 			rightRotate_ += RAPID_ROTATE_AMOUNT_;
 		}
 		else {
+			audio_->Stop(winBgmHandle_);
+
 			leftRotate_ += NORMAL_ROTATE_AMOUNT_;
 			rightRotate_ += NORMAL_ROTATE_AMOUNT_;
 			isCameraMove_ = true;
@@ -157,7 +171,7 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 
 
 		}
-
+		
 
 		//スケールの設定
 		levelDataManager_->SetScale(levelDataHandle_, NEXT_, leftScale_);
@@ -166,7 +180,8 @@ void WinScene::Update(Elysia::GameManager* gameManager){
 		levelDataManager_->SetRotate(levelDataHandle_, NEXT_, { 0.0f,leftRotate_ ,0.0f });
 		levelDataManager_->SetRotate(levelDataHandle_, TITLE_, {0.0f,rightRotate_ ,0.0f});
 	}
-	
+	//BGM
+	audio_->ChangeVolume(winBgmHandle_, bgmVolume_);
 
 	//平行光源の更新
 	directionalLight_.Update();

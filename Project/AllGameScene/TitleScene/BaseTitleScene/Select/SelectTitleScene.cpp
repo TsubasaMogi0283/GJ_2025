@@ -43,7 +43,7 @@ void SelectTitleScene::Initialize(){
 	//BGM
 	titleBgmHandle_ = audio_->Load("Resources/Audio/Title/Title.wav");
 	audio_->Play(titleBgmHandle_, true);
-
+	
 }
 
 void SelectTitleScene::Update(TitleScene* titleScene){

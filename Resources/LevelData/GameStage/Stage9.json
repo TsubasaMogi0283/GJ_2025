@@ -58,7 +58,8 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Player"
+            "object_type": "Player",
+            "is_invisible": true
         },
         {
             "type": "MESH",
@@ -1885,7 +1886,306 @@
         },
         {
             "type": "MESH",
-            "name": "Cube.023",
+            "name": "平面.004",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    8.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.005",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    10.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.006",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    12.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.007",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    14.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.008",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    16.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.009",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    18.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.010",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    20.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.011",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    22.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.012",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    24.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.013",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    26.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.014",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    28.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.015",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    30.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.016",
+            "transform": {
+                "scaling": [
+                    0.5,
+                    0.5,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.941882133483887,
+                    32.0,
+                    1.0
+                ]
+            },
+            "file_name": "YW",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.024",
             "transform": {
                 "scaling": [
                     1.0,
@@ -1895,33 +2195,18 @@
                 "rotation": [
                     0.0,
                     -0.0,
-                    0.0
+                    -90.00000762939453
                 ],
                 "translation": [
-                    -4.0,
-                    16.000450134277344,
+                    4.98762845993042,
+                    10.0,
                     1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
                 ]
             }
         },
         {
             "type": "MESH",
-            "name": "Cube.051",
+            "name": "平面.025",
             "transform": {
                 "scaling": [
                     1.0,
@@ -1931,33 +2216,18 @@
                 "rotation": [
                     0.0,
                     -0.0,
-                    0.0
+                    -90.00000762939453
                 ],
                 "translation": [
-                    -2.0,
-                    16.000450134277344,
+                    4.98762845993042,
+                    12.0,
                     1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
                 ]
             }
         },
         {
             "type": "MESH",
-            "name": "Cube.052",
+            "name": "平面.026",
             "transform": {
                 "scaling": [
                     1.0,
@@ -1967,33 +2237,18 @@
                 "rotation": [
                     0.0,
                     -0.0,
-                    0.0
+                    -90.00000762939453
                 ],
                 "translation": [
-                    0.0,
-                    16.000450134277344,
+                    4.98762845993042,
+                    14.0,
                     1.0
-                ]
-            },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
                 ]
             }
         },
         {
             "type": "MESH",
-            "name": "Cube.053",
+            "name": "平面.027",
             "transform": {
                 "scaling": [
                     1.0,
@@ -2003,29 +2258,389 @@
                 "rotation": [
                     0.0,
                     -0.0,
-                    0.0
+                    -90.00000762939453
                 ],
                 "translation": [
-                    2.0,
-                    16.000450134277344,
+                    4.98762845993042,
+                    16.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.028",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    18.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.029",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    20.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.030",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    22.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.031",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    24.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.032",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    26.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.033",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    28.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.034",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    30.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面.035",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.98762845993042,
+                    32.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "平面",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.724816799163818,
+                    6.0,
+                    1.2255759239196777
+                ]
+            },
+            "file_name": "FO",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.001",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.724816799163818,
+                    4.012470722198486,
+                    1.2255759239196777
+                ]
+            },
+            "file_name": "FO",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.002",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.724816799163818,
+                    2.0493319034576416,
+                    1.2255759239196777
+                ]
+            },
+            "file_name": "FO",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.003",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.724816799163818,
+                    0.08634098619222641,
+                    1.2255759239196777
+                ]
+            },
+            "file_name": "FO",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.017",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    90.00000762939453
+                ],
+                "translation": [
+                    -4.724816799163818,
+                    -1.909280776977539,
+                    1.2255759239196777
+                ]
+            },
+            "file_name": "FO",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.018",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.8568010330200195,
+                    6.620136260986328,
+                    1.0595060586929321
+                ]
+            },
+            "file_name": "SC",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.019",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.8568010330200195,
+                    3.1290581226348877,
+                    1.0595060586929321
+                ]
+            },
+            "file_name": "SC",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.020",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -90.00000762939453
+                ],
+                "translation": [
+                    4.8568010330200195,
+                    -0.3317379355430603,
+                    1.0595060586929321
+                ]
+            },
+            "file_name": "SC",
+            "object_type": "Stage"
+        },
+        {
+            "type": "MESH",
+            "name": "平面.021",
+            "transform": {
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99998474121094
+                ],
+                "translation": [
+                    0.0,
+                    -2.9873039722442627,
                     1.0
                 ]
             },
-            "file_name": "Cube",
-            "object_type": "Stage",
-            "collider": {
-                "type": "AABB",
-                "center": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "size": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            }
+            "file_name": "SR",
+            "object_type": "Stage"
         }
     ]
 }

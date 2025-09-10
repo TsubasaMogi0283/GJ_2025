@@ -156,7 +156,7 @@ private:
 	std::unique_ptr<Elysia::Sprite> whiteFade_ = nullptr;
 	float_t whiteTramsparency_ = 0.0f;
 
-	uint32_t selectBgmhandle_ = 0u;
+	uint32_t winBgmHandle_ = 0u;
 	float_t bgmVolume_ = 0.0f;
 
 	uint32_t decideSEhandle_ = 0u;
