@@ -164,6 +164,64 @@ void GameScene::PlayerMove(){
 		isPlayerMove = true;
 	}
 
+
+
+	//接続時
+	//キーボード入力していない時かつ移動できる時に受け付ける
+	if (isPlayerMoveKey == false) {
+
+		//コントローラーの入力
+		bool isInput = false;
+		//左スティック
+		Vector3 leftStickInput = {
+			.x = (static_cast<float_t>(input_->GetCurrentState().Gamepad.sThumbLX) / SHRT_MAX),
+			.y = 0.0f,
+			.z = (static_cast<float_t>(input_->GetCurrentState().Gamepad.sThumbLY) / SHRT_MAX),
+		};
+
+
+		//デッドゾーンの設定
+		const float_t DEAD_ZONE = 0.1f;
+		//X軸
+		if (std::abs(leftStickInput.x) < DEAD_ZONE) {
+			leftStickInput.x = 0.0f;
+		}
+		else {
+			isInput = true;
+		}
+		//Z軸
+		if (std::abs(leftStickInput.z) < DEAD_ZONE) {
+			leftStickInput.z = 0.0f;
+		}
+		else {
+			isInput = true;
+		}
+
+
+		//入力されていたら計算
+		if (isInput == true) {
+			//動いている
+			isPlayerMove = true;
+
+			//角度を求める
+			float_t radian = std::atan2f(leftStickInput.z, leftStickInput.x);
+			//値を0～2πに直してtheta_に揃える
+			if (radian < 0.0f) {
+				radian += 2.0f * std::numbers::pi_v<float_t>;
+			}
+			const float_t OFFSET = std::numbers::pi_v<float_t> / 2.0f;
+			float_t resultTheta = theta_ + radian - OFFSET;
+
+
+			//向きを代入
+			playerMoveDirection.x = std::cosf(resultTheta);
+			playerMoveDirection.z = std::sinf(resultTheta);
+		}
+
+
+
+	}
+
 	//方向取得
 	player_->SetMoveDirection(playerMoveDirection);
 

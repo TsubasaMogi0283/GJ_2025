@@ -23,12 +23,6 @@
             },
             "file_name": "Grass",
             "object_type": "Audio",
-            "audio": {
-                "file_name": "Run",
-                "type": "BGM",
-                "on_area": true,
-                "loop": true
-            },
             "collider": {
                 "type": "Plane",
                 "center": [
@@ -37,9 +31,9 @@
                     0.0
                 ],
                 "size": [
-                    86.1199951171875,
-                    86.33999633789062,
-                    0.010000050067901611
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             }
         },
@@ -64,8 +58,7 @@
                 ]
             },
             "file_name": "Cube",
-            "object_type": "Player",
-            "is_invisible": true
+            "object_type": "Player"
         },
         {
             "type": "MESH",
