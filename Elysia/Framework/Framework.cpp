@@ -40,7 +40,7 @@ Elysia::Framework::Framework(){
 
 void Elysia::Framework::Initialize(){
 	//ここでタイトルバーの名前を決めてね
-	const wchar_t* TITLE_BAR_NAME = L"照界迷路";
+	const wchar_t* TITLE_BAR_NAME = L"4002_照界迷路";
 	//ウィンドウのサイズを決める
 	const int32_t WINDOW_SIZE_WIDTH = 1280;
 	const int32_t WINDOW_SIZE_HEIGHT = 720;
