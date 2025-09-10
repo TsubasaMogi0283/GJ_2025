@@ -101,6 +101,7 @@ void GameScene::Initialize() {
 	//衝突管理クラス
 	collisionManager_ = std::make_unique<Elysia::CollisionManager>();
 
+	runSEHandle_ = audio_->Load("Resources/Audio/Action/Run.wav");
 }
 
 
@@ -216,10 +217,17 @@ void GameScene::PlayerMove(){
 			//向きを代入
 			playerMoveDirection.x = std::cosf(resultTheta);
 			playerMoveDirection.z = std::sinf(resultTheta);
+			audio_->Play(runSEHandle_, true);
+		}
+		else {
+			audio_->Stop(runSEHandle_);
 		}
 
+		
 
-
+	}
+	else {
+		audio_->Play(runSEHandle_, true);
 	}
 
 	//方向取得
@@ -244,9 +252,6 @@ void GameScene::PlayerMove(){
 			isCharge = false;
 		}
 
-
-
-		
 		//チャージ状態を設定
 		player_->GetFlashLight()->SetIsCharge(isCharge);
 

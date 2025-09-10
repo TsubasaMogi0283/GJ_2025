@@ -193,4 +193,6 @@ private:
 
 	//離したかどうか
 	bool isReleaseAttack_ = false;
+
+	uint32_t runSEHandle_ = 0u;
 };
