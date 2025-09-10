@@ -15,7 +15,7 @@
 #include "LevelDataManager.h"
 #include "GlobalVariables.h"
 #include "Audio.h"
-
+#include <SelectedStageInformation/SelectedStageInformation.h>
 
 GameScene::GameScene() {
 	//インスタンスの取得
@@ -36,7 +36,11 @@ GameScene::GameScene() {
 void GameScene::Initialize() {
 
 	//ハンドルの取得
-	levelHandle_ = levelDataManager_->Load("GameStage/Stage1.json");
+	std::string levelString = "GameStage/Stage";
+	//数を取得
+	std::string number = std::to_string(SelectedStageInformation::GetInstance()->GetRecordedNumber());
+	std::string fullPath = levelString + number + ".json";
+	levelHandle_ = levelDataManager_->Load(fullPath);
 
 	playerInitialPosition_ = levelDataManager_->GetInitialTranslate(levelHandle_, "Player");
 
